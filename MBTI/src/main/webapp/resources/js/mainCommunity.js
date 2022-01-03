@@ -6,6 +6,13 @@ $('.toggle-switch .switch').on('click', function() {
 	}
 });
 
+$('.contents').on('mouseenter', function() {
+	$(this).css("background", "#f2f2f2");
+}).on('mouseleave', function() {
+	$(this).css("background", "#fff");
+});
+
+
 // mbti filter
 function checkMbti() {
 	let type01;

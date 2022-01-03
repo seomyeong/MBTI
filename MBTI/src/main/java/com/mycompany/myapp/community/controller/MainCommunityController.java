@@ -1,17 +1,25 @@
 package com.mycompany.myapp.community.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.mycompany.myapp.community.service.CommunityService;
+import com.mycompany.myapp.domain.CommunityBoard;
 
 @Controller
 public class MainCommunityController {
+
 //	@Autowired
 //	CommunityService communityService;
 	
@@ -26,31 +34,28 @@ public class MainCommunityController {
 //		
 //		return mav;
 //	}
+
+	@Autowired
+	CommunityService communityService;
+
 	
 	@GetMapping("community/mainCommunity")
-	public String getMainCommunity() {
-		return "community/mainCommunity";
+	public ModelAndView getMainCommunity() {
+		ModelAndView mav = new ModelAndView();
+		
+		List<CommunityBoard> cbList = new ArrayList<CommunityBoard>();
+		int pageSize = 10; // 한 페이지에 출력할 레코드 수
+		String pageNum = "1";
+		
+		
+		cbList = communityService.findAllContents();
+		
+		
+		mav.addObject("cbList", cbList);
+		mav.setViewName("community/mainCommunity");
+		
+		return mav;
 	}
-	
-//	@PostMapping("community/mainCommunity")
-//	public ModelAndView postMainCommunity(@RequestBody Map<String, Object> param) {
-//		String mbti = (String)param.get("type01") + param.get("type02") + param.get("type03") + param.get("type04");
-//		System.out.println(mbti);
-//		
-//		ModelAndView mav = new ModelAndView();
-//		
-//		mav.addObject("mbti", mbti);
-//		mav.setViewName("/community/mainCommunity");
-//		
-////		PrintWriter out = response.getWriter();
-////        JSONObject mbtiInfo = new JSONObject();
-////        
-////        mbtiInfo.put("mbti", mbti);
-////        
-////        out.print(mbtiInfo);
-//		
-//		return mav;
-//	}
 	
 	@ResponseBody
 	@PostMapping("community/mainCommunity")

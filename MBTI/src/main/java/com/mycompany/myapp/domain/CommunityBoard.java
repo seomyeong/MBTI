@@ -1,8 +1,5 @@
 package com.mycompany.myapp.domain;
 
-import java.util.Date;
-import java.util.List;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,13 +8,26 @@ import lombok.ToString;
 @Getter
 @Setter
 public class CommunityBoard {
-	private long id;
-	private String title;
+	private Long id;
 	private Member member;
+	private String title;
 	private String contents;
-	private List<CommunityComments> comments;
-	private Date reportingDate;
+	private String reportingDate;
 	private int views;
 	private int likes;
 	private int commentsCount;
+	
+	public CommunityBoard(){}
+
+	public CommunityBoard(String title, String contents, String reportingDate, int views,
+			int likes, int commentsCount) {
+		super();
+		this.title = title;
+		this.contents = contents;
+		this.reportingDate = reportingDate;
+		this.views = views;
+		this.likes = likes;
+		this.commentsCount = commentsCount;
+	}
 }
+
