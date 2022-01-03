@@ -69,7 +69,7 @@
 					<td>${communityBoard.likes}</td>
 					<td>${communityBoard.member.mbti}</td>
 					<td>${communityBoard.member.nickName}</td>
-					<td><a href="#">${communityBoard.title}</a></td>
+					<td><a href="write?boardId=${communityBoard.id}">${communityBoard.title}</a></td>
 					<td>${communityBoard.reportingDate}</td>
 					<td>${communityBoard.views}</td>
 				</tr>
@@ -81,11 +81,11 @@
 				<select name="searchOption">
 					<option>제목</option>
 					<option>작성자</option>
-				</select> <input type="text" name="searchContents" placeholder="검색" />
-				<input type="submit" value="검색"/>
+				</select> <input type="text" name="searchContents" placeholder="검색" /> <input
+					type="submit" value="검색" />
 			</form>
 		</div>
-		
+
 		<a href="write" id="write">글쓰기</a>
 
 	</div>

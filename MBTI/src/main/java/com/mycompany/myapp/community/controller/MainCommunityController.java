@@ -19,37 +19,16 @@ import com.mycompany.myapp.domain.CommunityBoard;
 
 @Controller
 public class MainCommunityController {
-
-//	@Autowired
-//	CommunityService communityService;
-	
-//	@GetMapping("community/mainCommunity")
-//	public ModelAndView getMainCommunity() {
-//		ModelAndView mav = new ModelAndView();
-//		
-//		List<CommunityBoard> cbList = new ArrayList<CommunityBoard>();
-//		
-//		cbList = communityService.findAllContents();
-//		
-//		
-//		return mav;
-//	}
-
 	@Autowired
 	CommunityService communityService;
-
 	
 	@GetMapping("community/mainCommunity")
 	public ModelAndView getMainCommunity() {
 		ModelAndView mav = new ModelAndView();
 		
 		List<CommunityBoard> cbList = new ArrayList<CommunityBoard>();
-		int pageSize = 10; // 한 페이지에 출력할 레코드 수
-		String pageNum = "1";
-		
 		
 		cbList = communityService.findAllContents();
-		
 		
 		mav.addObject("cbList", cbList);
 		mav.setViewName("community/mainCommunity");
@@ -77,3 +56,4 @@ public class MainCommunityController {
 		return map;
 	}
 }
+

@@ -20,7 +20,8 @@ public class CommunityDao {
 	JdbcTemplate jdbcTemplate;
 
 	public List<CommunityBoard> findAllContents() {
-		String sql = "SELECT * FROM CommunityBoard";
+		// 최근 게시물이 위로 배치하도록
+		String sql = "SELECT * FROM CommunityBoard ORDER BY reportingDate DESC";
 		
 		return jdbcTemplate.query(sql, new RowMapper<CommunityBoard>() {
 
@@ -33,6 +34,7 @@ public class CommunityDao {
 				member = findMemberByMemberId(rs.getLong("memberId"));
 				
 				CommunityBoard cb = new CommunityBoard(rs.getString("title"), rs.getString("contents"), fmt.format(rs.getTimestamp("reportingDate")), rs.getInt("views"), rs.getInt("likes"), rs.getInt("commentsCount"));
+				cb.setId(rs.getLong("id"));
 				cb.setMember(member);
 				
 				return cb;
@@ -55,5 +57,41 @@ public class CommunityDao {
 			
 		}, memberId);
 	}
-}
 
+	public CommunityBoard findBoardByBoardId(long boardId) {
+		String sql = "SELECT * FROM CommunityBoard WHERE id=?";
+		return jdbcTemplate.queryForObject(sql, new RowMapper<CommunityBoard>() {
+
+			@Override
+			public CommunityBoard mapRow(ResultSet rs, int rowNum) throws SQLException {
+				SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				CommunityBoard cb = new CommunityBoard(rs.getLong("id"), rs.getString("title"), rs.getString("contents"), fmt.format(rs.getTimestamp("reportingDate")), rs.getInt("views"), rs.getInt("likes"), rs.getInt("commentsCount"));
+				
+				cb.setMember(findMemberByMemberId(rs.getLong("memberId")));
+				
+				return cb;
+			}
+			
+		}, boardId);
+	}
+
+	public void viewPoint(long boardId) {
+		String sql = "UPDATE CommunityBoard SET views=views+1 WHERE id=?";
+		jdbcTemplate.update(sql, boardId);
+	}
+
+	public void likePoint(long boardId) {
+		String sql = "UPDATE CommunityBoard SET likes=likes+1 WHERE id=?";
+		jdbcTemplate.update(sql, boardId);
+	}
+
+	public Long findLikesByBoardId(long boardId) {
+		String sql = "SELECT likes FROM CommunityBoard WHERE id=?";
+		return jdbcTemplate.queryForObject(sql, new RowMapper<Long>() {
+			@Override
+			public Long mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return rs.getLong("likes");
+			}
+		}, boardId);
+	}
+}
