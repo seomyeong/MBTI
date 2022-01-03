@@ -61,13 +61,15 @@
 				<th>MBTI</th>
 				<th>작성자</th>
 				<th>제목</th>
+				<th>내용</th>
 				<th>작성일</th>
 				<th>조회</th>
 			</tr>
 			<c:forEach var="communityBoard" items="${cbList}">
 				<tr class="contents">
 					<td>${communityBoard.likes}</td>
-					<td>${communityBoard.memberNickName}</td>
+					<td>${communityBoard.member.mbti}</td>
+					<td>${communityBoard.member.nickName}</td>
 					<td>${communityBoard.title}</td>
 					<td><a href="#">${communityBoard.contents}</a></td>
 					<td>${communityBoard.reportingDate}</td>

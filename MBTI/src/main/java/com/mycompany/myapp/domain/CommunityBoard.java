@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 public class CommunityBoard {
 	private Long id;
-	private String memberNickName;
+	private Member member;
 	private String title;
 	private String contents;
 	private String reportingDate;
@@ -19,10 +19,9 @@ public class CommunityBoard {
 	
 	public CommunityBoard(){}
 
-	public CommunityBoard(String memberNickName, String title, String contents, String reportingDate, int views,
+	public CommunityBoard(String title, String contents, String reportingDate, int views,
 			int likes, int commentsCount) {
 		super();
-		this.memberNickName = memberNickName;
 		this.title = title;
 		this.contents = contents;
 		this.reportingDate = reportingDate;
@@ -30,6 +29,5 @@ public class CommunityBoard {
 		this.likes = likes;
 		this.commentsCount = commentsCount;
 	}
-
 }
 
