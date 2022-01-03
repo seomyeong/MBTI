@@ -34,7 +34,7 @@
 			<a href="javascript:likes()" id="board_likes"><span>추천</span><span id="likesCount">${board.likes}</span></a>
 			<a href="mainCommunity" id="contentsList">글목록</a>
 			<div id="ad1">
-				<a href="#" id="download"></a>
+				<a href="https://play.google.com/store/apps/details?id=com.varxyz.demofico" id="download"></a>
 			</div>
 			<div id="comments">
 				<span>댓글</span> 총 <span>${board.commentsCount}</span> 개
