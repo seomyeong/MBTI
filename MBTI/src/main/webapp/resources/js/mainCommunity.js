@@ -6,6 +6,13 @@ $('.toggle-switch .switch').on('click', function() {
 	}
 });
 
+$('.contents').on('mouseenter', function() {
+	$(this).css("background", "#f2f2f2");
+}).on('mouseleave', function() {
+	$(this).css("background", "#fff");
+});
+
+
 // mbti filter
 function checkMbti() {
 	let type01;
@@ -48,7 +55,7 @@ function checkMbti() {
 	$.ajax({ // 비동기 방식 (페이지가 넘어가지 않고 그 페이지에서 바로 자료가 변경됨)
 		type: "post",
 		data: JSON.stringify(param),
-		url: "/myapp/community/mainCommunity",
+		url: "/test/community/mainCommunity",
 		contentType: "application/json; charset=UTF-8",
 		success: function(data) {
 			document.querySelector('#viewName').innerHTML = data["view"];
@@ -65,7 +72,7 @@ function allView() {
 	$.ajax({ // 비동기 방식 (페이지가 넘어가지 않고 그 페이지에서 바로 자료가 변경됨)
 		type: "post",
 		data: JSON.stringify(param),
-		url: "/myapp/community/mainCommunity",
+		url: "/test/community/mainCommunity",
 		contentType: "application/json; charset=UTF-8",
 		success: function(data) {
 			if (data["view"] == "all") {
