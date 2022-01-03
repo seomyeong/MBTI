@@ -61,7 +61,6 @@
 				<th>MBTI</th>
 				<th>작성자</th>
 				<th>제목</th>
-				<th>내용</th>
 				<th>작성일</th>
 				<th>조회</th>
 			</tr>
@@ -70,14 +69,13 @@
 					<td>${communityBoard.likes}</td>
 					<td>${communityBoard.member.mbti}</td>
 					<td>${communityBoard.member.nickName}</td>
-					<td>${communityBoard.title}</td>
-					<td><a href="#">${communityBoard.contents}</a></td>
+					<td><a href="#">${communityBoard.title}</a></td>
 					<td>${communityBoard.reportingDate}</td>
 					<td>${communityBoard.views}</td>
 				</tr>
 			</c:forEach>
 		</table>
-
+		
 		<div id="searchBar">
 			<form action="javascript:search()">
 				<select name="searchOption">
@@ -88,7 +86,7 @@
 			</form>
 		</div>
 		
-		<a href="#" id="write">글쓰기</a>
+		<a href="write" id="write">글쓰기</a>
 
 	</div>
 	<!-- 기본양식 // -->
