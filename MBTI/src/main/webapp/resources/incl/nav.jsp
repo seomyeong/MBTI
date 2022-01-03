@@ -28,7 +28,7 @@
 							name="home-outline"></ion-icon>
 				</span> <span class="title">홈으로</span>
 			</a></li>
-			<li><a href="#"> <span class="icon"> <ion-icon
+			<li><a href="/myapp/community/mainCommunity"> <span class="icon"> <ion-icon
 							name="people-outline"></ion-icon>
 				</span> <span class="title">커뮤니티</span>
 			</a></li>
