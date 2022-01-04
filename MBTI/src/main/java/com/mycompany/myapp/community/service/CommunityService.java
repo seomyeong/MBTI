@@ -16,5 +16,19 @@ public class CommunityService {
 	public List<CommunityBoard> findAllContents(){
 		return communityDao.findAllContents();
 	}
+
+	public CommunityBoard findBoardByBoardId(long parseLong) {
+		return communityDao.findBoardByBoardId(parseLong);
+	}
+
+	public void viewPoint(long boardId) {
+		communityDao.viewPoint(boardId);
+	}
+
+	public Long likePoint(long boardId) {
+		communityDao.likePoint(boardId);
+		// 증가 후 현재 추천 수 반환
+		return communityDao.findLikesByBoardId(boardId);
+	}
 	
 }

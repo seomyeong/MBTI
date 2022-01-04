@@ -29,5 +29,18 @@ public class CommunityBoard {
 		this.likes = likes;
 		this.commentsCount = commentsCount;
 	}
-}
 
+	public CommunityBoard(Long id, String title, String contents, String reportingDate, int views,
+			int likes, int commentsCount) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.contents = contents;
+		this.reportingDate = reportingDate;
+		this.views = views;
+		this.likes = likes;
+		this.commentsCount = commentsCount;
+	}
+	
+	
+}

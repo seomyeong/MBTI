@@ -24,11 +24,11 @@
 			</a></li>
 			<a href="#" id="login">로그인</a>
 			<a href="#" id="addUser">회원가입</a>
-			<li><a href="#"> <span class="icon"> <ion-icon
+			<li><a href="/myapp/"> <span class="icon"> <ion-icon
 							name="home-outline"></ion-icon>
 				</span> <span class="title">홈으로</span>
 			</a></li>
-			<li><a href="#"> <span class="icon"> <ion-icon
+			<li><a href="/myapp/community/mainCommunity"> <span class="icon"> <ion-icon
 							name="people-outline"></ion-icon>
 				</span> <span class="title">커뮤니티</span>
 			</a></li>

@@ -18,9 +18,9 @@ public class MemberDao {
 
 	//회원가입
 	public void addMember(Member member) {
-		String sql = "INSERT INTO MEMBER(email, Pw, name, nickname, birth, mbti, gender, phone) VALUES (?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO MEMBER(email, pw, name, nickname, birth, gender, mbti, phone) VALUES (?,?,?,?,?,?,?,?)";
 		jdbcTemplate.update(sql, member.getEmail(), member.getPw(), member.getName(), 
-				member.getNickName(), member.getBirth(), member.getMbti(), member.getGender(), member.getPhone());
+				member.getNickName(), member.getBirth(), member.getGender(), member.getMbti(), member.getPhone());
 	}
 
 	//회원정보 조회
@@ -30,27 +30,29 @@ public class MemberDao {
 
 			@Override
 			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
-				return new Member(rs.getLong("id"),rs.getString("email"), rs.getString("Pw"), rs.getString("name"), 
+				return new Member(rs.getLong("id"),rs.getString("email"), rs.getString("pw"), rs.getString("name"), 
 						rs.getString("nickname"), rs.getString("birth"), rs.getString("mbti"), 
-						rs.getString("gender"),  rs.getString("phone"), rs.getTimestamp("regDate"));
+						rs.getString("gender").charAt(0), rs.getString("phone"), rs.getTimestamp("regDate"));
 			}
 
-		}, member.getId());
+		}, member.getEmail());
 	}
 
 	//로그인			
 	public boolean login(Member member) {
-		String sql = "SELECT * FROM MEMBER WHERE userId = ? AND userPw = ?";
+		String sql = "SELECT * FROM MEMBER WHERE email = ? AND pw = ?";
 		List<Member> memberCheck = null;
 		memberCheck = jdbcTemplate.query(sql, new RowMapper<Member>() {
 
 			@Override
 			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
-				Member member = new Member(rs.getLong("id"),rs.getString("userId"), rs.getString("userPw"), rs.getString("name"), rs.getString("phone"), rs.getString("ssn"), rs.getString("addr"), rs.getString("email"), rs.getTimestamp("regDate"));
+				Member member = new Member(rs.getLong("id"),rs.getString("email"), rs.getString("pw"), rs.getString("name"), 
+						rs.getString("nickname"), rs.getString("birth"), rs.getString("mbti"), 
+						rs.getString("gender").charAt(0), rs.getString("phone"), rs.getTimestamp("regDate"));
 				return member;
 			}
 
-		}, member.getId(), member.getPw());
+		}, member.getEmail(), member.getPw());
 
 		if(memberCheck.size()==0) {
 			return false;

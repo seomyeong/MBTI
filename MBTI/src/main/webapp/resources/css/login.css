@@ -1,10 +1,9 @@
-@charset "UTF-8";
+@charset "utf-8";
 
 #main h1 { 
-    text-align: center; 
-    color: #fff; 
+    text-align: center;  
     font-size: 40px; 
-    margin: 0px;
+    margin: 100px auto 0; 
 
 }
 #main h2 { 
@@ -12,7 +11,7 @@
 }
 #login_wrap {
     width: 200px; 
-    margin: 150px auto 0; 
+    margin: 80px auto 0; 
     position: relative; 
     z-index: 1;
 }
@@ -46,7 +45,7 @@
 
 #login_btn {
     text-align: center; 
-    margin-top: 170px;
+    margin-top: 80px;
 }
 #login_btn a {
     display: inline-block;  

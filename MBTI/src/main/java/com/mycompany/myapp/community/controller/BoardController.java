@@ -1,9 +1,6 @@
 package com.mycompany.myapp.community.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,42 +16,36 @@ import com.mycompany.myapp.community.service.CommunityService;
 import com.mycompany.myapp.domain.CommunityBoard;
 
 @Controller
-public class MainCommunityController {
+public class BoardController {
 	@Autowired
 	CommunityService communityService;
 	
-	@GetMapping("community/mainCommunity")
-	public ModelAndView getMainCommunity() {
+	@GetMapping("/community/board")
+	public ModelAndView write(@RequestParam String boardId) {
 		ModelAndView mav = new ModelAndView();
 		
-		List<CommunityBoard> cbList = new ArrayList<CommunityBoard>();
+		// 조회수 올리기
+		communityService.viewPoint(Long.parseLong(boardId));
 		
-		cbList = communityService.findAllContents();
-		
-		mav.addObject("cbList", cbList);
-		mav.setViewName("community/mainCommunity");
+		CommunityBoard cb = communityService.findBoardByBoardId(Long.parseLong(boardId));
+		mav.addObject("board", cb);
+		mav.setViewName("/community/board");
 		
 		return mav;
 	}
 	
 	@ResponseBody
-	@PostMapping("community/mainCommunity")
-	public Map<String,String> ajaxMainCommunity(@RequestBody Map<String, String> param) {
-		String view = "";
+	@PostMapping("community/likes")
+	public Map<String, String> ajaxWrite(@RequestBody Map<String, String> param) {
+		String boardId = param.get("id");
+		String nowLikes = null;
 		
-		Iterator<String> keys = param.keySet().iterator();
-		while(keys.hasNext()) {
-			String strKey = keys.next();
-			String strValue = param.get(strKey);
-			view = view.concat(strValue);
-		}
-		
-		System.out.println(view);
+		// 추천수 올리기
+		nowLikes = Long.toString(communityService.likePoint(Long.parseLong(boardId)));
 		
 		Map<String,String> map = new HashMap<String,String>();
-	    map.put("view",view);
-	    
+		map.put("likes", nowLikes);
+		
 		return map;
 	}
 }
-
