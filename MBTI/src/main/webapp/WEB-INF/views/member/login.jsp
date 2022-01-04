@@ -48,8 +48,7 @@
                             <a onclick="javascript:history.back()">이전</a> <input type="submit" value="로그인" id="submit">
                         </div>
                     </form>
-                </div>
-                <div id="login_bg1"></div>    	                                                                                                                                                                                            
+                </div>	                                                                                                                                                                                            
 	</div>
 </body>
 </html>

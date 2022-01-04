@@ -72,9 +72,6 @@
                     </div>
                 </form:form>
             </div>
-            <div id="addCustomer_bg"></div>
-            <div id="testDiv">
-            </div>
 	    </main>
     </div>
 </body>
