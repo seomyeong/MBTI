@@ -1,0 +1,76 @@
+@charset "utf-8";
+
+#main h1 { 
+    text-align: center;  
+    font-size: 40px; 
+    margin: 100px auto 0; 
+
+}
+#main h2 { 
+    text-align: center;
+}
+#login_wrap {
+    width: 200px; 
+    margin: 80px auto 0; 
+    position: relative; 
+    z-index: 1;
+}
+#login_wrap table th {
+    height: 50px; 
+    padding-right: 30px; 
+    font-weight: bolder;
+}
+#login_wrap table td {
+    padding-right: 10px;
+}
+#login_wrap table input {
+    border-radius: 5px; 
+    height: 20px;
+    border: 1px solid #ffffff; 
+    padding: 2px;
+}
+#login_wrap input:focus{
+    outline: #fbe6ff;
+    border: 1px solid #86588f;
+    }
+#login_wrap .errorTxt{
+    font-weight: bold; 
+    color:#800040; 
+    font-size:13px; 
+    display:inline-block; 
+    width: 180px;
+ }
+
+
+
+#login_btn {
+    text-align: center; 
+    margin-top: 80px;
+}
+#login_btn a {
+    display: inline-block;  
+    width: 70px; 
+    height: 30px; 
+    background: rgba(255, 255, 255,0.3); 
+    line-height: 30px; 
+    border-radius: 5px;
+}
+#login_btn #submit {
+    cursor: pointer; 
+    width: 70px; 
+    height: 30px; 
+    background: rgba(255, 255, 255,0.3); 
+    border: none; 
+    font-size: 16px;
+}
+#login_btn a:hover {
+    background: rgba(135, 210, 137, 0.3);
+}
+#login_btn #submit:hover {
+    background: rgba(135, 210, 137, 0.3);
+}
+#login_btn #saveId {
+    width: 200px; 
+    height: 50px; 
+    margin: 0px auto;
+}

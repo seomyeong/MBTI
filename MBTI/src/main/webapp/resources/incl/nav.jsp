@@ -22,8 +22,8 @@
 							name="person-circle-outline"></ion-icon>
 				</span> <span class="title">회원이신가요?</span>
 			</a></li>
-			<a href="#" id="login">로그인</a>
-			<a href="#" id="addUser">회원가입</a>
+			<a href="/myapp/member/login" id="login">로그인</a>
+			<a href="/myapp/member/addMember" id="addUser">회원가입</a>
 			<li><a href="/myapp/"> <span class="icon"> <ion-icon
 							name="home-outline"></ion-icon>
 				</span> <span class="title">홈으로</span>

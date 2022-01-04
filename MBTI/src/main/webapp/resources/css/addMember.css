@@ -1,0 +1,87 @@
+@charset "UTF-8";
+#addCustomer h1 {
+    text-align: center; 
+    font-size: 40px; 
+    margin:80px auto;
+}
+#addCustomer_wrap {
+    position: relative; z-index: 1;
+ }
+#addCustomer_wrap table{
+    margin: 0 auto;
+}
+#addCustomer_wrap tr{
+    
+}
+
+#addCustomer_wrap th{
+    height: 60px; 
+    padding-right: 30px; 
+    font-weight: bolder;
+}
+#addCustomer_wrap td{
+    padding-right: 10px; width: 130px;
+}
+#addCustomer_wrap .errorTxt{
+    display:inline-block; 
+    font-weight: bold; 
+    color:#800040; 
+    font-size:13px; 
+    width: 180px;
+    position:relative; 
+    left:-180px; top:-30px;
+ }
+#addCustomer_wrap .errorTxt2{
+	position: relative; 
+    left:-370px;
+}
+ 
+ 
+#addCustomer_wrap input{
+    border-radius: 5px; 
+    height: 20px;
+    border: 2px solid #ffffff; 
+    padding: 2px;
+    position: relative;
+}
+#addCustomer_wrap input:focus{
+    outline: #fbe6ff;
+    border: 2px solid #86588f;
+}
+#addCustomer_btn{
+    text-align: center; 
+    margin-top: 30px;
+}
+#addCustomer_btn a{
+    display: inline-block;  
+    width: 70px; height: 30px; 
+    background: rgba(255, 255, 255,0.3); 
+    line-height: 30px; border-radius: 5px; 
+}
+#addCustomer_btn a:hover{
+    background: rgba(210, 255, 224, 0.3);
+}
+#addCustomer label{ 
+    font-weight: bold;
+}
+
+#addCustomer_btn #submit{
+    cursor: pointer; 
+    width: 70px; height: 30px; 
+    background: rgba(255, 255, 255,0.3); 
+    border: none; 
+    font-family: 'GowunDodum-Regular'; font-size: 16px;
+}
+#addCustomer_btn #submit:hover{
+    background: rgba(210, 255, 224, 0.3);
+}
+
+/* #addCustomer_bg{
+    width: 1000px; 
+    height: 130px; 
+    position: absolute; 
+    z-index: 0; 
+    top: 300px; left: calc(50% - 500px); 
+    background: url(../images/todakBG2.jpg) 100%; 
+    opacity: 0.7;
+} */

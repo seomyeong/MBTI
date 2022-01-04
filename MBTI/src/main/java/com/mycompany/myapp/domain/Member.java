@@ -25,6 +25,8 @@ public class Member {
 	private String profileImg;
 	private int contentsCount;
 	private int commentsCount;
+	
+	public Member() {}
 
 	public Member(long id, String email, String pw, String name, String nickName, String birth, String mbti,
 			char gender, String phone, Date regDate, int level, int mabPoint, String profileImg, int contentsCount,
@@ -46,5 +48,22 @@ public class Member {
 		this.contentsCount = contentsCount;
 		this.commentsCount = commentsCount;
 	}
+
+	public Member(long id, String email, String pw, String name, String nickName, String birth, String mbti,
+			char gender, String phone, Date regDate) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.pw = pw;
+		this.name = name;
+		this.nickName = nickName;
+		this.birth = birth;
+		this.mbti = mbti;
+		this.gender = gender;
+		this.phone = phone;
+		this.regDate = regDate;
+	}
+
+
 
 }
