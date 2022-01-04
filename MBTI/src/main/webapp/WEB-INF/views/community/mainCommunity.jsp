@@ -69,7 +69,7 @@
 					<td>${communityBoard.likes}</td>
 					<td>${communityBoard.member.mbti}</td>
 					<td>${communityBoard.member.nickName}</td>
-					<td><a href="write?boardId=${communityBoard.id}">${communityBoard.title}</a></td>
+					<td><a href="board?boardId=${communityBoard.id}">${communityBoard.title}</a></td>
 					<td>${communityBoard.reportingDate}</td>
 					<td>${communityBoard.views}</td>
 				</tr>

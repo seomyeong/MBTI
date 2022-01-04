@@ -16,11 +16,11 @@ import com.mycompany.myapp.community.service.CommunityService;
 import com.mycompany.myapp.domain.CommunityBoard;
 
 @Controller
-public class WriteController {
+public class BoardController {
 	@Autowired
 	CommunityService communityService;
 	
-	@GetMapping("/community/write")
+	@GetMapping("/community/board")
 	public ModelAndView write(@RequestParam String boardId) {
 		ModelAndView mav = new ModelAndView();
 		
@@ -29,7 +29,7 @@ public class WriteController {
 		
 		CommunityBoard cb = communityService.findBoardByBoardId(Long.parseLong(boardId));
 		mav.addObject("board", cb);
-		mav.setViewName("/community/write");
+		mav.setViewName("/community/board");
 		
 		return mav;
 	}
