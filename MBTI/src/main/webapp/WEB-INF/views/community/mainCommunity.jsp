@@ -64,88 +64,18 @@
 				<th>작성일</th>
 				<th>조회</th>
 			</tr>
-			<tr>
-				<td>33</td>
-				<td>ISFJ</td>
-				<td>종성성종</td>
-				<td>고민이 있습니다...</td>
-				<td>2022-01-02 23:48</td>
-				<td>77</td>
-			</tr>
-			<tr>
-				<td>161</td>
-				<td>ENFP</td>
-				<td>원디니</td>
-				<td>안녕하세요 출석체크입니다.</td>
-				<td>2022-01-02 21:54</td>
-				<td>805</td>
-			</tr>
-			<tr>
-				<td>6753</td>
-				<td>ENFP</td>
-				<td>짱짱혜경123</td>
-				<td>제 6의 멤버입니다. 잘 부탁드립니다!</td>
-				<td>2022-01-02 20:05</td>
-				<td>7823</td>
-			</tr>
-			<tr>
-				<td>25</td>
-				<td>INFJ</td>
-				<td>황숨니</td>
-				<td>구룡포 과메기 후기</td>
-				<td>2022-01-01 18:48</td>
-				<td>1502</td>
-			</tr>
-			<tr>
-				<td>0</td>
-				<td>INFJ</td>
-				<td>싸인</td>
-				<td>저에게 관심을 주세요.</td>
-				<td>2022-01-01 00:00</td>
-				<td>5</td>
-			</tr>
-			<tr>
-				<td>33</td>
-				<td>ISFJ</td>
-				<td>종성성종</td>
-				<td>고민이 있습니다...</td>
-				<td>2022-01-02 23:48</td>
-				<td>77</td>
-			</tr>
-			<tr>
-				<td>161</td>
-				<td>ENFP</td>
-				<td>원디니</td>
-				<td>안녕하세요 출석체크입니다.</td>
-				<td>2022-01-02 21:54</td>
-				<td>805</td>
-			</tr>
-			<tr>
-				<td>6753</td>
-				<td>ENFP</td>
-				<td>짱짱혜경123</td>
-				<td>제 6의 멤버입니다. 잘 부탁드립니다!</td>
-				<td>2022-01-02 20:05</td>
-				<td>7823</td>
-			</tr>
-			<tr>
-				<td>25</td>
-				<td>INFJ</td>
-				<td>황숨니</td>
-				<td>구룡포 과메기 후기</td>
-				<td>2022-01-01 18:48</td>
-				<td>1502</td>
-			</tr>
-			<tr>
-				<td>0</td>
-				<td>INFJ</td>
-				<td>외관이장님</td>
-				<td>저에게 관심을 주세요.</td>
-				<td>2022-01-01 00:00</td>
-				<td>5</td>
-			</tr>
+			<c:forEach var="communityBoard" items="${cbList}">
+				<tr class="contents">
+					<td>${communityBoard.likes}</td>
+					<td>${communityBoard.member.mbti}</td>
+					<td>${communityBoard.member.nickName}</td>
+					<td><a href="#">${communityBoard.title}</a></td>
+					<td>${communityBoard.reportingDate}</td>
+					<td>${communityBoard.views}</td>
+				</tr>
+			</c:forEach>
 		</table>
-
+		
 		<div id="searchBar">
 			<form action="javascript:search()">
 				<select name="searchOption">
@@ -156,7 +86,7 @@
 			</form>
 		</div>
 		
-		<a href="#" id="write">글쓰기</a>
+		<a href="write" id="write">글쓰기</a>
 
 	</div>
 	<!-- 기본양식 // -->
