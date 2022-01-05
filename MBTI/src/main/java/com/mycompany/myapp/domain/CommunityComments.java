@@ -1,7 +1,5 @@
 package com.mycompany.myapp.domain;
 
-import java.util.Date;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,5 +12,17 @@ public class CommunityComments {
 	private Member member;
 	private String comments;
 	private int likes;
-	private Date reportingDate;
+	private String reportingDate;
+	
+	public CommunityComments() {}
+	
+	public CommunityComments(long id, Member member, String comments, int likes, String reportingDate) {
+		super();
+		this.id = id;
+		this.member = member;
+		this.comments = comments;
+		this.likes = likes;
+		this.reportingDate = reportingDate;
+	}
+	
 }

@@ -22,7 +22,11 @@ CREATE TABLE MEMBER(
 -- Community
 
 SELECT * FROM CommunityBoard;
+SELECT * FROM CommunityComments;
+
 DROP TABLE CommunityBoard;
+DROP TABLE CommunityComments;
+
 
 INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('ydh1178@naver.com', '1234', '김종성', '종성성종', '961124', 'M', 'ISFJ', '010-8599-7622');
 INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('test@test.com', '1234', '테스트계정', '테스트계정', '001122', 'W', 'ENFP', '010-1111-2222');
@@ -39,4 +43,13 @@ CREATE TABLE CommunityBoard(
 	views			INT				DEFAULT 0,
 	likes			INT				DEFAULT 0,
 	commentsCount 	INT				DEFAULT 0
+);
+
+CREATE TABLE CommunityComments(
+	id				BIGINT			PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	boardId			BIGINT			NOT NULL,
+	memberId		BIGINT			NOT NULL,
+	comments		VARCHAR(200)	NOT NULL,
+	likes			INT				DEFAULT 0,
+	reportingDate	TIMESTAMP		DEFAULT CURRENT_TIMESTAMP
 );

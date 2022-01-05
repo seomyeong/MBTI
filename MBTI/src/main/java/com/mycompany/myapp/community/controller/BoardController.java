@@ -1,7 +1,10 @@
 package com.mycompany.myapp.community.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mycompany.myapp.community.service.CommunityService;
 import com.mycompany.myapp.domain.CommunityBoard;
+import com.mycompany.myapp.domain.CommunityComments;
+import com.mycompany.myapp.domain.Member;
 
 @Controller
 public class BoardController {
@@ -21,14 +26,29 @@ public class BoardController {
 	CommunityService communityService;
 	
 	@GetMapping("/community/board")
-	public ModelAndView write(@RequestParam String boardId) {
+	public ModelAndView write(@RequestParam String boardId, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
 		// 조회수 올리기
 		communityService.viewPoint(Long.parseLong(boardId));
 		
 		CommunityBoard cb = communityService.findBoardByBoardId(Long.parseLong(boardId));
+		List<CommunityComments> cc = communityService.findCommentsByBoardId(Long.parseLong(boardId));
+		
+		// 로그인 아이디의 정보를 들고온다.
+		Long loginId;
+		Member loginMemberInfo = null;
+		
+		if (!(session == null || session.getAttribute("loginId") == null || session.getAttribute("loginId").equals(""))) {
+			loginId = Long.parseLong(String.valueOf(session.getAttribute("loginId")));
+			loginMemberInfo = communityService.findMemberByMemberId(loginId);
+		}
+		// 댓글 수 가져오기
+		cb.setCommentsCount(cc.size());
+		
+		mav.addObject("loginMemberInfo", loginMemberInfo);
 		mav.addObject("board", cb);
+		mav.addObject("comments", cc);
 		mav.setViewName("/community/board");
 		
 		return mav;
@@ -45,6 +65,28 @@ public class BoardController {
 		
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("likes", nowLikes);
+		
+		return map;
+	}
+	
+	@ResponseBody
+	@PostMapping("community/addComment")
+	public Map<String, String> ajaxAddComment(@RequestBody Map<String, String> param) {
+		Long loginId = Long.parseLong(param.get("loginId"));
+		Long boardId = Long.parseLong(param.get("boardId"));
+		String comment = param.get("comment");
+		
+		// 댓글 테이블에 할당
+		communityService.addComment(loginId, boardId, comment);
+		
+		System.out.println(param.get("loginId") + param.get("boardId") + param.get("comment"));
+		Member loginMember = communityService.findMemberByMemberId(loginId);
+		
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("mbti", loginMember.getMbti());
+		map.put("level", Integer.toString(loginMember.getLevel()));
+		map.put("nickName", loginMember.getNickName());
+		map.put("comment", comment);
 		
 		return map;
 	}
