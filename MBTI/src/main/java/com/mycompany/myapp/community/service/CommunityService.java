@@ -47,6 +47,7 @@ public class CommunityService {
 
 	public void addComment(long loginId, long boardId, String comment) {
 		communityDao.addComment(loginId, boardId, comment);
+		communityDao.addCommentCount(boardId);
 	}
 
 	public boolean isLike(long loginId, long boardId) {

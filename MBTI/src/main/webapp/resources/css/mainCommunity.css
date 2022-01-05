@@ -140,12 +140,14 @@ td.nickName {
 	color: darksalmon;
 }
 
-
 td a {
 	text-decoration: none;
 	font-size: 0.9em;
 	font-weight: bold;
 	color: #727272;
+}
+td a .commentCount {
+	color: #4ab994;
 }
 
 table tr:last-of-type td {

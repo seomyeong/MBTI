@@ -145,4 +145,9 @@ public class CommunityDao {
 		jdbcTemplate.update(sql, loginId, boardId);
 	}
 	
+	public void addCommentCount(long boardId) {
+		String sql = "UPDATE CommunityBoard SET commentsCount=commentsCount+1 WHERE id=?";
+		jdbcTemplate.update(sql, boardId);
+	}
+	
 }
