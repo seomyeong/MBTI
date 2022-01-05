@@ -53,3 +53,12 @@ CREATE TABLE CommunityComments(
 	likes			INT				DEFAULT 0,
 	reportingDate	TIMESTAMP		DEFAULT CURRENT_TIMESTAMP
 );
+
+-- 추천 로그관리
+
+SELECT * FROM LikeLog;
+
+CREATE TABLE LikeLog(
+	boardId			BIGINT			NOT NULL,
+	memberId		BIGINT			NOT NULL
+);

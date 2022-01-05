@@ -57,14 +57,23 @@ public class BoardController {
 	@ResponseBody
 	@PostMapping("community/likes")
 	public Map<String, String> ajaxWrite(@RequestBody Map<String, String> param) {
-		String boardId = param.get("id");
+		String loginId = param.get("loginId");
+		String boardId = param.get("boardId");
 		String nowLikes = null;
 		
-		// 추천수 올리기
-		nowLikes = Long.toString(communityService.likePoint(Long.parseLong(boardId)));
+		// 추천이 눌려있으면 true 안눌려있으면 false
+		Boolean likeCheck = communityService.isLike(Long.parseLong(loginId), Long.parseLong(boardId));
+		
+		// 해당 게시물에 추천을 눌렀었는지 확인
+		if(!(likeCheck)) {
+			// 누른 로그가 없다면 추천올리기
+			nowLikes = Long.toString(communityService.likePoint(Long.parseLong(boardId)));
+			communityService.addlikePoint(Long.parseLong(loginId), Long.parseLong(boardId));
+		}
 		
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("likes", nowLikes);
+		map.put("likeCheck", String.valueOf(likeCheck));
 		
 		return map;
 	}

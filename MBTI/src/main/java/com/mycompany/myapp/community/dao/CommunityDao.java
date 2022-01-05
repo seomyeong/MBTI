@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.mycompany.myapp.domain.CommunityBoard;
 import com.mycompany.myapp.domain.CommunityComments;
+import com.mycompany.myapp.domain.LikeLog;
 import com.mycompany.myapp.domain.Member;
 
 @Component
@@ -118,6 +119,30 @@ public class CommunityDao {
 	public void addComment(long loginId, long boardId, String comment) {
 		String sql = "INSERT INTO CommunityComments(memberId, boardId, comments) VALUES(?, ?, ?)";
 		jdbcTemplate.update(sql, loginId, boardId, comment);
+	}
+
+	public boolean isLike(Long loginId, Long boardId) {
+		String sql = "SELECT * FROM LikeLog WHERE memberId=? AND boardId=?";
+		List<LikeLog> likeListCheck = jdbcTemplate.query(sql, new RowMapper<LikeLog>() {
+
+			@Override
+			public LikeLog mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return new LikeLog(rs.getLong("memberId"), rs.getLong("boardId"));
+			}
+				
+		}, loginId, boardId);
+		
+		if(likeListCheck.size() == 0 || likeListCheck == null || likeListCheck.equals(null)) {
+			return false;			
+		}
+		
+		return true;
+		
+	}
+
+	public void addLikePoint(long loginId, long boardId) {
+		String sql = "INSERT INTO LikeLog(memberId, boardId) VALUES(?, ?)";
+		jdbcTemplate.update(sql, loginId, boardId);
 	}
 	
 }

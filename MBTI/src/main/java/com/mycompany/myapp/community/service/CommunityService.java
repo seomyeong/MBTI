@@ -48,5 +48,13 @@ public class CommunityService {
 	public void addComment(long loginId, long boardId, String comment) {
 		communityDao.addComment(loginId, boardId, comment);
 	}
+
+	public boolean isLike(long loginId, long boardId) {
+		return communityDao.isLike(loginId, boardId);
+	}
+
+	public void addlikePoint(long loginId, long boardId) {
+		communityDao.addLikePoint(loginId, boardId);
+	}
 	
 }

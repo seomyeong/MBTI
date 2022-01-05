@@ -33,6 +33,7 @@
 			</div>
 			<a href="javascript:likes()" id="board_likes"><span><ion-icon
 						name="thumbs-up-outline"></ion-icon></span><span id="likesCount">${board.likes}</span></a>
+						<span id="errorMsg"></span>
 			<a href="mainCommunity" id="contentsList">글목록</a>
 			<div id="ad1">
 				<a
@@ -90,8 +91,14 @@
 	<script>
 		// EL의 값을 써야하기때문에 아래에서 작성
 		function likes() {
+			if('${sessionScope.loginId}' == "" || '${sessionScope.loginId}' == null) {
+				alert("추천기능은 로그인 후 이용이 가능합니다.");
+				return;
+			}
+			
 			var boardId = {
-				'id' : '${board.id}'
+				'loginId' : '${sessionScope.loginId}',
+				'boardId' : '${board.id}'
 			};
 
 			$.ajax({
@@ -100,7 +107,11 @@
 				url : "/myapp/community/likes",
 				contentType : "application/json; charset=UTF-8",
 				success : function(data) {
-					$('#likesCount').html(data.likes);
+					if(data["likeCheck"] == "false") {
+						$('#likesCount').text(data["likes"]);						
+					} else {
+						$('#errorMsg').text("추천은 계정당 한 번만 가능합니다.");
+					}
 				}
 			});
 		}
