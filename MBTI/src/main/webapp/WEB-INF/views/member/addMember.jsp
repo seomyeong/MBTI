@@ -23,10 +23,9 @@
                     <table>
                         <tr>
                             <th>ID</th>
-                            <td><form:input placeholder="아이디를 입력하세요."
+                            <td><form:input placeholder="아이디를 입력하세요." 
                                 path="email" required="required"/></td>
                             <td><span class="errorTxt">${errorMsg}</span></td>
-
                         </tr>
                         <tr>
                             <th>PW</th>
@@ -45,12 +44,6 @@
                             <td><span class="errorTxt">${errorMsg}</span></td>
                         </tr>
                         <tr>
-                            <th>핸드폰</th>
-                            <td><form:input maxlength="11"  placeholder="핸드폰 번호를 입력하세요"
-                                path="phone" required="required"/></td>
-                            <td><span class="errorTxt">${errorMsg}</span></td>
-                        </tr>
-                        <tr>
                             <th>생년월일</th>
                             <td><form:input maxlength="6" placeholder="주민번호 앞자리"
                                 path="birth" required="required"/></td>
@@ -65,6 +58,12 @@
                             <th>성별</th>
                             <td><form:input placeholder="성별을 입력하세요" path="gender" required="required"/></td>
                             <td><span class="errorTxt errorTxt2">${errorMsg}</span></td>
+                        </tr>
+                        <tr>
+                            <th>핸드폰</th>
+                            <td><form:input maxlength="11" placeholder="핸드폰 번호를 입력하세요"
+                                path="phone" required="required"/></td>
+                            <td><span class="errorTxt">${errorMsg}</span></td>
                         </tr>
                     </table>
                     <div id="addCustomer_btn">

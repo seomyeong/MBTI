@@ -18,9 +18,9 @@ public class MemberDao {
 
 	//회원가입
 	public void addMember(Member member) {
-		String sql = "INSERT INTO MEMBER(email, pw, name, nickname, birth, gender, mbti, phone) VALUES (?,?,?,?,?,?,?,?)";
-		jdbcTemplate.update(sql, member.getEmail(), member.getPw(), member.getName(), 
-				member.getNickName(), member.getBirth(), member.getGender(), member.getMbti(), member.getPhone());
+		String sql = "INSERT INTO MEMBER(email, pw, name, nickName, birth, mbti, gender, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		jdbcTemplate.update(sql, member.getEmail(), member.getPw(), member.getName(), member.getNickName(), 
+				member.getBirth(), member.getMbti(), member.getGender(), member.getPhone());
 	}
 
 	//회원정보 조회
