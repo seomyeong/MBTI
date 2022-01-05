@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.mycompany.myapp.community.dao.CommunityDao;
 import com.mycompany.myapp.domain.CommunityBoard;
+import com.mycompany.myapp.domain.CommunityComments;
+import com.mycompany.myapp.domain.Member;
 
 @Service
 public class CommunityService {
@@ -29,6 +31,22 @@ public class CommunityService {
 		communityDao.likePoint(boardId);
 		// 증가 후 현재 추천 수 반환
 		return communityDao.findLikesByBoardId(boardId);
+	}
+
+	public List<CommunityComments> findCommentsByBoardId(long boardId) {
+		return communityDao.findCommentsByBoardId(boardId);
+	}
+
+	public void addCommunityBoard(Long loginId, String title, String contents) {
+		communityDao.addCommunityBoard(loginId, title, contents);
+	}
+
+	public Member findMemberByMemberId(Long loginId) {
+		return communityDao.findMemberByMemberId(loginId);
+	}
+
+	public void addComment(long loginId, long boardId, String comment) {
+		communityDao.addComment(loginId, boardId, comment);
 	}
 	
 }

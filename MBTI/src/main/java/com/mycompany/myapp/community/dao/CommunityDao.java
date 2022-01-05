@@ -11,8 +11,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import com.mycompany.myapp.domain.CommunityBoard;
+import com.mycompany.myapp.domain.CommunityComments;
 import com.mycompany.myapp.domain.Member;
-
 
 @Component
 public class CommunityDao {
@@ -94,4 +94,30 @@ public class CommunityDao {
 			}
 		}, boardId);
 	}
+
+	public List<CommunityComments> findCommentsByBoardId(long boardId) {
+		String sql = "SELECT * FROM CommunityComments WHERE boardId=?";
+		return jdbcTemplate.query(sql, new RowMapper<CommunityComments>() {
+
+			@Override
+			public CommunityComments mapRow(ResultSet rs, int rowNum) throws SQLException {
+				SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Member m = findMemberByMemberId(rs.getLong("memberId"));
+				CommunityComments cc = new CommunityComments(rs.getLong("id"), m, rs.getString("comments"), rs.getInt("likes"), fmt.format(rs.getTimestamp("reportingDate")));
+				return cc;
+			}
+			
+		}, boardId);
+	}
+
+	public void addCommunityBoard(Long loginId, String title, String contents) {
+		String sql = "INSERT INTO CommunityBoard(memberId, title, contents) VALUES(?, ?, ?)";
+		jdbcTemplate.update(sql, loginId, title, contents);
+	}
+
+	public void addComment(long loginId, long boardId, String comment) {
+		String sql = "INSERT INTO CommunityComments(memberId, boardId, comments) VALUES(?, ?, ?)";
+		jdbcTemplate.update(sql, loginId, boardId, comment);
+	}
+	
 }

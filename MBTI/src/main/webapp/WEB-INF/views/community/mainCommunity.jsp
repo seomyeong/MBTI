@@ -66,16 +66,16 @@
 			</tr>
 			<c:forEach var="communityBoard" items="${cbList}">
 				<tr class="contents">
-					<td>${communityBoard.likes}</td>
-					<td>${communityBoard.member.mbti}</td>
-					<td>${communityBoard.member.nickName}</td>
+					<td class="likes">${communityBoard.likes}</td>
+					<td class="mbti">${communityBoard.member.mbti}</td>
+					<td class="nickName">${communityBoard.member.nickName}</td>
 					<td><a href="board?boardId=${communityBoard.id}">${communityBoard.title}</a></td>
-					<td>${communityBoard.reportingDate}</td>
+					<td class="reportingDate">${communityBoard.reportingDate}</td>
 					<td>${communityBoard.views}</td>
 				</tr>
 			</c:forEach>
 		</table>
-		
+
 		<div id="searchBar">
 			<form action="javascript:search()">
 				<select name="searchOption">
@@ -85,8 +85,8 @@
 					type="submit" value="검색" />
 			</form>
 		</div>
-
-		<a href="write" id="write">글쓰기</a>
+		
+		<a href="#" onclick="goWrite();" id="write" data-loginId="${sessionScope.loginId}">글쓰기</a>
 
 	</div>
 	<!-- 기본양식 // -->
