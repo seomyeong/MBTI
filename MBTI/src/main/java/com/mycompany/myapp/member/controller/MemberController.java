@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mycompany.myapp.domain.Member;
+import com.mycompany.myapp.member.command.MemberCommand;
 import com.mycompany.myapp.member.service.MemberService;
 
 @Controller
@@ -23,7 +24,7 @@ public class MemberController {
 	@GetMapping("/member/addMember")
 	public String addMember(@ModelAttribute Member member) {
 		return "member/addMember";
-	}
+	}    
 
 	/*
 	 * 회원가입 성공
@@ -34,8 +35,11 @@ public class MemberController {
 	}
 
 	@PostMapping("/member/successAddMember")
-	public ModelAndView successAddMember(Member member) {
+	public ModelAndView successAddMember(MemberCommand memberCommand) {
 		ModelAndView mav = new ModelAndView();
+		Member member = new Member(memberCommand.getEmail(), memberCommand.getPw(), memberCommand.getName(),memberCommand.getNickName(),
+				memberCommand.getBirth(), memberCommand.getMbti(), memberCommand.getGender(), memberCommand.getPhone());
+		
 		memberService.addMember(member);
 		mav.setViewName("/member/successAddMember");
 		return mav;

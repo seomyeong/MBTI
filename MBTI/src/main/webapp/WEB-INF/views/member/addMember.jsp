@@ -54,12 +54,15 @@
                             <td><form:input maxlength="4" placeholder="MBTI를 입력하세요" path="mbti" required="required"/></td>
                             <td><span class="errorTxt errorTxt2">${errorMsg}</span></td>
                         </tr>
-                        <tr>
-                            <th>성별</th>
-                            <td><form:input placeholder="성별을 입력하세요" path="gender" required="required"/></td>
-                            <td><span class="errorTxt errorTxt2">${errorMsg}</span></td>
-                        </tr>
-                        <tr>
+						<tr> 
+							<td>성별</td> 
+							<td>
+							Male: <form:radiobutton path="gender" value="M" label="남자"/> <br/> 
+							Female: <form:radiobutton path="gender" value="F" label="여자"/> 
+							</td> 
+							<td><span class="errorTxt errorTxt2">${errorMsg}</span></td>
+						</tr>
+       					<tr>
                             <th>핸드폰</th>
                             <td><form:input maxlength="11" placeholder="핸드폰 번호를 입력하세요"
                                 path="phone" required="required"/></td>

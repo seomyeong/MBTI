@@ -32,7 +32,7 @@ public class MemberDao {
 			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
 				return new Member(rs.getLong("id"),rs.getString("email"), rs.getString("pw"), rs.getString("name"), 
 						rs.getString("nickname"), rs.getString("birth"), rs.getString("mbti"), 
-						rs.getString("gender").charAt(0), rs.getString("phone"), rs.getTimestamp("regDate"));
+						rs.getString("gender"), rs.getString("phone"), rs.getTimestamp("regDate"));
 			}
 
 		}, member.getEmail());
@@ -48,7 +48,7 @@ public class MemberDao {
 			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Member member = new Member(rs.getLong("id"),rs.getString("email"), rs.getString("pw"), rs.getString("name"), 
 						rs.getString("nickname"), rs.getString("birth"), rs.getString("mbti"), 
-						rs.getString("gender").charAt(0), rs.getString("phone"), rs.getTimestamp("regDate"));
+						rs.getString("gender"), rs.getString("phone"), rs.getTimestamp("regDate"));
 				return member;
 			}
 
