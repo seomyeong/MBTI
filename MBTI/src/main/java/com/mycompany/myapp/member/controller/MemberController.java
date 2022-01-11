@@ -72,7 +72,7 @@ public class MemberController {
 		if (memberService.login(member)) {
 			Member memberInfo = memberService.memberInfo(member);
 
-//			session.setAttribute("memberInfo", memberInfo);
+			session.setAttribute("memberInfo", memberInfo);
 //			session.setAttribute("email", memberInfo.getEmail());
 			// 세션에 id 값 할당
 			session.setAttribute("loginId", memberInfo.getId());
