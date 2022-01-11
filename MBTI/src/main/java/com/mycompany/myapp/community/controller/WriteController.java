@@ -1,8 +1,5 @@
 package com.mycompany.myapp.community.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +11,15 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mycompany.myapp.community.service.CommunityService;
-import com.mycompany.myapp.domain.CommunityBoard;
 
 @Controller
 public class WriteController {
 	@Autowired
 	CommunityService communityService;
 	
+	/*
+	 * write GetMapping
+	 */
 	@GetMapping("community/write")
 	public ModelAndView getWrite(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -35,19 +34,17 @@ public class WriteController {
 		return mav;
 	}
 	
+	/*
+	 * 댓글 작성 성공시
+	 */
 	@PostMapping("community/successWrite")
 	public ModelAndView successWrite(@SessionAttribute("loginId") String loginId, @RequestParam String title, @RequestParam String contents) {
 		ModelAndView mav = new ModelAndView();
 		
 		// 작성한 게시글 테이블에 추가
 		communityService.addCommunityBoard(Long.parseLong(loginId), title, contents);
-		
-		List<CommunityBoard> cbList = new ArrayList<CommunityBoard>();
-		
-		cbList = communityService.findAllContents();
-
-		mav.addObject("cbList", cbList);
-		mav.setViewName("community/mainCommunity");
+				
+		mav.setViewName("redirect:mainCommunity?type=reportingDate&q=&page=1&range=1");
 
 		return mav;
 	}

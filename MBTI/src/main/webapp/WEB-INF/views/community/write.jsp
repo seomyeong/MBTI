@@ -29,7 +29,7 @@
 					id="errorMsg2"></span>
 				<textarea id="contents" name="contents"
 					oninput="typingContents(this.form)"></textarea>
-				<a href="mainCommunity" id="goContentsList">취소</a> <input
+				<a href="mainCommunity?type=reportingDate&q=&page=1&range=1" id="goContentsList">취소</a> <input
 					type="submit" value="작성완료"
 					onclick="writeSubmit(this.form); return false">
 			</form>

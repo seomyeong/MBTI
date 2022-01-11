@@ -35,6 +35,7 @@ function writeSubmit(form) {
 	
 	if(pass == true) {
 		alert("작성하신 글이 성공적으로 게시되었습니다.");
+		alert("게시글 작성으로 50맙이 적립되었습니다.");
 		var formTag = document.getElementById("form");
           formTag.submit();
 	}
