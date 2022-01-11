@@ -49,7 +49,6 @@ public class MemberController {
 				memberCommand.getGender(), phone);
 
 		memberService.addMember(member);
-		System.out.println("회원가입성공");
 		mav.setViewName("/member/successAddMember");
 		return mav;
 	}
@@ -76,17 +75,14 @@ public class MemberController {
 //			session.setAttribute("memberInfo", memberInfo);
 //			session.setAttribute("email", memberInfo.getEmail());
 			// 세션에 id 값 할당
-			System.out.println("loginId : " + memberInfo.getId());
 			session.setAttribute("loginId", memberInfo.getId());
 			session.setMaxInactiveInterval(-1);
 			mav.setViewName("redirect:/index");
-			System.out.println("로그인성공");
 			return mav;
 
 		} else {
 			mav.addObject("errorMsg", "회원정보가 일치하지 않습니다.");
 			mav.setViewName("/member/login");
-			System.out.println("로그인실패");
 			return mav;
 		}
 	}
@@ -101,7 +97,6 @@ public class MemberController {
 //		session.invalidate();
 		session.removeAttribute("loginId");
 
-		System.out.println("로그아웃");
 		return "redirect:/index";
 	}
 	
@@ -113,7 +108,6 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping("/member/emailCheck")
 	public Map<String, String> isEmailCheck(@RequestBody Map<String, String> param) {
-		System.out.println("email입력 : " + param.get("email"));
 		String msg = "";
 		String email = param.get("email");
 		String email1 = param.get("email1");
@@ -139,7 +133,6 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping("/member/nickNameCheck")
 	public Map<String, String> isNickCheck(@RequestBody Map<String, String> param) {
-		System.out.println("nickName입력 : " + param.get("nickName"));
 
 		String msg = "";
 		String nickName = param.get("nickName");
