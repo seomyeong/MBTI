@@ -23,15 +23,22 @@ function timeForToday(value) {
 	return `${Math.floor(betweenTimeDay / 365)}년 전`;
 }
 
+
+// date 표시 바꾸기 - 게시글, 댓글, 대댓글
+let formatDate_board = timeForToday($('#board_reportingDate').text());
+$('#board_reportingDate').text(formatDate_board);
+
 $('.comment_reportingDate').each(function() {
 	let formatDate = timeForToday($(this).text());
 	$(this).text(formatDate);
 
 });
 
-// date 표시 바꾸기 - 게시글 
-let formatDate_board = timeForToday($('#board_reportingDate').text());
-$('#board_reportingDate').text(formatDate_board);
+$('.plusCommentView_reportingDate').each(function() {
+	let formatDate = timeForToday($(this).text());
+	$(this).text(formatDate);
+
+});
 
 // 댓글 글자수 세기
 function typingContents(form) {
@@ -43,3 +50,77 @@ function typingContents(form) {
 		$('#typingCount').text('');
 	}
 }
+
+// 게시글 삭제
+
+$('#board_delete a').on('click', function(e) {
+	e.preventDefault();
+	var boardId = $(this).attr("href");
+
+	var answer = confirm("해당 게시글을 삭제할까요?");
+
+	if (answer == true) {
+		alert("삭제가 완료되었습니다.");
+		location.href = "deleteBoard?boardId=" + boardId;
+	}
+});
+
+// 댓글 삭제
+
+$('.comment_delete a').on('click', function(e) {
+	e.preventDefault();
+	var boardId = $('#comments span').attr("data-boardId");
+	var commentId = $(this).attr("href");
+
+	var answer = confirm("해당 댓글을 삭제할까요?");
+
+	if (answer == true) {
+
+		alert("삭제가 완료되었습니다.");
+
+		var param = {
+			'boardId' : boardId,
+			'commentId': commentId,
+		}
+
+		$.ajax({
+			type: "post",
+			data: JSON.stringify(param),
+			url: "deleteComment",
+			contentType: "application/json; charset=UTF-8",
+			success: function() {
+				location.reload(true);
+			}
+		});
+	}
+});
+
+// 대댓글 삭제
+$('.plusComment_delete a').on('click', function(e) {
+	e.preventDefault();
+	var boardId = $('#comments span').attr("data-boardId");
+	var plusCommentId = $(this).attr("href");
+
+	var answer = confirm("해당 댓글을 삭제할까요?");
+
+	if (answer == true) {
+
+		alert("삭제가 완료되었습니다.");
+
+		var param = {
+			'boardId' : boardId,
+			'plusCommentId': plusCommentId,
+		}
+
+		$.ajax({
+			type: "post",
+			data: JSON.stringify(param),
+			url: "deletePlusComment",
+			contentType: "application/json; charset=UTF-8",
+			success: function() {
+				location.reload(true);
+			}
+		});
+	}
+});
+

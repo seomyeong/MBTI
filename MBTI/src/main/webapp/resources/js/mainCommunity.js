@@ -1,3 +1,4 @@
+// mbti 필터 클릭시 애니메이션 처리
 $('.toggle-switch .switch').on('click', function() {
 	if ($(this).parent().children('input:eq(0)').attr('checked') == false || $(this).parent().children('input:eq(0)').attr('checked') == null) {
 		$(this).parent().children('input:eq(0)').attr('checked', true);
@@ -6,15 +7,11 @@ $('.toggle-switch .switch').on('click', function() {
 	}
 });
 
-$('.contents').on('mouseenter', function() {
-	$(this).css("background", "#f2f2f2");
-}).on('mouseleave', function() {
-	$(this).css("background", "#fff");
-});
 
-
-// mbti filter
+// mbti 필터 기능 처리
 function checkMbti() {
+	var type = "mbti";
+	let mbtiInfo;
 	let type01;
 	let type02;
 	let type03;
@@ -44,7 +41,15 @@ function checkMbti() {
 		type04 = 'J';
 	}
 
-	console.log(type01 + type02 + type03 + type04);
+	mbtiInfo = type01 + type02 + type03 + type04;
+	console.log("javascript에서 실행 -> mbtiInfo : " + mbtiInfo);
+	
+	// 게시판에 필터 적용 시키기 위해 get방식으로 정보를 컨트롤러로 전달
+	
+	location.href = "mainCommunity?type=" + type + "&q=" + mbtiInfo + "&page=1&range=1";
+
+
+	/* ajax 처리 연습
 	let param = {
 		"type01": type01,
 		"type02": type02,
@@ -55,15 +60,15 @@ function checkMbti() {
 	$.ajax({ // 비동기 방식 (페이지가 넘어가지 않고 그 페이지에서 바로 자료가 변경됨)
 		type: "post",
 		data: JSON.stringify(param),
-		url: "/myapp/community/mainCommunity",
+		url: "/test/community/mainCommunity",
 		contentType: "application/json; charset=UTF-8",
 		success: function(data) {
 			document.querySelector('#viewName').innerHTML = data["view"];
 		}
-	});
-
+	}); */
 }
 
+// 전체 보기
 function allView() {
 	let param = {
 		"allView": "all"
@@ -72,7 +77,7 @@ function allView() {
 	$.ajax({ // 비동기 방식 (페이지가 넘어가지 않고 그 페이지에서 바로 자료가 변경됨)
 		type: "post",
 		data: JSON.stringify(param),
-		url: "/myapp/community/mainCommunity",
+		url: "mainCommunity",
 		contentType: "application/json; charset=UTF-8",
 		success: function(data) {
 			if (data["view"] == "all") {
@@ -82,14 +87,22 @@ function allView() {
 	});
 }
 
-// search
-
-function search() {
-	console.log("submit success");
+// 검색 기능
+function search(form) {
+	
+	var type;
+	var q = form.searchContents.value;
+	
+	if(form.selectType.value == "제목") {
+		type = "title";
+	} else if(form.selectType.value == "작성자") {
+		type = "memberId";
+	}
+	
+	location.href = "mainCommunity?type=" + type + "&q=" + q + "&page=1&range=1";
 }
 
 // date 표시 바꾸기
-
 function timeForToday(value) {
         const today = new Date();
         const timeValue = new Date(value);
@@ -112,13 +125,13 @@ function timeForToday(value) {
 
         return `${Math.floor(betweenTimeDay / 365)}년 전`;
 }
-
 $('.reportingDate').each(function() {
 	let formatDate = timeForToday($(this).text());
 	$(this).text(formatDate);
 	
 });
 
+// 글쓰기 페이지 이동
 function goWrite() {
 	var loginId = $('#write').attr("data-loginId");
 	

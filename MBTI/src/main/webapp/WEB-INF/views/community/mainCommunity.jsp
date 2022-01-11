@@ -21,40 +21,72 @@
 	<jsp:include page="/resources/incl/nav.jsp"></jsp:include>
 	<div id="main">
 		<!-- 작성 구역 -->
-		<a id="viewAll" href="javascript:allView()">전체</a>
-
-		<form action="javascript:checkMbti()" method="POST">
-
-			<div id="type1" class="toggle-switch">
-				<input type="checkbox" name="type01" />
-				<div class="switch"></div>
-				<span class="front">E</span> <span class="back">I</span>
+		<div id="viewName">
+			<c:choose>
+				<c:when test="${(sessionScope.type eq 'reportingDate')}">
+					전체글
+				</c:when>
+				<c:when test="${(sessionScope.type eq 'mbti')}">
+					${sessionScope.q}
+				</c:when>
+				<c:when test="${(sessionScope.type eq 'likes')}">
+					인기순
+				</c:when>
+				<c:when test="${(sessionScope.type eq 'views')}">
+					조회순
+				</c:when>
+				<c:otherwise>
+					"${sessionScope.q}"에 대한 검색결과
+				</c:otherwise>
+			</c:choose>
+		</div>
+		<div id="topWrap">
+			<div id="searchBar">
+				<form>
+					<select name="selectType">
+						<option>제목</option>
+						<option>작성자</option>
+					</select> <input type="text" name="searchContents" placeholder="검색" /> <input
+						type="submit" value="검색"
+						onclick="javascript:search(this.form); return false;" />
+				</form>
 			</div>
 
-			<div id="type2" class="toggle-switch">
-				<input type="checkbox" name="type02" />
-				<div class="switch"></div>
-				<span class="front">N</span> <span class="back">S</span>
-			</div>
+			<form>
+				<a id="viewAll" href="mainCommunity_deleteSession">전체</a>
+				<a id="viewHot" href="mainCommunity_hot">인기순</a>
+				<a id="viewTop" href="mainCommunity_top">조회순</a>
+				<div id="typeWrap">
+					<div id="type1" class="toggle-switch">
+						<input type="checkbox" name="type01" />
+						<div class="switch"></div>
+						<span class="front">E</span> <span class="back">I</span>
+					</div>
 
-			<div id="type3" class="toggle-switch">
-				<input type="checkbox" name="type03" />
-				<div class="switch"></div>
-				<span class="front">F</span> <span class="back">T</span>
-			</div>
+					<div id="type2" class="toggle-switch">
+						<input type="checkbox" name="type02" />
+						<div class="switch"></div>
+						<span class="front">N</span> <span class="back">S</span>
+					</div>
 
-			<div id="type4" class="toggle-switch">
-				<input type="checkbox" name="type04" />
-				<div class="switch"></div>
-				<span class="front">P</span> <span class="back">J</span>
-			</div>
+					<div id="type3" class="toggle-switch">
+						<input type="checkbox" name="type03" />
+						<div class="switch"></div>
+						<span class="front">F</span> <span class="back">T</span>
+					</div>
 
-			<input type="submit" value="필터적용" />
+					<div id="type4" class="toggle-switch">
+						<input type="checkbox" name="type04" />
+						<div class="switch"></div>
+						<span class="front">P</span> <span class="back">J</span>
+					</div>
 
-		</form>
+				</div>
+				<input type="submit" value="필터적용"
+					onclick="javascript:checkMbti(); return false;" />
+			</form>
 
-		<a id="viewName">전체글</a>
-
+		</div>
 		<table>
 			<tr>
 				<th>추천</th>
@@ -64,30 +96,132 @@
 				<th>작성일</th>
 				<th>조회</th>
 			</tr>
+			<c:forEach var="communityBoard" items="${cbList_hot}">
+				<tr class="contents_hot">
+					<td class="likes">${communityBoard.likes}</td>
+					<td class="mbti">${communityBoard.member.mbti}</td>
+					<td class="nickName">
+					<c:choose>
+						<c:when test="${communityBoard.member.level >= 70}">
+							<span class="lv70">Lv.${communityBoard.member.level}</span>
+						</c:when>
+						<c:when test="${communityBoard.member.level < 70 and communityBoard.member.level >= 50}">
+							<span class="lv50">Lv.${communityBoard.member.level}</span>
+						</c:when>
+						<c:when test="${communityBoard.member.level < 50 and communityBoard.member.level >= 30}">
+							<span class="lv30">Lv.${communityBoard.member.level}</span>
+						</c:when>
+						<c:when test="${communityBoard.member.level < 30 and communityBoard.member.level >= 10}">
+							<span class="lv10">Lv.${communityBoard.member.level}</span>
+						</c:when>
+						<c:when test="${communityBoard.member.level < 10}">
+							<span class="level">Lv.${communityBoard.member.level}</span>
+						</c:when>
+					</c:choose>
+					 ${communityBoard.member.nickName}</td>
+					<td><span class="hotFlag_top">인기</span> <a href="board?boardId=${communityBoard.id}">${communityBoard.title}<span
+							class="commentCount"> [${communityBoard.commentsCount}]</span></a></td>
+					<td class="reportingDate">${communityBoard.reportingDate}</td>
+					<td>${communityBoard.views}</td>
+				</tr>
+			</c:forEach>
 			<c:forEach var="communityBoard" items="${cbList}">
 				<tr class="contents">
 					<td class="likes">${communityBoard.likes}</td>
 					<td class="mbti">${communityBoard.member.mbti}</td>
-					<td class="nickName">${communityBoard.member.nickName}</td>
-					<td><a href="board?boardId=${communityBoard.id}">${communityBoard.title}</a></td>
+					<td class="nickName">
+					<c:choose>
+						<c:when test="${communityBoard.member.level >= 70}">
+							<span class="lv70">Lv.${communityBoard.member.level}</span>
+						</c:when>
+						<c:when test="${communityBoard.member.level < 70 and communityBoard.member.level >= 50}">
+							<span class="lv50">Lv.${communityBoard.member.level}</span>
+						</c:when>
+						<c:when test="${communityBoard.member.level < 50 and communityBoard.member.level >= 30}">
+							<span class="lv30">Lv.${communityBoard.member.level}</span>
+						</c:when>
+						<c:when test="${communityBoard.member.level < 30 and communityBoard.member.level >= 10}">
+							<span class="lv10">Lv.${communityBoard.member.level}</span>
+						</c:when>
+						<c:when test="${communityBoard.member.level < 10}">
+							<span class="level">Lv.${communityBoard.member.level}</span>
+						</c:when>
+					</c:choose>
+					
+					 ${communityBoard.member.nickName}</td>
+					<td><c:if test="${communityBoard.likes >= 20}"><span class="hotFlag">인기</span> </c:if><a href="board?boardId=${communityBoard.id}">${communityBoard.title}<span
+							class="commentCount"> [${communityBoard.commentsCount}]</span></a></td>
 					<td class="reportingDate">${communityBoard.reportingDate}</td>
 					<td>${communityBoard.views}</td>
 				</tr>
 			</c:forEach>
 		</table>
+		<c:if test="${cbList eq '[]'}">
+			<div id="noContents"><a href="#" id="noContents_img"></a>결과를 찾지 못했어요!</div>
+		</c:if>
 
-		<div id="searchBar">
-			<form action="javascript:search()">
-				<select name="searchOption">
-					<option>제목</option>
-					<option>작성자</option>
-				</select> <input type="text" name="searchContents" placeholder="검색" /> <input
-					type="submit" value="검색" />
-			</form>
+		<div id="bottomWrap">
+			<div id="paging"
+				style="width: ${(sessionScope.pagingVO.endPage - sessionScope.pagingVO.startPage) * 42 + 144}px">
+				<c:choose>
+					<c:when test="${sessionScope.pagingVO.prev}">
+						<a
+							href="mainCommunity?type=${sessionScope.type}&q=${sessionScope.q}&page=${sessionScope.pagingVO.startPage-1}&range=${sessionScope.pagingVO.range - 1}">이전</a>
+					</c:when>
+					<c:otherwise>
+						<a href="#">이전</a>
+					</c:otherwise>
+				</c:choose>
+
+				<c:forEach var="i" begin="${sessionScope.pagingVO.startPage}"
+					end="${sessionScope.pagingVO.endPage}" step="1">
+					<c:choose>
+						<c:when test="${sessionScope.pagingVO.page eq i}">
+							<a
+								href="mainCommunity?type=${sessionScope.type}&q=${sessionScope.q}&page=${i}&range=${sessionScope.pagingVO.range}"
+								class="now">${i}</a>
+						</c:when>
+						<c:otherwise>
+							<a
+								href="mainCommunity?type=${sessionScope.type}&q=${sessionScope.q}&page=${i}&range=${sessionScope.pagingVO.range}">${i}</a>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+
+				<c:choose>
+					<c:when test="${sessionScope.pagingVO.next}">
+						<a
+							href="mainCommunity?type=${sessionScope.type}&q=${sessionScope.q}&page=${sessionScope.pagingVO.endPage+1}&range=${sessionScope.pagingVO.range + 1}">다음</a>
+					</c:when>
+					<c:otherwise>
+						<a href="#">다음</a>
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<a href="#" onclick="goWrite();" id="write"
+				data-loginId="${sessionScope.loginId}">글쓰기</a>
 		</div>
-		
-		<a href="#" onclick="goWrite();" id="write" data-loginId="${sessionScope.loginId}">글쓰기</a>
 
+		<!-- 사용한 세션 지우기 -->
+		<%-- <% session.invalidate(); %> --%>
+
+		<%-- <form action="" id="testValue">
+			<span>page = </span><input type=text
+				value="${sessionScope.pagingVO.page}" /><br> <span>range
+				= </span><input type=text value="${sessionScope.pagingVO.range}" /><br>
+			<span>listCnt = </span><input type=text
+				value="${sessionScope.pagingVO.listCnt}" /><br> <span>startPage
+				= </span><input type=text value="${sessionScope.pagingVO.startPage}" /><br>
+			<span>endPage = </span><input type=text
+				value="${sessionScope.pagingVO.endPage}" /><br> <span>startList
+				= </span><input type=text value="${sessionScope.pagingVO.startList}" /><br>
+			<span>prev = </span><input type=text
+				value="${sessionScope.pagingVO.prev}" /><br> <span>next
+				= </span><input type=text value="${sessionScope.pagingVO.next}" /><br>
+			<span>pageListSize = </span><input type=text
+				value="${sessionScope.pagingVO.pageListSize}" /><br> <span>pageCnt
+				= </span><input type=text value="${sessionScope.pagingVO.pageCnt}" /><br>
+		</form> --%>
 	</div>
 	<!-- 기본양식 // -->
 </body>

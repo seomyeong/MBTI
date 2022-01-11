@@ -14,32 +14,32 @@
 <script src="<%=request.getContextPath()%>/resources/js/common.js" defer></script>
 </head>
 <body>
-	<nav id="nav">
-		<span id="menuToggle"> <ion-icon name="menu-outline"></ion-icon>
+	<nav id="nav" class="hiddenProfile">
+		<span id="menuToggle" class="show"> <ion-icon name="menu-outline"></ion-icon>
 		</span>
 		<ul>
-			<li id="profile"><a href="#"> <span class="icon"> <ion-icon
+			<li id="profile" class="hiddenProfile"><a href="#"> <span class="icon"> <ion-icon
 							name="person-circle-outline"></ion-icon>
 				</span> <span class="title">회원이신가요?</span>
 				${sessionScope.nickName}
 			</a></li>
-			<a href="/myapp/member/login" id="login">로그인</a>
-			<a href="/myapp/member/addMember" id="addUser">회원가입</a>
+			<a href="/myapp/member/login" id="login" class="hiddenProfile">로그인</a>
+			<a href="/myapp/member/addMember" id="addUser" class="hiddenProfile">회원가입</a>
 			<li><a href="/myapp/"> <span class="icon"> <ion-icon
 							name="home-outline"></ion-icon>
 				</span> <span class="title">홈으로</span>
 			</a></li>
-			<li><a href="/myapp/community/mainCommunity"> <span class="icon"> <ion-icon
+			<li><a href="/myapp/community/mainCommunity_deleteSession"> <span class="icon"> <ion-icon
 							name="people-outline"></ion-icon>
 				</span> <span class="title">커뮤니티</span>
 			</a></li>
-			<li><a href="#"> <span class="icon"> <ion-icon
+			<li><a href="/myapp/mbtiMatch/mbtiMatch"> <span class="icon"> <ion-icon
 							name="heart-outline"></ion-icon>
 				</span> <span class="title">궁합도</span>
 			</a></li>
-			<li><a href="#"> <span class="icon"> <ion-icon
+			<li><a href="/myapp/mbtiPlay/mbtiPlayZone"> <span class="icon"> <ion-icon
 							name="ear-outline"></ion-icon>
-				</span> <span class="title">상황별 심리</span>
+				</span> <span class="title">맙티 플레이</span>
 			</a></li>
 			<li><a href="#"> <span class="icon"> <ion-icon
 							name="settings-outline"></ion-icon>
