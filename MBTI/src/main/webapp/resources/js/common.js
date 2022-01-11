@@ -26,3 +26,4 @@ function clickMenuToggle() {
     addUser.classList.toggle('hiddenProfile');
     profile.classList.toggle('hiddenProfile');
 }
+
