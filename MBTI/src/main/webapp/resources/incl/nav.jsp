@@ -22,29 +22,29 @@
 							name="person-circle-outline"></ion-icon>
 				</span> <span class="title">회원이신가요?</span>
 			</a></li>
-			<a href="#" id="login" class="hiddenProfile">로그인</a>
-			<a href="#" id="addUser" class="hiddenProfile">회원가입</a>
-			<li><a href="/test/index"> <span class="icon"> <ion-icon
+			<a href="/myapp/member/login" id="login" class="hiddenProfile">로그인</a>
+			<a href="/myapp/member/addMember" id="addUser" class="hiddenProfile">회원가입</a>
+			<li><a href="/myapp/"> <span class="icon"> <ion-icon
 							name="home-outline"></ion-icon>
 				</span> <span class="title">홈으로</span>
 			</a></li>
-			<li><a href="/test/community/mainCommunity_deleteSession"> <span class="icon"> <ion-icon
+			<li><a href="/myapp/community/mainCommunity_deleteSession"> <span class="icon"> <ion-icon
 							name="people-outline"></ion-icon>
 				</span> <span class="title">커뮤니티</span>
 			</a></li>
-			<li><a href="#"> <span class="icon"> <ion-icon
+			<li><a href="/myapp/mbtiMatch/mbtiMatch"> <span class="icon"> <ion-icon
 							name="heart-outline"></ion-icon>
 				</span> <span class="title">궁합도</span>
 			</a></li>
-			<li><a href="#"> <span class="icon"> <ion-icon
+			<li><a href="/myapp/mbtiPlay/mbtiPlayZone"> <span class="icon"> <ion-icon
 							name="ear-outline"></ion-icon>
-				</span> <span class="title">상황별 심리</span>
+				</span> <span class="title">맙티 플레이</span>
 			</a></li>
 			<li><a href="#"> <span class="icon"> <ion-icon
 							name="settings-outline"></ion-icon>
 				</span> <span class="title">개인설정</span>
 			</a></li>
-			<li><a href="#"> <span class="icon"> <ion-icon
+			<li><a href="/myapp/member/logout"> <span class="icon"> <ion-icon
 							name="log-out-outline"></ion-icon>
 				</span> <span class="title">로그아웃</span>
 			</a></li>
