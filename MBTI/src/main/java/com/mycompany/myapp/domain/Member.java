@@ -62,6 +62,21 @@ public class Member {
 		this.phone = phone;
 	}
 	
+	public Member(long id, String email, String pw, String name, String nickName, String birth, String mbti,
+			String gender, String phone, Date regDate) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.pw = pw;
+		this.name = name;
+		this.nickName = nickName;
+		this.birth = birth;
+		this.mbti = mbti;
+		this.gender = gender;
+		this.phone = phone;
+		this.regDate = regDate;
+	}
+	
 	public void calcLoginPoint() {
 		this.mabPoint = this.mabPoint + 10;
 	}
@@ -81,5 +96,7 @@ public class Member {
 	public void calcBestPoint() {
 		this.mabPoint = this.mabPoint + 500;
 	}
+
+	
 
 }
