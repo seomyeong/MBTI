@@ -18,11 +18,13 @@ function emailCheck(form) {
 			url: "/myapp/member/emailCheck",
 			contentType: "application/json; charset=UTF-8",
 			success: function(data) {
-				if (!(data["email1"] == "")) {
-					$('.errorTxt').eq(0).html(data["msg"]);
-				} else {
+				if (data["msg"] == ""){
 					$('.errorTxt').eq(0).html("");
-				}
+				} else if (data["msg"] == "중복되는 이메일이 존재합니다." || data["msg"] == "5~20자로 설정해주세요.") {
+					$('.errorTxt').eq(0).html(data["msg"]).css("color", "red");
+				} else if (!(data["email1"] == "")) {
+					$('.errorTxt').eq(0).html(data["msg"]).css("color", "#000");
+				} 
 			}
 		});
 
@@ -95,17 +97,17 @@ function checkPattern(form) {
 	} else {
 		$('.errorTxt').eq(1).text("");
 	}
-	
+
 	// 비밀번호  재확인
-	  var p1 = document.getElementById('password1').value;
-      var p2 = document.getElementById('password2').value;
-      
-          if( p1 != p2 ) {
-			$('.errorTxt').eq(2).text("비밀번호불일치");
-            return false;
-          } else{
-            $('.errorTxt').eq(2).text("비밀번호가 일치합니다");
-          }
+	var p1 = document.getElementById('password1').value;
+	var p2 = document.getElementById('password2').value;
+
+	if (p1 != p2) {
+		$('.errorTxt').eq(2).text("비밀번호 불일치").css("color", "red");
+		return false;
+	} else {
+		$('.errorTxt').eq(2).text("비밀번호가 일치합니다").css("color", "#000");
+	}
 
 
 	// 이름 검사

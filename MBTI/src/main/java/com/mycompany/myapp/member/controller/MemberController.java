@@ -115,10 +115,12 @@ public class MemberController {
 		if(memberService.isEmailCheck(email)) {
 			if ( email1.length() > 4 ) {
 				msg = "사용가능한 이메일입니다!";
-			} else {
+			} else { 
 				msg = "5~20자로 설정해주세요.";
 			}
 			
+		} else if(email1.equals(null) || email1 == "") {
+			msg = "";
 		} else {
 			msg = "중복되는 이메일이 존재합니다.";
 		}
