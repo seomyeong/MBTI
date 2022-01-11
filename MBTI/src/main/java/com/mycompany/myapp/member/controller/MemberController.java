@@ -36,7 +36,7 @@ public class MemberController {
 	 */
 	@GetMapping("/member/successAddMember")
 	public String successAddMemberGet() {
-		return "member/successAddMember";
+		return "redirect:/index";
 	}
 
 	@PostMapping("/member/successAddMember")

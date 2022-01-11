@@ -45,7 +45,6 @@ function nickNameCheck(form) {
 		url: "/myapp/member/nickNameCheck",
 		contentType: "application/json; charset=UTF-8",
 		success: function(data) {
-			console.log(data["nickName"]);
 			if (!(data["nickName"] == "")) {
 				$('.errorTxt').eq(4).html(data["msg"]);
 			} else {
