@@ -17,7 +17,7 @@ public class Member {
 	private String nickName;
 	private String birth;
 	private String mbti;
-	private char gender;
+	private String gender;
 	private String phone;
 	private Date regDate;
 	private int level;
@@ -29,7 +29,7 @@ public class Member {
 	public Member() {}
 
 	public Member(long id, String email, String pw, String name, String nickName, String birth, String mbti,
-			char gender, String phone, Date regDate, int level, int mabPoint, String profileImg, int contentsCount,
+			String gender, String phone, Date regDate, int level, int mabPoint, String profileImg, int contentsCount,
 			int commentsCount) {
 		super();
 		this.id = id;
@@ -50,7 +50,7 @@ public class Member {
 	}
 	
 	public Member(String email, String pw, String name, String nickName, String birth, String mbti,
-			char gender, String phone) {
+			String gender, String phone) {
 		super();
 		this.email = email;
 		this.pw = pw;
@@ -60,6 +60,21 @@ public class Member {
 		this.mbti = mbti;
 		this.gender = gender;
 		this.phone = phone;
+	}
+	
+	public Member(long id, String email, String pw, String name, String nickName, String birth, String mbti,
+			String gender, String phone, Date regDate) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.pw = pw;
+		this.name = name;
+		this.nickName = nickName;
+		this.birth = birth;
+		this.mbti = mbti;
+		this.gender = gender;
+		this.phone = phone;
+		this.regDate = regDate;
 	}
 	
 	public void calcLoginPoint() {
@@ -81,5 +96,7 @@ public class Member {
 	public void calcBestPoint() {
 		this.mabPoint = this.mabPoint + 500;
 	}
+
+	
 
 }

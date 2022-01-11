@@ -74,7 +74,7 @@ public class CommunityDao {
 			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Member m = new Member(rs.getLong("id"), rs.getString("email"), rs.getString("pw"), rs.getString("name"),
 						rs.getString("nickName"), rs.getString("birth"), rs.getString("mbti"),
-						rs.getString("gender").charAt(0), rs.getString("phone"), rs.getDate("regDate"),
+						rs.getString("gender"), rs.getString("phone"), rs.getDate("regDate"),
 						rs.getInt("level"), rs.getInt("mabPoint"), rs.getString("profileImg"),
 						rs.getInt("contentsCount"), rs.getInt("commentsCount"));
 				return m;
@@ -281,7 +281,7 @@ public class CommunityDao {
 			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Member m = new Member(rs.getLong("id"), rs.getString("email"), rs.getString("pw"), rs.getString("name"),
 						rs.getString("nickName"), rs.getString("birth"), rs.getString("mbti"),
-						rs.getString("gender").charAt(0), rs.getString("phone"), rs.getDate("regDate"),
+						rs.getString("gender"), rs.getString("phone"), rs.getDate("regDate"),
 						rs.getInt("level"), rs.getInt("mabPoint"), rs.getString("profileImg"),
 						rs.getInt("contentsCount"), rs.getInt("commentsCount"));
 				return m;
