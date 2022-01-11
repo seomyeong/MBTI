@@ -11,18 +11,30 @@ public class MemberService {
 	@Autowired
 	MemberDao dao;
 
-	//회원가입
+	// 회원가입
 	public void addMember(Member member) {
 		dao.addMember(member);
 	}
-
-	//로그인
+	
+	// 로그인
 	public boolean login(Member member) {
 		return dao.login(member);
 	}
 
-	//회원정보 조회
+	// 회원정보 조회
 	public Member memberInfo(Member member) {
 		return dao.memberInfo(member);
+	}
+
+	//이메일 중복검사
+	public boolean isEmailCheck(String email) {
+		System.out.println("service 접근");
+		return dao.isEmailCheck(email);
+	}
+	
+	//닉네임 중복검사
+	public boolean isNickNameCheck(String nickName) {
+		System.out.println("service");
+		return dao.isNickNameCheck(nickName);
 	}
 }

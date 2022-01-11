@@ -21,6 +21,7 @@
 			<li id="profile"><a href="#"> <span class="icon"> <ion-icon
 							name="person-circle-outline"></ion-icon>
 				</span> <span class="title">회원이신가요?</span>
+				${sessionScope.nickName}
 			</a></li>
 			<a href="/myapp/member/login" id="login">로그인</a>
 			<a href="/myapp/member/addMember" id="addUser">회원가입</a>
@@ -44,7 +45,7 @@
 							name="settings-outline"></ion-icon>
 				</span> <span class="title">개인설정</span>
 			</a></li>
-			<li><a href="#"> <span class="icon"> <ion-icon
+			<li><a href="/myapp/member/logout"> <span class="icon"> <ion-icon
 							name="log-out-outline"></ion-icon>
 				</span> <span class="title">로그아웃</span>
 			</a></li>

@@ -11,14 +11,16 @@ import lombok.ToString;
 @Setter
 public class MemberCommand {
 	private long id;
-	private String email;
+	private String email1;
+	private String email2;
 	private String pw;
 	private String name;
 	private String nickName;
 	private String birth;
 	private String mbti;
 	private String gender;
-	private String phone;
+	private String phone1;
+	private String phone2;
 	private Date regDate;
 	private int level;
 	private int mabPoint;
@@ -28,17 +30,19 @@ public class MemberCommand {
 	
 	public MemberCommand() {}
 
-	public MemberCommand(String email, String pw, String name, String nickName, String birth, String mbti, String gender,
-			String phone) {
+	public MemberCommand(String email1, String email2, String pw, String name, String nickName, String birth, String mbti, String gender,
+			String phone1, String phone2) {
 		super();
-		this.email = email;
+		this.email1 = email1;
+		this.email2 = email2;
 		this.pw = pw;
 		this.name = name;
 		this.nickName = nickName;
 		this.birth = birth;
 		this.mbti = mbti;
 		this.gender = gender;
-		this.phone = phone;
+		this.phone1 = phone1;
+		this.phone2 = phone2;
 	}
 	
 	

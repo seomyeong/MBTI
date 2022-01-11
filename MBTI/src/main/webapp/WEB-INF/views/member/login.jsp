@@ -45,7 +45,9 @@
                                     </c:otherwise>
                                 </c:choose>
                             </div>
-                            <a onclick="javascript:history.back()">이전</a> <input type="submit" value="로그인" id="submit">
+                            <!-- <a onclick="javascript:history.back()">이전</a> --> 
+                            <a href="/myapp/index">이전</a> 
+                            <input type="submit" value="로그인" id="submit">
                         </div>
                     </form>
                 </div>	                                                                                                                                                                                            
