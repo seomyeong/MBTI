@@ -38,6 +38,7 @@
 					<span id="contentsCount" class="hiddenProfile">내가 쓴 총 게시물 수 &nbsp;&nbsp;${sessionScope.memberInfo.contentsCount}</span>
 					<span id="commentsCount" class="hiddenProfile">내가 쓴 총 댓글 수 &nbsp;&nbsp;&nbsp;${sessionScope.memberInfo.commentsCount}</span>
 					<span id="mabPoint" class="hiddenProfile">현재 보유한 맙 &nbsp;&nbsp;&nbsp;&nbsp;${sessionScope.memberInfo.mabPoint}</span>
+					<span id="profileBack" class="hiddenProfile"></span>
 				</c:otherwise>
 			</c:choose>
 			<li><a href="/myapp/"> <span class="icon"> <ion-icon
@@ -56,14 +57,28 @@
 							name="ear-outline"></ion-icon>
 				</span> <span class="title">맙티 플레이</span>
 			</a></li>
-			<li><a href="#"> <span class="icon"> <ion-icon
-							name="settings-outline"></ion-icon>
-				</span> <span class="title">개인설정</span>
-			</a></li>
-			<li><a href="/myapp/member/logout"> <span class="icon"> <ion-icon
-							name="log-out-outline"></ion-icon>
-				</span> <span class="title">로그아웃</span>
-			</a></li>
+			<c:choose>
+				<c:when test="${sessionScope.loginId eq null}">
+					<li><a href="#" onclick="javascript:navErrorMsg(); return false;"> <span class="icon"> <ion-icon
+									name="settings-outline"></ion-icon>
+						</span> <span class="title">개인설정</span>
+					</a></li>
+					<li><a href="#" onclick="javascript:navErrorMsg(); return false;"> <span class="icon"> <ion-icon
+									name="log-out-outline"></ion-icon>
+						</span> <span class="title">로그아웃</span>
+					</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="/myapp/member/updateMember"> <span class="icon"> <ion-icon
+									name="settings-outline"></ion-icon>
+						</span> <span class="title">개인설정</span>
+					</a></li>
+					<li><a href="/myapp/member/logout"> <span class="icon"> <ion-icon
+									name="log-out-outline"></ion-icon>
+						</span> <span class="title">로그아웃</span>
+					</a></li>
+				</c:otherwise>
+			</c:choose>
 		</ul>
 	</nav>
 	<!-- <div id="main"></div> -->
@@ -91,6 +106,7 @@
 				$('#commentsCount').toggleClass('hiddenProfile');
 				$('#mabPoint').toggleClass('hiddenProfile');
 				$('#profileImg').toggleClass('hiddenProfile');
+				$('#profileBack').toggleClass('hiddenProfile');
 			}
 		});
 	

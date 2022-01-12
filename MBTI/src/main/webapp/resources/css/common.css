@@ -78,6 +78,8 @@ body {
 #nav ul li:nth-child(1) .nickName {
     text-indent: 20px;
     color: var(--black3);
+    font-size: 0.8em;
+    font-weight: bold;
 }
 
 #nav ul {
@@ -185,7 +187,8 @@ body {
 #profileImg,
 #contentsCount,
 #commentsCount,
-#mabPoint {
+#mabPoint,
+#profileBack {
     position: absolute;
     width: 150px;
     transition: 0.2s;
@@ -212,6 +215,15 @@ body {
 	top: -15px;
     left: calc(100% - 90px);
 }
+#profileBack {
+	width: 276px;
+	height: 140px;
+	top: -29px;
+    left: calc(100% - 289px);
+    background: #fff;
+    z-index: -2;
+    border-radius: 20px;
+}
 
 #profileImg,
 #login,
@@ -219,7 +231,8 @@ body {
 #profile,
 #contentsCount,
 #commentsCount,
-#mabPoint {
+#mabPoint,
+#profileBack {
     opacity: 1;
 }
 #profileImg.hiddenProfile,
@@ -228,7 +241,8 @@ body {
 #profile.hiddenProfile,
 #contentsCount.hiddenProfile,
 #commentsCount.hiddenProfile,
-#mabPoint.hiddenProfile {
+#mabPoint.hiddenProfile,
+#profileBack.hiddenProfile {
     opacity: 0;
 }
 
