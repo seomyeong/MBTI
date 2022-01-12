@@ -69,6 +69,19 @@ body {
     width: 100px;
     height: 100px;
 }
+
+/* 로그인 시 */
+#nav ul li:nth-child(1) a .icon {
+	width: 100px;
+    height: 100px;
+}
+#nav ul li:nth-child(1) .nickName {
+    text-indent: 20px;
+    color: var(--black3);
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
 #nav ul {
     text-align: center;
 }
@@ -169,15 +182,67 @@ body {
     left: calc(100% - 110px);
 }
 
-#login,
-#addUser,
-#profile {
-    opacity: 1;
+/* 로그인 */
+
+#profileImg,
+#contentsCount,
+#commentsCount,
+#mabPoint,
+#profileBack {
+    position: absolute;
+    width: 150px;
+    transition: 0.2s;
+    text-decoration: none;
+    color: #828282;
+    padding: 3px 5px;
+    font-size: 0.8em;
+}
+#contentsCount {
+	top: 25px;
+    left: calc(100% - 180px);
+}
+#commentsCount {
+	top: 45px;
+    left: calc(100% - 176px);
+}
+#mabPoint {
+	top: 65px;
+    left: calc(100% - 169px);
+}
+#profileImg {
+	width: 100px;
+	height: 100px;
+	top: -15px;
+    left: calc(100% - 90px);
+}
+#profileBack {
+	width: 276px;
+	height: 140px;
+	top: -29px;
+    left: calc(100% - 289px);
+    background: #fff;
+    z-index: -2;
+    border-radius: 20px;
 }
 
+#profileImg,
+#login,
+#addUser,
+#profile,
+#contentsCount,
+#commentsCount,
+#mabPoint,
+#profileBack {
+    opacity: 1;
+}
+#profileImg.hiddenProfile,
 #login.hiddenProfile,
 #addUser.hiddenProfile,
-#profile.hiddenProfile {
+#profile.hiddenProfile,
+#contentsCount.hiddenProfile,
+#commentsCount.hiddenProfile,
+#mabPoint.hiddenProfile,
+#profileBack.hiddenProfile {
     opacity: 0;
 }
 
