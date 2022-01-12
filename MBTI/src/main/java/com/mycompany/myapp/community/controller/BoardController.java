@@ -49,7 +49,15 @@ public class BoardController {
 				|| session.getAttribute("loginId").equals(""))) {
 			loginId = Long.parseLong(String.valueOf(session.getAttribute("loginId")));
 			loginMemberInfo = communityService.findMemberByMemberId(loginId);
+
+			// 정보 최신화
+			Member memberInfo = communityService.findMemberByMemberId(loginId);
+			
+			session.setAttribute("memberInfo", memberInfo);
+			session.setMaxInactiveInterval(-1);
 		}
+		
+				
 		// 댓글 수 가져오기
 		cb.setCommentsCount(cc.size() + ccp.size());
 
@@ -58,7 +66,7 @@ public class BoardController {
 		mav.addObject("comments", cc);
 		mav.addObject("commentsPlus", ccp);
 		mav.setViewName("/community/board");
-
+		
 		return mav;
 	}
 	
@@ -68,10 +76,11 @@ public class BoardController {
 	@ResponseBody
 	@PostMapping("community/addComment")
 	public Map<String, String> ajaxAddComment(@RequestBody Map<String, String> param) {
+		
 		Long loginId = Long.parseLong(param.get("loginId"));
 		Long boardId = Long.parseLong(param.get("boardId"));
 		String comment = param.get("comment");
-
+		
 		// 댓글 테이블에 할당
 		long commentId = communityService.addComment(loginId, boardId, comment);
 
@@ -100,8 +109,6 @@ public class BoardController {
 		String page = pagingVO.getPage() == 1 ? "1" : Integer.toString(pagingVO.getPage());
 		String range = pagingVO.getRange() == 1 ? "1" : Integer.toString(pagingVO.getRange());
 		
-		System.out.println(type + ", " + q + ", " + page + ", " + range);
-		
 		CommunityBoard cb = communityService.findBoardByBoardId(Long.parseLong(boardId));
 		communityService.deleteBoard(cb.getMember().getId(), boardId);
 		
@@ -121,7 +128,6 @@ public class BoardController {
 		
 		CommunityComments cc = communityService.findCommentByCommentId(Long.parseLong(commentId));
 		
-		
 		communityService.deleteComment(cc.getMember().getId(), Long.parseLong(boardId), Long.parseLong(commentId));
 		
 	}
@@ -137,7 +143,9 @@ public class BoardController {
 		Long memberId = Long.parseLong(param.get("memberId"));
 		String comments = param.get("comments");
 		
+		
 		communityService.addPlusComment(boardId, commentId, memberId, comments);
+		
 	}
 
 	/*
@@ -152,7 +160,6 @@ public class BoardController {
 		CommunityCommentsPlus ccp = communityService.findCommentPlusByPlusCommentId(plusCommentId);
 		
 		communityService.deletePlusComment(ccp.getMember().getId(), Long.parseLong(boardId), Long.parseLong(plusCommentId));
-		
 	}
 	
 	/*

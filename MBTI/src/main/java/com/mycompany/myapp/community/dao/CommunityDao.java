@@ -715,9 +715,9 @@ public class CommunityDao {
 		// jdbcTemplate.update(sql, loginId, boardId, comment);
 		Connection conn = null;
 		
-		String url = "jdbc:derby://localhost:1527/myapp";
-        String id = "myapp";
-        String pw = "myapp";
+		String url = "jdbc:derby://localhost:1527/MBTI";
+        String id = "MBTI";
+        String pw = "MBTI";
         
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");

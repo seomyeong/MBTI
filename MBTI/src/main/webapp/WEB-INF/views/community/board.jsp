@@ -176,45 +176,44 @@
 			}
 
 			// deleteComment부분 a태그 comment.id 설정
-			$
-					.ajax({
-						type : "post",
-						data : JSON.stringify(param),
-						url : "addComment",
-						contentType : "application/json; charset=UTF-8",
-						success : function(data) {
-							/* console.log(data["mbti"] + ", " + data["level"]
-									+ ", " + data["nickName"] + ", "
-									+ data["comment"]);
-							if ('${sessionScope.loginId}' == '${board.member.id}') {
-								$('#commentsWrap')
-										.append(
-												'<div class="comment"><div class="commentInfo"><span class="comment_mbti">'
-														+ data["mbti"]
-														+ '</span> <span class="comment_profile"><span class="comment_level">Lv.'
-														+ data["level"]
-														+ '</span><span class="comment_nickName">'
-														+ data["nickName"]
-														+ '</span></span><span class="comment_reportingDate">방금 전</span><span class="comment_me">작성자</span><span class="commentInfo_right"><span class="comment_delete"><a href="'+ data["commentId"] +'"><ion-icon name="close-outline"></ion-icon></a></span></span></div><p class="comment_text">'
-														+ data["comment"]
-														+ '</p></div>');
-							} else {
-								$('#commentsWrap')
-										.append(
-												'<div class="comment"><div class="commentInfo"><span class="comment_mbti">'
-														+ data["mbti"]
-														+ '</span> <span class="comment_profile"><span class="comment_level">Lv.'
-														+ data["level"]
-														+ '</span><span class="comment_nickName">'
-														+ data["nickName"]
-														+ '</span></span><span class="comment_reportingDate">방금 전</span><span class="commentInfo_right"><span class="comment_delete"><a href="'+ data["commentId"] +'"><ion-icon name="close-outline"></ion-icon></a></span></span></div><p class="comment_text">'
-														+ data["comment"]
-														+ '</p></div>');
-							}
-							$('#comment_text').val(''); */
-							location.reload(true);
-						}
-					});
+			$.ajax({
+				type : "post",
+				data : JSON.stringify(param),
+				url : "addComment",
+				contentType : "application/json; charset=UTF-8",
+				success : function(data) {
+					/* console.log(data["mbti"] + ", " + data["level"]
+							+ ", " + data["nickName"] + ", "
+							+ data["comment"]);
+					if ('${sessionScope.loginId}' == '${board.member.id}') {
+						$('#commentsWrap')
+								.append(
+										'<div class="comment"><div class="commentInfo"><span class="comment_mbti">'
+												+ data["mbti"]
+												+ '</span> <span class="comment_profile"><span class="comment_level">Lv.'
+												+ data["level"]
+												+ '</span><span class="comment_nickName">'
+												+ data["nickName"]
+												+ '</span></span><span class="comment_reportingDate">방금 전</span><span class="comment_me">작성자</span><span class="commentInfo_right"><span class="comment_delete"><a href="'+ data["commentId"] +'"><ion-icon name="close-outline"></ion-icon></a></span></span></div><p class="comment_text">'
+												+ data["comment"]
+												+ '</p></div>');
+					} else {
+						$('#commentsWrap')
+								.append(
+										'<div class="comment"><div class="commentInfo"><span class="comment_mbti">'
+												+ data["mbti"]
+												+ '</span> <span class="comment_profile"><span class="comment_level">Lv.'
+												+ data["level"]
+												+ '</span><span class="comment_nickName">'
+												+ data["nickName"]
+												+ '</span></span><span class="comment_reportingDate">방금 전</span><span class="commentInfo_right"><span class="comment_delete"><a href="'+ data["commentId"] +'"><ion-icon name="close-outline"></ion-icon></a></span></span></div><p class="comment_text">'
+												+ data["comment"]
+												+ '</p></div>');
+					}
+					$('#comment_text').val(''); */
+					location.reload(true);
+				}
+			});
 		}
 
 		
