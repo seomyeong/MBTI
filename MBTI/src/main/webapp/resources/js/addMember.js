@@ -45,11 +45,13 @@ function nickNameCheck(form) {
 		url: "/myapp/member/nickNameCheck",
 		contentType: "application/json; charset=UTF-8",
 		success: function(data) {
-			if (!(data["nickName"] == "")) {
-				$('.errorTxt').eq(4).html(data["msg"]);
-			} else {
-				$('.errorTxt').eq(4).html("");
-			}
+			if (data["nickName"] == ""){
+					$('.errorTxt').eq(4).html("");
+				} else if (data["msg"] == "중복되는 닉네임이 존재합니다.") {
+					$('.errorTxt').eq(4).html(data["msg"]).css("color", "red");
+				} else if (!(data["email1"] == "")) {
+					$('.errorTxt').eq(4).html(data["msg"]).css("color", "#000");
+				} 
 		}
 	});
 }
@@ -69,7 +71,7 @@ function checkPattern(form) {
 	// 이메일 검사 (숫자, 영어, 특수기호, 한글, 길이)
 	if (!pattern1.test(form.email1.value) || !pattern2.test(form.email1.value) || form.email1.value.length < 5) {
 		//alert("이메일은 5자리 이상 문자, 숫자로 구성하여야 합니다.");
-		$('.errorTxt').eq(0).text("5자리 이상 영문, 숫자로 구성하여야 합니다.");
+		$('.errorTxt').eq(0).text("5자리 이상 영문, 숫자로 구성하여야 합니다.").css("color", "red");
 		pass = false;
 	} else {
 
@@ -123,10 +125,10 @@ function checkPattern(form) {
 
 	// 닉네임 검사 
 	if (form.nickName.value.search(/[^(가-힣a-zA-Z0-9)]/) != -1) {
-		$('.errorTxt').eq(4).text("잘못된 닉네임 입니다.");
+		$('.errorTxt').eq(4).text("잘못된 닉네임 입니다.").css("color", "red");
 		pass = false;
 	} else if (form.nickName.value.length < 2) {
-		$('.errorTxt').eq(4).text("2자리 이상 입력해주세요.");
+		$('.errorTxt').eq(4).text("2자리 이상 입력해주세요.").css("color", "red");
 		pass = false;
 	} else {
 
@@ -137,7 +139,7 @@ function checkPattern(form) {
 		$('.errorTxt').eq(8).text("잘못된 번호형식 입니다.");
 		pass = false;
 	} else if (form.phone2.value.length < 8) {
-		$('.errorTxt').eq(8).text("8자 입력해주세요.");
+		$('.errorTxt').eq(8).text("8자리 입력해주세요.");
 		pass = true;
 	} else {
 		$('.errorTxt').eq(8).text("");

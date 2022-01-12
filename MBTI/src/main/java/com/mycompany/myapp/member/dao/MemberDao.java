@@ -66,7 +66,6 @@ public class MemberDao {
 	
 	//이메일 중복검사
 	public boolean isEmailCheck(String email) {
-		System.out.println("Dao 접근");
 		String sql = "SELECT * FROM Member WHERE email=?";
 		List<Member> list = null;
 		list = jdbcTemplate.query(sql, new RowMapper<Member>() {
@@ -78,7 +77,6 @@ public class MemberDao {
 			
 		}, email);
 		
-		System.out.println(list.size());
 		
 		if(list == null || list.equals(null) || list.size() == 0) {
 			return true;
@@ -89,7 +87,6 @@ public class MemberDao {
 
 	// 닉네임 중복검사
 	public boolean isNickNameCheck(String nickName) {
-		System.out.println("Dao 접근");
 		String sql = "SELECT * FROM Member WHERE nickName=?";
 		List<Member> list = null;
 		list = jdbcTemplate.query(sql, new RowMapper<Member>() {
@@ -101,7 +98,6 @@ public class MemberDao {
 			
 		}, nickName);
 		
-		System.out.println(list.size());
 		
 		if(list == null || list.equals(null) || list.size() == 0) {
 			return true;

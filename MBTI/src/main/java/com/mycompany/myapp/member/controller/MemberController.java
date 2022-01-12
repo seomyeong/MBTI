@@ -49,7 +49,6 @@ public class MemberController {
 				memberCommand.getGender(), phone);
 
 		memberService.addMember(member);
-		System.out.println("회원가입성공");
 		mav.setViewName("/member/successAddMember");
 		return mav;
 	}
@@ -76,17 +75,14 @@ public class MemberController {
 //			session.setAttribute("memberInfo", memberInfo);
 //			session.setAttribute("email", memberInfo.getEmail());
 			// 세션에 id 값 할당
-			System.out.println("loginId : " + memberInfo.getId());
 			session.setAttribute("loginId", memberInfo.getId());
 			session.setMaxInactiveInterval(-1);
 			mav.setViewName("redirect:/index");
-			System.out.println("로그인성공");
 			return mav;
 
 		} else {
 			mav.addObject("errorMsg", "회원정보가 일치하지 않습니다.");
 			mav.setViewName("/member/login");
-			System.out.println("로그인실패");
 			return mav;
 		}
 	}
@@ -101,7 +97,6 @@ public class MemberController {
 //		session.invalidate();
 		session.removeAttribute("loginId");
 
-		System.out.println("로그아웃");
 		return "redirect:/index";
 	}
 	
@@ -113,20 +108,19 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping("/member/emailCheck")
 	public Map<String, String> isEmailCheck(@RequestBody Map<String, String> param) {
-		System.out.println("email입력 : " + param.get("email"));
 		String msg = "";
 		String email = param.get("email");
 		String email1 = param.get("email1");
 		
-		if(memberService.isEmailCheck(email)) {
+		if(email1.equals(null) || email1 == "") {
+			msg = "";
+		} else if(memberService.isEmailCheck(email)) {
 			if ( email1.length() > 4 ) {
 				msg = "사용가능한 이메일입니다!";
 			} else { 
 				msg = "5~20자로 설정해주세요.";
 			}
 			
-		} else if(email1.equals(null) || email1 == "") {
-			msg = "";
 		} else {
 			msg = "중복되는 이메일이 존재합니다.";
 		}
@@ -141,7 +135,6 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping("/member/nickNameCheck")
 	public Map<String, String> isNickCheck(@RequestBody Map<String, String> param) {
-		System.out.println("nickName입력 : " + param.get("nickName"));
 
 		String msg = "";
 		String nickName = param.get("nickName");
@@ -149,7 +142,7 @@ public class MemberController {
 		if(memberService.isNickNameCheck(nickName)) {
 			msg = "사용가능한 닉네임입니다.";
 		} else {
-			msg = "중복되는 닉네임 존재합니다.";
+			msg = "중복되는 닉네임이 존재합니다.";
 		}
 		
 		Map<String, String> map = new HashMap<String, String>();
