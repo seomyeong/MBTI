@@ -21,6 +21,7 @@ CREATE TABLE MEMBER(
 
 -- Community
 
+
 SELECT * FROM Member;
 SELECT * FROM CommunityBoard;
 SELECT * FROM CommunityComments;
@@ -29,6 +30,7 @@ SELECT * FROM CommunityComments_plus;
 UPDATE Member SET level=57 WHERE id=1;
 UPDATE Member SET level=38 WHERE id=5;
 UPDATE Member SET nickName='에어포스' WHERE id=5;
+UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ISFJ.png' WHERE id=1;
 
 DROP TABLE Member;
 DROP TABLE CommunityBoard;
