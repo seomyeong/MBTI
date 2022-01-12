@@ -50,7 +50,7 @@ public class Member {
 	}
 	
 	public Member(String email, String pw, String name, String nickName, String birth, String mbti,
-			String gender, String phone) {
+			String gender, String phone, String profileImg) {
 		super();
 		this.email = email;
 		this.pw = pw;
@@ -60,6 +60,7 @@ public class Member {
 		this.mbti = mbti;
 		this.gender = gender;
 		this.phone = phone;
+		this.profileImg = profileImg;
 	}
 	
 	public Member(long id, String email, String pw, String name, String nickName, String birth, String mbti,

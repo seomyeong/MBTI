@@ -25,7 +25,7 @@
 					modelAttribute="memberCommand">
 					<table>
 						<tr>
-							<th>EMAIL</th>
+							<th>이메일</th>
 							<td><form:input type="text" maxlength="30"
 									placeholder="5자리 이상 영문, 숫자" path="email1" autocomplete="off"
 									autofocus="autofocus" oninput="emailCheck(this.form)" /> @ <select
@@ -43,7 +43,7 @@
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>
-							<th>비밀번호 확인</th>
+							<th>비밀번호 <br>확인</th>
 							<td><form:password id="password2" placeholder="비밀번호 재확인" path="" /></td>
 							<td><span class="errorTxt"></span></td>
 						</tr>
@@ -104,7 +104,7 @@
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>
-							<th>PHONE</th>
+							<th>휴대전화</th>
 							<td>
 								<%-- <form:input maxlength="8" minlength="8"
 									placeholder="핸드폰 번호를 입력하세요" path="phone" required="required"
@@ -115,7 +115,7 @@
 									<option value="016">016</option>
 							</select>
 							<form:input type="text" path="phone2" maxlength="8"
-									minlength="8" placeholder="8자리 숫자" required="required"
+									minlength="8" placeholder="8자리 숫자" 
 									pattern="[0-9]+" /> </td>
 
 							<td><span class="errorTxt errorTxt2"></span></td>

@@ -42,14 +42,15 @@ public class MemberController {
 	@PostMapping("/member/successAddMember")
 	public ModelAndView successAddMember(MemberCommand memberCommand) {
 		ModelAndView mav = new ModelAndView();
+		String profileImg = "/myapp/resources/img/avatar/MBTI_" + memberCommand.getMbti() + ".png";
 		String email = memberCommand.getEmail1() + memberCommand.getEmail2();
 		String phone = memberCommand.getPhone1() + memberCommand.getPhone2();
 		Member member = new Member(email, memberCommand.getPw(), memberCommand.getName(),
 				memberCommand.getNickName(), memberCommand.getBirth(), memberCommand.getMbti(),
-				memberCommand.getGender(), phone);
+				memberCommand.getGender(), phone, profileImg);
 
 		memberService.addMember(member);
-		mav.setViewName("/member/successAddMember");
+		mav.setViewName("redirect:/index");
 		return mav;
 	}
 
@@ -72,7 +73,7 @@ public class MemberController {
 		if (memberService.login(member)) {
 			Member memberInfo = memberService.memberInfo(member);
 
-//			session.setAttribute("memberInfo", memberInfo);
+			session.setAttribute("memberInfo", memberInfo);
 //			session.setAttribute("email", memberInfo.getEmail());
 			// 세션에 id 값 할당
 			session.setAttribute("loginId", memberInfo.getId());
@@ -86,6 +87,7 @@ public class MemberController {
 			return mav;
 		}
 	}
+	
 
 	/*
 	 * 로그아웃

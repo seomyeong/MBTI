@@ -28,13 +28,12 @@ public class MemberService {
 
 	//이메일 중복검사
 	public boolean isEmailCheck(String email) {
-		System.out.println("service 접근");
 		return dao.isEmailCheck(email);
 	}
 	
 	//닉네임 중복검사
 	public boolean isNickNameCheck(String nickName) {
-		System.out.println("service");
 		return dao.isNickNameCheck(nickName);
 	}
+	
 }

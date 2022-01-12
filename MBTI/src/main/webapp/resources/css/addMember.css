@@ -28,7 +28,7 @@ a {
 }
 
 #addCustomer_wrap td {
-	padding-right: 10px;
+	padding-left: 30px;
 	width: 250px;
 	padding-bottom: 2px;
 }
@@ -39,13 +39,13 @@ a {
 	font-size: 13px;
 	width: 300px;
 	position: relative;
-	left: -82%;
+	left: -79%;
 	top: 28px;
 }
 
 #addCustomer_wrap .errorTxt2 {
 	position: relative;
-	left: -74%;
+	left: -72%;
 }
 
 #addCustomer_wrap input {
