@@ -1,3 +1,5 @@
+$('#nav li:nth-of-type(3)').addClass('clicked');
+
 // date 표시 바꾸기
 
 function timeForToday(value) {

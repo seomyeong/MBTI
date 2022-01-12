@@ -98,6 +98,7 @@ public class MemberController {
 //		session.getAttribute("loginId");
 //		session.invalidate();
 		session.removeAttribute("loginId");
+		session.removeAttribute("memberInfo");
 
 		return "redirect:/index";
 	}
