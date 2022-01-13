@@ -428,16 +428,19 @@
 		}
 		
 		setInterval(function() {
+			var now_likes = $('#likesCount').html();
 			$.ajax({
 				type: "post",
 				data: JSON.stringify(liveParam),
 				url: "liveLikes",
 				contentType: "application/json; charset=UTF-8",
 				success: function(data) {
-					$('#likesCount').html(data["likes"]);		
+					if(now_likes != data["likes"]) {
+						$('#likesCount').html(data["likes"]);					
+					}
 				}
 			});
-		}, 500);
+		}, 300);
 
 	</script>
 </body>
