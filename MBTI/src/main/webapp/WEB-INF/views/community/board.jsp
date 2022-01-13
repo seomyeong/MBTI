@@ -437,7 +437,7 @@
 					$('#likesCount').html(data["likes"]);		
 				}
 			});
-		}, 100);
+		}, 500);
 
 	</script>
 </body>

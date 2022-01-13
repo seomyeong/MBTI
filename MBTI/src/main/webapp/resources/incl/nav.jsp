@@ -19,8 +19,7 @@
 </head>
 <body>
 	<nav id="nav" class="hiddenProfile">
-		<span id="menuToggle" class="show"> <ion-icon name="menu-outline"></ion-icon>
-		</span>
+		<span id="menuToggle" class="show"> <ion-icon name="menu-outline"></ion-icon></span>
 		<ul>
 			<c:choose>
 				<c:when test="${sessionScope.loginId eq null}">
@@ -109,6 +108,29 @@
 				$('#profileBack').toggleClass('hiddenProfile');
 			}
 		});
+		
+		if(!('${sessionScope.loginId}' == '' || '${sessionScope.loginId}' == null)) {
+			setInterval(function() {
+				var param = {
+						"loginId" : '${sessionScope.loginId}',
+				}
+				$.ajax({
+					type: "post",
+					data: JSON.stringify(param),
+					url: "/myapp/liveProfile",
+					contentType: "application/json; charset=UTF-8",
+					success: function(data) {
+						var m = data["m"];
+						$('.nickName').html("Lv. " + m.level + "&nbsp;&nbsp;" + m.nickName);
+						$('#contentsCount').html("내가 쓴 총 게시물 수 &nbsp;&nbsp;" + m.contentsCount);
+						$('#commentsCount').html("내가 쓴 총 댓글 수 &nbsp;&nbsp;" + m.commentsCount);
+						$('#mabPoint').html("현재 보유한 맙 &nbsp;&nbsp;&nbsp;&nbsp;" + m.mabPoint);
+					}
+				});
+			}, 500);
+			
+		}
+		
 	
 	</script>
 </body>
