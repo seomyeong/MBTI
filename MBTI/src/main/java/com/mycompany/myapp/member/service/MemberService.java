@@ -15,25 +15,30 @@ public class MemberService {
 	public void addMember(Member member) {
 		dao.addMember(member);
 	}
-	
-	// 로그인
-	public boolean login(Member member) {
-		return dao.login(member);
-	}
 
 	// 회원정보 조회
 	public Member memberInfo(Member member) {
 		return dao.memberInfo(member);
 	}
 
-	//이메일 중복검사
+	// 회원정보 수정
+	public void updateMember(Member member, long loginId) {
+		dao.updateMember(member, loginId);
+	}
+	
+	// 로그인
+	public boolean login(Member member) {
+		return dao.login(member);
+	}
+
+	// 이메일 중복검사
 	public boolean isEmailCheck(String email) {
 		return dao.isEmailCheck(email);
 	}
-	
-	//닉네임 중복검사
+
+	// 닉네임 중복검사
 	public boolean isNickNameCheck(String nickName) {
 		return dao.isNickNameCheck(nickName);
 	}
-	
+
 }

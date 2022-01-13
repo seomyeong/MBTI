@@ -38,6 +38,15 @@ public class MemberDao {
 		}, member.getEmail());
 	}
 	
+	// 회원정보 수정
+	public void updateMember(Member member, long loginId) {
+		String sql = "UPDATE MEMBER SET email=?, pw=?, name=?, nickName=?, birth=?, mbti=?, gender=?, phone=?, profileImg=? WHERE id=?";
+		jdbcTemplate.update(sql, member.getEmail(), member.getPw(), member.getName(), member.getNickName(),
+				member.getBirth(), member.getMbti(), member.getGender(), member.getPhone(), member.getProfileImg(), loginId);
+	}
+	
+	
+	
 	// 로그인
 	public boolean login(Member member) {
 		String sql = "SELECT * FROM MEMBER WHERE email = ? AND pw = ?";

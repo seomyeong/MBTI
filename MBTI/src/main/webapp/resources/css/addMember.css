@@ -18,7 +18,7 @@ a {
 
 #addCustomer_wrap table {
 	width: 100%;
-	margin: -25px 34%;
+	margin: -25px 38%;
 }
 
 #addCustomer_wrap th {
@@ -43,10 +43,10 @@ a {
 	top: 28px;
 }
 
-#addCustomer_wrap .errorTxt2 {
+/* #addCustomer_wrap .errorTxt2 {
 	position: relative;
 	left: -72%;
-}
+} */
 
 #addCustomer_wrap input {
 	border-radius: 5px;

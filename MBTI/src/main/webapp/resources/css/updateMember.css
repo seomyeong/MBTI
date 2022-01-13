@@ -43,10 +43,10 @@ a {
 	top: 28px;
 }
 
-#updateCustomer_wrap .errorTxt2 {
+/* #updateCustomer_wrap .errorTxt2 {
 	position: relative;
 	left: -72%;
-}
+} */
 
 #updateCustomer_wrap input {
 	border-radius: 5px;
@@ -144,4 +144,8 @@ input[type='radio']:checked {
 #mbtiBtn:hover {
 	color: #fff;
 	background-color: gray;
+}
+
+#email1, #name {
+	background-color: rgba(215, 212, 212, 1);
 }

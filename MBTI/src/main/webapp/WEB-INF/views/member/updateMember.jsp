@@ -13,32 +13,28 @@
 <script
 	src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"
 	defer></script>
+<script src="<%=request.getContextPath()%>/resources/js/updateMember.js"
+	defer></script>
 <body>
 	<jsp:include page="/resources/incl/nav.jsp"></jsp:include>
 	<div id="main">
 		<main id="updateCustomer">
 			<h1>정보수정</h1>
 			<div id="updateCustomer_wrap">
-				<form:form action="successAddMember" method="post"
+				<form:form action="successUpdateMember" method="post"
 					modelAttribute="memberCommand">
 					<table>
 						<tr>
 							<th>이메일</th>
-							<td><form:input type="text" maxlength="30"
-									placeholder="5자리 이상 영문, 숫자" path="email1" autocomplete="off"
-									autofocus="autofocus" oninput="emailCheck(this.form)" /> @ <select
-								name="email2">
-									<option value="@naver.com">naver.com</option>
-									<option value="@daum.net">daum.net</option>
-									<option value="@gmail.com">gmail.com</option>
-									<option value="@nate.com">nate.com</option>
-							</select></td>
+							<td><form:input type="text" maxlength="30" readonly="true"
+									value="${sessionScope.memberInfo.email}" path="email1"
+									autocomplete="off" oninput="emailCheck(this.form)" /></td>
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>
 							<th>비밀번호</th>
 							<td><form:password id="password1"
-									placeholder="8자리 이상 문자, 숫자, 특수문자" path="pw" /></td>
+									value="${sessionScope.memberInfo.pw}" path="pw" /></td>
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>
@@ -50,14 +46,15 @@
 						</tr>
 						<tr>
 							<th>이름</th>
-							<td><form:input placeholder="2자리 이상 한글" path="name"
-									maxlength="30" autocomplete="off" /></td>
+							<td><form:input path="name" maxlength="30"
+									value="${sessionScope.memberInfo.name}" autocomplete="off"
+									readonly="true" /></td>
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>
 							<th>닉네임</th>
-							<td><form:input placeholder="2자리 이상 문자, 숫자" path="nickName"
-									autocomplete="off" maxlength="10"
+							<td><form:input value="${sessionScope.memberInfo.nickName}"
+									path="nickName" autocomplete="off" maxlength="10"
 									oninput="nickNameCheck(this.form)" /></td>
 							<td><span class="errorTxt"></span></td>
 						</tr>
@@ -73,7 +70,8 @@
 							<td>
 								<%-- <form:select maxlength="4" placeholder="MBTI를 입력하세요"
 									path="mbti" required="required"
-									 /> --%> <select name="mbti">
+									 /> --%> <select name="mbti"
+								value="${sessionScope.memberInfo.mbti}">
 									<option value="ENTJ">ENTJ</option>
 									<option value="ENTP">ENTP</option>
 									<option value="ENFJ">ENFJ</option>
@@ -98,33 +96,26 @@
 						</tr>
 						<tr>
 							<th>성별(선택)</th>
-							<td id="radioBtn">남자: <form:radiobutton path="gender"
-									value="M" /> 여자: <form:radiobutton path="gender" value="F" />
-								선택안함: <form:radiobutton path="gender" value="N"
-									checked="checked" />
+							<td id="radioBtn" value="${sessionScope.memberInfo.gender}">남자:
+								<form:radiobutton path="gender" value="M" /> 여자: <form:radiobutton
+									path="gender" value="W" /> 선택안함: <form:radiobutton
+									path="gender" value="N" checked="checked" />
 							</td>
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>
 							<th>휴대전화</th>
 							<td>
-								<%-- <form:input maxlength="8" minlength="8"
-									placeholder="핸드폰 번호를 입력하세요" path="phone" required="required"
-									pattern="[0-9]+" /> --%> <select name="phone1">
-									<option value="010">010</option>
-									<option value="011">011</option>
-									<option value="012">012</option>
-									<option value="016">016</option>
-							</select> <form:input type="text" path="phone2" maxlength="8"
-									minlength="8" placeholder="8자리 숫자" pattern="[0-9]+" />
+							<form:input value="${sessionScope.memberInfo.phone}" type="text" path="phone" maxlength="11"
+									minlength="11" placeholder="11자리 숫자" pattern="[0-9]+" />
 							</td>
 
 							<td><span class="errorTxt errorTxt2"></span></td>
 						</tr>
 					</table>
-					<div id="addCustomer_btn">
+					<div id="updateCustomer_btn">
 						<!-- <a onclick="javascript:history.back()">이전</a> -->
-						<a href="/myapp/index">이전</a> <input type="submit" value="회원가입"
+						<a href="/myapp/index">이전</a> <input type="submit" value="정보수정"
 							onclick="checkPattern(this.form); return false" id="submit">
 					</div>
 				</form:form>
@@ -132,5 +123,8 @@
 		</main>
 
 	</div>
+	<script>
+		$("#radioBtn").val()
+	</script>
 </body>
 </html>
