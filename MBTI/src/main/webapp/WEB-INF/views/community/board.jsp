@@ -149,9 +149,14 @@
 				success : function(data) {
 					if (data["likeCheck"] == "false") {
 						$('#likesCount').text(data["likes"]);
+						$('#board_likes').find('span:eq(0)').find('ion-icon').css("top", "5px");
+						setTimeout(function() {
+							$('#board_likes').find('span:eq(0)').find('ion-icon').css("top", "0");
+						}, 200);
 					} else {
-						$('#errorMsg').text("추천은 게시글당 한 번만 가능합니다.");
+						$('#errorMsg').text("같은 글은 최대 3번까지 추천가능합니다.");
 					}
+					
 				}
 			});
 		}
@@ -258,8 +263,9 @@
 										commentsWrap += '<span class="plusCommentInfo_right"> ';
 										if('${sessionScope.loginId}' == dataccp[ccp].member.id) {
 											commentsWrap += '<span class="plusComment_delete"><a href="'
-													+ dataccp[ccp].id
-													+ '"><ion-iconname="close-outline"></ion-icon></a></span>';
+														+ dataccp[ccp].id
+														+ '"><ion-icon name="close-outline"></ion-icon></a></span>';
+														
 										}
 										commentsWrap += '</span><div class="plusCommentView_comments">'
 													+ dataccp[ccp].comments
@@ -395,11 +401,12 @@
 										if('${sessionScope.loginId}' == dataccp[ccp].member.id) {
 											commentsWrap += '<span class="plusComment_delete"><a href="'
 													+ dataccp[ccp].id
-													+ '"><ion-iconname="close-outline"></ion-icon></a></span>';
+													+ '"><ion-icon name="close-outline"></ion-icon></a></span>';
 										}
 										commentsWrap += '</span><div class="plusCommentView_comments">'
 													+ dataccp[ccp].comments
 													+ '</div></div>';
+										console.log('${sessionScope.loginId}' + dataccp[ccp].member.id);
 									}
 								}
 							}
@@ -436,11 +443,15 @@
 				contentType: "application/json; charset=UTF-8",
 				success: function(data) {
 					if(now_likes != data["likes"]) {
-						$('#likesCount').html(data["likes"]);					
+						$('#likesCount').html(data["likes"]);
+						$('#board_likes').find('span:eq(0)').find('ion-icon').css("top", "5px");
+						setTimeout(function() {
+							$('#board_likes').find('span:eq(0)').find('ion-icon').css("top", "0").css("background", "#fff");
+						}, 200);
 					}
 				}
 			});
-		}, 300);
+		}, 500);
 
 	</script>
 </body>

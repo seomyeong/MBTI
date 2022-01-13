@@ -29,10 +29,11 @@ SELECT * FROM CommunityComments_plus;
 
 SELECT * FROM sys.systables;
 SELECT level, mbti FROM Member;
+SELECT * FROM CommunityBoard WHERE likes>=20 ORDER BY ReportingDate DESC;
 
-UPDATE Member SET level=57 WHERE id=1;
-UPDATE Member SET level=38 WHERE id=5;
-UPDATE Member SET nickName='에어포스' WHERE id=5;
+UPDATE Member SET level=31 WHERE id=3;
+UPDATE Member SET level=29 WHERE id=6;
+UPDATE Member SET nickName='이즈리얼 연구원' WHERE id=1;
 UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ESFJ.png' WHERE id=4;
 UPDATE Member SET mbti='ESFJ' WHERE id=4;
 

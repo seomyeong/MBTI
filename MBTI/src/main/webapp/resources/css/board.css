@@ -54,6 +54,7 @@
 	color: #828282;
 }
 #board_likes {
+	position: relative;
 	display: block;
 	width: 50px;
 	height: 65px;
@@ -67,6 +68,10 @@
 }
 #board_likes:hover {
 	background: #e2e2e2;
+}
+#board_likes ion-icon {
+	position: relative;
+	transition: 0.2s;
 }
 #errorMsg {
 	display: block;
