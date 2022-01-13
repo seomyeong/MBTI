@@ -27,10 +27,15 @@ SELECT * FROM CommunityBoard;
 SELECT * FROM CommunityComments;
 SELECT * FROM CommunityComments_plus;
 
-UPDATE Member SET level=57 WHERE id=1;
-UPDATE Member SET level=38 WHERE id=5;
-UPDATE Member SET nickName='에어포스' WHERE id=5;
-UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ISFJ.png' WHERE id=1;
+SELECT * FROM sys.systables;
+SELECT level, mbti FROM Member;
+SELECT * FROM CommunityBoard WHERE likes>=20 ORDER BY ReportingDate DESC;
+
+UPDATE Member SET level=31 WHERE id=3;
+UPDATE Member SET level=29 WHERE id=6;
+UPDATE Member SET nickName='이즈리얼 연구원' WHERE id=1;
+UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ESFJ.png' WHERE id=4;
+UPDATE Member SET mbti='ESFJ' WHERE id=4;
 
 DROP TABLE Member;
 DROP TABLE CommunityBoard;
@@ -40,7 +45,7 @@ DROP TABLE CommunityComments_plus;
 INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('ydh1178@naver.com', '1234', '김종성', '성종', '961124', 'M', 'ISFJ', '010-8599-7622');
 INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('test@test.com', '1234', '테스트계정', '테스트계정', '001122', 'W', 'ENFP', '010-1111-2222');
 INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('tnals@test.com', '1234', '황수민', '민수', '967777', 'M', 'INFJ', '010-5555-6666');
-INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('tjaud@test.com', '1234', '이서명', '뜨돈', '957777', 'W', 'INFJ', '010-0000-9999');
+INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('tjaud@test.com', '1234', '이서명', '뜨돈', '957777', 'W', 'ESFJ', '010-0000-9999');
 INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('dnjswls@test.com', '1234', '김원진', '나이키', '997777', 'M', 'ISFP', '010-1111-0000');
 INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('wldud@test.com', '1234', '정지영', '정영지', '947777', 'W', 'INFP', '010-2222-0000');
 

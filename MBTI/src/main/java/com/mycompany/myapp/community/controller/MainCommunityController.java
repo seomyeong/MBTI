@@ -112,6 +112,17 @@ public class MainCommunityController {
 					pagingVO.getPageListSize());
 		}
 		
+		// 정보 최신화
+		Long loginId;
+		
+		if(!(session.getAttribute("loginId") == null || session.getAttribute("loginId").equals(""))) {
+			loginId = Long.parseLong(String.valueOf(session.getAttribute("loginId")));
+			Member memberInfo = communityService.findMemberByMemberId(loginId);
+			
+			session.setAttribute("memberInfo", memberInfo);
+			session.setMaxInactiveInterval(-1);
+		}
+		
 		session.setAttribute("pagingVO", pagingVO);
 		session.setAttribute("type", type);
 		

@@ -475,7 +475,7 @@ public class CommunityDao {
 	public List<CommunityBoard> findBoardByStartList_sort(String type, int startList, int pageListSize) {
 		List<CommunityBoard> cbList = new ArrayList<CommunityBoard>();
 		String sql = "SELECT * FROM CommunityBoard ORDER BY " + type + " DESC";
-
+		
 		List<CommunityBoard> list = jdbcTemplate.query(sql, new RowMapper<CommunityBoard>() {
 
 			@Override
@@ -715,9 +715,9 @@ public class CommunityDao {
 		// jdbcTemplate.update(sql, loginId, boardId, comment);
 		Connection conn = null;
 		
-		String url = "jdbc:derby://localhost:1527/myapp";
-        String id = "myapp";
-        String pw = "myapp";
+		String url = "jdbc:derby://localhost:1527/MBTI";
+        String id = "MBTI";
+        String pw = "MBTI";
         
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
@@ -738,7 +738,6 @@ public class CommunityDao {
             	generatedKey = rs.getLong(1);
             }
             
-            System.out.println("INSERT 한 Data의 ID : " + generatedKey);
             ps.close();
             rs.close();
             conn.close();
@@ -879,6 +878,7 @@ public class CommunityDao {
 	 * @return Boolean(LikeLog 테이블에 해당 정보를 만족하는 데이터가 있는지 여부)
 	 */
 	public boolean isLike(Long loginId, Long boardId) {
+		int maxLikeCount = 3; // 추천 최대 횟수
 		String sql = "SELECT * FROM LikeLog WHERE memberId=? AND boardId=?";
 		List<LikeLog> likeListCheck = jdbcTemplate.query(sql, new RowMapper<LikeLog>() {
 
@@ -889,7 +889,7 @@ public class CommunityDao {
 
 		}, loginId, boardId);
 
-		if (likeListCheck.size() == 0 || likeListCheck == null || likeListCheck.equals(null)) {
+		if (likeListCheck.size() < maxLikeCount || likeListCheck == null || likeListCheck.equals(null)) {
 			return false;
 		}
 

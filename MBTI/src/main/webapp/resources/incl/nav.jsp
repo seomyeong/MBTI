@@ -19,8 +19,7 @@
 </head>
 <body>
 	<nav id="nav" class="hiddenProfile">
-		<span id="menuToggle" class="show"> <ion-icon name="menu-outline"></ion-icon>
-		</span>
+		<span id="menuToggle" class="show"> <ion-icon name="menu-outline"></ion-icon></span>
 		<ul>
 			<c:choose>
 				<c:when test="${sessionScope.loginId eq null}">
@@ -33,7 +32,7 @@
 				</c:when>
 				<c:otherwise>
 					<li id="profile" class="hiddenProfile"><a href="#"> <span class="icon"> <span id="profileImg" class="hiddenProfile" style="background: url(${sessionScope.memberInfo.profileImg}) 0 0 / cover"></span>
-						</span><span class="nickName">Lv. ${sessionScope.memberInfo.level} &nbsp;&nbsp;${sessionScope.memberInfo.nickName}</span>
+						</span><span class="nickName_profile">Lv. ${sessionScope.memberInfo.level} &nbsp;&nbsp;${sessionScope.memberInfo.nickName}</span>
 					</a></li>
 					<span id="contentsCount" class="hiddenProfile">내가 쓴 총 게시물 수 &nbsp;&nbsp;${sessionScope.memberInfo.contentsCount}</span>
 					<span id="commentsCount" class="hiddenProfile">내가 쓴 총 댓글 수 &nbsp;&nbsp;&nbsp;${sessionScope.memberInfo.commentsCount}</span>
@@ -109,6 +108,48 @@
 				$('#profileBack').toggleClass('hiddenProfile');
 			}
 		});
+		
+		if(!('${sessionScope.loginId}' == '' || '${sessionScope.loginId}' == null)) {
+			
+			setInterval(function() {
+				var now_nickName = $('.nickName_profile').html();
+				var now_contentsCount = $('#contentsCount').html();
+				var now_commentsCount = $('#commentsCount').html();
+				var now_mabPoint = $('#mabPoint').html();
+				var param = {
+						"loginId" : '${sessionScope.loginId}',
+				}
+				$.ajax({
+					type: "post",
+					data: JSON.stringify(param),
+					url: "/myapp/liveProfile",
+					contentType: "application/json; charset=UTF-8",
+					success: function(data) {
+						var m = data["m"];
+
+						m_nickName = "Lv. " + m.level + "&nbsp;&nbsp;" + m.nickName;
+						m_contentsCount = "내가 쓴 총 게시물 수 &nbsp;&nbsp;" + m.contentsCount;
+						m_commentsCount = "내가 쓴 총 댓글 수 &nbsp;&nbsp;" + m.commentsCount;
+						m_mabPoint = "현재 보유한 맙 &nbsp;&nbsp;&nbsp;&nbsp;" + m.mabPoint;
+						
+						if(now_nickName != m_nickName) {
+							$('.nickName_profile').html(m_nickName);							
+						}
+						if(now_contentsCount != m_contentsCount) {
+							$('#contentsCount').html(m_contentsCount);							
+						}
+						if(now_commentsCount != m_commentsCount) {
+							$('#commentsCount').html(m_commentsCount);							
+						}
+						if(now_mabPoint != m_mabPoint) {
+							$('#mabPoint').html(m_mabPoint);							
+						}
+					}
+				});
+			}, 300);
+			
+		}
+		
 	
 	</script>
 </body>

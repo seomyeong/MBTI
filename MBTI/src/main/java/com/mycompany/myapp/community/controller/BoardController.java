@@ -1,5 +1,7 @@
 package com.mycompany.myapp.community.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +51,21 @@ public class BoardController {
 				|| session.getAttribute("loginId").equals(""))) {
 			loginId = Long.parseLong(String.valueOf(session.getAttribute("loginId")));
 			loginMemberInfo = communityService.findMemberByMemberId(loginId);
+
+			// 정보 최신화
+			Member memberInfo = communityService.findMemberByMemberId(loginId);
+			
+			session.setAttribute("memberInfo", memberInfo);
+			session.setMaxInactiveInterval(-1);
+			
+			// 알림
+			LocalDateTime now = LocalDateTime.now();
+			String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+			System.out.println("[" + formatedNow + "] '" + memberInfo.getNickName() + "(" + memberInfo.getName() + ")'님이 '" + cb.getMember().getNickName() + "(" + cb.getMember().getName() + ")'님의 \"" + cb.getTitle() + "\" 게시물을 조회합니다.");
+			
 		}
+		
+		
 		// 댓글 수 가져오기
 		cb.setCommentsCount(cc.size() + ccp.size());
 
@@ -58,7 +74,7 @@ public class BoardController {
 		mav.addObject("comments", cc);
 		mav.addObject("commentsPlus", ccp);
 		mav.setViewName("/community/board");
-
+		
 		return mav;
 	}
 	
@@ -67,23 +83,37 @@ public class BoardController {
 	 */
 	@ResponseBody
 	@PostMapping("community/addComment")
-	public Map<String, String> ajaxAddComment(@RequestBody Map<String, String> param) {
+	public Map<String, Object> ajaxAddComment(@RequestBody Map<String, String> param) {
+		
 		Long loginId = Long.parseLong(param.get("loginId"));
 		Long boardId = Long.parseLong(param.get("boardId"));
 		String comment = param.get("comment");
-
+		
+		
 		// 댓글 테이블에 할당
 		long commentId = communityService.addComment(loginId, boardId, comment);
 
-		System.out.println(param.get("loginId") + param.get("boardId") + param.get("comment"));
 		Member loginMember = communityService.findMemberByMemberId(loginId);
-
-		Map<String, String> map = new HashMap<String, String>();
+		
+		CommunityBoard cb = communityService.findBoardByBoardId(boardId);
+		List<CommunityComments> cc = communityService.findCommentsByBoardId(boardId);
+		List<CommunityCommentsPlus> ccp = communityService.findCommentsPlusByBoardId(boardId);
+		
+		
+		// 알림
+		LocalDateTime now = LocalDateTime.now();
+		String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+		System.out.println("[" + formatedNow + "] '" + loginMember.getNickName() + "(" + loginMember.getName() + ")'님이 '" + cb.getMember().getNickName() + "(" + cb.getMember().getName() + ")' 님의 \"" + cb.getTitle() + "\" 게시물에 \"" + comment + "\" 댓글을 작성했습니다.");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("mbti", loginMember.getMbti());
 		map.put("level", Integer.toString(loginMember.getLevel()));
 		map.put("nickName", loginMember.getNickName());
 		map.put("comment", comment);
 		map.put("commentId", Long.toString(commentId));
+		map.put("cb", cb);
+		map.put("cc", cc);
+		map.put("ccp", ccp);
 		
 		return map;
 	}
@@ -100,10 +130,10 @@ public class BoardController {
 		String page = pagingVO.getPage() == 1 ? "1" : Integer.toString(pagingVO.getPage());
 		String range = pagingVO.getRange() == 1 ? "1" : Integer.toString(pagingVO.getRange());
 		
-		System.out.println(type + ", " + q + ", " + page + ", " + range);
-		
 		CommunityBoard cb = communityService.findBoardByBoardId(Long.parseLong(boardId));
 		communityService.deleteBoard(cb.getMember().getId(), boardId);
+		
+		
 		
 		return "redirect:/community/mainCommunity?type=" + type + "&q=" + q + "&page=" + page + "&range=" + range;
 	}
@@ -114,16 +144,19 @@ public class BoardController {
 	@ResponseBody
 	@PostMapping("/community/deleteComment")
 	public void deleteComment(@RequestBody Map<String, String> param) {
-		System.out.println("삭제할 댓글 ID : " + param.get("commentId"));
 		
 		String boardId = param.get("boardId");
 		String commentId = param.get("commentId");
 		
 		CommunityComments cc = communityService.findCommentByCommentId(Long.parseLong(commentId));
 		
-		
 		communityService.deleteComment(cc.getMember().getId(), Long.parseLong(boardId), Long.parseLong(commentId));
 		
+		CommunityBoard cb = communityService.findBoardByBoardId(Long.parseLong(boardId));
+		// 알림
+		LocalDateTime now = LocalDateTime.now();
+		String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+		System.out.println("[" + formatedNow + "] '" + cc.getMember().getNickName() + "(" + cc.getMember().getName() + ")'님이 '" + cb.getMember().getNickName() + "(" + cb.getMember().getName() + ")' 님의 \"" + cb.getTitle() + "\" 게시물에 \"" + cc.getComments() + "\" 댓글을 삭제했습니다.");
 	}
 
 	/*
@@ -131,13 +164,30 @@ public class BoardController {
 	 */
 	@ResponseBody
 	@PostMapping("/community/addPlusComment")
-	public void addPlusComment(@RequestBody Map<String, String> param) {
+	public Map<String, Object> addPlusComment(@RequestBody Map<String, String> param) {
 		Long boardId = Long.parseLong(param.get("boardId"));
 		Long commentId = Long.parseLong(param.get("commentId"));
 		Long memberId = Long.parseLong(param.get("memberId"));
 		String comments = param.get("comments");
 		
 		communityService.addPlusComment(boardId, commentId, memberId, comments);
+
+		CommunityBoard cb = communityService.findBoardByBoardId(boardId);
+		List<CommunityComments> cc = communityService.findCommentsByBoardId(boardId);
+		List<CommunityCommentsPlus> ccp = communityService.findCommentsPlusByBoardId(boardId);
+		
+		Member m = communityService.findMemberByMemberId(memberId);
+		// 알림
+		LocalDateTime now = LocalDateTime.now();
+		String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+		System.out.println("[" + formatedNow + "] '" + m.getNickName() + "(" + m.getName() + ")'님이 '" + cb.getMember().getNickName() + "(" + cb.getMember().getName() + ")' 님의 \"" + cb.getTitle() + "\" 게시물에 \"" + comments + "\" 댓글을 작성했습니다.");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cb", cb);
+		map.put("cc", cc);
+		map.put("ccp", ccp);
+		
+		return map;
 	}
 
 	/*
@@ -153,6 +203,11 @@ public class BoardController {
 		
 		communityService.deletePlusComment(ccp.getMember().getId(), Long.parseLong(boardId), Long.parseLong(plusCommentId));
 		
+		CommunityBoard cb = communityService.findBoardByBoardId(Long.parseLong(boardId));
+		// 알림
+		LocalDateTime now = LocalDateTime.now();
+		String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+		System.out.println("[" + formatedNow + "] '" + ccp.getMember().getNickName() + "(" + ccp.getMember().getName() + ")'님이 '" + cb.getMember().getNickName() + "(" + cb.getMember().getName() + ")' 님의 \"" + cb.getTitle() + "\" 게시물에 \"" + ccp.getComments() + "\" 댓글을 삭제했습니다.");
 	}
 	
 	/*
@@ -164,8 +219,14 @@ public class BoardController {
 		String loginId = param.get("loginId");
 		String boardId = param.get("boardId");
 		String nowLikes = null;
+		
+		// 알림용
+		Member m = communityService.findMemberByMemberId(Long.parseLong(loginId));
+		CommunityBoard cb = communityService.findBoardByBoardId(Long.parseLong(boardId));
+		LocalDateTime now = LocalDateTime.now();
+		String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
 
-		// 추천이 눌려있으면 true 안눌려있으면 false
+		// 추천이 눌려있으면 true 안눌려있으면 false -> 추천 최대 횟수 초과시 true
 		Boolean likeCheck = communityService.isLike(Long.parseLong(loginId), Long.parseLong(boardId));
 
 		// 해당 게시물에 추천을 눌렀었는지 확인
@@ -173,11 +234,15 @@ public class BoardController {
 			// 누른 로그가 없다면 추천올리기
 			nowLikes = Long.toString(communityService.likePoint(Long.parseLong(boardId)));
 			communityService.addlikePoint(Long.parseLong(loginId), Long.parseLong(boardId));
+
+			// 알림
+			System.out.println("[" + formatedNow + "] '" + m.getNickName() + "(" + m.getName() + ")'님이 '" + cb.getMember().getNickName() + "(" + cb.getMember().getName() + ")' 님의 \"" + cb.getTitle() + "\" 게시물에 추천을 눌렀습니다.");
 		}
 		
 		if(loginId.equals("1")) {
 			likeCheck = false;
 		}
+		
 
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("likes", nowLikes);

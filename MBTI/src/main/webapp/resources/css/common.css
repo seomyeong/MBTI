@@ -75,7 +75,7 @@ body {
 	width: 100px;
     height: 100px;
 }
-#nav ul li:nth-child(1) .nickName {
+#nav ul li:nth-child(1) .nickName_profile {
     text-indent: 20px;
     color: var(--black3);
     font-size: 0.8em;
@@ -190,7 +190,7 @@ body {
 #mabPoint,
 #profileBack {
     position: absolute;
-    width: 150px;
+    width: 160px;
     transition: 0.2s;
     text-decoration: none;
     color: #828282;
@@ -207,7 +207,7 @@ body {
 }
 #mabPoint {
 	top: 65px;
-    left: calc(100% - 169px);
+    left: calc(100% - 171px);
 }
 #profileImg {
 	width: 100px;

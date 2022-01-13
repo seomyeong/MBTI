@@ -1,3 +1,5 @@
+$('#nav li:nth-of-type(3)').addClass('clicked');
+
 function writeSubmit(form) {
 	var title = form.title.value;
 	var contents = form.contents.value;

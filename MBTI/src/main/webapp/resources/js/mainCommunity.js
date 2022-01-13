@@ -1,3 +1,5 @@
+$('#nav li:nth-of-type(3)').addClass('clicked');
+
 // mbti 필터 클릭시 애니메이션 처리
 $('.toggle-switch .switch').on('click', function() {
 	if ($(this).parent().children('input:eq(0)').attr('checked') == false || $(this).parent().children('input:eq(0)').attr('checked') == null) {
