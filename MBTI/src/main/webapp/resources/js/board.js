@@ -27,20 +27,37 @@ function timeForToday(value) {
 
 
 // date 표시 바꾸기 - 게시글, 댓글, 대댓글
-let formatDate_board = timeForToday($('#board_reportingDate').text());
-$('#board_reportingDate').text(formatDate_board);
-
-$('.comment_reportingDate').each(function() {
-	let formatDate = timeForToday($(this).text());
-	$(this).text(formatDate);
-
-});
-
-$('.plusCommentView_reportingDate').each(function() {
-	let formatDate = timeForToday($(this).text());
-	$(this).text(formatDate);
-
-});
+function changeDate() {
+	let formatDate_board = timeForToday($('#board_reportingDate').text());
+	$('#board_reportingDate').text(formatDate_board);
+	
+	$('.comment_reportingDate').each(function() {
+		let formatDate = timeForToday($(this).text());
+		$(this).text(formatDate);
+	
+	});
+	
+	$('.plusCommentView_reportingDate').each(function() {
+		let formatDate = timeForToday($(this).text());
+		$(this).text(formatDate);
+	
+	});
+}
+function changeDate_comment() {
+	
+	$('.comment_reportingDate').each(function() {
+		let formatDate = timeForToday($(this).text());
+		$(this).text(formatDate);
+	
+	});
+	
+	$('.plusCommentView_reportingDate').each(function() {
+		let formatDate = timeForToday($(this).text());
+		$(this).text(formatDate);
+	
+	});
+}
+changeDate();
 
 // 댓글 글자수 세기
 function typingContents(form) {
@@ -69,7 +86,7 @@ $('#board_delete a').on('click', function(e) {
 
 // 댓글 삭제
 
-$('.comment_delete a').on('click', function(e) {
+$(document).on('click', '.comment_delete a', function(e) {
 	e.preventDefault();
 	var boardId = $('#comments span').attr("data-boardId");
 	var commentId = $(this).attr("href");
@@ -98,7 +115,7 @@ $('.comment_delete a').on('click', function(e) {
 });
 
 // 대댓글 삭제
-$('.plusComment_delete a').on('click', function(e) {
+$(document).on('click', '.plusComment_delete a', function(e) {
 	e.preventDefault();
 	var boardId = $('#comments span').attr("data-boardId");
 	var plusCommentId = $(this).attr("href");

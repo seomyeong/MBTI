@@ -75,24 +75,31 @@ public class BoardController {
 	 */
 	@ResponseBody
 	@PostMapping("community/addComment")
-	public Map<String, String> ajaxAddComment(@RequestBody Map<String, String> param) {
+	public Map<String, Object> ajaxAddComment(@RequestBody Map<String, String> param) {
 		
 		Long loginId = Long.parseLong(param.get("loginId"));
 		Long boardId = Long.parseLong(param.get("boardId"));
 		String comment = param.get("comment");
 		
+		
 		// 댓글 테이블에 할당
 		long commentId = communityService.addComment(loginId, boardId, comment);
 
-		System.out.println(param.get("loginId") + param.get("boardId") + param.get("comment"));
 		Member loginMember = communityService.findMemberByMemberId(loginId);
-
-		Map<String, String> map = new HashMap<String, String>();
+		
+		CommunityBoard cb = communityService.findBoardByBoardId(boardId);
+		List<CommunityComments> cc = communityService.findCommentsByBoardId(boardId);
+		List<CommunityCommentsPlus> ccp = communityService.findCommentsPlusByBoardId(boardId);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("mbti", loginMember.getMbti());
 		map.put("level", Integer.toString(loginMember.getLevel()));
 		map.put("nickName", loginMember.getNickName());
 		map.put("comment", comment);
 		map.put("commentId", Long.toString(commentId));
+		map.put("cb", cb);
+		map.put("cc", cc);
+		map.put("ccp", ccp);
 		
 		return map;
 	}
@@ -137,15 +144,24 @@ public class BoardController {
 	 */
 	@ResponseBody
 	@PostMapping("/community/addPlusComment")
-	public void addPlusComment(@RequestBody Map<String, String> param) {
+	public Map<String, Object> addPlusComment(@RequestBody Map<String, String> param) {
 		Long boardId = Long.parseLong(param.get("boardId"));
 		Long commentId = Long.parseLong(param.get("commentId"));
 		Long memberId = Long.parseLong(param.get("memberId"));
 		String comments = param.get("comments");
 		
-		
 		communityService.addPlusComment(boardId, commentId, memberId, comments);
+
+		CommunityBoard cb = communityService.findBoardByBoardId(boardId);
+		List<CommunityComments> cc = communityService.findCommentsByBoardId(boardId);
+		List<CommunityCommentsPlus> ccp = communityService.findCommentsPlusByBoardId(boardId);
 		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cb", cb);
+		map.put("cc", cc);
+		map.put("ccp", ccp);
+		
+		return map;
 	}
 
 	/*
