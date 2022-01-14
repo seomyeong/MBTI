@@ -34,6 +34,20 @@ body {
     transition: 0.5s;
     overflow: hidden;
 }
+#__mbtiInfo {
+	color: var(--white);
+	position: absolute;
+	width: 28px;
+	left: calc(50% - 15px);
+	top: 70px;
+	transition: 0.5s;
+	font-size: 1em;
+	font-weight: bold;
+}
+#__mbtiInfo.hidden {
+	left: -200px;
+}
+
 #nav.hiddenProfile {
     width: 73px;
 }
