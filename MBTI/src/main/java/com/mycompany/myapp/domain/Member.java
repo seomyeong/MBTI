@@ -78,6 +78,19 @@ public class Member {
 		this.regDate = regDate;
 	}
 	
+	public Member(String email, String pw, String name, String nickName, String birth, String mbti,
+			String gender, String phone) {
+		super();
+		this.email = email;
+		this.pw = pw;
+		this.name = name;
+		this.nickName = nickName;
+		this.birth = birth;
+		this.mbti = mbti;
+		this.gender = gender;
+		this.phone = phone;
+	}
+
 	public void calcLoginPoint() {
 		this.mabPoint = this.mabPoint + 10;
 	}

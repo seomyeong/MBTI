@@ -106,16 +106,8 @@
 						<tr>
 							<th>휴대전화</th>
 							<td>
-								<%-- <form:input maxlength="8" minlength="8"
-									placeholder="핸드폰 번호를 입력하세요" path="phone" required="required"
-									pattern="[0-9]+" /> --%> <select name="phone1">
-									<option value="010">010</option>
-									<option value="011">011</option>
-									<option value="012">012</option>
-									<option value="016">016</option>
-							</select>
-							<form:input type="text" path="phone2" maxlength="8"
-									minlength="8" placeholder="8자리 숫자" 
+							<form:input type="text" path="phone" maxlength="11"
+									minlength="11" placeholder="11자리 숫자" 
 									pattern="[0-9]+" /> </td>
 
 							<td><span class="errorTxt errorTxt2"></span></td>

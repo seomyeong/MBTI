@@ -19,8 +19,7 @@ public class MemberCommand {
 	private String birth;
 	private String mbti;
 	private String gender;
-	private String phone1;
-	private String phone2;
+	private String phone;
 	private Date regDate;
 	private int level;
 	private int mabPoint;
@@ -31,7 +30,7 @@ public class MemberCommand {
 	public MemberCommand() {}
 
 	public MemberCommand(String email1, String email2, String pw, String name, String nickName, String birth, String mbti, String gender,
-			String phone1, String phone2) {
+			String phone) {
 		super();
 		this.email1 = email1;
 		this.email2 = email2;
@@ -41,8 +40,7 @@ public class MemberCommand {
 		this.birth = birth;
 		this.mbti = mbti;
 		this.gender = gender;
-		this.phone1 = phone1;
-		this.phone2 = phone2;
+		this.phone = phone;
 	}
 	
 	

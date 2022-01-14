@@ -44,16 +44,44 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		String profileImg = "/myapp/resources/img/avatar/MBTI_" + memberCommand.getMbti() + ".png";
 		String email = memberCommand.getEmail1() + memberCommand.getEmail2();
-		String phone = memberCommand.getPhone1() + memberCommand.getPhone2();
 		Member member = new Member(email, memberCommand.getPw(), memberCommand.getName(),
 				memberCommand.getNickName(), memberCommand.getBirth(), memberCommand.getMbti(),
-				memberCommand.getGender(), phone, profileImg);
+				memberCommand.getGender(), memberCommand.getPhone(), profileImg);
 
 		memberService.addMember(member);
 		mav.setViewName("redirect:/index");
 		return mav;
 	}
+	
+	/*
+	 * 회원정보 수정창
+	 */
+	@GetMapping("/member/updateMember")
+	public String updateMember(@ModelAttribute MemberCommand memberCommand) {
+		return "member/updateMember";
+		
+	}
+	
+	/*updateMember
+	 * 회원정보 수정 성공
+	 */
+	@GetMapping("/member/successUpdateMember")
+	public String successUpdateMemberGet() {
+		return "redirect:/index";
+	}
 
+	@PostMapping("/member/successUpdateMember")
+	public ModelAndView successUpdateMember(MemberCommand memberCommand, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		String profileImg = "/myapp/resources/img/avatar/MBTI_" + memberCommand.getMbti() + ".png";
+		Member member = new Member(memberCommand.getEmail1(), memberCommand.getPw(), memberCommand.getName(),
+				memberCommand.getNickName(), memberCommand.getBirth(), memberCommand.getMbti(),
+				memberCommand.getGender(), memberCommand.getPhone(), profileImg);
+		long loginId = (long)session.getAttribute("loginId");
+		memberService.updateMember(member, loginId);
+		mav.setViewName("redirect:/index");
+		return mav;
+	}
 
 	/*
 	 * 로그인
@@ -143,7 +171,11 @@ public class MemberController {
 		String nickName = param.get("nickName");
 		
 		if(memberService.isNickNameCheck(nickName)) {
-			msg = "사용가능한 닉네임입니다.";
+			if ( nickName.length() > 1 ) {
+				msg = "사용가능한 닉네임입니다.";
+			} else {
+				msg = "2자리 이상 입력해주세요.";
+			} 
 		} else {
 			msg = "중복되는 닉네임이 존재합니다.";
 		}

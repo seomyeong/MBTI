@@ -5,35 +5,35 @@ a {
 	color: #000;
 }
 
-#addCustomer h1 {
+#updateCustomer h1 {
 	text-align: center;
 	font-size: 40px;
 	margin: 40px auto;
 }
 
-#addCustomer_wrap {
+#updateCustomer_wrap {
 	position: relative;
 	z-index: 1;
 }
 
-#addCustomer_wrap table {
+#updateCustomer_wrap table {
 	width: 100%;
-	margin: -25px 38%;
+	margin: -25px 34%;
 }
 
-#addCustomer_wrap th {
+#updateCustomer_wrap th {
 	width: 0px;
 	height: 62px;
 	font-weight: bolder;
 }
 
-#addCustomer_wrap td {
+#updateCustomer_wrap td {
 	padding-left: 30px;
 	width: 250px;
 	padding-bottom: 2px;
 }
 
-#addCustomer_wrap .errorTxt {
+#updateCustomer_wrap .errorTxt {
 	display: inline-block;
 	color: red;
 	font-size: 13px;
@@ -43,12 +43,12 @@ a {
 	top: 28px;
 }
 
-/* #addCustomer_wrap .errorTxt2 {
+/* #updateCustomer_wrap .errorTxt2 {
 	position: relative;
 	left: -72%;
 } */
 
-#addCustomer_wrap input {
+#updateCustomer_wrap input {
 	border-radius: 5px;
 	width: 170px;
 	height: 28px;
@@ -60,17 +60,17 @@ a {
 	font-weight: bold;
 }
 
-#addCustomer_wrap input:focus {
+#aupdateCustomer_wrap input:focus {
 	outline: #b2d4ad;
 	border: 1px solid gray;
 }
 
-#addCustomer_btn {
+#updateCustomer_btn {
 	text-align: center;
 	margin-top: 42px;
 }
 
-#addCustomer_btn a {
+#updateCustomer_btn a {
 	display: inline-block;
 	width: 70px;
 	height: 30px;
@@ -79,15 +79,15 @@ a {
 	border-radius: 5px;
 }
 
-#addCustomer_btn a:hover {
+#updateCustomer_btn a:hover {
 	background: #b2d4ad;
 }
 
-#addCustomer label {
+#updateCustomer label {
 	font-weight: bold;
 }
 
-#addCustomer_btn #submit {
+#updateCustomer_btn #submit {
 	cursor: pointer;
 	width: 70px;
 	height: 30px;
@@ -97,7 +97,7 @@ a {
 	font-size: 16px;
 }
 
-#addCustomer_btn #submit:hover {
+#updateCustomer_btn #submit:hover {
 	background: #b2d4ad;
 }
 
@@ -144,4 +144,8 @@ input[type='radio']:checked {
 #mbtiBtn:hover {
 	color: #fff;
 	background-color: gray;
+}
+
+#email1, #name {
+	background-color: rgba(215, 212, 212, 1);
 }
