@@ -145,16 +145,16 @@ public class BoardController {
 	@PostMapping("/community/deleteComment")
 	public Map<String, Object> deleteComment(@RequestBody Map<String, String> param) {
 		
-		String boardId = param.get("boardId");
-		String commentId = param.get("commentId");
+		Long boardId = Long.parseLong(param.get("boardId"));
+		Long commentId = Long.parseLong(param.get("commentId"));
 		
-		CommunityComments cc = communityService.findCommentByCommentId(Long.parseLong(commentId));
+		CommunityComments cc = communityService.findCommentByCommentId(commentId);
 		
-		communityService.deleteComment(cc.getMember().getId(), Long.parseLong(boardId), Long.parseLong(commentId));
+		communityService.deleteComment(cc.getMember().getId(), boardId, commentId);
 		
-		CommunityBoard cb = communityService.findBoardByBoardId(Long.parseLong(boardId));
-		List<CommunityComments> cc2 = communityService.findCommentsByBoardId(Long.parseLong(boardId));
-		List<CommunityCommentsPlus> ccp = communityService.findCommentsPlusByBoardId(Long.parseLong(boardId));
+		CommunityBoard cb = communityService.findBoardByBoardId(boardId);
+		List<CommunityComments> cc2 = communityService.findCommentsByBoardId(boardId);
+		List<CommunityCommentsPlus> ccp = communityService.findCommentsPlusByBoardId(boardId);
 		
 		// 알림
 		LocalDateTime now = LocalDateTime.now();
@@ -209,15 +209,15 @@ public class BoardController {
 	@PostMapping("/community/deletePlusComment")
 	public Map<String, Object> deletePlusComment(@RequestBody Map<String, String> param) {
 		
-		String boardId = param.get("boardId");
+		Long boardId = Long.parseLong(param.get("boardId"));
 		String plusCommentId = param.get("plusCommentId");
 		CommunityCommentsPlus ccp = communityService.findCommentPlusByPlusCommentId(plusCommentId);
 		
-		communityService.deletePlusComment(ccp.getMember().getId(), Long.parseLong(boardId), Long.parseLong(plusCommentId));
+		communityService.deletePlusComment(ccp.getMember().getId(), boardId, Long.parseLong(plusCommentId));
 		
-		CommunityBoard cb = communityService.findBoardByBoardId(Long.parseLong(boardId));
-		List<CommunityComments> cc = communityService.findCommentsByBoardId(Long.parseLong(boardId));
-		List<CommunityCommentsPlus> ccp2 = communityService.findCommentsPlusByBoardId(Long.parseLong(boardId));
+		CommunityBoard cb = communityService.findBoardByBoardId(boardId);
+		List<CommunityComments> cc = communityService.findCommentsByBoardId(boardId);
+		List<CommunityCommentsPlus> ccp2 = communityService.findCommentsPlusByBoardId(boardId);
 		
 		// 알림
 		LocalDateTime now = LocalDateTime.now();
@@ -239,30 +239,33 @@ public class BoardController {
 	@ResponseBody
 	@PostMapping("community/likes")
 	public Map<String, String> ajaxWrite(@RequestBody Map<String, String> param) {
-		String loginId = param.get("loginId");
-		String boardId = param.get("boardId");
+		Long loginId = Long.parseLong(param.get("loginId"));
+		Long boardId = Long.parseLong(param.get("boardId"));
 		String nowLikes = null;
 		
 		// 알림용
-		Member m = communityService.findMemberByMemberId(Long.parseLong(loginId));
-		CommunityBoard cb = communityService.findBoardByBoardId(Long.parseLong(boardId));
+		Member m = communityService.findMemberByMemberId(loginId);
+		CommunityBoard cb = communityService.findBoardByBoardId(loginId);
 		LocalDateTime now = LocalDateTime.now();
 		String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
 
 		// 추천이 눌려있으면 true 안눌려있으면 false -> 추천 최대 횟수 초과시 true
-		Boolean likeCheck = communityService.isLike(Long.parseLong(loginId), Long.parseLong(boardId));
+		Boolean likeCheck = communityService.isLike(loginId, boardId);
 
 		// 해당 게시물에 추천을 눌렀었는지 확인
-		if (!(likeCheck) || loginId.equals("1")) {
+		if (!(likeCheck) || m.getName().equals("김종성")) {
 			// 누른 로그가 없다면 추천올리기
-			nowLikes = Long.toString(communityService.likePoint(Long.parseLong(boardId)));
-			communityService.addlikePoint(Long.parseLong(loginId), Long.parseLong(boardId));
+			nowLikes = Long.toString(communityService.likePoint(boardId));
+			communityService.addlikePoint(loginId, boardId);
+			
+			// 해당 board가 추천이 20이 넘는지 확인 -> 추천 수가 20이면 해당 Board Member에 500맙 지급
+			communityService.checkHotBoard(loginId);
 
 			// 알림
 			System.out.println("[" + formatedNow + "] '" + m.getNickName() + "(" + m.getName() + ")'님이 '" + cb.getMember().getNickName() + "(" + cb.getMember().getName() + ")' 님의 \"" + cb.getTitle() + "\" 게시물에 추천을 눌렀습니다.");
 		}
 		
-		if(loginId.equals("1")) {
+		if(m.getName().equals("김종성")) {
 			likeCheck = false;
 		}
 		
@@ -282,10 +285,10 @@ public class BoardController {
 	@PostMapping("/community/liveLikes")
 	public Map<String, Object> liveLikes(@RequestBody Map<String, String> param) {
 		
-		String boardId = param.get("boardId");
+		Long boardId = Long.parseLong(param.get("boardId"));
 		CommunityBoard cb = null;
 		
-		cb = communityService.findBoardByBoardId(Long.parseLong(boardId));
+		cb = communityService.findBoardByBoardId(boardId);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 

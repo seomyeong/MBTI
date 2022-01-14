@@ -184,6 +184,18 @@ public class CommunityService {
 			communityDao.minusMab(m.getId(), levelUp * maxExp);			
 		}
 	}
+	public void checkHotBoard(Long boardId) {
+		CommunityBoard cb = communityDao.findBoardByBoardId(boardId);
+		
+		if(cb.getLikes() == 20) {
+			Member m = communityDao.findMemberByMemberId(cb.getMember().getId());
+			
+			m.calcBestPoint();
+			communityDao.plusMab(m.getId(), m.getMabPoint());
+			
+			this.resultLevel(m);
+		}
+	}
 	
 
 }
