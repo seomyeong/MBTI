@@ -33,8 +33,8 @@
 						</tr>
 						<tr>
 							<th>비밀번호</th>
-							<td><form:password id="password1"
-									value="${sessionScope.memberInfo.pw}" path="pw" /></td>
+							<td><form:password id="password1" placeholder="비밀번호"
+									 path="pw" /></td>
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>
