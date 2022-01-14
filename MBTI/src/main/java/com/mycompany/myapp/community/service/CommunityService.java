@@ -161,7 +161,9 @@ public class CommunityService {
 	public boolean isLike(Long loginId, Long boardId) {
 		return communityDao.isLike(loginId, boardId);
 	}
-	
+	public boolean isBoard(Long boardId) {
+		return communityDao.isBoard(boardId);
+	}
 	
 	// 기타 Service
 	public void viewPoint(Long boardId) {
@@ -182,5 +184,6 @@ public class CommunityService {
 			communityDao.minusMab(m.getId(), levelUp * maxExp);			
 		}
 	}
+	
 
 }

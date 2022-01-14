@@ -143,7 +143,7 @@ public class BoardController {
 	 */
 	@ResponseBody
 	@PostMapping("/community/deleteComment")
-	public void deleteComment(@RequestBody Map<String, String> param) {
+	public Map<String, Object> deleteComment(@RequestBody Map<String, String> param) {
 		
 		String boardId = param.get("boardId");
 		String commentId = param.get("commentId");
@@ -153,10 +153,21 @@ public class BoardController {
 		communityService.deleteComment(cc.getMember().getId(), Long.parseLong(boardId), Long.parseLong(commentId));
 		
 		CommunityBoard cb = communityService.findBoardByBoardId(Long.parseLong(boardId));
+		List<CommunityComments> cc2 = communityService.findCommentsByBoardId(Long.parseLong(boardId));
+		List<CommunityCommentsPlus> ccp = communityService.findCommentsPlusByBoardId(Long.parseLong(boardId));
+		
 		// 알림
 		LocalDateTime now = LocalDateTime.now();
 		String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
 		System.out.println("[" + formatedNow + "] '" + cc.getMember().getNickName() + "(" + cc.getMember().getName() + ")'님이 '" + cb.getMember().getNickName() + "(" + cb.getMember().getName() + ")' 님의 \"" + cb.getTitle() + "\" 게시물에 \"" + cc.getComments() + "\" 댓글을 삭제했습니다.");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("cb", cb);
+		map.put("cc", cc2);
+		map.put("ccp", ccp);
+		
+		return map;
 	}
 
 	/*
@@ -183,6 +194,7 @@ public class BoardController {
 		System.out.println("[" + formatedNow + "] '" + m.getNickName() + "(" + m.getName() + ")'님이 '" + cb.getMember().getNickName() + "(" + cb.getMember().getName() + ")' 님의 \"" + cb.getTitle() + "\" 게시물에 \"" + comments + "\" 댓글을 작성했습니다.");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+		
 		map.put("cb", cb);
 		map.put("cc", cc);
 		map.put("ccp", ccp);
@@ -195,7 +207,7 @@ public class BoardController {
 	 */
 	@ResponseBody
 	@PostMapping("/community/deletePlusComment")
-	public void deletePlusComment(@RequestBody Map<String, String> param) {
+	public Map<String, Object> deletePlusComment(@RequestBody Map<String, String> param) {
 		
 		String boardId = param.get("boardId");
 		String plusCommentId = param.get("plusCommentId");
@@ -204,10 +216,21 @@ public class BoardController {
 		communityService.deletePlusComment(ccp.getMember().getId(), Long.parseLong(boardId), Long.parseLong(plusCommentId));
 		
 		CommunityBoard cb = communityService.findBoardByBoardId(Long.parseLong(boardId));
+		List<CommunityComments> cc = communityService.findCommentsByBoardId(Long.parseLong(boardId));
+		List<CommunityCommentsPlus> ccp2 = communityService.findCommentsPlusByBoardId(Long.parseLong(boardId));
+		
 		// 알림
 		LocalDateTime now = LocalDateTime.now();
 		String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
 		System.out.println("[" + formatedNow + "] '" + ccp.getMember().getNickName() + "(" + ccp.getMember().getName() + ")'님이 '" + cb.getMember().getNickName() + "(" + cb.getMember().getName() + ")' 님의 \"" + cb.getTitle() + "\" 게시물에 \"" + ccp.getComments() + "\" 댓글을 삭제했습니다.");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("cb", cb);
+		map.put("cc", cc);
+		map.put("ccp", ccp2);
+		
+		return map;
 	}
 	
 	/*
@@ -245,6 +268,7 @@ public class BoardController {
 		
 
 		Map<String, String> map = new HashMap<String, String>();
+		
 		map.put("likes", nowLikes);
 		map.put("likeCheck", String.valueOf(likeCheck));
 
@@ -256,13 +280,15 @@ public class BoardController {
 	 */
 	@ResponseBody
 	@PostMapping("/community/liveLikes")
-	public Map<String, String> liveLikes(@RequestBody Map<String, String> param) {
+	public Map<String, Object> liveLikes(@RequestBody Map<String, String> param) {
 		
 		String boardId = param.get("boardId");
+		CommunityBoard cb = null;
 		
-		CommunityBoard cb = communityService.findBoardByBoardId(Long.parseLong(boardId));
+		cb = communityService.findBoardByBoardId(Long.parseLong(boardId));
 		
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, Object> map = new HashMap<String, Object>();
+
 		map.put("likes", Integer.toString(cb.getLikes()));
 		
 		return map;		
