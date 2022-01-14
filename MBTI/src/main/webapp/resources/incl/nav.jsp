@@ -116,6 +116,8 @@
 				var now_contentsCount = $('#contentsCount').html();
 				var now_commentsCount = $('#commentsCount').html();
 				var now_mabPoint = $('#mabPoint').html();
+				var now_profileImg = document.querySelector('#profileImg').style.backgroundImage;
+
 				var param = {
 						"loginId" : '${sessionScope.loginId}',
 				}
@@ -131,6 +133,7 @@
 						m_contentsCount = "내가 쓴 총 게시물 수 &nbsp;&nbsp;" + m.contentsCount;
 						m_commentsCount = "내가 쓴 총 댓글 수 &nbsp;&nbsp;" + m.commentsCount;
 						m_mabPoint = "현재 보유한 맙 &nbsp;&nbsp;&nbsp;&nbsp;" + m.mabPoint;
+						m_profileImg = "url(\"" + m.profileImg + "\")";
 						
 						if(now_nickName != m_nickName) {
 							$('.nickName_profile').html(m_nickName);							
@@ -143,6 +146,9 @@
 						}
 						if(now_mabPoint != m_mabPoint) {
 							$('#mabPoint').html(m_mabPoint);							
+						}
+						if(now_profileImg != m_profileImg) {
+							$('#profileImg').css("background-image", m_profileImg);
 						}
 					}
 				});

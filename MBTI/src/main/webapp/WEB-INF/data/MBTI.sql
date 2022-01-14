@@ -36,6 +36,8 @@ UPDATE Member SET level=29 WHERE id=6;
 UPDATE Member SET nickName='이즈리얼 연구원' WHERE id=1;
 UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ESFJ.png' WHERE id=4;
 UPDATE Member SET mbti='ESFJ' WHERE id=4;
+UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ISFJ.png' WHERE id=1;
+UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ENFP.png' WHERE id=1;
 
 DROP TABLE Member;
 DROP TABLE CommunityBoard;
