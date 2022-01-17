@@ -20,11 +20,14 @@
 <body>
 	<nav id="nav" class="hiddenProfile">
 		<span id="menuToggle" class="show"> <ion-icon name="menu-outline"></ion-icon></span>
+			<c:if test="${not (sessionScope.loginId eq null)}">
+				<span id="__mbtiInfo">${sessionScope.memberInfo.mbti}</span>
+			</c:if>
 		<ul>
 			<c:choose>
 				<c:when test="${sessionScope.loginId eq null}">
 					<li id="profile" class="hiddenProfile"><a href="#"> <span class="icon"> <ion-icon
-									name="person-ciㅏㅣrcle-outline"></ion-icon>
+									name="person-circle-outline"></ion-icon>
 						</span> <span class="title">회원이신가요?</span>
 					</a></li>
 					<a href="/myapp/member/login" id="login" class="hiddenProfile">로그인</a>
@@ -106,6 +109,7 @@
 				$('#mabPoint').toggleClass('hiddenProfile');
 				$('#profileImg').toggleClass('hiddenProfile');
 				$('#profileBack').toggleClass('hiddenProfile');
+				$('#__mbtiInfo').toggleClass('hidden');
 			}
 		});
 		

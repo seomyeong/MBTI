@@ -161,7 +161,9 @@ public class CommunityService {
 	public boolean isLike(Long loginId, Long boardId) {
 		return communityDao.isLike(loginId, boardId);
 	}
-	
+	public boolean isBoard(Long boardId) {
+		return communityDao.isBoard(boardId);
+	}
 	
 	// 기타 Service
 	public void viewPoint(Long boardId) {
@@ -182,5 +184,18 @@ public class CommunityService {
 			communityDao.minusMab(m.getId(), levelUp * maxExp);			
 		}
 	}
+	public void checkHotBoard(Long boardId) {
+		CommunityBoard cb = communityDao.findBoardByBoardId(boardId);
+		
+		if(cb.getLikes() == 20) {
+			Member m = communityDao.findMemberByMemberId(cb.getMember().getId());
+			
+			m.calcBestPoint();
+			communityDao.plusMab(m.getId(), m.getMabPoint());
+			
+			this.resultLevel(m);
+		}
+	}
+	
 
 }

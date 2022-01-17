@@ -139,10 +139,7 @@ public class CommunityDao {
 
 			@Override
 			public CommunityBoard mapRow(ResultSet rs, int rowNum) throws SQLException {
-
-				CommunityBoard cb = new CommunityBoard();
-
-				return cb;
+				return new CommunityBoard();
 			}
 
 		});
@@ -208,10 +205,7 @@ public class CommunityDao {
 
 			@Override
 			public CommunityBoard mapRow(ResultSet rs, int rowNum) throws SQLException {
-
-				CommunityBoard cb = new CommunityBoard();
-
-				return cb;
+				return new CommunityBoard();
 			}
 
 		});
@@ -350,10 +344,7 @@ public class CommunityDao {
 
 			@Override
 			public CommunityBoard mapRow(ResultSet rs, int rowNum) throws SQLException {
-
-				CommunityBoard cb = new CommunityBoard();
-
-				return cb;
+				return new CommunityBoard();
 			}
 
 		}, memberId);
@@ -373,10 +364,7 @@ public class CommunityDao {
 
 			@Override
 			public CommunityBoard mapRow(ResultSet rs, int rowNum) throws SQLException {
-
-				CommunityBoard cb = new CommunityBoard();
-
-				return cb;
+				return new CommunityBoard();
 			}
 
 		}, mbtiInfo);
@@ -896,6 +884,30 @@ public class CommunityDao {
 		return true;
 
 	}
+	/**
+	 * 해당 boardId를 가지는 board가 있는지 확인한다.
+	 * 
+	 * @param boardId
+	 * @return 해당 boardId의 board가 존재하면 true, 그렇지 않으면 false
+	 */
+	public boolean isBoard(Long boardId) {
+		String sql = "SELECT id FROM CommunityBoard WHERE id=?";
+		List<CommunityBoard> list = null;
+		list = jdbcTemplate.query(sql, new RowMapper<CommunityBoard>() {
+
+			@Override
+			public CommunityBoard mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return new CommunityBoard();
+			}
+			
+		}, boardId);
+		
+		if(list.size() == 0 || list.equals(null) || list == null) {
+			return false;
+		}
+		
+		return true;
+	}
 
 	
 	// 기타 Dao
@@ -961,4 +973,5 @@ public class CommunityDao {
 		String sql = "UPDATE Member SET level=level+? WHERE id=?";
 		jdbcTemplate.update(sql, levelUp, id);
 	}
+	
 }
