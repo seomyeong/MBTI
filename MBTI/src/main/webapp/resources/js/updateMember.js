@@ -70,7 +70,7 @@ function checkPattern(form) {
 	}
 	
 	// 컨트롤러
-	if (pass == true && pass2 == true) {
+	if (pass == true) {
 		var formTag = document.getElementById("form");
 		alert("입력하신 정보로 회원수정이 완료 되었습니다. ");
 		formTag.submit();
