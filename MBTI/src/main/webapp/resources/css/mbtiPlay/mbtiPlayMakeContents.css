@@ -1,0 +1,140 @@
+@charset "UTF-8";
+li{list-style: none;}
+.hidden{
+	position: absolute;
+	left:-9999px;
+}
+#introTxt{
+    text-align: center;
+    margin-top: 130px;
+    margin-bottom: 50px;
+}
+#introTxt span{
+    font-size: 20px;
+    font-weight: bold;
+    color: #b2d4ad;
+}
+
+#QnA{
+    position: relative;
+    top: 0px;
+    left: calc(50% - 300px);
+    width: 600px;
+    height: 460px;
+}
+.stepTxt{
+    font-weight: bold;
+    color: darksalmon;
+}
+#questionCount{
+	font-size: 14px;
+	color: #b2d4ad;
+}
+
+#addQuestion{
+    height: 100px;
+    text-align: center;
+    position: relative;
+}
+
+#questionValue{
+    font-size: 15px;
+    position: absolute;
+    top: 80px;
+    left: 80px;
+    color: #ff1707;
+}
+#questionCount{
+    font-size: 12px;
+    position: absolute;
+    top: 80px;
+    right: 125px;
+    color: darksalmon;
+}
+
+.nextIcon{
+    cursor: pointer;
+    display: inline-block;
+    position: absolute;
+    top: 90px;
+    right: 300px;
+    width: 30px;
+    height: 30px;
+    transform: rotate(90deg);
+    background: url(../img/icon/next.png) no-repeat center / cover;
+    background-size: 100% 100%;
+}
+
+#addAnswers{
+    position: absolute;
+    top: 200px;
+    left: (50% - 200px);
+    width: 600px;
+    height: 100px;
+    text-align: center;
+    margin: 0 auto;
+}
+#answer01div, #answer02div, #answer03div {
+    position: relative;
+}
+
+.answerValue{
+    position: absolute;
+    font-size: 14px;
+    color: #ff1707;
+}
+.answerCount{
+    position: absolute;
+    font-size: 12px;
+    color: darksalmon;
+}
+
+.answer01Value{
+   top: 60px;
+   left: 80px;
+}
+.answer01Count{
+    top: 60px;
+    right: 125px;
+}
+.answer02Value{
+    top: 135px;
+    left: 80px;
+ }
+.answer02Count{
+    top: 135px;
+    right: 125px;
+}
+.answer03Value{
+    top: 210px;
+    left: 80px;
+}
+.answer03Count{
+    top: 210px;
+    right: 125px;
+}
+
+.userInput{
+    display: block;
+    float: left;
+     margin: 10px 0 25px 80px;
+    width: 400px;
+    height: 40px;
+    border-radius: 15px;
+    border: 1px solid #b2d4ad;
+}
+.userInput:focus{
+    outline: #b2d4ad;
+    border: 1px solid #ec7666;
+}
+
+input[type="submit"]{
+    width: 100px;
+    line-height: 30px;
+    background: #b2d4ad;
+    border: none;
+    border-radius: 10px;
+    position: absolute;
+    bottom: -30px;
+    right: 270px;
+}

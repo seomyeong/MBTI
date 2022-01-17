@@ -111,3 +111,56 @@ CREATE TABLE LikeLog(
 	boardId			BIGINT			NOT NULL,
 	memberId		BIGINT			NOT NULL
 );
+
+
+
+
+
+
+
+--MbtiPlay
+SELECT * FROM MbtiPlayContents;
+SELECT * FROM MbtiPlayContentsAnswer;
+SELECT * FROM ContentsLog;
+SELECT * FROM AnswersLog;
+
+DROP TABLE MbtiPlayContents;
+DROP TABLE MbtiPlayContentsAnswer;
+DROP TABLE ContentsLog;
+DROP TABLE AnswersLog;
+
+CREATE TABLE MbtiPlayContents(
+	id				BIGINT			PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	memberId		BIGINT			NOT NULL, --멤버FK
+	question		VARCHAR(500)	NOT NULL,
+	answer01		VARCHAR(100)	NOT NULL,
+	answer02		VARCHAR(100)	NOT NULL,
+	answer03		VARCHAR(100)	NOT NULL,
+	CONSTRAINT memberId_FK FOREIGN KEY(memberId) REFERENCES Member(id)
+);
+
+CREATE TABLE MbtiPlayContentsAnswer(
+	id					BIGINT			PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	memberMbti			VARCHAR(4)		NOT NULL, --회원의 MBTI
+	questionNum			BIGINT			NOT NULL, --문제번호 FK
+	choosenNum			CHAR(1)			NOT NULL, --선지번호
+	isSubjective		VARCHAR(10)		NOT NULL, --주관식여부
+	subjectiveContent	VARCHAR(100)	NOT NULL DEFAULT '', --주관식내용
+	choosenNumCount		INT				NOT NULL DEFAULT 0,  --선지번호 선택건수
+	CONSTRAINT questionNum_FK FOREIGN KEY(questionNum) REFERENCES MbtiPlayContents(id)
+);
+
+CREATE TABLE ContentsLog(
+	id					BIGINT			PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	memberId			BIGINT			NOT NULL,
+	contentsCount		INT				DEFAULT 0,
+	regDate 			TIMESTAMP 		NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	CONSTRAINT ContentsLog_memberId_FK FOREIGN KEY(memberId) REFERENCES Member(id)
+);
+
+CREATE TABLE AnswersLog(
+	id					BIGINT			PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	memberId			BIGINT			NOT NULL,
+	contentsNum			BIGINT			NOT NULL,
+	CONSTRAINT AnswersLog_memberId_FK FOREIGN KEY(memberId) REFERENCES Member(id)
+);
