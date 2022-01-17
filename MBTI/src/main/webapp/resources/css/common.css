@@ -38,7 +38,7 @@ body {
 	color: var(--white);
 	position: absolute;
 	width: 28px;
-	left: calc(50% - 19px);
+	left: calc(50% - 24.5px);
 	top: 70px;
 	transition: 0.5s;
 	font-size: 1em;
