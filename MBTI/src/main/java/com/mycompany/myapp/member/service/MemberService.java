@@ -26,6 +26,11 @@ public class MemberService {
 		dao.updateMember(member, loginId);
 	}
 	
+	// 회원탈퇴
+		public boolean deleteMember(Member member) {
+			return false;
+		}
+	
 	// 로그인
 	public boolean login(Member member) {
 		return dao.login(member);

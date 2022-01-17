@@ -113,6 +113,7 @@ function checkPattern(form) {
 		formTag.submit();
 	} else {
 		alert("올바른 형식으로 작성해주세요.");
+		pass = true;
 	}
 
 }
@@ -201,7 +202,7 @@ $(document).ready(function() {
 
 	//년도 selectbox만들기 
 	for (var i = 1950; i <= year; i++) {
-		$('#year').append(
+		$('.year').append(
 			'<option value="' + i + '">' + i
 			+ '년</option>');
 	}
@@ -209,7 +210,7 @@ $(document).ready(function() {
 	// 월별 selectbox 만들기 
 	for (var i = 1; i <= 12; i++) {
 		var mm = i > 9 ? i : "0" + i;
-		$('#month').append(
+		$('.month').append(
 			'<option value="' + mm + '">' + mm
 			+ '월</option>');
 	}
@@ -217,16 +218,14 @@ $(document).ready(function() {
 	// 일별 selectbox 만들기 
 	for (var i = 1; i <= 31; i++) {
 		var dd = i > 9 ? i : "0" + i;
-		$('#day').append(
+		$('.day').append(
 			'<option value="' + dd + '">' + dd
 			+ '일</option>');
 	}
-	$("#year > option[value=" + year + "]").attr(
+	$(".year > option[value=" + year + "]").attr(
 		"selected", "true");
-	$("#month > option[value=" + mon + "]").attr(
+	$(".month > option[value=" + mon + "]").attr(
 		"selected", "true");
-	$("#day > option[value=" + day + "]").attr(
+	$(".day > option[value=" + day + "]").attr(
 		"selected", "true");
 })
-
-

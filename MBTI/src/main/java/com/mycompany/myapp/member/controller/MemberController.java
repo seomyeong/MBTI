@@ -47,11 +47,12 @@ public class MemberController {
 		Member member = new Member(email, memberCommand.getPw(), memberCommand.getName(),
 				memberCommand.getNickName(), memberCommand.getBirth(), memberCommand.getMbti(),
 				memberCommand.getGender(), memberCommand.getPhone(), profileImg);
-
+		System.out.println(memberCommand.getBirth());
 		memberService.addMember(member);
 		mav.setViewName("redirect:/index");
 		return mav;
 	}
+	
 	
 	/*
 	 * 회원정보 수정창
@@ -78,11 +79,19 @@ public class MemberController {
 				memberCommand.getNickName(), memberCommand.getBirth(), memberCommand.getMbti(),
 				memberCommand.getGender(), memberCommand.getPhone(), profileImg);
 		long loginId = (long)session.getAttribute("loginId");
+		session.removeAttribute("memberInfo");
 		memberService.updateMember(member, loginId);
+		// 수정한 정보 다시 보여주기
+		Member memberInfo = memberService.memberInfo(member);
+		String[] memberInfoBirth = memberInfo.getBirth().split(",");
+		session.setAttribute("memberInfoBirth", memberInfoBirth);
+		session.setAttribute("memberInfo", memberInfo);
 		mav.setViewName("redirect:/index");
 		return mav;
 	}
 
+
+	
 	/*
 	 * 로그인
 	 */
@@ -97,12 +106,12 @@ public class MemberController {
 	@PostMapping("/member/login")
 	public ModelAndView login(Member member, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-
 		if (memberService.login(member)) {
 			Member memberInfo = memberService.memberInfo(member);
-
+			String[] memberInfoBirth = memberInfo.getBirth().split(",");
+			session.setAttribute("memberInfoBirth", memberInfoBirth);
 			session.setAttribute("memberInfo", memberInfo);
-//			session.setAttribute("email", memberInfo.getEmail());
+			//session.setAttribute("mbti", memberInfo.getMbti());
 			// 세션에 id 값 할당
 			session.setAttribute("loginId", memberInfo.getId());
 			session.setMaxInactiveInterval(-1);
@@ -116,12 +125,13 @@ public class MemberController {
 		}
 	}
 	
-
+	
+	
 	/*
 	 * 로그아웃
 	 */
 	@GetMapping("/member/logout")
-	public String logoutMainGET(HttpSession session) throws Exception {
+	public String logoutGET(HttpSession session) throws Exception {
 
 //		session.getAttribute("loginId");
 //		session.invalidate();
@@ -130,6 +140,33 @@ public class MemberController {
 
 		return "redirect:/index";
 	}
+	
+	
+	/*
+	 * 회원탈퇴
+	 */
+	@GetMapping("/member/deleteMember")
+	public String deleteMemberGet() {
+		return "member/deleteMember";
+	}
+	/*
+	 * 회원탈퇴 실행
+	 */
+//	@PostMapping("/member/login")
+//	public ModelAndView deleteMember(Member member, HttpSession session) {
+//		ModelAndView mav = new ModelAndView();
+//
+//		if (memberService.deleteMember(member)) {
+//
+//			mav.setViewName("redirect:/index");
+//			return mav;
+//
+//		} else {
+//			mav.addObject("errorMsg", "비밀번호가 일치하지 않습니다.");
+//			mav.setViewName("/member/deleteMember");
+//			return mav;
+//		}
+//	}
 	
 	
 	
@@ -186,7 +223,6 @@ public class MemberController {
 
 		return map;
 	}
-	
 
 
 	
