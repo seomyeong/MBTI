@@ -120,6 +120,11 @@
 					</div>
 				</form:form>
 			</div>
+			<div id="deco">
+            	<div id="deco1"></div>
+            	<div id="deco2"></div>
+            	<div id="deco3"></div>
+        	</div>
 		</main>
 	</div>
 	<script type="text/javascript">
