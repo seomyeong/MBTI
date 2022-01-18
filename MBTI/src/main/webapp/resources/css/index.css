@@ -1,19 +1,128 @@
 @charset "UTF-8";
 .hidden{
-    position: absolute;
-    top: -9999px;
+	position: absolute;
+	left: -9999px;
 }
 #banner{
     text-align: center;
     /* height: 40vh; */
     /* background: blue; */
 }
-#bannerImg{
+#banner p:nth-of-type(1){
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+#banner p:nth-of-type(1) span:nth-of-type(1){
+    font-size: 13px;
+    position: absolute;
+    top: 5px;
+    left: calc(50% - 80px);
+    color: var(--black2);
+}
+#banner p:nth-of-type(1) span:nth-of-type(2){
+    color: #b2d4ad;
+}
+
+/* avatar */
+#bannerAvatar{
+    /* border: 1px solid #000; */
+    position: relative;
     margin: 0 auto;
     width: 1200px;
-    height: 37vh;
-    background: url(../img/banner/MBTI_banner_min.png) no-repeat center / cover;
+    height: 210px;
 }
-#banner p:nth-of-type(1){font-size: 10px;}
-#banner p:nth-of-type(2){font-size: 20px; font-weight: bold;}
-#banner p:nth-of-type(2) span{color: #b2d4ad;}
+.avatar{
+    /* border: 1px solid tomato; */
+    position: absolute;
+    width: 110px;
+    height: 130px;
+    transition: 0.3s;
+}
+
+.avatar:hover{
+    width: 115px;
+    height: 135px;
+}
+/*어린왕자*/
+.enfj{
+    top: 8px;
+    right: 30px;
+}
+/*폭죽여캐*/
+.enfp{
+    top: 0px;
+    left: 550px;
+}
+/*포니테일여캐*/
+.entj{
+    bottom: 0px;
+    right: 80px;
+    z-index: 1;
+}
+/*발표남캐*/
+.entp{
+    top: -15px;
+    right: 250px;
+}
+/*서명*/
+.esfj{
+    bottom: 0px;
+    right: 290px;
+}
+/*뿌까여캐*/
+.esfp{
+    top: 15px;
+    left: 290px;
+}
+/*칠판여캐*/
+.estj{
+    bottom: -10px;
+    left: 80px;
+}
+/*탐험모자여캐*/
+.estp{
+    top: 0px;
+    left: 23px;
+}
+/*수민*/
+.infj{
+    bottom: 0px;
+    left: 200px;
+}
+/*지영*/
+.infp{
+    bottom: 5px;
+    left: 370px;
+    z-index: 1;
+}
+/*포마드남캐*/
+.intj{
+    top: 20px;
+    left: 145px;
+}
+/*독서여캐*/
+.intp{
+    top: 30px;
+    right: 157px;
+}
+/*종성*/
+.isfj{
+    bottom: 5px;
+    right: 450px;
+}
+/*원진*/
+.isfp{
+    bottom: -13px;
+    left: 510px;
+}
+/*박사 안경*/
+.istj{
+    top: 0px;
+    left: 430px;
+}
+/*이즈리얼*/
+.istp{
+    top: 5px;
+    right: 390px;
+}
