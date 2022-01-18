@@ -141,6 +141,14 @@
 	font-weight: bold;
 	color: green;
 }
+#comments a {
+	margin-left: 10px;
+}
+#comments a ion-icon {
+	cursor: pointer;
+	position: relative;
+	top: 2px;
+}
 
 /* 댓글 */
 .comment {

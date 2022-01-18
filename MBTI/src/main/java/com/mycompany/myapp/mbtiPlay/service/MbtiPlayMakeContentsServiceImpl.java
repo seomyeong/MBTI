@@ -182,6 +182,9 @@ public class MbtiPlayMakeContentsServiceImpl implements MbtiPlayMakeContentsServ
 			return false;
 		}
 	}
-
+	//ContentsLog테이블의 정보 조회
+	public ContentsLog findContentsLog(Long loginId, String nowYear, String nowMonth, String nowDay) {
+		return dao.findContentsLog(loginId, nowYear, nowMonth, nowDay);
+	}
 
 }

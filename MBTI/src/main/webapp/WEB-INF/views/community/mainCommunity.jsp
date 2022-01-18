@@ -202,7 +202,7 @@
 				data-loginId="${sessionScope.loginId}">글쓰기</a>
 		</div>
 
-		<!-- 사용한 세션 지우기 -->
+		<!-- 사용한 페이징 값들 -->
 		<%-- <% session.invalidate(); %> --%>
 
 		<%-- <form action="" id="testValue">

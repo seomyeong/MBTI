@@ -249,7 +249,6 @@ public class MbtiPlayMakeContentsDao {
 			return false;
 		}
 		return true;
-
 	}
 
 	// ContentsLog테이블에 조회하는 날짜와 동일한 년-월-일이 있는가?
@@ -348,6 +347,21 @@ public class MbtiPlayMakeContentsDao {
 		return answersTotalNum;
 	}
 
+	//ContentsLog테이블의 정보 조회
+	public ContentsLog findContentsLog(Long loginId, String nowYear, String nowMonth, String nowDay) {
+		String sql = "SELECT * FROM ContentsLog WHERE memberId = ? AND YEAR(regDate)=? AND MONTH(regDate)=? AND DAY(regDate)=?";
+		ContentsLog cLog = jdbcTemplate.queryForObject(sql, new RowMapper<ContentsLog>() {
+
+			@Override
+			public ContentsLog mapRow(ResultSet rs, int rowNum) throws SQLException {
+				ContentsLog c = new ContentsLog(rs.getLong("id"), rs.getLong("memberId"), rs.getInt("contentsCount"),
+						rs.getTimestamp("regDate"));
+				return c;
+			}
+
+		}, loginId, nowYear, nowMonth, nowDay);
+		return cLog;
+	}
 
 
 }

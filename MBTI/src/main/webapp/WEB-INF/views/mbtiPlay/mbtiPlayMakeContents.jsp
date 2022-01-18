@@ -16,7 +16,7 @@
 	src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<jsp:include page="/resources/incl/header.jsp"></jsp:include>
+	<jsp:include page="/resources/incl/header.jsp"></jsp:include>
 	<jsp:include page="/resources/incl/nav.jsp"></jsp:include>
 	<div id="main">
 		<h2 class="hidden">문답 등록</h2>
@@ -60,8 +60,24 @@
 							class="answerCount answer03Count"></span>
 					</div>
 				</div>
-				<input type="submit" value="등록"
-					onclick="makeContents(this.form); return false">
+				<div id="makeBtn">
+					<c:choose>
+						<c:when test="${zeroCount == 0 }">
+							<p class="count">금일 생성 횟수 0 / 3</p>
+							<input type="submit" value="등록"
+						onclick="makeContents(this.form); return false">
+						</c:when>
+						<c:when test="${contentsCount != 3}">
+							<p class="count">금일 생성 횟수 ${contentsCount } / 3</p>
+							<input type="submit" value="등록"
+						onclick="makeContents(this.form); return false">
+						</c:when>
+						<c:when test="${contentsCount == 3 }">
+							<p id="last">금일 생성 횟수 ${contentsCount } / 3</p>
+							<p>금일 생성 가능한 횟수를 초과하였습니다. 매일 밤 12시에 횟수가 초기화됩니다.</p>
+						</c:when>
+					</c:choose>
+				</div>
 			</form:form>
 		</div>
 	</div>
@@ -115,11 +131,15 @@
 			} else {
 				$(".answer03Value").text("");
 			}
-			
+
+			// 하루 3번 제한 시
+			/*if(contentsCount == 3 ){
+				alert("금일 생성 가능한 횟수를 초과하였습니다. 매일 밤 12시에 횟수가 초기화됩니다.");
+				state = false;
+			}*/
 
 			if (state == true) {
 				let submitBtn = document.getElementById("form");
-				//alert("30맙이 적립되었습니다.");
 				submitBtn.submit();
 			}
 		}

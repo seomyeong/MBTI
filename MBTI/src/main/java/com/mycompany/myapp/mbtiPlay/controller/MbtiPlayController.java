@@ -14,10 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mycompany.myapp.domain.ContentsLog;
 import com.mycompany.myapp.domain.MbtiPlayContents;
 import com.mycompany.myapp.domain.MbtiPlayContentsAnswer;
 import com.mycompany.myapp.domain.Member;
@@ -41,8 +44,9 @@ public class MbtiPlayController {
 	 * 문답 풀기 클릭
 	 */
 	@ResponseBody
-	@PostMapping("/mbtiPlay/mbtiPlayContents")
-	public ModelAndView mbtiPlayContents(MbtiPlayContentsAnswer mbtiPlayContentsAnswer, @SessionAttribute Long loginId) {
+	@RequestMapping(value="/mbtiPlay/mbtiPlayContents", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView mbtiPlayContents(MbtiPlayContentsAnswer mbtiPlayContentsAnswer,
+			@SessionAttribute Long loginId) {
 		ModelAndView mav = new ModelAndView();
 
 		Member memberMbti = service.findMemberById(loginId);
@@ -57,10 +61,8 @@ public class MbtiPlayController {
 			long randomNum = (long) (Math.random() * contentsTotalNum) + 1;
 			set.add(randomNum);
 			if (!(service.isAnswersLog(loginId, randomNum))) {
-				List<MbtiPlayContents> content = service.findQuestionByRandomNum(1);
+				List<MbtiPlayContents> content = service.findQuestionByRandomNum(randomNum);
 
-				//System.out.println(randomNum+"번 문제 출력");
-				
 				mav.setViewName("mbtiPlay/mbtiPlayContents");
 				mav.addObject("memberMbti", memberMbti.getMbti());
 				mav.addObject("content", content);
@@ -98,17 +100,17 @@ public class MbtiPlayController {
 		// MbtiPlayContentsAnswer테이블에 유저가 선택한 객관식 데이터 insert
 		if (!(service.isMbtiTypeAndQuestion(memberMbti, questionNum))) {
 			if (isSubjective.equals("false")) {
-				//System.out.println("객관식 first insert");
+				// System.out.println("객관식 first insert");
 				service.addAnswer(memberMbti, questionNum, "1", "false", "null", 0);
 				service.addAnswer(memberMbti, questionNum, "2", "false", "null", 0);
 				service.addAnswer(memberMbti, questionNum, "3", "false", "null", 0);
 
 				if (service.isMbtiTypeAndQuestion(memberMbti, questionNum)) {
-					//System.out.println("선택받은 객관식 cnt++");
+					// System.out.println("선택받은 객관식 cnt++");
 					service.updateObjectiveAnswer(subjectiveContent, memberMbti, questionNum, choosenNum, isSubjective);
 				}
 			} else if (isSubjective.equals("true")) {
-				//System.out.println("주관식 first insert");
+				// System.out.println("주관식 first insert");
 				service.addAnswer(memberMbti, questionNum, "1", "false", "null", 0);
 				service.addAnswer(memberMbti, questionNum, "2", "false", "null", 0);
 				service.addAnswer(memberMbti, questionNum, "3", "false", "null", 0);
@@ -117,10 +119,10 @@ public class MbtiPlayController {
 			}
 		} else {
 			if (isSubjective.equals("false")) {
-				//System.out.println("객관식 update");
+				// System.out.println("객관식 update");
 				service.updateObjectiveAnswer(subjectiveContent, memberMbti, questionNum, choosenNum, isSubjective);
 			} else if (isSubjective.equals("true")) {
-				//System.out.println("주관식 second insert");
+				// System.out.println("주관식 second insert");
 				service.addAnswer(memberMbti, questionNum, choosenNum, isSubjective, subjectiveContent,
 						choosenNumCount);
 			}
@@ -131,25 +133,19 @@ public class MbtiPlayController {
 
 		// 데이터 출력
 		if (service.isQuestionNum(questionNum)) {
-				MbtiPlayContentsAnswer firstObj = service.findObjectiveAnswer(memberMbti, questionNum, "1");
-				MbtiPlayContentsAnswer secondObj = service.findObjectiveAnswer(memberMbti, questionNum, "2");
-				MbtiPlayContentsAnswer thirdObj = service.findObjectiveAnswer(memberMbti, questionNum, "3");
+			MbtiPlayContentsAnswer firstObj = service.findObjectiveAnswer(memberMbti, questionNum, "1");
+			MbtiPlayContentsAnswer secondObj = service.findObjectiveAnswer(memberMbti, questionNum, "2");
+			MbtiPlayContentsAnswer thirdObj = service.findObjectiveAnswer(memberMbti, questionNum, "3");
 
-				map.put("firstObj", firstObj);
-				map.put("secondObj", secondObj);
-				map.put("thirdObj", thirdObj);
-		} // end of isQuestionNum
+			map.put("firstObj", firstObj);
+			map.put("secondObj", secondObj);
+			map.put("thirdObj", thirdObj);
+		}
 
 		// 주관식 데이터 출력
-			if (service.isSubjectiveAnswer(questionNum)) {
-//				SubjectiveCountCommand subAns = service.findSubCount(questionNum);
-//				long subCount = subAns.getCount();
-//				System.out.println(questionNum + "번 문제의 주관식답변 갯수 : " + subCount);
+		if (service.isSubjectiveAnswer(questionNum)) {
 			List<MbtiPlayContentsAnswerCommand> subList = service.findAllSubjectiveAnswers(questionNum);
-			
-			for(MbtiPlayContentsAnswerCommand ans : subList) {
-				map.put("subList", subList);
-			}
+			map.put("subList", subList);
 		} else {
 			map.put("nullSubMsg", "아직 작성된 기타 답변이 없어요!");
 		}
@@ -159,15 +155,35 @@ public class MbtiPlayController {
 	/*
 	 * 문답 만들기
 	 */
-	@PostMapping("/mbtiPlay/mbtiPlayMakeContents")
-	public String makeContents(@ModelAttribute MbtiPlayContents mbtiPlayContents) {
-		return "mbtiPlay/mbtiPlayMakeContents";
+	@RequestMapping(value="/mbtiPlay/mbtiPlayMakeContents", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView makeContents(@ModelAttribute MbtiPlayContents mbtiPlayContents, @SessionAttribute Long loginId) {
+		ModelAndView mav = new ModelAndView();
+		
+		Date today = new Date();
+		SimpleDateFormat yearDf = new SimpleDateFormat("yyyy");
+		SimpleDateFormat monthDf = new SimpleDateFormat("MM");
+		SimpleDateFormat dayDf = new SimpleDateFormat("dd");
+
+		String nowYear = yearDf.format(today);
+		String nowMonth = monthDf.format(today);
+		String nowDay = dayDf.format(today);
+		
+		if (service.isContentsLogDate(loginId, nowYear, nowMonth, nowDay)) {
+			ContentsLog cLog = service.findContentsLog(loginId, nowYear, nowMonth, nowDay);
+			mav.addObject("contentsCount", cLog.getContentsCount());
+
+		} else {
+			mav.addObject("zeroCount", 0);
+		}
+
+		mav.setViewName("mbtiPlay/mbtiPlayMakeContents");
+		return mav;
 	}
 
 	/*
 	 * 문답 만들기 성공
 	 */
-	@PostMapping("/mbtiPlay/successAddMbtiPlayMakeContents")
+	@RequestMapping(value="/mbtiPlay/successAddMbtiPlayMakeContents", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView successAddMbtiPlayMakeContents(@ModelAttribute MbtiPlayContents mbtiPlayContents,
 			@SessionAttribute Long loginId) {
 		ModelAndView mav = new ModelAndView();
@@ -180,34 +196,37 @@ public class MbtiPlayController {
 		String nowYear = yearDf.format(today);
 		String nowMonth = monthDf.format(today);
 		String nowDay = dayDf.format(today);
-		
+
 		if (!(service.isContentsLogDate(loginId, nowYear, nowMonth, nowDay))) {
 			service.addContents(loginId, mbtiPlayContents);
 			service.addContentsLog(loginId);
 			service.calcQuizPoint(loginId);
 
-			System.out.println("first insert");
+			//System.out.println("first insert");
+			return mav;
 
 		} else if (service.isContentsLogDate(loginId, nowYear, nowMonth, nowDay)
 				&& !(service.isContentsLogLimitTime(loginId, nowYear, nowMonth, nowDay))) {
-			
+
 			service.addContents(loginId, mbtiPlayContents);
 			service.updateContentsLog(loginId, nowYear, nowMonth, nowDay);
 			service.calcQuizPoint(loginId);
-			
-			System.out.println("second insert");
+
+			//System.out.println("second insert");
 
 			if (service.isContentsLogLimitTime(loginId, nowYear, nowMonth, nowDay)) {
-				System.out.println("3번 끝");
-				mav.setViewName("redirect:/mbtiPlay/limitMakeContents");
+
+				//System.out.println("3번 끝");
+				mav.setViewName("mbtiPlay/successAddMbtiPlayMakeContents");
 				return mav;
 			}
 
 		} else {
-			System.out.println("limitMakeContents");
+			//System.out.println("limitMakeContents");
 			mav.setViewName("redirect:/mbtiPlay/limitMakeContents");
 			return mav;
 		}
+
 		mav.setViewName("mbtiPlay/successAddMbtiPlayMakeContents");
 		return mav;
 	}

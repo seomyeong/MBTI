@@ -234,6 +234,28 @@ public class BoardController {
 	}
 	
 	/*
+	 * refresh 버튼 클릭시
+	 */
+	@ResponseBody
+	@PostMapping("/community/refresh")
+	public Map<String, Object> refresh(@RequestBody Map<String, String> param) {
+		
+		Long boardId = Long.parseLong(param.get("boardId"));
+		
+		CommunityBoard cb = communityService.findBoardByBoardId(boardId);
+		List<CommunityComments> cc = communityService.findCommentsByBoardId(boardId);
+		List<CommunityCommentsPlus> ccp = communityService.findCommentsPlusByBoardId(boardId);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("cb", cb);
+		map.put("cc", cc);
+		map.put("ccp", ccp);
+		
+		return map;
+	}
+	
+	/*
 	 * 추천시
 	 */
 	@ResponseBody
