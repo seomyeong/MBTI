@@ -69,6 +69,8 @@ public class MemberDao {
 		return true;
 	}
 
+	
+	
 	//이메일 중복검사
 	public boolean isEmailCheck(String email) {
 		String sql = "SELECT * FROM Member WHERE email=?";

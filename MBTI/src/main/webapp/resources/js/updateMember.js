@@ -8,8 +8,6 @@ function checkPattern(form) {
 	var pattern2 = /[a-zA-Z]/; // 문자 
 	var pattern3 = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자 
 
-
-
 	// 비밀번호 패턴 체크 (8자 이상, 문자, 숫자, 특수문자 포함여부 체크) 
 	if (!pattern1.test(form.pw.value) || !pattern2.test(form.pw.value) || !pattern3.test(form.pw.value) || form.pw.value.length < 8) {
 		$('.errorTxt').eq(1).text("8자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다.");
@@ -70,7 +68,7 @@ function checkPattern(form) {
 		alert("닉네임에 공백은 들어갈 수 없습니다.");
 		pass = false;
 	}
-
+	
 	// 컨트롤러
 	if (pass == true) {
 		var formTag = document.getElementById("form");
@@ -78,10 +76,10 @@ function checkPattern(form) {
 		formTag.submit();
 	} else {
 		alert("올바른 형식으로 작성해주세요.");
+		pass = true;
 	}
 
 }
-
 
 
 
@@ -92,18 +90,21 @@ function checkPattern(form) {
 //닉네임 중복검사
 function nickNameCheck(form) {
 	var nickName = form.nickName.value;
-
+	
 	var param = {
 		"nickName": nickName,
 	}
-
+	
 	$.ajax({
 		type: "post",
 		data: JSON.stringify(param),
 		url: "/myapp/member/nickNameCheck",
 		contentType: "application/json; charset=UTF-8",
 		success: function(data) {
-			if (data["nickName"] == "") {
+			
+			if(loginNickName == nickName) {
+				pass = true;
+			} else if (data["nickName"] == "") {
 				$('.errorTxt').eq(4).html("");
 				pass = false;
 			} else if (data["msg"] == "중복되는 닉네임이 존재합니다." || data["msg"] == "2자리 이상 입력해주세요.") {
@@ -118,44 +119,6 @@ function nickNameCheck(form) {
 }
 
 
-// 생년월일
-$(document).ready(function() {
-	var now = new Date();
-	var year = now.getFullYear();
-	var mon = (now.getMonth() + 1) > 9 ? ''
-		+ (now.getMonth() + 1) : '0'
-		+ (now.getMonth() + 1);
-	var day = (now.getDate()) > 9 ? ''
-		+ (now.getDate()) : '0' + (now.getDate());
 
-	//년도 selectbox만들기 
-	for (var i = 1950; i <= year; i++) {
-		$('#year').append(
-			'<option value="' + i + '">' + i
-			+ '년</option>');
-	}
-
-	// 월별 selectbox 만들기 
-	for (var i = 1; i <= 12; i++) {
-		var mm = i > 9 ? i : "0" + i;
-		$('#month').append(
-			'<option value="' + mm + '">' + mm
-			+ '월</option>');
-	}
-
-	// 일별 selectbox 만들기 
-	for (var i = 1; i <= 31; i++) {
-		var dd = i > 9 ? i : "0" + i;
-		$('#day').append(
-			'<option value="' + dd + '">' + dd
-			+ '일</option>');
-	}
-	$("#year > option[value=" + year + "]").attr(
-		"selected", "true");
-	$("#month > option[value=" + mon + "]").attr(
-		"selected", "true");
-	$("#day > option[value=" + day + "]").attr(
-		"selected", "true");
-})
 
 

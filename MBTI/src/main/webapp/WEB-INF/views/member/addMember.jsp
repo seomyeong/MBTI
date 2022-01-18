@@ -62,8 +62,8 @@
 						</tr>
 						<tr>
 							<th>생년월일</th>
-							<td><form:select id="year" path="birth" /> 년 <select
-								id="month" name="birth"></select> 월 <select id="day"
+							<td><form:select class="year" path="birth" /> 년 <select
+								class="month" name="birth"></select> 월 <select class="day"
 								name="birth"></select> 일</td>
 							<td><span class="errorTxt"></span></td>
 						</tr>
@@ -107,7 +107,7 @@
 							<th>휴대전화</th>
 							<td>
 							<form:input type="text" path="phone" maxlength="11"
-									minlength="11" placeholder="11자리 숫자" 
+									minlength="11" placeholder="'-' 제외한 11자리 숫자" 
 									pattern="[0-9]+" /> </td>
 
 							<td><span class="errorTxt errorTxt2"></span></td>

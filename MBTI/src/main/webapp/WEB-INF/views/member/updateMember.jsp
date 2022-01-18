@@ -33,15 +33,16 @@
 						</tr>
 						<tr>
 							<th>비밀번호</th>
-							<td><form:password id="password1"
-									value="${sessionScope.memberInfo.pw}" path="pw" /></td>
+							<td><form:password id="password1" placeholder="비밀번호" onpaste="return false;" oncopy="return false;"
+							value="${sessionScope.memberInfo.pw}"
+									path="pw" /></td>
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>
 							<th>비밀번호 <br>확인
 							</th>
-							<td><form:password id="password2" placeholder="비밀번호 재확인"
-									path="" /></td>
+							<td><input type="password" id="password2" placeholder="비밀번호 재확인" onpaste="return false;"	oncopy="return false;"					
+									/></td>
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>
@@ -60,7 +61,7 @@
 						</tr>
 						<tr>
 							<th>생년월일</th>
-							<td><form:select id="year" path="birth" /> 년 <select
+							<td><select id="year" name="birth"></select> 년 <select
 								id="month" name="birth"></select> 월 <select id="day"
 								name="birth"></select> 일</td>
 							<td><span class="errorTxt"></span></td>
@@ -70,8 +71,8 @@
 							<td>
 								<%-- <form:select maxlength="4" placeholder="MBTI를 입력하세요"
 									path="mbti" required="required"
-									 /> --%> <select name="mbti"
-								value="${sessionScope.memberInfo.mbti}">
+									 /> --%> <select id="mbti" name="mbti">
+									<%-- <option><%=request.getParameter("mbti")%></option> --%>
 									<option value="ENTJ">ENTJ</option>
 									<option value="ENTP">ENTP</option>
 									<option value="ENFJ">ENFJ</option>
@@ -96,19 +97,18 @@
 						</tr>
 						<tr>
 							<th>성별(선택)</th>
-							<td id="radioBtn" value="${sessionScope.memberInfo.gender}">남자:
-								<form:radiobutton path="gender" value="M" /> 여자: <form:radiobutton
-									path="gender" value="W" /> 선택안함: <form:radiobutton
-									path="gender" value="N" checked="checked" />
+							<td id="radioBtn">남자: <form:radiobutton class="radioBtn"
+									path="gender" value="M" /> 여자: <form:radiobutton
+									class="radioBtn" path="gender" value="F" /> 선택안함: <form:radiobutton
+									class="radioBtn" path="gender" value="N" />
 							</td>
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>
 							<th>휴대전화</th>
-							<td>
-							<form:input value="${sessionScope.memberInfo.phone}" type="text" path="phone" maxlength="11"
-									minlength="11" placeholder="11자리 숫자" pattern="[0-9]+" />
-							</td>
+							<td><form:input value="${sessionScope.memberInfo.phone}"
+									type="text" path="phone" maxlength="11" minlength="11"
+									placeholder="'-' 제외한 11자리 숫자" pattern="[0-9]+" /></td>
 
 							<td><span class="errorTxt errorTxt2"></span></td>
 						</tr>
@@ -124,7 +124,58 @@
 
 	</div>
 	<script>
-		$("#radioBtn").val()
+		// 생년월일
+		var now = new Date();
+		var year = now.getFullYear();
+		var mon = (now.getMonth() + 1) > 9 ? '' + (now.getMonth() + 1) : '0'
+				+ (now.getMonth() + 1);
+		var day = (now.getDate()) > 9 ? '' + (now.getDate()) : '0'
+				+ (now.getDate());
+
+		//년도 selectbox만들기 
+		for (var i = 1950; i <= year; i++) {
+			$('#year').append('<option value="' + i + '">' + i + '년</option>');
+		}
+
+		// 월별 selectbox 만들기 
+		for (var i = 1; i <= 12; i++) {
+			var mm = i > 9 ? i : "0" + i;
+			$('#month').append(
+					'<option value="' + mm + '">' + mm + '월</option>');
+		}
+
+		// 일별 selectbox 만들기 
+		for (var i = 1; i <= 31; i++) {
+			var dd = i > 9 ? i : "0" + i;
+			$('#day').append('<option value="' + dd + '">' + dd + '일</option>');
+		}
+
+			
+		//select, radioBtn 값 불러오기
+		
+		//MBTI
+		var myMbti = '${sessionScope.memberInfo.mbti}';
+		$('#mbti').val(myMbti).prop("selected", true);
+
+		//성별
+		var myGender = '${sessionScope.memberInfo.gender}';
+		$(":radio[name='gender'][value='" + myGender + "']").attr('checked',
+				true);
+
+		//생년월일
+		var myYear = "${sessionScope.memberInfoBirth[0]}";
+		$('#year').val(myYear).prop("selected", true);
+
+		var myMonth = '${sessionScope.memberInfoBirth[1]}';
+		$('#month').val(myMonth).prop("selected", true);
+
+		var myDay = '${sessionScope.memberInfoBirth[2]}';
+		$('#day').val(myDay).prop("selected", true);
+
+		
+		//닉네임 중복검사
+		var loginNickName = '${sessionScope.memberInfo.nickName}';
+		
 	</script>
 </body>
 </html>
