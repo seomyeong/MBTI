@@ -27,7 +27,6 @@
 				<span id="errorMsg1"></span><input type="text" id="title"
 					name="title" placeholder="제목"/><span id="typingCount"></span><span
 					id="errorMsg2"></span>
-				<input type="file" name="fileName">
 				<textarea id="contents" name="contents"
 					oninput="typingContents(this.form)"></textarea>
 				<a href="mainCommunity?type=reportingDate&q=&page=1&range=1" id="goContentsList">취소</a> <input
