@@ -101,6 +101,7 @@
 			let subjectiveContent = form.subjectiveContent.value;
 			let choosenNumCount = form.choosenNumCount.value;
 
+			
 			let param = {
 				'memberMbti' : memberMbti,
 				'questionNum' : questionNum,
@@ -269,7 +270,7 @@
 
 						}
 					});
-		}
+			}//end of addAnswers(form)
 
 		function reloadByRandomNum(form) {
 			window.location.reload();

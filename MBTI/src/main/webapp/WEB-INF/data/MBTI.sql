@@ -129,13 +129,19 @@ DROP TABLE MbtiPlayContentsAnswer;
 DROP TABLE ContentsLog;
 DROP TABLE AnswersLog;
 
+--문답 쿼리
+INSERT INTO MbtiPlayContents (memberId, question, answer01, answer02, answer03) VALUES (1, '친구들과 놀이동산을 간 당신, 놀이기구를 탈 때의 나는?', '오늘 이거 다섯 개는 꼭 타야 돼! 지도를 보며 계획을 세운다.', '오, 저거 재밌어 보인다! 일단 보이는 것부터 탄다.', '놀이기구는 흥미가 들지 않아 이끌려다닌다.');
+INSERT INTO MbtiPlayContents (memberId, question, answer01, answer02, answer03) VALUES (1, '소개팅을 나간 당신, 첫 만남에 어색할 때','준비해온 멘트들을 건네며 대화에 시동을 건다.','미소만 지으며 상대가 말할 때까지 기다린다.','즉흥적으로 대화를 진행하다 집에가서 후회한다.');
+INSERT INTO MbtiPlayContents (memberId, question, answer01, answer02, answer03) VALUES (1, '연인이 길을 가다가 누군가와 부딪혔다. 그때의 나는?','저기요! 사과하셔야죠! 일단 따지고 본다.','괜찮아? 다친데 없어? 연인을 위로한다.','그럴수도 있지. 대수롭지 않게 넘긴다.');
+INSERT INTO MbtiPlayContents (memberId, question, answer01, answer02, answer03) VALUES (1, '친구한테 지금 내가 있는 카페 위치를 알려줄 때','5번 출구로 나와서 두번째 블록에서 좌회전 하면 나오는 사거리 근처야','거기 그 햄버거집 알지? 그 앞이야','지도보고 알아서 찾아와!');
+
 CREATE TABLE MbtiPlayContents(
 	id				BIGINT			PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	memberId		BIGINT			NOT NULL, --멤버FK
 	question		VARCHAR(500)	NOT NULL,
 	answer01		VARCHAR(100)	NOT NULL,
 	answer02		VARCHAR(100)	NOT NULL,
-	answer03		VARCHAR(100)	NOT NULL,
+	answer03		VARCHAR(100)	NOT NULL,ㄹ
 	CONSTRAINT memberId_FK FOREIGN KEY(memberId) REFERENCES Member(id)
 );
 
