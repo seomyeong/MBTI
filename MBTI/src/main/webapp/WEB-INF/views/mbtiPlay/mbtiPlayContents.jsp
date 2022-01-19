@@ -95,6 +95,14 @@
 			let isSubjective = form.isSubjective.value;
 			let subjectiveContent = form.subjectiveContent.value;
 			let choosenNumCount = form.choosenNumCount.value;
+			
+			if(subjectiveContent.length == 0){
+				alert("답변을 작성하세요.");
+				return;
+			} else if(subjectiveContent.length > 100){
+				alert("100자 이내로 입력 가능합니다.")
+				return;
+			}
 
 			
 			let param = {
@@ -112,6 +120,11 @@
 						url : "/myapp/mbtiPlay/addAnswer",
 						contentType : "application/json; charset=UTF-8",
 						success : function(data) {
+							    $('#playContents').animate({ marginTop: 80 }, function () {
+							        $('#statistics').delay(300).animate({ opacity: 1 }, 2000)
+							    })
+							    $('#answersSubmit').hide()
+							    $('#answers li').off('click')
 							
 							//객관식 데이터 객체
 							let firstObjInfo = data.firstObj;
@@ -193,7 +206,9 @@
 								$('.answerCountNum3').text(nullObjMsg);
 							}
 						}
-					});
+						
+					}); //end of Ajax
+			
 			}//end of addAnswers(form)
 
 		function reloadByRandomNum(form) {

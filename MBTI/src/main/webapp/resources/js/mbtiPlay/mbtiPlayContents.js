@@ -7,45 +7,6 @@ $('#isSubjective').hide()
 $('#subjectiveContent').hide()
 $('#answerCount').hide()
 
-
-/* 선택한 보기에 이펙트 변경 */
-//let objLength = $('#answers ul li').length;
-
-/*$('#answers ul li').on('click', function () {
-    $('#answersSubmit').show()
-    $('#answers ul li').css({ background: '#eeeeee' })
-    $(this).css({ background: 'var(--green)' })
-
-})*/
-
-/* 전송버튼 클릭 시 */
-$('#answersSubmit').on('click', function (e) {
-    $('#playContents').animate({ marginTop: 80 }, function () {
-
-        $('#statistics').delay(300).animate({ opacity: 1 }, 2000)
-    })
-    $('#answersSubmit').hide()
-    $('#answers li').off('click')
-})
-
-
-/*let state= true;
-let subjectiveContentPath = document.querySelector('#subjectiveContent');
-	
-	submitBtn.addEventListener('click',function(e){
-	if(subjectiveContentPath.val == null){
-			alert('답변을 입력해주세요.')
-			state = false;
-			e.preventDefault()
-		}else if (subjectiveContent.val != null) {
-			state = true;
-		}
-		if(state == true){
-			submitBtn.submit();
-		}
-	})//end of submitBtn.addEventListner
-*/	
-
 /*각 ul li클릭 시 변수값 담아오기 */
 
 $('#answers ul li').on('click', function () {
