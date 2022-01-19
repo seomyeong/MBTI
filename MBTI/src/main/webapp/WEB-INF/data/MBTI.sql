@@ -129,6 +129,9 @@ DROP TABLE MbtiPlayContentsAnswer;
 DROP TABLE ContentsLog;
 DROP TABLE AnswersLog;
 
+UPDATE Member SET mabPoint=980 WHERE id=1;
+UPDATE ContentsLog SET contentsCount=0 WHERE id=1;
+
 --문답 쿼리
 INSERT INTO MbtiPlayContents (memberId, question, answer01, answer02, answer03) VALUES (1, '친구들과 놀이동산을 간 당신, 놀이기구를 탈 때의 나는?', '오늘 이거 다섯 개는 꼭 타야 돼! 지도를 보며 계획을 세운다.', '오, 저거 재밌어 보인다! 일단 보이는 것부터 탄다.', '놀이기구는 흥미가 들지 않아 이끌려다닌다.');
 INSERT INTO MbtiPlayContents (memberId, question, answer01, answer02, answer03) VALUES (1, '소개팅을 나간 당신, 첫 만남에 어색할 때','준비해온 멘트들을 건네며 대화에 시동을 건다.','미소만 지으며 상대가 말할 때까지 기다린다.','즉흥적으로 대화를 진행하다 집에가서 후회한다.');
@@ -141,7 +144,7 @@ CREATE TABLE MbtiPlayContents(
 	question		VARCHAR(500)	NOT NULL,
 	answer01		VARCHAR(100)	NOT NULL,
 	answer02		VARCHAR(100)	NOT NULL,
-	answer03		VARCHAR(100)	NOT NULL,ㄹ
+	answer03		VARCHAR(100)	NOT NULL,
 	CONSTRAINT memberId_FK FOREIGN KEY(memberId) REFERENCES Member(id)
 );
 
