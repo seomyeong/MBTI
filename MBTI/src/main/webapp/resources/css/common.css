@@ -187,21 +187,30 @@ body {
     color: var(--black2);
 }
 
+#profile {
+    font-size: 17px;
+    font-weight: bold;
+}
+
 #login,
 #addUser {
-    border: 1px solid var(--black1);
+    border: 1px solid var(--white);
     position: absolute;
     top: 50px;
     transition: 0.2s;
     text-decoration: none;
-    color: var(--black3);
-    padding: 3px 5px;
+    font-size: 14px;
+    height: 32px;
+    border-radius: 5px;
+    color: var(--white);
+    padding: 6px;
+    box-shadow: 3px 3px 3px rgba(161, 161, 161, 0.1);
 }
 #login {
-    left: calc(100% - 170px);
+    left: calc(100% - 165px);
 }
 #addUser {
-    left: calc(100% - 110px);
+    left: calc(100% - 105px);
 }
 
 /* 로그인 */
@@ -280,4 +289,9 @@ body {
 #main.extend {
     width: calc(100% - 300px);
     left: 300px;
+}
+/* Copyright */
+#copyrignt{
+    font-size: 14px;
+    color: var(--white);
 }

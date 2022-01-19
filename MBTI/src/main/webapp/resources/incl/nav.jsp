@@ -82,6 +82,7 @@
 				</c:otherwise>
 			</c:choose>
 		</ul>
+		<span id="copyrignt">Copyright 2022. TeamA All rights reserved.</span>
 	</nav>
 	<!-- <div id="main"></div> -->
 
