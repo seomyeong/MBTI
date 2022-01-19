@@ -57,22 +57,22 @@ public class MbtiPlayController {
 
 		Set<Long> set = new HashSet<Long>();
 
-//		while (set.size() <= contentsTotalNum) {
-//			long randomNum = (long) (Math.random() * contentsTotalNum) + 1;
-//			set.add(randomNum);
-//			if (!(service.isAnswersLog(loginId, randomNum))) {
-				List<MbtiPlayContents> content = service.findQuestionByRandomNum(1);
+		while (set.size() <= contentsTotalNum) {
+			long randomNum = (long) (Math.random() * contentsTotalNum) + 1;
+			set.add(randomNum);
+			if (!(service.isAnswersLog(loginId, randomNum))) {
+				List<MbtiPlayContents> content = service.findQuestionByRandomNum(randomNum);
 
 				mav.setViewName("mbtiPlay/mbtiPlayContents");
 				mav.addObject("memberMbti", memberMbti.getMbti());
 				mav.addObject("content", content);
-//				return mav;
-//			} else if (service.isAnswersLog(loginId, randomNum)
-//					&& service.isAnswerLogSize(loginId) == contentsTotalNum) {
-//				mav.setViewName("redirect:/mbtiPlay/mbtiPlayMakeGuide");
-//				return mav;
-//			}
-//		}
+				return mav;
+			} else if (service.isAnswersLog(loginId, randomNum)
+					&& service.isAnswerLogSize(loginId) == contentsTotalNum) {
+				mav.setViewName("redirect:/mbtiPlay/mbtiPlayMakeGuide");
+				return mav;
+			}
+		}
 		return mav;
 	}
 
