@@ -268,12 +268,15 @@ body {
 }
 #profileImg.hiddenProfile,
 #login.hiddenProfile,
-#addUser.hiddenProfile,
-#profile.hiddenProfile,
+#addUser.hiddenProfile {
+	opacity: 0;
+}
+
 #contentsCount.hiddenProfile,
 #commentsCount.hiddenProfile,
 #mabPoint.hiddenProfile,
-#profileBack.hiddenProfile {
+#profileBack.hiddenProfile,
+#profile.hiddenProfile {
     opacity: 0;
 }
 
@@ -301,9 +304,10 @@ body {
     left: 0;
     bottom: 60px;
     opacity: 1;
-    transition: 0.8s;
+    transition: 0.5s;
 }
 #__copyright.hide {
 	left: -300px;
 	opacity: 0;
+	width: 500px;
 }
