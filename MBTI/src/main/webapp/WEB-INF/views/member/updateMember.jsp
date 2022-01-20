@@ -18,9 +18,9 @@
 <body>
 	<jsp:include page="/resources/incl/nav.jsp"></jsp:include>
 	<div id="main">
-		<main id="updateCustomer">
+		<main id="updateMember">
 			<h1>정보수정</h1>
-			<div id="updateCustomer_wrap">
+			<div id="updateMember_wrap">
 				<form:form action="successUpdateMember" method="post"
 					modelAttribute="memberCommand">
 					<table>
@@ -33,16 +33,17 @@
 						</tr>
 						<tr>
 							<th>비밀번호</th>
-							<td><form:password id="password1" placeholder="비밀번호" onpaste="return false;" oncopy="return false;"
-							value="${sessionScope.memberInfo.pw}"
-									path="pw" /></td>
+							<td><form:password id="password1" placeholder="비밀번호"
+									onpaste="return false;" oncopy="return false;"
+									value="${sessionScope.memberInfo.pw}" path="pw" /></td>
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>
 							<th>비밀번호 <br>확인
 							</th>
-							<td><input type="password" id="password2" placeholder="비밀번호 재확인" onpaste="return false;"	oncopy="return false;"					
-									/></td>
+							<td><input type="password" id="password2"
+								placeholder="비밀번호 재확인" onpaste="return false;"
+								oncopy="return false;" /></td>
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>
@@ -113,7 +114,7 @@
 							<td><span class="errorTxt errorTxt2"></span></td>
 						</tr>
 					</table>
-					<div id="updateCustomer_btn">
+					<div id="updateMember_btn">
 						<!-- <a onclick="javascript:history.back()">이전</a> -->
 						<a href="/myapp/index">이전</a> <input type="submit" value="정보수정"
 							onclick="checkPattern(this.form); return false" id="submit">
@@ -155,9 +156,8 @@
 			$('#day').append('<option value="' + dd + '">' + dd + '일</option>');
 		}
 
-			
 		//select, radioBtn 값 불러오기
-		
+
 		//MBTI
 		var myMbti = '${sessionScope.memberInfo.mbti}';
 		$('#mbti').val(myMbti).prop("selected", true);
@@ -177,10 +177,8 @@
 		var myDay = '${sessionScope.memberInfoBirth[2]}';
 		$('#day').val(myDay).prop("selected", true);
 
-		
 		//닉네임 중복검사
 		var loginNickName = '${sessionScope.memberInfo.nickName}';
-		
 	</script>
 </body>
 </html>

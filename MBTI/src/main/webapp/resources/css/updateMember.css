@@ -5,35 +5,35 @@ a {
 	color: #000;
 }
 
-#updateCustomer h1 {
+#updateMember h1 {
 	text-align: center;
 	font-size: 40px;
 	margin: 40px auto;
 }
 
-#updateCustomer_wrap {
+#updateMember_wrap {
 	position: relative;
 	z-index: 1;
 }
 
-#updateCustomer_wrap table {
+#updateMember_wrap table {
 	width: 100%;
 	margin: -25px 38%;
 }
 
-#updateCustomer_wrap th {
+#updateMember_wrap th {
 	width: 0px;
 	height: 62px;
 	font-weight: bolder;
 }
 
-#updateCustomer_wrap td {
+#updateMember_wrap td {
 	padding-left: 30px;
 	width: 250px;
 	padding-bottom: 2px;
 }
 
-#updateCustomer_wrap .errorTxt {
+#updateMember_wrap .errorTxt {
 	display: inline-block;
 	color: red;
 	font-size: 13px;
@@ -47,8 +47,7 @@ a {
 	position: relative;
 	left: -72%;
 } */
-
-#updateCustomer_wrap input {
+#updateMember_wrap input {
 	border-radius: 5px;
 	width: 170px;
 	height: 28px;
@@ -60,17 +59,17 @@ a {
 	font-weight: bold;
 }
 
-#aupdateCustomer_wrap input:focus {
+#aupdateMember_wrap input:focus {
 	outline: #b2d4ad;
 	border: 1px solid gray;
 }
 
-#updateCustomer_btn {
+#updateMember_btn {
 	text-align: center;
 	margin-top: 42px;
 }
 
-#updateCustomer_btn a {
+#updateMember_btn a {
 	display: inline-block;
 	width: 70px;
 	height: 30px;
@@ -79,15 +78,14 @@ a {
 	border-radius: 5px;
 }
 
-#updateCustomer_btn a:hover {
+#updateMember_btn a:hover {
 	background: #b2d4ad;
 }
 
-#updateCustomer label {
+/* #updateMember label {
 	font-weight: bold;
-}
-
-#updateCustomer_btn #submit {
+} */
+#updateMember_btn #submit {
 	cursor: pointer;
 	width: 70px;
 	height: 30px;
@@ -95,9 +93,10 @@ a {
 	border: none;
 	font-family: 'GowunDodum-Regular';
 	font-size: 16px;
+	text-align: center;
 }
 
-#updateCustomer_btn #submit:hover {
+#updateMember_btn #submit:hover {
 	background: #b2d4ad;
 }
 
