@@ -29,7 +29,7 @@ public class BoardController {
 	@Autowired
 	CommunityService communityService;
 
-	/*
+	/**
 	 * board GetMapping
 	 */
 	@GetMapping("/community/board")
@@ -78,7 +78,7 @@ public class BoardController {
 		return mav;
 	}
 	
-	/*
+	/**
 	 * 댓글 작성시
 	 */
 	@ResponseBody
@@ -118,7 +118,7 @@ public class BoardController {
 		return map;
 	}
 
-	/*
+	/**
 	 * 게시물 삭제시
 	 */
 	@GetMapping("/community/deleteBoard")
@@ -138,7 +138,7 @@ public class BoardController {
 		return "redirect:/community/mainCommunity?type=" + type + "&q=" + q + "&page=" + page + "&range=" + range;
 	}
 	
-	/*
+	/**
 	 * 댓글 삭제시
 	 */
 	@ResponseBody
@@ -170,7 +170,7 @@ public class BoardController {
 		return map;
 	}
 
-	/*
+	/**
 	 * 대댓글 작성시
 	 */
 	@ResponseBody
@@ -202,7 +202,7 @@ public class BoardController {
 		return map;
 	}
 
-	/*
+	/**
 	 * 대댓글 삭제시
 	 */
 	@ResponseBody
@@ -233,7 +233,7 @@ public class BoardController {
 		return map;
 	}
 	
-	/*
+	/**
 	 * refresh 버튼 클릭시
 	 */
 	@ResponseBody
@@ -255,7 +255,7 @@ public class BoardController {
 		return map;
 	}
 	
-	/*
+	/**
 	 * 추천시
 	 */
 	@ResponseBody
@@ -300,7 +300,7 @@ public class BoardController {
 		return map;
 	}
 	
-	/*
+	/**
 	 * 실시간 추천
 	 */
 	@ResponseBody

@@ -155,7 +155,8 @@ public class MbtiPlayController {
 	/*
 	 * 문답 만들기
 	 */
-	@RequestMapping(value="/mbtiPlay/mbtiPlayMakeContents", method = {RequestMethod.GET, RequestMethod.POST})
+	//@RequestMapping(value="/mbtiPlay/mbtiPlayMakeContents", method = {RequestMethod.POST})
+	@PostMapping("/mbtiPlay/mbtiPlayMakeContents")
 	public ModelAndView makeContents(@ModelAttribute MbtiPlayContents mbtiPlayContents, @SessionAttribute Long loginId) {
 		ModelAndView mav = new ModelAndView();
 		
@@ -183,9 +184,9 @@ public class MbtiPlayController {
 	/*
 	 * 문답 만들기 성공
 	 */
-	@RequestMapping(value="/mbtiPlay/successAddMbtiPlayMakeContents", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/mbtiPlay/successAddMbtiPlayMakeContents", method = {RequestMethod.POST})
 	public ModelAndView successAddMbtiPlayMakeContents(@ModelAttribute MbtiPlayContents mbtiPlayContents,
-			@SessionAttribute Long loginId) {
+			@SessionAttribute Long loginId, Member member) {
 		ModelAndView mav = new ModelAndView();
 
 		Date today = new Date();
@@ -202,7 +203,7 @@ public class MbtiPlayController {
 			service.addContentsLog(loginId);
 			service.calcQuizPoint(loginId);
 
-			//System.out.println("first insert");
+			System.out.println("first insert");
 			return mav;
 
 		} else if (service.isContentsLogDate(loginId, nowYear, nowMonth, nowDay)
@@ -212,17 +213,17 @@ public class MbtiPlayController {
 			service.updateContentsLog(loginId, nowYear, nowMonth, nowDay);
 			service.calcQuizPoint(loginId);
 
-			//System.out.println("second insert");
+			System.out.println("second insert");
 
-			if (service.isContentsLogLimitTime(loginId, nowYear, nowMonth, nowDay)) {
-
-				//System.out.println("3번 끝");
-				mav.setViewName("mbtiPlay/successAddMbtiPlayMakeContents");
-				return mav;
-			}
+//			if (service.isContentsLogLimitTime(loginId, nowYear, nowMonth, nowDay)) {
+//
+//				System.out.println("3번 끝");
+//				mav.setViewName("mbtiPlay/successAddMbtiPlayMakeContents");
+//				return mav;
+//			}
 
 		} else {
-			//System.out.println("limitMakeContents");
+			System.out.println("limitMakeContents");
 			mav.setViewName("redirect:/mbtiPlay/limitMakeContents");
 			return mav;
 		}

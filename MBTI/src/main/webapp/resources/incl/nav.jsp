@@ -82,6 +82,7 @@
 				</c:otherwise>
 			</c:choose>
 		</ul>
+		<small id="__copyright" class="hide">&copy; Copyright 2022. <br>TeamA All rights reserved.</small>
 	</nav>
 	<!-- <div id="main"></div> -->
 
@@ -99,6 +100,7 @@
 				$('#main').toggleClass('extend');
 				$('#login').toggleClass('hiddenProfile');
 				$('#addUser').toggleClass('hiddenProfile');
+				$('#__copyright').toggleClass('hide');
 			} else {
 				$('#menuToggle ion-icon').toggleClass('show');
 				$('#nav').toggleClass('hiddenProfile');
@@ -110,6 +112,7 @@
 				$('#profileImg').toggleClass('hiddenProfile');
 				$('#profileBack').toggleClass('hiddenProfile');
 				$('#__mbtiInfo').toggleClass('hidden');
+				$('#__copyright').toggleClass('hide');
 			}
 		});
 		

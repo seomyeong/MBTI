@@ -78,11 +78,6 @@
 					<td>3. <span class="answer answer03"></span></td>
 				</tr>
 			</table>
-
-			<!-- <div id="otherMbtiSubjective">
-				<p>다른 유형들은 기타답변에 이렇게 얘기했어요.</p>
-				<div id="subjectiveTxt"></div>
-			</div> -->
 			<table id="otherMbtiSubjective">
 				<caption>다른 유형들은 기타답변에 이렇게 얘기했어요.</caption>
 			</table>
@@ -100,6 +95,14 @@
 			let isSubjective = form.isSubjective.value;
 			let subjectiveContent = form.subjectiveContent.value;
 			let choosenNumCount = form.choosenNumCount.value;
+			
+			if(subjectiveContent.length == 0){
+				alert("답변을 작성하세요.");
+				return;
+			} else if(subjectiveContent.length > 100){
+				alert("100자 이내로 입력 가능합니다.")
+				return;
+			}
 
 			
 			let param = {
@@ -117,6 +120,11 @@
 						url : "/myapp/mbtiPlay/addAnswer",
 						contentType : "application/json; charset=UTF-8",
 						success : function(data) {
+							    $('#playContents').animate({ marginTop: 80 }, function () {
+							        $('#statistics').delay(300).animate({ opacity: 1 }, 2000)
+							    })
+							    $('#answersSubmit').hide()
+							    $('#answers li').off('click')
 							
 							//객관식 데이터 객체
 							let firstObjInfo = data.firstObj;
@@ -136,7 +144,6 @@
 							let nullSubMsg = data.nullSubMsg;
 							let subList = data.subList;
 							
-							//test
 							if (subList != null) {
 								for (let i = 0; i < subList.length; i++) {
 									let subId = subList[i].id;
@@ -148,102 +155,33 @@
 										let addSubjective = subjectiveContent[i];
 										
 										$('#otherMbtiSubjective').each(function(){
-											
-											let subTag = 
-										"<tr><td id='td-SubMbti'>"+subMemberMbti+"</td><td id='td-SubCon'>"+subjectiveContent+"</td></tr>";
+											let subTag = "<tr><td id='td-SubMbti'>"+subMemberMbti+"</td><td id='td-SubCon'>"+subjectiveContent+"</td></tr>";
 											$(this).append(subTag);
 										})
 											
 									}else if(subList.length > 3){
-										
-										// let randomNum = [];
-										// randomNum[0] = random 수 하나 뽑고
-										
-										/* for(let i = 0; i < 뽑을 갯수; i++) {
-											randomNum[i] = random 수 하나 뽑기
-											
-											for(let j = 0; j < randomNum의 사이즈; j++) {
-												if(randomNum[j] == randomNum[i]) {
-													i--;
-												}
-											}
-										}*/
-										
-										//------------------------------------------------------
- 										/*let random = [];
-										random[0] = Math.floor(Math.random()*subList.length);
-										for(let i = 0; i<3; i++){
-											random[i] = Math.floor(Math.random()*subList.length);
-											console.log('random[i] : '+random[i]);
-											let firstSubTag = "<tr><td class='td-SubMbti'>"+subList[random[i]].memberMbti+"</td><td class='td-SubCon'>"+subList[random[i]].subjectiveContent+"</td></tr>";											
-											$('#otherMbtiSubjective').append(firstSubTag);
-										}
-										if( $('#otherMbtiSubjective tr').eq(2) ){
-											break;
-										}
-										*/
-										//------------------------------------------------------
 										let random = [];
-										
-											for(let i=0; i<3; i++){
-											let randomNum = Math.floor(Math.random()*subList.length);
-											
-											if(random.indexOf(randomNum) == -1){
-												random.push(randomNum);
-												let firstSubTag = "<tr><td id='td-SubMbti'>"+subList[random[i]].memberMbti+"</td><td id='td-SubCon'>"+subList[random[i]].subjectiveContent+"</td></tr>";											
-												$('#otherMbtiSubjective').append(firstSubTag);
-												}
+										let ranSet = new Set();
+										let subTotalNum = subList.length;
+																				
+										for(let i = 0; i<subTotalNum; i++){
+											ranSet.add(Math.floor(Math.random()*subList.length));
+											ranSet.add(Math.floor(Math.random()*subList.length));
+										}
+											random = [...ranSet]; //set의 array화
+											for(let i = 0; i<3; i++){
+												let firstSubTag = "<tr><td class='td-SubMbti'>"+subList[random[i]].memberMbti+"</td><td class='td-SubCon'>"+subList[random[i]].subjectiveContent+"</td></tr>";																						
+												$('#otherMbtiSubjective').append(firstSubTag); 
 											}
-										//}????
-										console.log(random[0])
-										console.log(random[1])
-										console.log(random[2])
-										
 										if( $('#otherMbtiSubjective tr').eq(2) ){
 											break;
 										}
-
-										//--------------original code---------------------
-										/*let randomNum1 = Math.floor(Math.random()*subList.length);
-										let randomNum2 = Math.floor(Math.random()*subList.length);
-										let randomNum3 = Math.floor(Math.random()*subList.length);
-										
-										console.log(randomNum1+', '+randomNum2+', '+randomNum3);
-										
-										let firstSubTag = "<tr><td id='td-SubMbti'>"+subList[randomNum1].memberMbti+"</td><td id='td-SubCon'>"+subList[randomNum1].subjectiveContent+"</td></tr>";											
-										$('#otherMbtiSubjective').append(firstSubTag);
-								
-										let secondSubTag = "<tr><td id='td-SubMbti'>"+subList[randomNum2].memberMbti+"</td><td id='td-SubCon'>"+subList[randomNum2].subjectiveContent+"</td></tr>";											
-										$('#otherMbtiSubjective').append(secondSubTag);
-								
-										let thirdSubTag = "<tr><td id='td-SubMbti'>"+subList[randomNum3].memberMbti+"</td><td id='td-SubCon'>"+subList[randomNum3].subjectiveContent+"</td></tr>";											
-										$('#otherMbtiSubjective').append(thirdSubTag);
-										
-										if( $('#otherMbtiSubjective tr').eq(2) ){
-											break;
-										}*/
-								
- 										
-									}//end of else if
-									
-								}//end of for i
+									}
+								}//end of for
 							} else {
 								let addNullSubMsg = "<p id='nullSubMsg'>" + nullSubMsg+"</p>";
 								otherMbtiSubjective.innerHTML=addNullSubMsg;
 							}
-
-							//배열에 담기
-							//let subArr = new Array();
-							//subArr.push(subMemberMbti);
-							//subArr.push(subjectiveContent);
-
-							//console.log("subArr : " + subArr);
-							//console.log("num : "+num);
-							//console.log("length : "+subArr.length);
-
-							//let num = Math.floor(Math.random()*subList.length)+1;						
-							//console.log("randomNum : "+num);
-
 							// 객관식에 대한 데이터가 없으면 값을 출력할 변수
 							let nullObjMsg = "아직 선택받지 못했어요!";
 
@@ -267,9 +205,10 @@
 							} else {
 								$('.answerCountNum3').text(nullObjMsg);
 							}
-
 						}
-					});
+						
+					}); //end of Ajax
+			
 			}//end of addAnswers(form)
 
 		function reloadByRandomNum(form) {

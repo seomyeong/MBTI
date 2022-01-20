@@ -74,6 +74,7 @@ a{
     bottom: 100px;
 }
 .contentsBtn{
+	cursor: pointer;
     float: left;
     margin-right: 20px;
     margin-bottom: 10px;

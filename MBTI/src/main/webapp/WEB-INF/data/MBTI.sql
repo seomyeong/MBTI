@@ -21,6 +21,7 @@ CREATE TABLE MEMBER(
 
 -- Community
 
+SELECT * FROM Member WHERE mbti='ENFP' AND pw='1234' OR mbti='INFJ' AND pw='1234';
 
 SELECT * FROM Member;
 SELECT * FROM CommunityBoard;
@@ -114,10 +115,6 @@ CREATE TABLE LikeLog(
 
 
 
-
-
-
-
 --MbtiPlay
 SELECT * FROM MbtiPlayContents;
 SELECT * FROM MbtiPlayContentsAnswer;
@@ -128,6 +125,9 @@ DROP TABLE MbtiPlayContents;
 DROP TABLE MbtiPlayContentsAnswer;
 DROP TABLE ContentsLog;
 DROP TABLE AnswersLog;
+
+UPDATE Member SET mabPoint=980 WHERE id=1;
+UPDATE ContentsLog SET contentsCount=0 WHERE id=1;
 
 --문답 쿼리
 INSERT INTO MbtiPlayContents (memberId, question, answer01, answer02, answer03) VALUES (1, '친구들과 놀이동산을 간 당신, 놀이기구를 탈 때의 나는?', '오늘 이거 다섯 개는 꼭 타야 돼! 지도를 보며 계획을 세운다.', '오, 저거 재밌어 보인다! 일단 보이는 것부터 탄다.', '놀이기구는 흥미가 들지 않아 이끌려다닌다.');
@@ -141,7 +141,7 @@ CREATE TABLE MbtiPlayContents(
 	question		VARCHAR(500)	NOT NULL,
 	answer01		VARCHAR(100)	NOT NULL,
 	answer02		VARCHAR(100)	NOT NULL,
-	answer03		VARCHAR(100)	NOT NULL,ㄹ
+	answer03		VARCHAR(100)	NOT NULL,
 	CONSTRAINT memberId_FK FOREIGN KEY(memberId) REFERENCES Member(id)
 );
 

@@ -71,11 +71,11 @@
 					<a href="<%=request.getContextPath()%>/member/addMember" class="contentsBtn notMember">회원가입 바로가기</a>
 				</c:when>
 				<c:otherwise>
-					<form action="mbtiPlayContents" method="post"
+					<form action="mbtiPlayContents" method="POST"
 						class="playContentsBtn">
 						<input type="submit" value="맙티플레이 GO" />
 					</form>
-					<form action="mbtiPlayMakeContents" method="post"
+					<form action="mbtiPlayMakeContents" method="POST"
 						class="makeContentsBtn">
 						<input type="submit" value="문답 만들기" />
 					</form>
