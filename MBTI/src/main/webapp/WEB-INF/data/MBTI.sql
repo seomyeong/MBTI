@@ -174,6 +174,10 @@ CREATE TABLE AnswersLog(
 
 
 ---수민 cultureBoard 파트 테이블------
+SELECT * FROM CultureBoard;
+SELECT * FROM CultureBoardComment;
+SELECT * FROM LikeLogForCulture;
+SELECT * FROM LikeLogComment;
 
 
 CREATE TABLE CultureBoard(

@@ -38,7 +38,7 @@ public class cultureWriteController {
 	}
 	
 	
-	@PostMapping("/cultureBoard/successWrite")
+	@PostMapping("/successWrite")
 	public ModelAndView successWrite(@ModelAttribute("cultureBoardCommand") CultureBoardCommand cbc) {
 		ModelAndView mav = new ModelAndView();
 		//나중에, 세션을 통한 memId 수정필요 session.getAttribute("loginId")
@@ -55,7 +55,7 @@ public class cultureWriteController {
 		cultureCommunityService.addWrittenContent(memberId, contents01, contents02, contentType, title, link);
 		
 		System.out.println("글쓰기 성공");
-		mav.setViewName("redirect:/cultureBoard/index");
+		mav.setViewName("redirect:/");
 		return mav;
 	}
 	

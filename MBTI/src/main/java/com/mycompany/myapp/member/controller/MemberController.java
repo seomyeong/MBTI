@@ -49,7 +49,7 @@ public class MemberController {
 				memberCommand.getGender(), memberCommand.getPhone(), profileImg);
 		System.out.println(memberCommand.getBirth());
 		memberService.addMember(member);
-		mav.setViewName("redirect:/index");
+		mav.setViewName("redirect:/");
 		return mav;
 	}
 	
