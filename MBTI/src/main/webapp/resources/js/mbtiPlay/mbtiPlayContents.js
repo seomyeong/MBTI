@@ -7,31 +7,6 @@ $('#isSubjective').hide()
 $('#subjectiveContent').hide()
 $('#answerCount').hide()
 
-
-/* 선택한 보기에 이펙트 변경 */
-let objLength = $('#answers ul li').length;
-// let statisticsTxt = 
-
-$('#answers ul li').on('click', function () {
-    $('#answersSubmit').show()
-    $('#answers ul li').css({ background: '#eeeeee' })
-    $(this).css({ background: 'var(--green)' })
-
-    /* 객관식선택 후 애니메이션 */
-
-})
-
-
-$('#answersSubmit').on('click', function (e) {
-    $('#playContents').animate({ marginTop: 80 }, function () {
-
-        $('#statistics').delay(300).animate({ opacity: 1 }, 2000)
-    })
-    $('#answersSubmit').hide()
-    $('#answers li').off('click')
-})
-
-
 /*각 ul li클릭 시 변수값 담아오기 */
 
 $('#answers ul li').on('click', function () {
@@ -56,7 +31,14 @@ $('#answers ul li').on('click', function () {
         $('#subjectiveContent').hide()
     }
     $('#answerCount').attr('value', answerCount)
+
+	//css
+    $('#answersSubmit').show()
+    $('#answers ul li').css({ background: '#eeeeee' })
+    $(this).css({ background: 'var(--green)' })
 })
+
+
 
 /* statistics에 answer값 넣기 */
 let answer01 = $('#answers ul li:eq(0)').text().substring(3)
@@ -75,3 +57,4 @@ function slideBar() {
     $('#questionBar').animate({ width: "100%" }, 2500)
 }
 slideBar();
+
