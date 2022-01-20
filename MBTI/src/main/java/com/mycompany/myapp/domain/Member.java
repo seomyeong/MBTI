@@ -90,6 +90,7 @@ public class Member {
 		this.gender = gender;
 		this.phone = phone;
 	}
+	
 
 	public void calcLoginPoint() {
 		this.mabPoint = this.mabPoint + 10;

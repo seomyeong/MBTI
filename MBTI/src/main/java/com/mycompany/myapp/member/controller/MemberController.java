@@ -36,7 +36,7 @@ public class MemberController {
 	 */
 	@GetMapping("/member/successAddMember")
 	public String successAddMemberGet() {
-		return "redirect:/index";
+		return "redirect:/";
 	}
 
 	@PostMapping("/member/successAddMember")
@@ -68,7 +68,7 @@ public class MemberController {
 	 */
 	@GetMapping("/member/successUpdateMember")
 	public String successUpdateMemberGet() {
-		return "redirect:/index";
+		return "redirect:/";
 	}
 
 	@PostMapping("/member/successUpdateMember")
@@ -86,7 +86,7 @@ public class MemberController {
 		String[] memberInfoBirth = memberInfo.getBirth().split(",");
 		session.setAttribute("memberInfoBirth", memberInfoBirth);
 		session.setAttribute("memberInfo", memberInfo);
-		mav.setViewName("redirect:/index");
+		mav.setViewName("redirect:/");
 		return mav;
 	}
 
@@ -115,7 +115,7 @@ public class MemberController {
 			// 세션에 id 값 할당
 			session.setAttribute("loginId", memberInfo.getId());
 			session.setMaxInactiveInterval(-1);
-			mav.setViewName("redirect:/index");
+			mav.setViewName("redirect:/");
 			return mav;
 
 		} else {
@@ -138,7 +138,7 @@ public class MemberController {
 		session.removeAttribute("loginId");
 		session.removeAttribute("memberInfo");
 
-		return "redirect:/index";
+		return "redirect:/";
 	}
 	
 	
