@@ -21,6 +21,7 @@ CREATE TABLE MEMBER(
 
 -- Community
 
+SELECT * FROM Member WHERE mbti='ENFP' AND pw='1234' OR mbti='INFJ' AND pw='1234';
 
 SELECT * FROM Member;
 SELECT * FROM CommunityBoard;

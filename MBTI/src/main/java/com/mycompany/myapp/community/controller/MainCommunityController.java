@@ -22,7 +22,7 @@ public class MainCommunityController {
 	@Autowired
 	CommunityService communityService;
 
-	/*
+	/**
 	 * 전체보기, nav로 접근 시 세션을 지우고 전체 내용을 조회한다.
 	 */
 	@GetMapping("community/mainCommunity_deleteSession")
@@ -40,7 +40,7 @@ public class MainCommunityController {
 		return "redirect:/community/mainCommunity?type=reportingDate&q=&page=1&range=1";
 	}
 	
-	/*
+	/**
 	 * 인기순
 	 */
 	@GetMapping("community/mainCommunity_hot")
@@ -48,7 +48,7 @@ public class MainCommunityController {
 		return "redirect:/community/mainCommunity?type=likes&q=&page=1&range=1";
 	}
 	
-	/*
+	/**
 	 * 조회순 
 	 */
 	@GetMapping("community/mainCommunity_top")
@@ -56,7 +56,7 @@ public class MainCommunityController {
 		return "redirect:/community/mainCommunity?type=views&q=&page=1&range=1";
 	}
 
-	/*
+	/**
 	 * mainCommunity GetMapping
 	 */
 	@GetMapping("community/mainCommunity")
