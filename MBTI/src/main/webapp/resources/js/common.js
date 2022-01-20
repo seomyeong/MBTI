@@ -1,4 +1,4 @@
-let list = document.querySelectorAll('#nav li');
+var list = document.querySelectorAll('#nav li');
 function activeLink() {
     list.forEach((item) =>
         item.classList.remove('clicked'));
