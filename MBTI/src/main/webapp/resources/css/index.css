@@ -1,128 +1,280 @@
 @charset "UTF-8";
+@font-face {
+    font-family: 'gameFont';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 .hidden{
-	position: absolute;
-	left: -9999px;
+    position: absolute;
+    top: -9999px;
+}
+a{
+	text-transform: none;
+	color: #000;
+}
+
+table{
+	border-collapse: collapse;
+}
+#main{
+    height: 100%;
+    padding-top: 20px;
 }
 #banner{
     text-align: center;
-    /* height: 40vh; */
-    /* background: blue; */
-}
-#banner p:nth-of-type(1){
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 20px;
-}
-#banner p:nth-of-type(1) span:nth-of-type(1){
-    font-size: 13px;
-    position: absolute;
-    top: 5px;
-    left: calc(50% - 80px);
-    color: var(--black2);
-}
-#banner p:nth-of-type(1) span:nth-of-type(2){
-    color: #b2d4ad;
+    height: 39%;
+    min-width: 1200px;
 }
 
-/* avatar */
-#bannerAvatar{
-    /* border: 1px solid #000; */
-    position: relative;
-    margin: 0 auto;
-    width: 1200px;
-    height: 210px;
-}
-.avatar{
-    /* border: 1px solid tomato; */
-    position: absolute;
-    width: 110px;
-    height: 130px;
-    transition: 0.3s;
+
+
+
+#bottomSectionWrap{
+    display: flex;
+    height: 61%;
+    margin: 0 40px;
 }
 
-.avatar:hover{
-    width: 115px;
-    height: 135px;
+#cultureContents{
+    width: 100%; height: 100%;
+    min-width: 608px;
+    margin-right: 20px;
 }
-/*어린왕자*/
-.enfj{
-    top: 8px;
-    right: 30px;
+
+#topBtn{
+    display: flex;
+	align-items: center;
+	justify-content: space-between;
+  
+    height: 7%;
 }
-/*폭죽여캐*/
-.enfp{
-    top: 0px;
-    left: 550px;
+#cultureBtn{min-width: 312px;}
+#cultureBtn input{
+	border: none;
+	background-color: #b2d4ad;
+	color: #fff;
+	font-weight: 700;
+	width: 100px;
+	border-radius: 10px;
+	
 }
-/*포니테일여캐*/
-.entj{
-    bottom: 0px;
-    right: 80px;
-    z-index: 1;
+#index02Toggle{
+    width: 100%;
+    display: flex;
+    justify-content: right;
 }
-/*발표남캐*/
-.entp{
-    top: -15px;
-    right: 250px;
+
+.mbti-switch{
+	position: relative;
+	border: 1px solid rgba(139, 139, 139, 0.445);
+	width: 60px;
+	height: 30px;
+	border-radius: 50px;
 }
-/*서명*/
-.esfj{
-    bottom: 0px;
-    right: 290px;
+
+.mbti-switch input {
+	position: absolute;
+	left: -9999px;
 }
-/*뿌까여캐*/
-.esfp{
-    top: 15px;
-    left: 290px;
+
+.mbti-switch .toggle {
+	content: '';
+	display: block;
+	width: 28px;
+	height: 28px;
+	background: #b2d4ad;
+	border: 1px solid #000;
+	cursor: pointer;
+	border-radius: 50%;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
-/*칠판여캐*/
-.estj{
-    bottom: -10px;
-    left: 80px;
+
+
+
+.front, .back {
+	position: absolute;
+	top: 7px;
+	z-index: 1;
+	pointer-events: none;
+	user-select: none;
 }
-/*탐험모자여캐*/
-.estp{
-    top: 0px;
-    left: 23px;
+
+.front {
+	left: 10px;
 }
-/*수민*/
-.infj{
-    bottom: 0px;
-    left: 200px;
+
+.back {
+	left: 41px;
 }
-/*지영*/
-.infp{
-    bottom: 5px;
-    left: 370px;
-    z-index: 1;
+
+.mbtiSubmitOff{
+	outline: none;
+    border: 3px solid #B2D4AD;
+    border-radius: 11px;
+    background: #fff;
+    font-weight : 700;
 }
-/*포마드남캐*/
-.intj{
-    top: 20px;
-    left: 145px;
+
+.mbtiSubmitOn{
+    border: 3px solid #fff;
+    border-radius: 11px;
+    background: #B2D4AD;
+    color: #fff;
 }
-/*독서여캐*/
-.intp{
-    top: 30px;
-    right: 157px;
+
+
+
+
+
+
+#totalBtn{width: 100%; overflow: hidden;}
+#totalBtn input{
+    float: right;
 }
-/*종성*/
-.isfj{
-    bottom: 5px;
-    right: 450px;
+
+#contentWrap{
+	height: calc(100% - 14%);
+	overflow-y: scroll;
 }
-/*원진*/
-.isfp{
-    bottom: -13px;
-    left: 510px;
+
+#noneDataWrap{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-/*박사 안경*/
-.istj{
-    top: 0px;
-    left: 430px;
+
+#noneData p{
+	font-size: 25px;
+	text-align: center;
 }
-/*이즈리얼*/
-.istp{
-    top: 5px;
-    right: 390px;
+
+
+
+#contentList{
+	width: 100%;
+}	
+
+#contentHead{
+	background-color: #b2d4ad;
+	font-weight: 700; color: #fff;
+	height: 40px;
+	display: flex;
+}
+#contentHead p{
+	width: 100%;
+	text-align: center;
+	line-height: 38px;
+}
+
+
+
+.content{
+	height: 150px;
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+	
+}
+
+
+
+.contentForm01{
+	display: flex;	
+	height: 80%;
+}
+.contentForm01 div{
+	width: 100%;
+	text-align: center;
+	line-height: 118.39px;
+	font-family: 'gameFont';
+}
+
+.contentForm02{
+	display: flex;
+	height: 20%;
+	align-items: center;
+ 	justify-content: space-between;
+ 	padding: 0 30px 0 25px;
+ 	font-family: 'gameFont';
+}
+
+.commentTd a{
+	display: block;
+	line-height:25px;
+	font-family: 'gameFont';
+}
+
+.content tr:first-child{text-align: center; height: 70%;}
+.content tr:last-child{height: 30%}
+.content tr:last-child td{ height: 100%;}
+.linkTag{
+	display:flex;
+	align-items: center;
+	justify-content: flex-end;
+	font-family: 'gameFont';
+}
+.dropComment{
+	font-family: 'gameFont';
+}
+.likeWrap{
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+.cultureBoard_likes{
+	display: block;
+	height: 80%;
+	background: url(../img/likes.png) no-repeat center/40px 40px;
+}
+.cultureBoard_unlikes{
+	display: block;
+	height: 80%;
+	background: url(../img/unlikes.png) no-repeat center/40px 40px;
+}
+.likesCount{
+	height: 20%;
+	line-height: 0;
+}
+
+.linkIcon{
+	width: 25px ; height: 25px;
+	display: inline-block;
+	background: url(../img/link.png) no-repeat center/contain;
+	margin-left: 10px;
+}
+#bottomBtn{
+	position: relative;
+	height: 7%;
+}
+#bottomBtn a{
+	text-align: center;
+	text-decoration: none;
+	display: block;
+	height: 100%; width: 120px;
+	background-color: #b2d4ad;
+	color: #fff; font-weight: 700;
+	margin: 0 auto;
+	border-radius: 10px;
+}
+#bottomBtn>a{line-height: 38px;}
+
+#newbestBtn{
+	position: absolute;
+	right: 0; top: calc(50% - 10.5px);
+	display: flex;
+}
+
+#newbestBtn a{
+	width: 50px; height: 80%;
+	margin:0 3px;
+}
+
+#mbtiCard{
+    width: 100%; height: 100%;
+    min-width: 550px;
+    border: 1px solid #000; box-sizing: border-box;
 }

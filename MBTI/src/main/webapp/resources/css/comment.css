@@ -1,0 +1,173 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'gameFont';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.commentWrap{width: 100%; display:none;}
+.comment{width: 100%;}
+.hidden{
+	position:absolute;
+	left: -9999px;
+}
+
+/**댓글 작성부분 css*/
+
+.commentWrite{
+	display:flex;
+	align-items: center;
+	padding: 15px 0;
+	position:relative;
+}
+
+.commentWrite::after{
+ 	display: block;
+    content: "";
+    width: 100%; height: 3px;
+    position:absolute; bottom:0;
+    background-color: rgba(139, 139, 139, 0.589);
+}
+
+
+.authorImg{
+	background-color: #000;
+	border-radius: 25px;
+	width: 50px;
+	height: 50px;	
+}
+.authorWrap{
+	padding-left : 20px;
+	font-family: 'gameFont';
+	width: calc(100% - 50px);
+	
+}
+.authorInfo{}
+.authorLv{font-family: 'gameFont';}
+.authorNickname{font-family: 'gameFont';}
+.authorMbti{font-family: 'gameFont';}
+
+form.writeTextForm{
+	display:flex;
+	flex-direction:column;
+	width: 90%;
+	margin-top: 10px;
+}
+.writeText{
+	width: 100%;
+}
+.writeText input{
+	outline:none;
+	border:none;
+	padding: 0 10px;
+	border-bottom: 3px solid #b2d4ad; box-sizing: border-box;
+	display:block;
+	width:100%;
+	font-size: 18px;font-family: 'gameFont';
+}
+.writeText input::placeholder{
+	font-family: 'gameFont';
+}
+
+.writeText input:focus{
+	border-bottom: 3px solid #40d629;
+}
+
+
+.commentErrorMsg{
+	font-family: 'gameFont';font-size: 15px;
+	font-weight: 700;
+	color: red;
+}
+
+.writeSubmit{
+	width: 100%;
+	overflow: hidden;
+	margin-top: 7px;
+}
+.writeSubmit input{
+	font-family: 'gameFont';font-size: 18px;
+	outline:none;
+	border:none;
+	float:right;
+	padding: 3px 5px;
+	
+}
+
+/**댓글단 리스트 부분 css*/
+
+.commentRead{
+	width: 580px; margin: 15px 0 0 50px;
+	display: flex;
+	align-items: center;
+	
+}
+.memberImg{
+	border: 1px solid #000;
+	background-color: #000;
+	border-radius: 15px;
+	width: 30px;
+	height: 30px;	
+}
+.memberWrapOfWrap{
+	width: calc(100% - 30px); height:100%;
+	padding-left : 20px;
+	display: flex;
+}
+.memberWrap{
+	width: 80%; height:100%;
+	display:flex; flex-direction:column;
+	justify-content: center;
+	
+}
+
+.memberInfo{}
+.eachMember{font-family: 'gameFont';}
+.memberLv{}
+.memberNickname{}
+.memberMbti{}
+
+.memberComment{
+	padding: 10px 0;
+	font-family: 'gameFont';
+}
+
+.memberLike{
+	width: 13%;
+	display: flex;
+	flex-direction:column;
+}
+
+.cultureBoardComment_likes{
+	display: block;
+	height: 70%;
+	background: url(../img/likes.png) no-repeat center/30px 30px;
+}
+.cultureBoardComment_unlikes{
+	display: block;
+	height: 68%;
+	background: url(../img/unlikes.png) no-repeat center/30px 30px;
+}
+.commentLikesCount{
+	height: 32%; text-align:center; line-height:11px;
+	margin-top:1px;
+	font-family: 'gameFont';
+	
+}
+
+
+.memberDelete{
+	width: 7%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
