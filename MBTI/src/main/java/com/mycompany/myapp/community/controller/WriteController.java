@@ -17,7 +17,7 @@ public class WriteController {
 	@Autowired
 	CommunityService communityService;
 	
-	/*
+	/**
 	 * write GetMapping
 	 */
 	@GetMapping("community/write")
@@ -34,7 +34,7 @@ public class WriteController {
 		return mav;
 	}
 	
-	/*
+	/**
 	 * 댓글 작성 성공시
 	 */
 	@PostMapping("community/successWrite")
