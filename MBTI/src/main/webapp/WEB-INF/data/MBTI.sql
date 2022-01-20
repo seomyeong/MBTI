@@ -115,10 +115,6 @@ CREATE TABLE LikeLog(
 
 
 
-
-
-
-
 --MbtiPlay
 SELECT * FROM MbtiPlayContents;
 SELECT * FROM MbtiPlayContentsAnswer;
