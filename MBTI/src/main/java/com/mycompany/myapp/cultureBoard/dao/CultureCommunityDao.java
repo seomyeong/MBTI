@@ -117,7 +117,7 @@ public class CultureCommunityDao {
 
 	//해당 컨텐츠의 해당 아이디가 '좋아요'를 눌렀는지 확인
 	public Boolean isLike(long loginId, long boardId) {
-		String sql = "SELECT * FROM LikeLog WHERE memberId=? AND boardId=?";
+		String sql = "SELECT * FROM LikeLogForCulture WHERE memberId=? AND boardId=?";
 		//queryForObject는 무조건 값이 하나가 존재해야함!
 		
 		List<LikeLog> likeListCheck = jdbcTemplate.query(sql, new RowMapper<LikeLog>() {
@@ -168,12 +168,12 @@ public class CultureCommunityDao {
 	////////////////////////////////////////////////////////
 	
 	public void addLikePoint(long loginId, long boardId) {
-		String sql = "INSERT INTO LikeLog(memberId, boardId) VALUES(?,?)";
+		String sql = "INSERT INTO LikeLogForCulture(memberId, boardId) VALUES(?,?)";
 		jdbcTemplate.update(sql, loginId, boardId);
 	}
 	
 	public void removeLikePoint(long loginId, long boardId) {
-		String sql = "DELETE FROM LikeLog WHERE memberId=? AND boardId=?";
+		String sql = "DELETE FROM LikeLogForCulture WHERE memberId=? AND boardId=?";
 		jdbcTemplate.update(sql, loginId, boardId);
 	}
 

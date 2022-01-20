@@ -31,7 +31,7 @@ public class IndexController {
 	CultureCommunityService cultureCommunityService;
 	
 	//첫시작 컨텐츠 
-	@GetMapping("/")
+	@GetMapping("/index")
 	public ModelAndView cultureConWrite(HttpSession session, @ModelAttribute CultureBoardCommand cultureBoardCommand) {
 		ModelAndView mav = new ModelAndView();
 		
@@ -68,7 +68,7 @@ public class IndexController {
 		//mav.addObject("cultureBoardComment", cultureBoardComment);
 		
 		//index.jsp로의 이동! 
-		mav.setViewName("../../index");
+		mav.setViewName("../index");
 		return mav;
 	}
 	

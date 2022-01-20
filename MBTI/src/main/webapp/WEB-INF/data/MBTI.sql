@@ -170,3 +170,54 @@ CREATE TABLE AnswersLog(
 	contentsNum			BIGINT			NOT NULL,
 	CONSTRAINT AnswersLog_memberId_FK FOREIGN KEY(memberId) REFERENCES Member(id)
 );
+
+
+
+---수민 cultureBoard 파트 테이블------
+
+
+CREATE TABLE CultureBoard(
+	id				BIGINT			PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	memberId 		BIGINT			NOT NULL,
+	title			VARCHAR(50) 	NOT NULL,
+	contents01		VARCHAR(50)		NOT NULL,
+	contents02		VARCHAR(50)		DEFAULT '' ,
+	contentType		CHAR			NOT NULL,
+	likes			INT				DEFAULT 0,
+	likesStatus		BOOLEAN			DEFAULT FALSE,
+	link			VARCHAR(500)	NOT NULL,
+	commentNum		INT				DEFAULT 0,
+	reportingDate	TIMESTAMP		NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	
+	CONSTRAINT CultureBoard_memberId_FK FOREIGN KEY(memberId) REFERENCES MEMBER(id)
+);
+
+
+
+CREATE TABLE CultureBoardComment(
+	id				BIGINT			PRIMARY KEY	GENERATED ALWAYS AS IDENTITY,
+	memberId		BIGINT			NOT NULL,
+	boardId			BIGINT			NOT NULL,
+	comment			VARCHAR(500)	NOT NULL,
+	likes			INT				DEFAULT 0,
+	likesStatus		BOOLEAN			DEFAULT FALSE,
+	reportingDate	TIMESTAMP		DEFAULT CURRENT_TIMESTAMP,
+	
+	CONSTRAINT CultureBoardComment_boardId_FK FOREIGN KEY(boardId) REFERENCES CultureBoard(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE LikeLogForCulture(
+	boardId			BIGINT			NOT NULL,
+	memberId		BIGINT			NOT NULL
+);
+
+
+CREATE TABLE LikeLogComment(
+	memberId		BIGINT			NOT NULL,
+	commentId		BIGINT			NOT NULL
+);
+
+
+
+
