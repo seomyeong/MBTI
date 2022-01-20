@@ -38,12 +38,12 @@ public class cultureWriteController {
 	}
 	
 	
-	@PostMapping("/successWrite")
-	public ModelAndView successWrite(@ModelAttribute("cultureBoardCommand") CultureBoardCommand cbc) {
+
+	@PostMapping("successWrite")
+	public ModelAndView successWrite(HttpSession session, @ModelAttribute("cultureBoardCommand") CultureBoardCommand cbc) {
 		ModelAndView mav = new ModelAndView();
-		//나중에, 세션을 통한 memId 수정필요 session.getAttribute("loginId")
-		Long memberId = Long.parseLong("2");
 		
+		Long memberId = Long.parseLong(String.valueOf(session.getAttribute("loginId")));
 		
 		String contents01 = cbc.getContents01();
 		String contents02 = cbc.getContents02();
@@ -55,6 +55,7 @@ public class cultureWriteController {
 		cultureCommunityService.addWrittenContent(memberId, contents01, contents02, contentType, title, link);
 		
 		System.out.println("글쓰기 성공");
+
 		mav.setViewName("redirect:/");
 		return mav;
 	}
@@ -67,8 +68,8 @@ public class cultureWriteController {
 		
 		String comment = param.get("comment");  //ajax를 통한 comment 
 		Long boardId = Long.parseLong(param.get("boardId"));
-		//long loginId = Long.parseLong(param.get("loginId"));  //세션을 통한 로그인한 멤버의 아이디
-		Long loginId = Long.parseLong("1");
+		Long loginId = Long.parseLong(String.valueOf(session.getAttribute("loginId")));
+
 		
 		
 		List<CultureBoardComment> cultureBoardComment = new ArrayList<CultureBoardComment>();
@@ -88,10 +89,9 @@ public class cultureWriteController {
 	
 	@ResponseBody
 	@PostMapping("/cultureBoard/commentLikes")
-	public Map<String, String> commentLikes(@RequestBody Map<String, String> param){
+	public Map<String, String> commentLikes(HttpSession session, @RequestBody Map<String, String> param){
 		Long commentId = Long.parseLong(param.get("commentId"));
-		//long loginId = Long.parseLong(param.get("loginId"));  //세션을 통한 로그인한 멤버의 아이디
-		Long loginId = Long.parseLong("1");
+		Long loginId = Long.parseLong(String.valueOf(session.getAttribute("loginId")));
 		String appliedLikes= "";
 		Boolean likeCheck = cultureCommunityService.isLikeForComment(loginId, commentId);
 		
@@ -111,11 +111,11 @@ public class cultureWriteController {
 	
 	@ResponseBody
 	@PostMapping("/cultureBoard/delComment")
-	public Map<String, Object> commentDelete(@RequestBody Map<String, String> param){
+	public Map<String, Object> commentDelete(HttpSession session, @RequestBody Map<String, String> param){
 		Long commentId = Long.parseLong(param.get("commentId"));
 		Long boardId = Long.parseLong(param.get("boardId"));
-		//long loginId = Long.parseLong(param.get("loginId"));  //세션을 통한 로그인한 멤버의 아이디
-		Long loginId = Long.parseLong("1");
+		Long loginId = Long.parseLong(String.valueOf(session.getAttribute("loginId")));
+
 		List<CultureBoardComment> cultureBoardComment = new ArrayList<CultureBoardComment>();
 		
 		cultureBoardComment = cultureCommunityService.deleteComment(loginId, boardId, commentId);
