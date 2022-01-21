@@ -94,7 +94,9 @@ function load_comments(data) {
 
 	if(datacc.length != 0) {
 		for(var cc in datacc) {
-			commentsWrap += '<div class="comment"><div class="commentInfo"><span class="comment_mbti">'
+			commentsWrap += '<div class="comment"><div class="commentInfo"><span class="comment_mbti"><span class="mbtiImg" style="background: url('
+									+ datacc[cc].member.profileImg
+									+ ') 0 0 / cover"></span>'
 									+ datacc[cc].member.mbti
 									+ '</span> <span class="comment_profile"><span class="comment_level">Lv.'
 									+ datacc[cc].member.level
@@ -116,7 +118,9 @@ function load_comments(data) {
 			if(dataccp.length != 0) {
 				for(var ccp in dataccp) {
 					if(dataccp[ccp].communityComments.id == datacc[cc].id) {
-						commentsWrap += '<div class="plusCommentView"><ion-icon name="return-down-forward-outline"></ion-icon><span class="plusCommentView_mbti">'
+						commentsWrap += '<div class="plusCommentView"><ion-icon name="return-down-forward-outline"></ion-icon><span class="plusCommentView_mbti"><span class="mbtiImg" style="background: url('
+							+ dataccp[ccp].member.profileImg
+							+ ') 0 0 / cover"></span>'
 							+ dataccp[ccp].member.mbti
 							+ '</span><span class="plusCommentView_profile"><span class="plusCommentView_level">Lv. '
 							+ dataccp[ccp].member.level

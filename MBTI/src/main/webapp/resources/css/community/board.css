@@ -11,14 +11,22 @@
 	border-bottom: 2px solid #f2f2f2;
 }
 #board_info {
-	width: 95%;
+	width: 93%;
 	margin: 0 auto;
 }
 #board_mbti {
+	position: relative;
 	font-weight: bold;
-	font-size: 1.3em;
+	font-size: 1.1em;
 	color: lightseagreen;
 	margin-right: 20px;
+}
+#board_mbti .mbtiImg {
+	position: absolute;
+	top: -3px;
+	left: -38px;
+	width: 35px;
+	height: 23px;
 }
 #board_level {
 	margin-right: 5px;
@@ -112,7 +120,7 @@
 	border-radius: 10px;
 	width: 100%;
 	height: 180px;
-	background: url(../img/ad1.png) center -55px / cover;
+	background: url(../../img/ad1.png) center -55px / cover;
 	margin:50px 0;
 }
 #download {
@@ -122,7 +130,7 @@
 	right: 295px;
 	width: 184.57px;
 	height: 71.42px;
-	background: url(../img/down.png) center center / cover;
+	background: url(../../img/down.png) center center / cover;
 	z-index: 1;
 }
 
@@ -157,15 +165,23 @@
 	border-radius: 10px;
 	width: 100%;
 	margin: 20px auto;
-	padding: 25px;
+	padding: 25px 50px;
 }
 /* .comment:hover {
 	background: #f2f2f2;
 } */
 .comment_mbti {
-	font-size: 1.3em;
+	position: relative;
+	font-size: 1.1em;
 	color: lightseagreen;
 	font-weight: bold;
+}
+.comment_mbti .mbtiImg {
+	position: absolute;
+	top: -3px;
+	left: -38px;
+	width: 35px;
+	height: 23px;
 }
 .comment_level {
 	color: lightsteelblue;
@@ -222,9 +238,17 @@
 	position: absolute;
 } */
 .plusCommentView_mbti {
-	font-size: 1.3em;
+	position: relative;
+	font-size: 1.1em;
 	color: lightseagreen;
 	font-weight: bold;
+}
+.plusCommentView_mbti .mbtiImg {
+	position: absolute;
+	top: -3px;
+	left: -38px;
+	width: 35px;
+	height: 23px;
 }
 .plusCommentView_level {
 	color: lightsteelblue;
@@ -303,7 +327,7 @@
 	border-radius: 10px;
 	width: 100%;
 	margin: 20px auto 0;
-	padding: 25px;
+	padding: 27px 60px 5px;
 }
 /* .comment:hover {
 	background: #f2f2f2;
@@ -325,10 +349,11 @@
 	position: absolute;
 	top: 26px;
 	left: 25px;
-	font-size: 1.3em;
+	font-size: 1.1em;
 	color: lightseagreen;
 	font-weight: bold;
 }
+
 .plusCommentBox .plusComment_level {
 	position: absolute;
 	top: 30px;
@@ -343,7 +368,7 @@
 	font-size: 0.9em;
 	color: darksalmon;
 	font-weight: bold;
-	margin-left: 3px;
+	margin-left: 13px;
 }
 .plusCommentBox .plusComment_reportingDate {
 	position: absolute;
@@ -365,7 +390,7 @@
 	width: 100%;
 	height: 150px;
 	vertical-align: middle;
-	border: 2px solid #f2f2f2;
+	border: 2px solid #a2a2a2;
 	border-radius: 10px;
 	padding: 20px;
 }
