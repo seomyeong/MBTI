@@ -260,7 +260,7 @@ td.nickName .level {
 	opacity: 0.9;
 	width: 110px;
 	height: 154px;
-	background: url(../img/avatar/MBTI_ISFP.png) center center / cover;
+	background: url(../../img/avatar/MBTI_ISFP.png) center center / cover;
 	cursor: default;
 	user-select: none;
 }
@@ -301,7 +301,7 @@ td.nickName .level {
 	width: 20px;
 	height: 20px;
 	border: 0;
-	background: url(../img/search.png) center center / cover;
+	background: url(../../img/search.png) center center / cover;
 	z-index: 1;
 	text-indent: -9999px;
 	cursor: pointer;
