@@ -20,7 +20,7 @@
 		<div id="boardInfoWrap">
 			<h2 id="board_title">${board.title}</h2>
 			<div id="board_info">
-				<span id="board_mbti">${board.member.mbti}</span> <span
+				<span id="board_mbti"><span class="mbtiImg" style="background: url(${board.member.profileImg}) 0 0 / cover"></span>${board.member.mbti}</span> <span
 					id="board_level">Lv. ${board.member.level}</span> <span
 					id="board_nickName">${board.member.nickName}</span>
 				<div id="rightInfo">
@@ -53,7 +53,7 @@
 				<c:forEach var="comment" items="${comments}">
 					<div class="comment">
 						<div class="commentInfo">
-							<span class="comment_mbti">${comment.member.mbti}</span> <span
+							<span class="comment_mbti"><span class="mbtiImg" style="background: url(${comment.member.profileImg}) 0 0 / cover"></span>${comment.member.mbti}</span> <span
 								class="comment_profile"><span class="comment_level">Lv.
 									${comment.member.level}</span><span class="comment_nickName">${comment.member.nickName}</span></span>
 							<span class="comment_reportingDate">${comment.reportingDate}</span>
@@ -75,7 +75,7 @@
 							<c:if test="${plus.communityComments.id eq comment.id}">
 								<div class="plusCommentView">
 									<ion-icon name="return-down-forward-outline"></ion-icon>
-									<span class="plusCommentView_mbti">${plus.member.mbti}</span> 
+									<span class="plusCommentView_mbti"><span class="mbtiImg" style="background: url(${plus.member.profileImg}) 0 0 / cover"></span>${plus.member.mbti}</span> 
 									<span class="plusCommentView_profile">
 										<span class="plusCommentView_level">Lv. ${plus.member.level}</span>
 										<span class="plusCommentView_nickName">${plus.member.nickName}</span>
@@ -202,7 +202,7 @@
 			e.preventDefault();
 			
 			if(!($(this).parent().parent().parent().hasClass("plusCommentExtends"))) {
-				var plusCommentBox = '<div class="plusCommentBox"><ion-icon name="return-down-forward-outline"></ion-icon><span class="plusComment_mbti">' + '${loginMemberInfo.mbti}' + '</span> <span class="plusComment_profile"><span class="plusComment_level">Lv.' + '${loginMemberInfo.level}' + '</span><span class="plusComment_nickName">' + '${loginMemberInfo.nickName}' + '</span></span><form><input type="text" name="plusComment" placeholder="댓글을 입력해보세요!"/><input type="submit" onclick="return false;"/><a href="#" class="plusComment_submit">등록</a></form></div>';
+				var plusCommentBox = '<div class="plusCommentBox"><ion-icon name="return-down-forward-outline"></ion-icon><span class="plusComment_mbti">' + '${loginMemberInfo.mbti}' + '</span> <span class="plusComment_profile"><span class="plusComment_level">Lv.' + '${loginMemberInfo.level}' + '</span> <span class="plusComment_nickName">' + '${loginMemberInfo.nickName}' + '</span></span><form><input type="text" name="plusComment" placeholder="댓글을 입력해보세요!"/><input type="submit" onclick="return false;"/><a href="#" class="plusComment_submit">등록</a></form></div>';
 			
 				$(this).parent().parent().parent().append(plusCommentBox);
 				$(this).parent().parent().parent().addClass("plusCommentExtends");

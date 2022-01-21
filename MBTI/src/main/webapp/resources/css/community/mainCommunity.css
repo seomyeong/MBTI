@@ -198,8 +198,16 @@ td {
 	font-size: 14px;
 }
 td.mbti {
+	position: relative;
 	color: lightseagreen;
 	width: 0;
+}
+td.mbti .mbtiImg {
+	position: absolute;
+	top: 9px;
+	left: 0;
+	width: 20px;
+	height: 13px;
 }
 td.nickName {
 	color: darksalmon;
