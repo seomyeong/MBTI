@@ -55,8 +55,7 @@
 							name="heart-outline"></ion-icon>
 				</span> <span class="title">궁합도</span>
 			</a></li>
-			<li><a href="/myapp/mbtiPlay/mbtiPlayZone"> <span class="icon"> <ion-icon
-							name="ear-outline"></ion-icon>
+			<li><a href="/myapp/mbtiPlay/mbtiPlayZone"> <span class="icon"> <ion-icon name="rocket-outline"></ion-icon>
 				</span> <span class="title">맙티 플레이</span>
 			</a></li>
 			<c:choose>
