@@ -14,6 +14,7 @@
 <script src="<%=request.getContextPath()%>/resources/js/community/board.js" defer></script>
 </head>
 <body>
+<jsp:include page="/resources/incl/header.jsp"></jsp:include>
 	<jsp:include page="/resources/incl/nav.jsp"></jsp:include>
 	<div id="main">
 		<div id="boardInfoWrap">

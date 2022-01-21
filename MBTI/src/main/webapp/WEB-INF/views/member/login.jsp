@@ -40,6 +40,11 @@
 		<div id="addMember">
 			<a href="/myapp/member/addMember">회원가입</a>
 		</div>
+		<div id="isfp">
+			<img
+				src="<%=request.getContextPath()%>/resources/img/avatar/MBTI_ISFP.png"
+				alt="isfp" class="avatar avatar14 isfp"></img>
+		</div>
 	</div>
 	<script>
 		function loginSubmit(form) {
