@@ -39,7 +39,7 @@
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>
-							<th>비밀번호 <br>확인
+							<th>비밀번호 확인
 							</th>
 							<td><input type="password" id="password2"
 								placeholder="비밀번호 재확인" onpaste="return false;"
