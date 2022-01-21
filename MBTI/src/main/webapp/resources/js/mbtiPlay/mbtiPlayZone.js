@@ -1,3 +1,7 @@
+$('#nav li:nth-of-type(5)').addClass('clicked');
+
+console.log($('#nav li:nth-of-type(5)'));
+
 function decoMove1() {
     $('#deco1').animate({ bottom: "30px" }, 2000).animate({ bottom: "0px" }, 2000)
 }
