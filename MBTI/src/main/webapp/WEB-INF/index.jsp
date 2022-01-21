@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>맙티</title> 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/index.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/common.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/popup.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/comment.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/mbtiCard.css">
@@ -16,7 +15,6 @@
 	src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"
 	defer></script>
 <script src="<%=request.getContextPath()%>/resources/js/indexForBanner.js" defer></script>
-<script src="<%=request.getContextPath()%>/resources/js/common.js" defer></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" defer></script>
 <script src="<%=request.getContextPath()%>/resources/js/jquery.bpopup-0.1.1.min.js" defer></script>
 <script src="<%=request.getContextPath()%>/resources/js/popup.js" defer></script>
