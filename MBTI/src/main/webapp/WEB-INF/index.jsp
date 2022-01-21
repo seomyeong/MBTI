@@ -251,11 +251,53 @@
 					</div>
 				</div>
 			</section>
-			<section id="mbtiCard">
-		
-			
-			
-			</section>
+            <section id="mbtiCard">
+                <h3 class="hidden">mbtiCard</h3>
+                <div id="mbtiCardTxt">
+                    <p>What's your Best Team?</p>
+                </div>
+                <div id="mbtiImg"></div>
+                <ul class="cardGroup analysisType">
+                    <li class="cardTitle">분석형
+                        <ul>
+                            <li>INTJ</li>
+                            <li>INTP</li>
+                            <li>ENTJ</li>
+                            <li>ENTP</li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="cardGroup diplomacyType">
+                    <li class="cardTitle">외교형
+                        <ul>
+                            <li>INFJ</li>
+                            <li>INFP</li>
+                            <li>ENFJ</li>
+                            <li>ENFP</li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="cardGroup administratorType">
+                    <li class="cardTitle">관리자형
+                        <ul>
+                            <li>ISTJ</li>
+                            <li>ISFJ</li>
+                            <li>ESTJ</li>
+                            <li>ESFJ</li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="cardGroup explorerType">
+                    <li class="cardTitle">탐험가형
+                        <ul>
+                            <li>ISTP</li>
+                            <li>ISFP</li>
+                            <li>ESTP</li>
+                            <li>ESFP</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
 		</div>
 
 	</div>
