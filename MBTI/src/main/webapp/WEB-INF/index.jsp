@@ -17,7 +17,6 @@
 	defer></script>
 <script src="<%=request.getContextPath()%>/resources/js/indexForBanner.js" defer></script>
 <script src="<%=request.getContextPath()%>/resources/js/common.js" defer></script>
-<script src="<%=request.getContextPath()%>/resources/js/mainCommunity.js" defer></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" defer></script>
 <script src="<%=request.getContextPath()%>/resources/js/jquery.bpopup-0.1.1.min.js" defer></script>
 <script src="<%=request.getContextPath()%>/resources/js/popup.js" defer></script>
