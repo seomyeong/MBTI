@@ -7,6 +7,7 @@
 }
 a { text-decoration: none;  
 	color: #f1adad;
+	cursor: pointer;
 }
 #header{
     width: 100%;
@@ -18,7 +19,7 @@ a { text-decoration: none;
     text-align: right;
     padding-right: 130px;
     box-sizing: border-box;
-
+    user-select: none;
 }
 /* My Best Team Is MBTI */
 #logo{
