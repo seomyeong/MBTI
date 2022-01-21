@@ -12,7 +12,7 @@
 </head>
 <body>
     <header id="header">
-        <p id="logo"> <a href="/myapp/"><span class="logoLetter">M</span>y <span class="logoLetter">B</span>est <span
+        <p id="logo"> <span class="logoLetter">M</span>y <span class="logoLetter">B</span>est <span
                 class="logoLetter">T</span>eam <span class="logoLetter">I</span>s &ensp;<span
                 class="logoMbti"> MBTI</span></p>
         <div id="logoIcon"></div>
