@@ -29,7 +29,7 @@
 							<td><form:input type="text" maxlength="30"
 									placeholder="5자리 이상 영문, 숫자" path="email1" autocomplete="off"
 									autofocus="autofocus" oninput="emailCheck(this.form)" /> @ <select
-								name="email2">
+								name="email2" style="width: 90px; height: 25px">
 									<option value="@naver.com">naver.com</option>
 									<option value="@daum.net">daum.net</option>
 									<option value="@gmail.com">gmail.com</option>
@@ -39,12 +39,15 @@
 						</tr>
 						<tr>
 							<th>비밀번호</th>
-							<td><form:password id="password1" placeholder="8자리 이상 문자, 숫자, 특수문자" path="pw" /></td>
+							<td><form:password id="password1"
+									placeholder="8자리 이상 문자, 숫자, 특수문자" path="pw" /></td>
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>
-							<th>비밀번호 <br>확인</th>
-							<td><form:password id="password2" placeholder="비밀번호 재확인" path="" /></td>
+							<th>비밀번호 확인
+							</th>
+							<td><form:password id="password2" placeholder="비밀번호 재확인"
+									path="" /></td>
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>
@@ -62,17 +65,16 @@
 						</tr>
 						<tr>
 							<th>생년월일</th>
-							<td><form:select class="year" path="birth" /> 년 <select
-								class="month" name="birth"></select> 월 <select class="day"
-								name="birth"></select> 일</td>
+							<td><form:select class="year" path="birth"
+									style="width:70px; height:25px" /> 년 <select class="month"
+								name="birth" style="width: 60px; height: 25px"></select> 월 <select
+								class="day" name="birth" style="width: 60px; height: 25px"></select>
+								일</td>
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>
 							<th>MBTI</th>
-							<td>
-								<%-- <form:select maxlength="4" placeholder="MBTI를 입력하세요"
-									path="mbti" required="required"
-									 /> --%> <select name="mbti">
+							<td><select name="mbti" style="width: 65px; height: 25px">
 									<option value="ENTJ">ENTJ</option>
 									<option value="ENTP">ENTP</option>
 									<option value="ENFJ">ENFJ</option>
@@ -89,48 +91,40 @@
 									<option value="ISTP">ISTP</option>
 									<option value="ISFJ">ISFJ</option>
 									<option value="ISFP">ISFP</option>
-							</select> <!-- <button
-									onclick="window.open('https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC','popup','width=1080, height=700, left=200, top=50');">검사하기</button> -->
-								<a id="mbtiBtn"
+							</select> <a id="mbtiBtn"
 								href="javascript:void(window.open('https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC', 'popup','width=1080, height=700, left=200, top=250'))">검사하기</a>
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>
 							<th>성별(선택)</th>
-							<td id="radioBtn">남자: <form:radiobutton path="gender" value="M" /> 여자: <form:radiobutton
-									path="gender" value="F" /> 선택안함: <form:radiobutton
-									path="gender" value="N" checked="checked" />
+							<td id="radioBtn">남자: <form:radiobutton path="gender"
+									value="M" /> 여자: <form:radiobutton path="gender" value="F" />
+								선택안함: <form:radiobutton path="gender" value="N"
+									checked="checked" />
 							</td>
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>
 							<th>휴대전화</th>
-							<td>
-							<form:input type="text" path="phone" maxlength="11"
-									minlength="11" placeholder="'-' 제외한 11자리 숫자" 
-									pattern="[0-9]+" /> </td>
+							<td><form:input type="text" path="phone" maxlength="11"
+									minlength="11" placeholder="'-' 제외한 11자리 숫자" pattern="[0-9]+" />
+							</td>
 
 							<td><span class="errorTxt errorTxt2"></span></td>
 						</tr>
 					</table>
 					<div id="addCustomer_btn">
-						<!-- <a onclick="javascript:history.back()">이전</a> -->
 						<a href="/myapp/index">이전</a> <input type="submit" value="회원가입"
 							onclick="checkPattern(this.form); return false" id="submit">
 					</div>
 				</form:form>
 			</div>
 			<div id="deco">
-            	<div id="deco1"></div>
-            	<div id="deco2"></div>
-            	<div id="deco3"></div>
-        	</div>
+				<div id="deco1"></div>
+				<div id="deco2"></div>
+				<div id="deco3"></div>
+			</div>
 		</main>
 	</div>
-	<script type="text/javascript">
-		
-	</script>
-
-
 </body>
 </html>

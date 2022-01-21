@@ -19,6 +19,7 @@ public class MemberDao {
 
 	/**
 	 * 회원가입
+	 * 
 	 * @param member
 	 */
 	public void addMember(Member member) {
@@ -29,6 +30,7 @@ public class MemberDao {
 
 	/**
 	 * 회원정보를 email로 조회
+	 * 
 	 * @param member
 	 * @return
 	 */
@@ -46,9 +48,10 @@ public class MemberDao {
 
 		}, member.getEmail());
 	}
-	
+
 	/**
 	 * Member테이블의 회원정보를 세션id로 조회
+	 * 
 	 * @param loginId
 	 * @return 회원정보
 	 */
@@ -59,10 +62,9 @@ public class MemberDao {
 			@Override
 			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Member m = new Member(rs.getLong("id"), rs.getString("email"), rs.getString("pw"), rs.getString("name"),
-						rs.getString("nickName"), rs.getString("birth"), rs.getString("mbti"),
-						rs.getString("gender"), rs.getString("phone"), rs.getDate("regDate"),
-						rs.getInt("level"), rs.getInt("mabPoint"), rs.getString("profileImg"),
-						rs.getInt("contentsCount"), rs.getInt("commentsCount"));
+						rs.getString("nickName"), rs.getString("birth"), rs.getString("mbti"), rs.getString("gender"),
+						rs.getString("phone"), rs.getDate("regDate"), rs.getInt("level"), rs.getInt("mabPoint"),
+						rs.getString("profileImg"), rs.getInt("contentsCount"), rs.getInt("commentsCount"));
 				return m;
 			}
 
@@ -71,6 +73,7 @@ public class MemberDao {
 
 	/**
 	 * 회원정보 수정
+	 * 
 	 * @param member
 	 * @param loginId
 	 */
@@ -82,7 +85,8 @@ public class MemberDao {
 	}
 
 	/**
-	 *  로그인
+	 * 로그인
+	 * 
 	 * @param member
 	 * @return
 	 */
@@ -109,6 +113,7 @@ public class MemberDao {
 
 	/**
 	 * LoginLog테이블에 로그인 이력 데이터 추가
+	 * 
 	 * @param loginId
 	 */
 	public void addLoginLog(Long loginId) {
@@ -118,6 +123,7 @@ public class MemberDao {
 
 	/**
 	 * LoginLog테이블에서 조회하는 당일 날짜와 일치하는 log데이터가 있는지 검사
+	 * 
 	 * @param loginId
 	 * @param nowYear
 	 * @param nowMonth
@@ -145,15 +151,17 @@ public class MemberDao {
 
 	/**
 	 * 매일 첫 로그인 유저에게 맙티포인트 10p 적립
+	 * 
 	 * @param loginId
 	 */
 	public void calcLoginPoint(Long loginId, int mapPoint) {
 		String sql = "UPDATE member SET mabPoint=? WHERE id=?";
-		jdbcTemplate.update(sql,mapPoint, loginId);
+		jdbcTemplate.update(sql, mapPoint, loginId);
 	}
-	
+
 	/**
-	 *  멤버의 맙포인트가 1000점모일 때 마다 레벨업
+	 * 멤버의 맙포인트가 1000점모일 때 마다 레벨업
+	 * 
 	 * @param loginId
 	 * @param level
 	 */
@@ -161,9 +169,10 @@ public class MemberDao {
 		String sql = "UPDATE Member SET level=level+? WHERE id=?";
 		jdbcTemplate.update(sql, level, loginId);
 	}
-	
+
 	/**
 	 * 레벨업 직후 맙포인트 리셋
+	 * 
 	 * @param loginId
 	 * @param mapPoint
 	 */
@@ -171,10 +180,10 @@ public class MemberDao {
 		String sql = "UPDATE member SET mabPoint=mabPoint-? WHERE id=?";
 		jdbcTemplate.update(sql, mapPoint, loginId);
 	}
-	
 
 	/**
 	 * 이메일 중복검사
+	 * 
 	 * @param email
 	 * @return
 	 */
@@ -199,6 +208,7 @@ public class MemberDao {
 
 	/**
 	 * 닉네임 중복검사
+	 * 
 	 * @param nickName
 	 * @return
 	 */
