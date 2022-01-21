@@ -39,8 +39,7 @@
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>
-							<th>비밀번호 확인
-							</th>
+							<th>비밀번호 확인</th>
 							<td><input type="password" id="password2"
 								placeholder="비밀번호 재확인" onpaste="return false;"
 								oncopy="return false;" /></td>
@@ -109,14 +108,24 @@
 						</tr>
 					</table>
 					<div id="updateMember_btn">
-						<a href="/myapp/index">이전</a> <input type="submit" value="정보수정"
+						<a href="/myapp/index">이전</a> <input type="submit" value="수정완료"
 							onclick="checkPattern(this.form); return false" id="submit">
 					</div>
 				</form:form>
 			</div>
 			<div id="deco">
-				<div id="deco1"></div>
-				<div id="deco2"></div>
+				<div id="deco1">
+					<img
+						src="<%=request.getContextPath()%>/resources/img/avatar/MBTI_INFP.png"
+						alt="infp" class="avatar avatar10 infp"></img><img
+						src="<%=request.getContextPath()%>/resources/img/avatar/MBTI_ESFJ.png"
+						alt="esfj" class="avatar avatar5 esfj"></img>
+				</div>
+				<div id="deco2">
+					<img
+						src="<%=request.getContextPath()%>/resources/img/avatar/MBTI_INFJ.png"
+						alt="infj" class="avatar avatar9 infj"></img>
+				</div>
 				<div id="deco3"></div>
 			</div>
 		</main>
