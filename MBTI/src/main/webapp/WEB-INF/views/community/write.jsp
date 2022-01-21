@@ -9,11 +9,11 @@
 <meta charset="UTF-8">
 <title>맙티</title>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/write.css">
+	href="<%=request.getContextPath()%>/resources/css/community/write.css">
 <script
 	src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"
 	defer></script>
-<script src="<%=request.getContextPath()%>/resources/js/write.js" defer></script>
+<script src="<%=request.getContextPath()%>/resources/js/community/write.js" defer></script>
 </head>
 
 <body>
