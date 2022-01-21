@@ -9,11 +9,11 @@
 <title>맙티</title>
 </head>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/updateMember.css">
+	href="<%=request.getContextPath()%>/resources/css/member/updateMember.css">
 <script
 	src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"
 	defer></script>
-<script src="<%=request.getContextPath()%>/resources/js/updateMember.js"
+<script src="<%=request.getContextPath()%>/resources/js/member/updateMember.js"
 	defer></script>
 <body>
 	<jsp:include page="/resources/incl/nav.jsp"></jsp:include>

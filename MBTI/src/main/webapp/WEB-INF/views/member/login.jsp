@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>맙티</title>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/login.css">
+	href="<%=request.getContextPath()%>/resources/css/member/login.css">
 <script
 	src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"
 	defer></script>

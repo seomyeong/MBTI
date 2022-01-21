@@ -8,11 +8,11 @@
 <meta charset="UTF-8">
 <title>맙티</title>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/addMember.css">
+	href="<%=request.getContextPath()%>/resources/css/member/addMember.css">
 <script
 	src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"
 	defer></script>
-<script src="<%=request.getContextPath()%>/resources/js/addMember.js"
+<script src="<%=request.getContextPath()%>/resources/js/member/addMember.js"
 	defer></script>
 </head>
 <body>
@@ -91,7 +91,7 @@
 									<option value="ISFJ">ISFJ</option>
 									<option value="ISFP">ISFP</option>
 							</select> <a id="mbtiBtn"
-								href="javascript:void(window.open('https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC', 'popup','width=1080, height=700, left=200, top=250'))">검사하기</a>
+								href="javascript:void(window.open('https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC', 'popup','width=1080, height=700, left=200, bottom=250'))">검사하기</a>
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>

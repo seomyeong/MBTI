@@ -5,39 +5,39 @@ a {
 	color: #000;
 }
 
-#addCustomer h1 {
+#updateMember h1 {
 	text-align: center;
 	font-size: 50px;
 	margin: 55px auto;
 }
 
-#addCustomer_wrap {
+#updateMember_wrap {
 	position: relative;
 	z-index: 1;
 }
 
-#addCustomer_wrap table {
+#updateMember_wrap table {
 	width: 100%;
 	margin: -30px 34.5%;
 }
 
-#addCustomer_wrap th {
+#updateMember_wrap th {
 	width: 0px;
 	height: 75px;
 	font-weight: bolder;
 }
 
-#addCustomer_wrap tr {
+#updateMember_wrap tr {
 	margin: -25px auto;
 }
 
-#addCustomer_wrap td {
+#updateMember_wrap td {
 	padding-left: 50px;
 	width: 250px;
 	padding-bottom: 2px;
 }
 
-#addCustomer_wrap .errorTxt {
+#updateMember_wrap .errorTxt {
 	display: inline-block;
 	color: red;
 	font-size: 13px;
@@ -47,7 +47,7 @@ a {
 	top: 33px;
 }
 
-#addCustomer_wrap input {
+#updateMember_wrap input {
 	border-radius: 5px;
 	width: 250px;
 	height: 45px;
@@ -59,18 +59,18 @@ a {
 	font-weight: bold;
 }
 
-#addCustomer_wrap input:focus {
+#aupdateMember_wrap input:focus {
 	outline: #b2d4ad;
 	border: 1px solid gray;
 }
 
-#addCustomer_btn {
+#updateMember_btn {
 	width: 250px;
 	height: 25px;
 	margin: 50px 43%;
 }
 
-#addCustomer_btn a {
+#updateMember_btn a {
 	display: inline-block;
 	width: 110px;
 	height: 40px;
@@ -82,15 +82,15 @@ a {
 	line-height: 40px;
 }
 
-#addCustomer_btn a:hover {
+#updateMember_btn a:hover {
 	background: #b2d4ad;
 }
 
-#addCustomer label {
+#updateMember label {
 	font-weight: bold;
 }
 
-#addCustomer_btn #submit {
+#updateMember_btn #submit {
 	cursor: pointer;
 	width: 110px;
 	height: 40px;
@@ -103,7 +103,7 @@ a {
 	line-height: 40px;
 }
 
-#addCustomer_btn #submit:hover {
+#updateMember_btn #submit:hover {
 	background: #b2d4ad;
 }
 
@@ -151,6 +151,10 @@ input[type='radio']:checked {
 	background-color: gray;
 }
 
+#email1, #name {
+	background-color: rgba(215, 212, 212, 1);
+}
+
 /* deco */
 #deco1 {
 	position: absolute;
@@ -158,8 +162,8 @@ input[type='radio']:checked {
 	left: -20px;
 	width: 400px;
 	height: 400px;
-	opacity: 0.7;
-	background: url(../img/icon/deco1.png) no-repeat center;
+	opacity: 0.5;
+	background: url(../../img/icon/deco1.png) no-repeat center;
 	background-size: 100%;
 }
 
@@ -169,8 +173,8 @@ input[type='radio']:checked {
 	right: 100px;
 	width: 300px;
 	height: 300px;
-	opacity: 0.7;
-	background: url(../img/icon/deco2.png) no-repeat center;
+	opacity: 0.6;
+	background: url(../../img/icon/deco2.png) no-repeat center;
 	background-size: 100%;
 }
 
@@ -181,7 +185,7 @@ input[type='radio']:checked {
 	width: 110px;
 	height: 110px;
 	opacity: 0.2;
-	background: url(../img/icon/deco3.png) no-repeat center;
+	background: url(../../img/icon/deco3.png) no-repeat center;
 	background-size: 100%;
 }
 
@@ -191,20 +195,20 @@ input[type='radio']:checked {
 	height: 215px
 }
 
-#deco1 .enfp{
+#deco1 .infp{
 	position: absolute;
 	bottom: 100px;
 	left: 40px;
 }
 
-#deco1 .isfj{
+#deco1 .esfj{
 	position: absolute;
 	bottom: 100px;
 	left: 190px;
 }
 
-#deco2 .istp{
+#deco2 .infj{
 	position: absolute;
 	bottom: 50px;
-	left: 70px;
+	left: 60px;
 }

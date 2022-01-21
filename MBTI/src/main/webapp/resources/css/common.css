@@ -15,6 +15,7 @@
     /* font-family: 'Ubuntu', sans-serif; */
     font-family: 'KoddiUDOnGothic-Regular';
 }
+
 :root {
     --green: #b2d4ad;
     --white: #fff;
@@ -23,6 +24,7 @@
     --black2: #999;
     --black3: #555;
 }
+
 body {
     min-height: 100vh;
     overflow-x: hidden;
