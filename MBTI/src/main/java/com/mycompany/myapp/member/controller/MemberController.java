@@ -49,7 +49,6 @@ public class MemberController {
 		Member member = new Member(email, memberCommand.getPw(), memberCommand.getName(), memberCommand.getNickName(),
 				memberCommand.getBirth(), memberCommand.getMbti(), memberCommand.getGender(), memberCommand.getPhone(),
 				profileImg);
-		System.out.println(memberCommand.getBirth());
 		memberService.addMember(member);
 		mav.setViewName("redirect:/");
 		return mav;
@@ -105,7 +104,7 @@ public class MemberController {
 	@PostMapping("/member/login")
 	public ModelAndView login(Member member, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		
+
 		Date today = new Date();
 		SimpleDateFormat yearDf = new SimpleDateFormat("yyyy");
 		SimpleDateFormat monthDf = new SimpleDateFormat("MM");
@@ -117,7 +116,7 @@ public class MemberController {
 
 		if (memberService.login(member)) {
 			Member memberInfo = memberService.memberInfo(member);
-			
+
 			// 첫 로그인인지 아닌지 구분
 			if (!(memberService.isLoginLogDate(memberInfo.getId(), nowYear, nowMonth, nowDay))) {
 
@@ -132,12 +131,12 @@ public class MemberController {
 				long loginId = (long) session.getAttribute("loginId");
 				memberService.addLoginLog(loginId);
 				memberService.calcLoginPoint(loginId);
-				
+
 				mav.setViewName("redirect:/");
 				return mav;
 
 			} else {
-				
+
 				String[] memberInfoBirth = memberInfo.getBirth().split(",");
 				session.setAttribute("memberInfoBirth", memberInfoBirth);
 				session.setAttribute("memberInfo", memberInfo);
@@ -165,8 +164,6 @@ public class MemberController {
 	@GetMapping("/member/logout")
 	public String logoutGET(HttpSession session) throws Exception {
 
-//		session.getAttribute("loginId");
-//		session.invalidate();
 		session.removeAttribute("loginId");
 		session.removeAttribute("memberInfo");
 

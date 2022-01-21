@@ -8,12 +8,12 @@
 <meta charset="UTF-8">
 <title>맙티</title>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/mainCommunity.css">
+	href="<%=request.getContextPath()%>/resources/css/community/mainCommunity.css">
 <script
 	src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"
 	defer></script>
 <script
-	src="<%=request.getContextPath()%>/resources/js/mainCommunity.js" defer></script>
+	src="<%=request.getContextPath()%>/resources/js/community/mainCommunity.js" defer></script>
 </head>
 
 <body>

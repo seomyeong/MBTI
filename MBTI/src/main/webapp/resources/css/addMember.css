@@ -7,8 +7,8 @@ a {
 
 #addCustomer h1 {
 	text-align: center;
-	font-size: 40px;
-	margin: 40px auto;
+	font-size: 50px;
+	margin: 55px auto;
 }
 
 #addCustomer_wrap {
@@ -18,17 +18,21 @@ a {
 
 #addCustomer_wrap table {
 	width: 100%;
-	margin: -25px 38%;
+	margin: -30px 34.5%;
 }
 
 #addCustomer_wrap th {
 	width: 0px;
-	height: 62px;
+	height: 75px;
 	font-weight: bolder;
 }
 
+#addCustomer_wrap tr {
+	margin: -25px auto;
+}
+
 #addCustomer_wrap td {
-	padding-left: 30px;
+	padding-left: 50px;
 	width: 250px;
 	padding-bottom: 2px;
 }
@@ -37,26 +41,21 @@ a {
 	display: inline-block;
 	color: red;
 	font-size: 13px;
-	width: 300px;
+	width: 310px;
 	position: relative;
-	left: -79%;
-	top: 28px;
+	left: -87.5%;
+	top: 33px;
 }
-
-/* #addCustomer_wrap .errorTxt2 {
-	position: relative;
-	left: -72%;
-} */
 
 #addCustomer_wrap input {
 	border-radius: 5px;
-	width: 170px;
-	height: 28px;
+	width: 250px;
+	height: 45px;
 	border: 1px solid #b2d4ad;
 	padding: 2px;
 	padding-left: 7px;
 	position: relative;
-	font-size: 12px;
+	font-size: 15px;
 	font-weight: bold;
 }
 
@@ -66,17 +65,21 @@ a {
 }
 
 #addCustomer_btn {
-	text-align: center;
-	margin-top: 42px;
+	width: 250px;
+	height: 25px;
+	margin: 50px 43%;
 }
 
 #addCustomer_btn a {
 	display: inline-block;
-	width: 70px;
-	height: 30px;
+	width: 110px;
+	height: 40px;
 	background: rgba(255, 255, 255, 0.3);
-	line-height: 30px;
+	line-height: 40px;
 	border-radius: 5px;
+	font-size: 25px;
+	text-align: center;
+	line-height: 40px;
 }
 
 #addCustomer_btn a:hover {
@@ -89,12 +92,15 @@ a {
 
 #addCustomer_btn #submit {
 	cursor: pointer;
-	width: 70px;
-	height: 30px;
+	width: 110px;
+	height: 40px;
 	background: rgba(255, 255, 255, 0.3);
 	border: none;
 	font-family: 'GowunDodum-Regular';
-	font-size: 16px;
+	border-radius: 5px;
+	font-size: 25px;
+	text-align: center;
+	line-height: 40px;
 }
 
 #addCustomer_btn #submit:hover {
@@ -126,9 +132,8 @@ input[type='radio']:checked {
 
 #radioBtn input {
 	top: -6px;
-	width: 20px;
-	height: 20px;
-	width: 20px;
+	width: 25px;
+	height: 25px;
 }
 
 #mbtiBtn {
@@ -147,34 +152,35 @@ input[type='radio']:checked {
 }
 
 /* deco */
-#deco1{
-  position: absolute;
-  bottom: 0px;
-  left: -20px;
-  width: 400px;
-  height: 400px;
-  opacity: 0.3;
-  background: url(../img/icon/deco1.png) no-repeat center;
-  background-size: 100%;
-}
-#deco2{
-  position: absolute;
-  top: 100px;
-  right: 100px;
-  width: 300px;
-  height: 300px;
-  opacity: 0.2;
-  background: url(../img/icon/deco2.png) no-repeat center;
-  background-size: 100%;
+#deco1 {
+	position: absolute;
+	bottom: 0px;
+	left: -20px;
+	width: 400px;
+	height: 400px;
+	opacity: 0.3;
+	background: url(../img/icon/deco1.png) no-repeat center;
+	background-size: 100%;
 }
 
-#deco3{
-  position: absolute;
-  bottom: 180px;
-  left: 400px;
-  width: 110px;
-  height: 110px;
-  opacity: 0.2;
-  background: url(../img/icon/deco3.png) no-repeat center;
-  background-size: 100%;
+#deco2 {
+	position: absolute;
+	top: 100px;
+	right: 100px;
+	width: 300px;
+	height: 300px;
+	opacity: 0.2;
+	background: url(../img/icon/deco2.png) no-repeat center;
+	background-size: 100%;
+}
+
+#deco3 {
+	position: absolute;
+	bottom: 180px;
+	left: 400px;
+	width: 110px;
+	height: 110px;
+	opacity: 0.2;
+	background: url(../img/icon/deco3.png) no-repeat center;
+	background-size: 100%;
 }

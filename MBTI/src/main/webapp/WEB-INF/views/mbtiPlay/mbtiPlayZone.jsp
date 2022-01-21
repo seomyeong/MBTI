@@ -11,7 +11,7 @@
 <script
 	src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
 <script
-	src="<%=request.getContextPath()%>/resources/js/mbtiPlay/mbtiPlayZone.js"></script>
+	src="<%=request.getContextPath()%>/resources/js/mbtiPlay/mbtiPlayZone.js" defer></script>
 
 </head>
 <body>

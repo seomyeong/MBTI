@@ -1,3 +1,5 @@
+$('#nav li:nth-of-type(5)').addClass('clicked');
+
 const chart1 = document.querySelector('.doughnut1')
 
 const makeChart = (percent, classname, color) => {

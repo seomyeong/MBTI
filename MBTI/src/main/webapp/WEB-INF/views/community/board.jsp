@@ -8,10 +8,10 @@
 <meta charset="UTF-8">
 <title>맙티</title>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/board.css">
+	href="<%=request.getContextPath()%>/resources/css/community/board.css">
 <script
 	src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
-<script src="<%=request.getContextPath()%>/resources/js/board.js" defer></script>
+<script src="<%=request.getContextPath()%>/resources/js/community/board.js" defer></script>
 </head>
 <body>
 	<jsp:include page="/resources/incl/nav.jsp"></jsp:include>

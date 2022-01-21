@@ -39,7 +39,7 @@
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>
-							<th>비밀번호 <br>확인
+							<th>비밀번호 확인
 							</th>
 							<td><input type="password" id="password2"
 								placeholder="비밀번호 재확인" onpaste="return false;"
@@ -69,11 +69,7 @@
 						</tr>
 						<tr>
 							<th>MBTI</th>
-							<td>
-								<%-- <form:select maxlength="4" placeholder="MBTI를 입력하세요"
-									path="mbti" required="required"
-									 /> --%> <select id="mbti" name="mbti">
-									<%-- <option><%=request.getParameter("mbti")%></option> --%>
+							<td><select id="mbti" name="mbti">
 									<option value="ENTJ">ENTJ</option>
 									<option value="ENTP">ENTP</option>
 									<option value="ENFJ">ENFJ</option>
@@ -90,9 +86,7 @@
 									<option value="ISTP">ISTP</option>
 									<option value="ISFJ">ISFJ</option>
 									<option value="ISFP">ISFP</option>
-							</select> <!-- <button
-									onclick="window.open('https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC','popup','width=1080, height=700, left=200, top=50');">검사하기</button> -->
-								<a id="mbtiBtn"
+							</select> <a id="mbtiBtn"
 								href="javascript:void(window.open('https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC', 'popup','width=1080, height=700, left=200, top=50'))">검사하기</a>
 							<td><span class="errorTxt"></span></td>
 						</tr>
@@ -115,17 +109,16 @@
 						</tr>
 					</table>
 					<div id="updateMember_btn">
-						<!-- <a onclick="javascript:history.back()">이전</a> -->
 						<a href="/myapp/index">이전</a> <input type="submit" value="정보수정"
 							onclick="checkPattern(this.form); return false" id="submit">
 					</div>
 				</form:form>
 			</div>
 			<div id="deco">
-            	<div id="deco1"></div>
-            	<div id="deco2"></div>
-            	<div id="deco3"></div>
-        	</div>
+				<div id="deco1"></div>
+				<div id="deco2"></div>
+				<div id="deco3"></div>
+			</div>
 		</main>
 
 	</div>

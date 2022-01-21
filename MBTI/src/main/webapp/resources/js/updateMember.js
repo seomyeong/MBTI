@@ -36,7 +36,7 @@ function checkPattern(form) {
 		$('.errorTxt').eq(4).text("2자리 이상 입력해주세요.").css("color", "red");
 		pass = false;
 	}
-	
+
 	// 휴대전화 검사 
 	if (form.phone.value.search(/[^0-9]/) != -1) {
 		$('.errorTxt').eq(8).text("잘못된 번호형식 입니다.");
@@ -68,7 +68,7 @@ function checkPattern(form) {
 		alert("닉네임에 공백은 들어갈 수 없습니다.");
 		pass = false;
 	}
-	
+
 	// 컨트롤러
 	if (pass == true) {
 		var formTag = document.getElementById("form");
@@ -90,19 +90,19 @@ function checkPattern(form) {
 //닉네임 중복검사
 function nickNameCheck(form) {
 	var nickName = form.nickName.value;
-	
+
 	var param = {
 		"nickName": nickName,
 	}
-	
+
 	$.ajax({
 		type: "post",
 		data: JSON.stringify(param),
 		url: "/myapp/member/nickNameCheck",
 		contentType: "application/json; charset=UTF-8",
 		success: function(data) {
-			
-			if(loginNickName == nickName) {
+
+			if (loginNickName == nickName) {
 				pass = true;
 			} else if (data["nickName"] == "") {
 				$('.errorTxt').eq(4).html("");
@@ -120,7 +120,7 @@ function nickNameCheck(form) {
 
 
 function decoMove() {
-    $('#deco1').animate({ bottom: "30px" }, 2000).animate({ bottom: "0px" }, 2000)
+	$('#deco1').animate({ bottom: "30px" }, 2000).animate({ bottom: "0px" }, 2000)
 	$('#deco2').animate({ top: "80px" }, 2500).animate({ top: "50px" }, 2500)
 	$('#deco3').animate({ bottom: "180px" }, 3000).animate({ bottom: "200px" }, 3500)
 }

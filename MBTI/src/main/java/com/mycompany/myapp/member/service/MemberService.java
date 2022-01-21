@@ -45,7 +45,7 @@ public class MemberService {
 	public void addLoginLog(Long loginId) {
 		dao.addLoginLog(loginId);
 	}
-	
+
 	/**
 	 * LoginLog테이블에서 조회하는 당일 날짜와 일치하는 log데이터가 있는지 검사
 	 */
@@ -62,15 +62,16 @@ public class MemberService {
 	 */
 	public void calcLoginPoint(Long loginId) {
 		Member m = dao.findMemberById(loginId);
-		
+
 		m.calcLoginPoint();
 		dao.calcLoginPoint(loginId, m.getMabPoint());
-		
+
 		this.levelUp(m);
 	}
-	
+
 	/**
-	 *  멤버 레벨업 계산
+	 * 멤버 레벨업 계산
+	 * 
 	 * @param member
 	 */
 	public void levelUp(Member member) {
@@ -78,8 +79,8 @@ public class MemberService {
 		int maxExp = 1000;
 		int map = member.getMabPoint();
 		int level = map / maxExp;
-		
-		if(level != 0) {
+
+		if (level != 0) {
 			dao.levelUp(member.getId(), level);
 			dao.updateMapMinus(member.getId(), level * maxExp);
 		}

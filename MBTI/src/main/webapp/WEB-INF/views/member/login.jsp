@@ -32,26 +32,13 @@
 					</tr>
 				</table>
 				<div id="login_btn">
-					<!-- <div id="saveId">
-						<c:choose>
-							<c:when test="${sessionScope.memberInfo.email eq null}">
-								<label><input type="checkbox" name="saveId"><span>아이디
-										기억하기</span></label>
-							</c:when>
-							<c:otherwise>
-								<label><input type="checkbox" name="saveId"
-									checked="checked"><span>아이디 기억하기</span></label>
-							</c:otherwise>
-						</c:choose>
-					</div> -->
-					<!--  <a onclick="javascript:history.back()">이전</a> -->
-					 <a href="/myapp/index">이전</a> <input type="submit" value="로그인"
+					<a href="/myapp/index">이전</a> <input type="submit" value="로그인"
 						id="submit">
 				</div>
-				<div id="addMember">
-					<a href="/myapp/member/addMember">회원가입</a>
-				</div>
 			</form>
+		</div>
+		<div id="addMember">
+			<a href="/myapp/member/addMember">회원가입</a>
 		</div>
 	</div>
 	<script>
