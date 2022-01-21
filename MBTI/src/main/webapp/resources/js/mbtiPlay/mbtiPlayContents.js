@@ -1,3 +1,5 @@
+$('#nav li:nth-of-type(5)').addClass('clicked');
+
 $('#statistics').css({ opacity: 0 })
 $('#answersSubmit').hide()
 $('#memberMbti').hide()
