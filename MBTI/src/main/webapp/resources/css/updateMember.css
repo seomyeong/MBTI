@@ -162,7 +162,7 @@ input[type='radio']:checked {
 	left: -20px;
 	width: 400px;
 	height: 400px;
-	opacity: 0.3;
+	opacity: 0.7;
 	background: url(../img/icon/deco1.png) no-repeat center;
 	background-size: 100%;
 }
@@ -173,7 +173,7 @@ input[type='radio']:checked {
 	right: 100px;
 	width: 300px;
 	height: 300px;
-	opacity: 0.2;
+	opacity: 0.7;
 	background: url(../img/icon/deco2.png) no-repeat center;
 	background-size: 100%;
 }
@@ -187,4 +187,28 @@ input[type='radio']:checked {
 	opacity: 0.2;
 	background: url(../img/icon/deco3.png) no-repeat center;
 	background-size: 100%;
+}
+
+#deco img {
+	display: inline;
+	width: 175px;
+	height: 215px
+}
+
+#deco1 .infp{
+	position: absolute;
+	bottom: 100px;
+	left: 40px;
+}
+
+#deco1 .esfj{
+	position: absolute;
+	bottom: 100px;
+	left: 190px;
+}
+
+#deco2 .infj{
+	position: absolute;
+	bottom: 50px;
+	left: 60px;
 }

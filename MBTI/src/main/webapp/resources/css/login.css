@@ -127,6 +127,14 @@ a {
 	color: #fff;
 }
 
+#isfp {
+	position: absolute;
+	top: 70px;
+	left: 40px;
+	opacity: 0.9;
+}
+
+
 /* #addMember a:hover {
 	color: #b2d4ad;
 	background: #fff;
