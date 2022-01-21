@@ -142,13 +142,12 @@ li{
 .cardTitle li{grid-area: main;}
 #mbtiCard{
     position: relative;
-    padding-top: 160px;
-    padding-left: 20px;
+    padding-top: 100px;
+    padding-left: 40px;
     width: 100%; height: 100%;
     min-width: 550px;
-    box-sizing: border-box;
     display: grid;
-    grid-template-columns: 100px 100px 100px 100px;
+    grid-template-columns: 10% 10% 10% 10%;
     grid-template-areas: 'title title title title'
                          'main main main main';
     gap: 5px 5px;
@@ -156,25 +155,44 @@ li{
 #mbtiCardTxt{
     position: absolute;
     top: 30px;
-    left: 30px;
-    font-size: 50px;
+    left: 20px;
+    font-size: 42px;
     font-weight: bold;
     letter-spacing: 5px;
 }
 #mbtiCardTxt p{
     font-family: 'Cafe24Ssurround';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 750px;
+    text-align: center;
 }
 #mbtiImg{
     position: absolute;
-    top: 135px;
-    right: 20px;
+    top: 105px;
+    right: 10px;
+    padding: 20px;
+    box-sizing: border-box;
     border: 3px solid #eee;
     border-radius: 10px;
     box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.1);
     width: 42%;
-    height: 400px;
+    height: 80%;
     background: #fff;
-    margin: 0 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#mbtiDeco{
+    position: absolute;
+    top: 10%;
+    right: 33%;
+    z-index: 3;
+    width: 70px;
+    height: 220px;
+    background: url(../img/icon/tape2.png) no-repeat center;
+    background-size: 70px 220px;
+    transform: rotate(40deg);
 }
 #mbtiCard>ul li{
     display: block;
@@ -183,24 +201,12 @@ li{
     line-height: 60px;
     margin-bottom: 10px;
 }
-
-#mbtiDeco{
-    position: absolute;
-    top: 70px;
-    right: calc(50% - 140px);
-    z-index: 3;
-    width: 70px;
-    height: 220px;
-    background: url(../img/icon/tape2.png) no-repeat center;
-    background-size: 70px 220px;
-    transform: rotate(40deg);
-}
-
 .cardGroup{
     width: 100%;
 }
 
 .cardGroup li{
+    font-size: 13px;
     color: var(--black3);
     font-weight: bold;
 }
@@ -209,6 +215,10 @@ li{
     border-radius: 10px;
     cursor: pointer;
     box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.1);
+    transition: 0.2s;
+}
+.cardGroup li ul li:hover{
+    color: #f55454;
 }
 
 .analysisType li ul li{
@@ -224,33 +234,35 @@ li{
     background: #fae57c;
 }
 
-/* 카드 */
+/* append by js */
 #cardAvatar{
-    margin-left: 60px;
-    width: 230px;
-    height: 250px;
+    margin-top: -13px;
+    margin-left: 43px;
+    width: 210px;
+    height: 230px;
 }
 .MBTITip{
-    margin-top: 250px;
+    margin-top: 220px;
+    font-size: 15px;
     text-align: center;
 }
 .analysisTypeSpan{
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bold;
     color: #b8a2b4;
 }
 .diplomacyTypeSpan{
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bold;
     color: #b2d4ad;
 }
 .administratorTypeSpan{
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bold;
     color: #b9e2e9;
 }
 .explorerTypeSpan{
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bold;
     color: #f5db59;
 }
