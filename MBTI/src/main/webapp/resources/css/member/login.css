@@ -112,26 +112,27 @@ a {
 
 #addMember a {
 	display: inline-block;
-	width: 200px;
+	width: 180px;
 	height: 60px;
 	background: rgba(255, 255, 255, 0.3);
-	line-height: 40px;
-	border-radius: 7px;
-	font-size: 50px;
+	border-radius: 30px;
+	font-size: 35px;
     text-align: center;
-    line-height: 60px;
+    line-height: 50px;
     position: absolute;
 	bottom: 100px;
 	right: 150px;
 	background: #b2d4ad;
 	color: #fff;
+ 	padding: 5px;
+	
 }
 
 #isfp {
 	position: absolute;
-	top: 70px;
+	bottom: 70px;
 	left: 40px;
-	opacity: 0.7;
+	opacity: 0.4;
 }
 
 

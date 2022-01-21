@@ -5,6 +5,9 @@
     font-weight: normal;
     font-style: normal;
 }
+a { text-decoration: none;  
+	color: #f1adad;
+}
 #header{
     width: 100%;
     line-height: 70px;
