@@ -100,7 +100,7 @@
 			<c:forEach var="communityBoard" items="${cbList_hot}">
 				<tr class="contents_hot">
 					<td class="likes">${communityBoard.likes}</td>
-					<td class="mbti">${communityBoard.member.mbti}</td>
+					<td class="mbti"><span class="mbtiImg" style="background: url(${communityBoard.member.profileImg}) 0 0 / cover"></span>${communityBoard.member.mbti}</td>
 					<td class="nickName">
 					<c:choose>
 						<c:when test="${communityBoard.member.level >= 70}">
@@ -129,7 +129,7 @@
 			<c:forEach var="communityBoard" items="${cbList}">
 				<tr class="contents">
 					<td class="likes">${communityBoard.likes}</td>
-					<td class="mbti">${communityBoard.member.mbti}</td>
+					<td class="mbti">${communityBoard.member.mbti}<span class="mbtiImg" style="background: url(${communityBoard.member.profileImg}) 0 0 / cover"></span></td>
 					<td class="nickName">
 					<c:choose>
 						<c:when test="${communityBoard.member.level >= 70}">
