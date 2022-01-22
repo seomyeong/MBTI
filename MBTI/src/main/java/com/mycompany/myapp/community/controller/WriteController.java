@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mycompany.myapp.community.service.CommunityService;
-import com.mycompany.myapp.domain.CommunityBoard;
 
 @Controller
 public class WriteController {
