@@ -19,13 +19,13 @@ public class PagingVO {
 	private int startPage; // 각 페이지 범위 시작번호
 	private int startList; // 게시판 시작번호
 	private int endPage; // 각 페이지 범위 끝번호
-	private int pageListSize;
-	private int pageCnt_unCeil;
+	
+	private int pageListSize; // 마지막 페이지가 10개가 아닐 경우 대비
+	private int pageCnt_unCeil; // 총 페이지의 개수를 내림 한 것
 
 	private boolean prev; // 이전 버튼 상태
 	private boolean next; // 다음 버튼 상태
 	
-	public PagingVO() {}
 
 	public void pageInfo(int page, int range, int listCnt) {
 
@@ -63,4 +63,6 @@ public class PagingVO {
 			this.next = false;
 		}
 	}
+	
+	public PagingVO() {}
 }
