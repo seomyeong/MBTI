@@ -193,6 +193,10 @@ SELECT * FROM CultureBoardComment;
 SELECT * FROM LikeLogForCulture;
 SELECT * FROM LikeLogComment;
 
+DROP TABLE CultureBoard;
+DROP TABLE CultureBoardComment;
+DROP TABLE LikeLogForCulture;
+DROP TABLE LikeLogComment;
 
 CREATE TABLE CultureBoard(
 	id				BIGINT			PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -237,5 +241,366 @@ CREATE TABLE LikeLogComment(
 );
 
 
+---- mbtiMatch ----
+
+SELECT * FROM MEMBER;
+SELECT * FROM MbtiMatch;
+SELECT * FROM MbtiComments;
+
+DROP TABLE MEMBER;
+DROP TABLE MbtiMatch;
+DROP TABLE MbtiComments;
+
+UPDATE MEMBER SET profileImg='/myapp/resources/img/avatar/MBTI_ENFP.png' WHERE mbti='ENFP';
+UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_INFP.png' WHERE mbti='INFP';
+UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ESFP.png' WHERE mbti='ESFP';
+UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ISFP.png' WHERE mbti='ISFP';
+UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ENTP.png' WHERE mbti='ENTP';
+UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_INTP.png' WHERE mbti='INTP';
+UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ESTP.png' WHERE mbti='ESTP';
+UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ISTP.png' WHERE mbti='ISTP';
+UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ENFJ.png' WHERE mbti='ENFJ';
+UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_INFJ.png' WHERE mbti='INFJ';
+UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ISFJ.png' WHERE mbti='ISFJ';
+UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_INTJ.png' WHERE mbti='INTJ';
+UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ESTJ.png' WHERE mbti='ESTJ';
+UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ESFJ.png' WHERE mbti='ESFJ';
+UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ISTJ.png' WHERE mbti='ISTJ';
+UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ENTJ.png' WHERE mbti='ENTJ';
+
+INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('ydh1178@naver.com', '1234', '김종성', '종성', '961124', 'M', 'ISFJ', '010-8599-7622');
+INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('test@test.com', '1234', '혜윤씨', '혜윤', '001122', 'W', 'ENFP', '010-1111-2222');
+INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('tnals@test.com', '1234', '황수민', '수민', '967777', 'M', 'INFJ', '010-5555-6666');
+INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('tjaud@test.com', '1234', '이서명', '서명', '957777', 'W', 'ESFJ', '010-0000-9999');
+INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('dnjswls@test.com', '1234', '김원진', '원진', '997777', 'M', 'ISFP', '010-1111-0000');
+INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('wldud@test.com', '1234', '정지영', '지영', '947777', 'W', 'INFP', '010-2222-0000');
+INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('test1@test.com', '1234', '테스트', '테스트1', '961124', 'M', 'INTP', '010-8599-7622');
+INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('test2@test.com', '1234', '테스트', '테스트2', '001122', 'W', 'ENTP', '010-1111-2222');
+INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('test3@test.com', '1234', '테스트', '테스트3', '967777', 'M', 'ISTP', '010-5555-6666');
+INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('test4@test.com', '1234', '테스트', '테스트4', '957777', 'W', 'ENTP', '010-0000-9999');
+INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('test5@test.com', '1234', '테스트', '테스트5', '997777', 'M', 'INFP', '010-1111-0000');
+INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('test6@test.com', '1234', '테스트', '테스트6', '947777', 'W', 'INFP', '010-2222-0000');
+INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('chung12@naver.com', 'wldud12!!', '정정', '졍졍1234', '220115', 'W', 'INFP', '01011111111');
 
 
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTJ', 'ENTJ', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTJ', 'ENTP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTJ', 'INTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTJ', 'INTP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTJ', 'ESTJ', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTJ', 'ESFJ', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTJ', 'ISTJ', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTJ', 'ISFJ', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTJ', 'ENFJ', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTJ', 'ENFP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTJ', 'INFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTJ', 'INFP', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTJ', 'ESTP', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTJ', 'ESFP', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTJ', 'ISTP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTJ', 'ISFP', 5);
+
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTP', 'ENTP', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTP', 'INTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTP', 'INTP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTP', 'ESTJ', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTP', 'ESFJ', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTP', 'ISTJ', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTP', 'ISFJ', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTP', 'ENFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTP', 'ENFP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTP', 'INFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTP', 'INFP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTP', 'ESTP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTP', 'ESFP', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTP', 'ISTP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTP', 'ISFP', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTP', 'ENTJ', 1);
+
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTJ', 'INTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTJ', 'INTP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTJ', 'ESTJ', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTJ', 'ESFJ', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTJ', 'ISTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTJ', 'ISFJ', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTJ', 'ENFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTJ', 'ENFP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTJ', 'INFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTJ', 'INFP', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTJ', 'ENTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTJ', 'ENTP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTJ', 'ESTP', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTJ', 'ESFP', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTJ', 'ISTP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTJ', 'ISFP', 4);
+
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTP', 'INTP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTP', 'ESTJ', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTP', 'ESFJ', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTP', 'ISTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTP', 'ISFJ', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTP', 'ENFJ', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTP', 'ENFP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTP', 'INFJ', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTP', 'INFP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTP', 'ENTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTP', 'ENTP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTP', 'INTJ', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTP', 'ESTP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTP', 'ESFP', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTP', 'ISTP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INTP', 'ISFP', 1);
+
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFJ', 'ESTP', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFJ', 'ESFP', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFJ', 'ISTP', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFJ', 'ISFP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFJ', 'ENTJ', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFJ', 'ENTP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFJ', 'INTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFJ', 'INTP', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFJ', 'ESTJ', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFJ', 'ESFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFJ', 'ISTJ', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFJ', 'ISFJ', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFJ', 'ENFJ', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFJ', 'ENFP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFJ', 'INFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFJ', 'INFP', 3);
+
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFP', 'ESTP', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFP', 'ESFP', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFP', 'ISTP', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFP', 'ISFP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFP', 'ENTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFP', 'ENTP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFP', 'INTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFP', 'INTP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFP', 'ESTJ', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFP', 'ESFJ', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFP', 'ISTJ', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFP', 'ISFJ', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFP', 'ENFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFP', 'INFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFP', 'INFP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENFP', 'ENFP', 2);
+
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFJ', 'ESTP', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFJ', 'ESFP', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFJ', 'ISTP', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFJ', 'ISFP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFJ', 'ESTJ', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFJ', 'ENTP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFJ', 'ENTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFJ', 'INTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFJ', 'INTP', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFJ', 'ESFJ', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFJ', 'ISTJ', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFJ', 'ISFJ', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFJ', 'ENFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFJ', 'ENFP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFJ', 'INFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFJ', 'INFP', 1);
+
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFP', 'ESTP', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFP', 'ESFP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFP', 'ISTP', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFP', 'ISFP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFP', 'ENTJ', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFP', 'ENTP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFP', 'INTJ', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFP', 'INTP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFP', 'ESTJ', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFP', 'ESFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFP', 'ISTJ', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFP', 'ISFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFP', 'ENFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFP', 'ENFP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFP', 'INFJ', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('INFP', 'INFP', 3);
+
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTP', 'ESTP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTP', 'ESFP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTP', 'ISTP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTP', 'ISFP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTP', 'ENTJ', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTP', 'ENTP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTP', 'INTJ', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTP', 'INTP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTP', 'ESTJ', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTP', 'ESFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTP', 'ISTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTP', 'ISFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTP', 'ENFJ', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTP', 'ENFP', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTP', 'INFJ', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTP', 'INFP', 1);
+
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFP', 'ESFP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFP', 'ISTP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFP', 'ISFP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFP', 'ENTJ', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFP', 'ENTP', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFP', 'INTJ', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFP', 'INTP', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFP', 'ESTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFP', 'ESFJ', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFP', 'ISTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFP', 'ISFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFP', 'ENFJ', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFP', 'ENFP', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFP', 'INFJ', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFP', 'INFP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFP', 'ESTP', 2);
+
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTP', 'ISTP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTP', 'ISFP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTP', 'ENTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTP', 'ENTP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTP', 'INTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTP', 'INTP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTP', 'ESTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTP', 'ESFJ', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTP', 'ISTJ', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTP', 'ISFJ', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTP', 'ENFJ', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTP', 'ENFP', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTP', 'INFJ', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTP', 'INFP', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTP', 'ESTP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTP', 'ESFP', 3);
+
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFP', 'ISFP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFP', 'ENTJ', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFP', 'ENTP', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFP', 'INTJ', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFP', 'INTP', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFP', 'ESTJ', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFP', 'ESFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFP', 'ISTJ', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFP', 'ISFJ', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFP', 'ENFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFP', 'ENFP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFP', 'INFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFP', 'INFP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFP', 'ESTP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFP', 'ESFP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFP', 'ISTP', 2);
+
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTJ', 'ESTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTJ', 'ESFJ', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTJ', 'ISTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTJ', 'ISFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTJ', 'ESTP', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTJ', 'ESFP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTJ', 'ISTP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTJ', 'ISFP', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTJ', 'ENTJ', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTJ', 'ENTP', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTJ', 'INTJ', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTJ', 'INTP', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTJ', 'ENFJ', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTJ', 'ENFP', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTJ', 'INFJ', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESTJ', 'INFP', 5);
+
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFJ', 'ESFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFJ', 'ISTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFJ', 'ISFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFJ', 'ENFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFJ', 'ENFP', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFJ', 'INFJ', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFJ', 'INFP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFJ', 'ESTP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFJ', 'ESFP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFJ', 'ISTP', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFJ', 'ISFP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFJ', 'ENTJ', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFJ', 'ENTP', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFJ', 'INTJ', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFJ', 'INTP', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ESFJ', 'ESTJ', 2);
+
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTJ', 'ISTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTJ', 'ISFJ', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTJ', 'ENFJ', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTJ', 'ENFP', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTJ', 'INFJ', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTJ', 'INFP', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTJ', 'ESTP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTJ', 'ESFP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTJ', 'ISTP', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTJ', 'ISFP', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTJ', 'ENTJ', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTJ', 'ENTP', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTJ', 'INTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTJ', 'INTP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTJ', 'ESTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISTJ', 'ESFJ', 3);
+
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFJ', 'ISFJ', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFJ', 'ENFJ', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFJ', 'ENFP', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFJ', 'INFJ', 2);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFJ', 'INFP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFJ', 'ESTP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFJ', 'ESFP', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFJ', 'ISTP', 4);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFJ', 'ISFP', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFJ', 'ENTJ', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFJ', 'ENTP', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFJ', 'INTJ', 1);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFJ', 'INTP', 5);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFJ', 'ESTJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFJ', 'ESFJ', 3);
+INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFJ', 'ISTJ', 2);
+
+INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(1, 'ISFJ', 'ENFP', '잘지내요0.');
+INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(2, 'ENFP', 'ISFJ', '잘지내요1.');
+INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(3, 'INFJ', 'ENFP', '잘지내요2.');
+INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(4, 'ESFJ', 'ENFP', '잘지내요3.');
+INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(5, 'ISFP', 'ISTP', '잘지내요4.');
+INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(6, 'INFP', 'INTP', '잘지내요5.');
+INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(7, 'INTP', 'INFP', '잘지내요6.');
+INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(8, 'ENTP', 'INFP', '잘지내요7.');
+INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(9, 'ISTP', 'INFP', '잘지내요8.');
+INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(10, 'ENTP', 'INFP', '잘지내요9.');
+INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(11, 'INFP', 'ISTP', '잘지내요10.');
+INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(12, 'INFP', 'ENTP', '잘지내요11.');
+INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(1, 'INFP', 'INTJ', '잘지내요11.');
+
+
+CREATE TABLE MEMBER(
+	id				BIGINT		PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	email 			VARCHAR(40)	NOT NULL,
+	pw 				VARCHAR(20)	NOT NULL,
+	name 			VARCHAR(30)	NOT NULL,
+	nickName 		VARCHAR(10)	NOT NULL,
+	birth 			VARCHAR(20) NOT NULL,
+	mbti 			VARCHAR(4)	NOT NULL,
+	gender 			CHAR(1)		NOT NULL,
+	phone 			VARCHAR(13) NOT NULL,
+	regDate 		TIMESTAMP 	NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	level 			INT 		DEFAULT 1,
+	mabPoint 		INT 		DEFAULT 0,
+	profileImg 		VARCHAR(100) DEFAULT '',
+	contentsCount 	INT DEFAULT 0,
+	commentsCount 	INT DEFAULT 0
+);
+
+CREATE TABLE MbtiMatch(
+	id			BIGINT		PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	type01		VARCHAR(4)	NOT NULL,
+	type02		VARCHAR(4)	NOT NULL,
+	result		INT			NOT NULL
+);
+
+CREATE TABLE MbtiComments(
+	id				BIGINT			PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+	memberId		BIGINT			NOT NULL,
+	type01			VARCHAR(4)		NOT NULL,
+	type02			VARCHAR(4)		NOT NULL,
+	comment			VARCHAR(100)	NOT NULL,
+	reportingDate	TIMESTAMP		NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	CONSTRAINT MbtiComments_memberId_FK FOREIGN KEY(memberId) REFERENCES Member(id) ON DELETE CASCADE
+);
