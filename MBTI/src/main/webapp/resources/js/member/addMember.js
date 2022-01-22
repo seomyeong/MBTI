@@ -234,7 +234,7 @@ $(document).ready(function() {
 function decoMove() {
 	$('#deco1').animate({ bottom: "30px" }, 2000).animate({ bottom: "0px" }, 2000)
 	$('#deco2').animate({ top: "80px" }, 2500).animate({ top: "50px" }, 2500)
-	$('#deco3').animate({ bottom: "180px" }, 3000).animate({ bottom: "200px" }, 3500)
+	$('#deco3').animate({ bottom: "400px" }, 3000).animate({ bottom: "430px" }, 3500)
 }
 
 setInterval(decoMove, 2000);
