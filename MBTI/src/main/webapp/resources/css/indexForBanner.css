@@ -1,4 +1,11 @@
 @charset "UTF-8";
+@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .hidden{
 	position: absolute;
 	left: -9999px;
@@ -10,6 +17,8 @@
     /* background: blue; */
 }
 #banner p:nth-of-type(1){
+	font-family: 'Cafe24Ssurround';
+	color: var(--black3);
 	padding-top: 35px;
     font-size: 47px;
     font-weight: bold;
@@ -22,6 +31,7 @@
     color: var(--black2);
 }
 #banner p:nth-of-type(1) span:nth-of-type(2){
+	font-family: 'Cafe24Ssurround';
     color: #b2d4ad;
 }
 #banner p:nth-of-type(2){
@@ -51,7 +61,7 @@
 /*어린왕자*/
 .enfj{
     top: 8px;
-    right: 30px;
+    right: 10px;
 }
 /*폭죽여캐*/
 .enfp{
@@ -87,13 +97,14 @@
 }
 /*탐험모자여캐*/
 .estp{
-    top: 0px;
-    left: 23px;
+    top: -3px;
+    left: 8px;
 }
 /*수민*/
 .infj{
     bottom: 0px;
     left: 200px;
+    z-index: 1;
 }
 /*지영*/
 .infp{
@@ -115,6 +126,7 @@
 .isfj{
     bottom: 5px;
     right: 450px;
+    z-index: 1;
 }
 /*원진*/
 .isfp{
@@ -134,12 +146,6 @@
 
 
 /* mbtiCard */
-@font-face {
-    font-family: 'Cafe24Ssurround';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
 li{
     list-style: none;
 }
