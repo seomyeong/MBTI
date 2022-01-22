@@ -41,6 +41,9 @@ public class WriteController {
 	public ModelAndView successWrite(@SessionAttribute("loginId") String loginId, @RequestParam String title, @RequestParam String contents) {
 		ModelAndView mav = new ModelAndView();
 		
+		// contents.replaceAll("\n", "<br/>");
+		// System.out.println(contents);
+		
 		// 작성한 게시글 테이블에 추가
 		communityService.addCommunityBoard(Long.parseLong(loginId), title, contents);
 				

@@ -32,7 +32,7 @@
 				</div>
 			</div>
 			<div id="contentsWrap">
-				<p id="board_contents">${board.contents}</p>
+				<pre id="board_contents">${board.contents}</pre>
 			</div>
 			<a href="javascript:likes()" id="board_likes"><span><ion-icon
 						name="thumbs-up-outline"></ion-icon></span><span id="likesCount">${board.likes}</span></a>
@@ -90,7 +90,7 @@
 														name="close-outline"></ion-icon></a></span>
 										</c:if> <%-- <span>추천 ${comment.likes}</span> --%>
 									</span>
-									<div class="plusCommentView_comments">${plus.comments}</div>
+									<div class="plusCommentView_comments" style="white-space:pre;">${plus.comments}</div>
 								</div>						
 							</c:if>
 						</c:forEach>				

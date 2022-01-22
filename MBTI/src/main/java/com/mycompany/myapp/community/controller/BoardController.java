@@ -65,7 +65,6 @@ public class BoardController {
 			
 		}
 		
-		
 		// 댓글 수 가져오기
 		cb.setCommentsCount(cc.size() + ccp.size());
 
