@@ -157,6 +157,9 @@
 	position: relative;
 	top: 2px;
 }
+#comments a#refresh {
+	color: #828282;
+}
 
 /* 댓글 */
 .comment {
