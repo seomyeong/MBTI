@@ -81,7 +81,7 @@
 				</c:otherwise>
 			</c:choose>
 		</ul>
-		<small id="__copyright" class="hide">&copy; Copyright 2022. <br>TeamA All rights reserved.</small>
+		<small id="__copyright" class="hide">&copy; Copyright 2022. <br>WeAll-I All rights reserved.</small>
 	</nav>
 	<!-- <div id="main"></div> -->
 
