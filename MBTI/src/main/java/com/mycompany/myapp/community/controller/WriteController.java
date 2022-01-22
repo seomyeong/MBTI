@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mycompany.myapp.community.service.CommunityService;
+import com.mycompany.myapp.domain.CommunityBoard;
 
 @Controller
 public class WriteController {
@@ -43,6 +44,21 @@ public class WriteController {
 		
 		// 작성한 게시글 테이블에 추가
 		communityService.addCommunityBoard(Long.parseLong(loginId), title, contents);
+				
+		mav.setViewName("redirect:mainCommunity?type=reportingDate&q=&page=1&range=1");
+
+		return mav;
+	}
+	
+	/**
+	 * 댓글 작성 성공시
+	 */
+	@PostMapping("community/successEdit")
+	public ModelAndView successEdit(@RequestParam String boardId, @RequestParam String title, @RequestParam String contents) {
+		ModelAndView mav = new ModelAndView();
+		
+		// 작성한 게시글 테이블에 수정
+		communityService.UpdateCommunityBoard(Long.parseLong(boardId), title, contents);
 				
 		mav.setViewName("redirect:mainCommunity?type=reportingDate&q=&page=1&range=1");
 

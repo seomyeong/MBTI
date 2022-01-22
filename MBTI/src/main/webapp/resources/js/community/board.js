@@ -84,6 +84,19 @@ $('#board_delete a').on('click', function(e) {
 	}
 });
 
+// 게시글 삭제
+
+$('#board_edit a').on('click', function(e) {
+	e.preventDefault();
+	var boardId = $(this).attr("href");
+
+	var answer = confirm("해당 게시글의 수정 페이지로 이동합니다.");
+
+	if (answer == true) {
+		location.href = "editBoard?boardId=" + boardId;
+	}
+});
+
 // 댓글 부분만 다시 불러오기
 function load_comments(data) {
 	$('#commentsWrap').empty();

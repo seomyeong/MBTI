@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+.hidden {
+	display: none;
+}
 #writeWrap {
 	width: 80%;
 	margin: 170px auto 0;

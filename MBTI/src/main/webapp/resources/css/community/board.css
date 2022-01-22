@@ -45,6 +45,11 @@
 	content: '|';
 	margin: 0 13px;
 }
+#board_edit a {
+	text-decoration: none;
+	font-weight: bold;
+	margin-left: 15px;
+}
 #board_delete a {
 	text-decoration: none;
 	color: lightcoral;
@@ -156,6 +161,9 @@
 	cursor: pointer;
 	position: relative;
 	top: 2px;
+}
+#comments a#refresh {
+	color: #828282;
 }
 
 /* 댓글 */

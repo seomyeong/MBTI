@@ -32,7 +32,7 @@
 					</tr>
 				</table>
 				<div id="login_btn">
-					<a href="/myapp/index">이전</a> <input type="submit" value="로그인"
+					<a href="/myapp/index">홈으로</a> <input type="submit" value="로그인"
 						id="submit">
 				</div>
 			</form>
@@ -45,6 +45,7 @@
 				src="<%=request.getContextPath()%>/resources/img/avatar/MBTI_ISFP.png"
 				alt="isfp" class="avatar avatar14 isfp"></img>
 		</div>
+		<div id="loginImg"></div>
 	</div>
 	<script>
 		function loginSubmit(form) {

@@ -973,5 +973,15 @@ public class CommunityDao {
 		String sql = "UPDATE Member SET level=level+? WHERE id=?";
 		jdbcTemplate.update(sql, levelUp, id);
 	}
+	/**
+	 * 해당 id를 가지는 CommunityBoard에 title과 contents를 수정한다.
+	 * @param boardId
+	 * @param title
+	 * @param contents
+	 */
+	public void UpdateCommunityBoard(long boardId, String title, String contents) {
+		String sql = "UPDATE CommunityBoard SET title=?, contents=? WHERE id=?";
+		jdbcTemplate.update(sql, title, contents, boardId);
+	}
 	
 }

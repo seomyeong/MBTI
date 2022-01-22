@@ -6,9 +6,10 @@ a {
 }
 
 #main h1 {
-	text-align: center;
+	position: relative; text-align : center;
 	font-size: 70px;
 	margin: 9% auto 0;
+	text-align: center;
 }
 
 #main h2 {
@@ -67,8 +68,7 @@ a {
 #login_btn {
 	width: 250px;
 	text-align: center;
-    margin: 30px -29px;
-
+	margin: 30px -29px;
 }
 
 #login_btn a {
@@ -78,9 +78,8 @@ a {
 	background: rgba(255, 255, 255, 0.3);
 	line-height: 40px;
 	border-radius: 5px;
-	font-size: 25px;
+	font-size: 23px;
 	text-align: center;
-	line-height: 40px;
 }
 
 #login_btn #submit {
@@ -89,9 +88,8 @@ a {
 	height: 40px;
 	background: rgba(255, 255, 255, 0.3);
 	border: none;
-	font-family: 'GowunDodum-Regular';
 	border-radius: 5px;
-	font-size: 25px;
+	font-size: 24px;
 	text-align: center;
 	line-height: 40px;
 }
@@ -117,24 +115,40 @@ a {
 	background: rgba(255, 255, 255, 0.3);
 	border-radius: 30px;
 	font-size: 35px;
-    text-align: center;
-    line-height: 50px;
-    position: absolute;
+	text-align: center;
+	line-height: 50px;
+	position: absolute;
 	bottom: 100px;
 	right: 150px;
 	background: #b2d4ad;
 	color: #fff;
- 	padding: 5px;
-	
+	padding: 5px;
 }
 
 #isfp {
 	position: absolute;
 	bottom: 70px;
-	left: 40px;
+	left: 85px;
 	opacity: 0.4;
+	display: inline;
 }
 
+#isfp img {
+	width: 400px;
+	height: 550px;
+}
+
+#loginImg {
+	position: absolute;
+	top: 200px;
+	left: calc(50% - 335px);
+	width: 700px;
+	height: 460px;
+	background: url(../../img/login2.png) no-repeat center;
+	background-size: 100%;
+	opacity: 0.3;
+	display: inline;
+}
 
 /* #addMember a:hover {
 	color: #b2d4ad;
