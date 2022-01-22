@@ -108,7 +108,7 @@
 						</tr>
 					</table>
 					<div id="updateMember_btn">
-						<a href="/myapp/index">이전</a> <input type="submit" value="수정완료"
+						<a href="/myapp/index">홈으로</a> <input type="submit" value="수정완료"
 							onclick="checkPattern(this.form); return false" id="submit">
 					</div>
 				</form:form>

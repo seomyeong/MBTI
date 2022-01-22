@@ -196,6 +196,9 @@ public class CommunityService {
 			this.resultLevel(m);
 		}
 	}
+	public void UpdateCommunityBoard(long boardId, String title, String contents) {
+		communityDao.UpdateCommunityBoard(boardId, title, contents);
+	}
 	
 
 }

@@ -251,7 +251,7 @@
             <section id="mbtiCard">
                 <h3 class="hidden">mbtiCard</h3>
                 <div id="mbtiCardTxt">
-                    <p>What's your Best Team?</p>
+                    <!-- <p>What's your Best Team?</p> -->
                 </div>
                 <div id="mbtiImg"></div>
                 <div id="mbtiDeco"></div>

@@ -65,7 +65,6 @@ public class BoardController {
 			
 		}
 		
-		
 		// 댓글 수 가져오기
 		cb.setCommentsCount(cc.size() + ccp.size());
 
@@ -136,6 +135,25 @@ public class BoardController {
 		
 		
 		return "redirect:/community/mainCommunity?type=" + type + "&q=" + q + "&page=" + page + "&range=" + range;
+	}
+	
+	/**
+	 * 게시물 수정시
+	 */
+	@GetMapping("/community/editBoard")
+	public ModelAndView editBoard(@RequestParam String boardId, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		CommunityBoard cb = communityService.findBoardByBoardId(Long.parseLong(boardId));
+		
+		// 로그인한 상태가 아닌 상태에서 페이지 진입시 로그인페이지로 보냄
+		if (session == null || session.getAttribute("loginId") == null || session.getAttribute("loginId").equals("")) {
+			mav.setViewName("redirect:/member/login");
+			return mav;
+		}
+		
+		mav.addObject("cb", cb);
+		mav.setViewName("community/editBoard");
+		return mav;
 	}
 	
 	/**
