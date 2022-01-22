@@ -27,6 +27,7 @@
 					<span id="board_views">조회 ${board.views}</span> <span
 						id="board_reportingDate">${board.reportingDate}</span>
 					<c:if test="${board.member.id eq sessionScope.loginId}">
+						<span id="board_edit"><a href="${board.id}">수정</a></span>
 						<span id="board_delete"><a href="${board.id}">삭제</a></span>
 					</c:if>
 				</div>

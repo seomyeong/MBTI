@@ -138,6 +138,25 @@ public class BoardController {
 	}
 	
 	/**
+	 * 게시물 수정시
+	 */
+	@GetMapping("/community/editBoard")
+	public ModelAndView editBoard(@RequestParam String boardId, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		CommunityBoard cb = communityService.findBoardByBoardId(Long.parseLong(boardId));
+		
+		// 로그인한 상태가 아닌 상태에서 페이지 진입시 로그인페이지로 보냄
+		if (session == null || session.getAttribute("loginId") == null || session.getAttribute("loginId").equals("")) {
+			mav.setViewName("redirect:/member/login");
+			return mav;
+		}
+		
+		mav.addObject("cb", cb);
+		mav.setViewName("community/editBoard");
+		return mav;
+	}
+	
+	/**
 	 * 댓글 삭제시
 	 */
 	@ResponseBody
