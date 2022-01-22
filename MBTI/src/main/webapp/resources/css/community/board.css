@@ -157,6 +157,9 @@
 	position: relative;
 	top: 2px;
 }
+#comments a#refresh {
+	color: #828282;
+}
 
 /* 댓글 */
 .comment {
@@ -464,7 +467,7 @@ hr {
 	color: lightcoral;
 	font-weight: bold;
 }
-#comment_info span#comment_info_first::after, #comment_info span#comment_info_second::after {
+#comment_info span#comment_info_first::after {
 	content: '|';
 	margin: 10px;
 	color: #a2a2a2;
@@ -482,6 +485,7 @@ hr {
 	font-size: 0.9em;
 	color: darksalmon;
 	font-weight: bold;
+	margin-left: 5px;
 }
 
 #comment_write input[type="text"] {
