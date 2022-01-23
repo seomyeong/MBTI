@@ -141,7 +141,7 @@ DROP TABLE ContentsLog;
 DROP TABLE AnswersLog;
 
 UPDATE Member SET mabPoint=980 WHERE id=1;
-UPDATE ContentsLog SET contentsCount=0 WHERE id=1;
+UPDATE MbtiPlayContentsAnswer SET choosenNumCount=32 WHERE questionnum=1 AND choosenNum=1;
 
 --문답 쿼리
 INSERT INTO MbtiPlayContents (memberId, question, answer01, answer02, answer03) VALUES (1, '친구들과 놀이동산을 간 당신, 놀이기구를 탈 때의 나는?', '오늘 이거 다섯 개는 꼭 타야 돼! 지도를 보며 계획을 세운다.', '오, 저거 재밌어 보인다! 일단 보이는 것부터 탄다.', '놀이기구는 흥미가 들지 않아 이끌려다닌다.');

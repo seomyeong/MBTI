@@ -62,7 +62,7 @@ public class MbtiPlayController {
 			set.add(randomNum);
 			if (!(service.isAnswersLog(loginId, randomNum))) {
 				List<MbtiPlayContents> content = service.findQuestionByRandomNum(randomNum);
-
+				
 				mav.setViewName("mbtiPlay/mbtiPlayContents");
 				mav.addObject("memberMbti", memberMbti.getMbti());
 				mav.addObject("content", content);
