@@ -55,13 +55,9 @@ public class cultureWriteController {
 		//System.out.println(memberId + contents01 + contents02 + contentType + title + link);
 		cultureCommunityService.addWrittenContent(memberId, contents01, contents02, contentType, title, link);
 		
-<<<<<<< HEAD
-		mav.setViewName("redirect:/index");
-=======
-		System.out.println("글쓰기 성공");
 
+		mav.setViewName("redirect:/index");
 		mav.setViewName("redirect:/");
->>>>>>> branch 'main' of https://github.com/seomyeong/MBTI.git
 		return mav;
 	}
 	
