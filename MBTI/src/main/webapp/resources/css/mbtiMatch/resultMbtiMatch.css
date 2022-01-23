@@ -7,8 +7,12 @@ body { min-width: 1200px; /* overflow: hidden; */ }
 /* 메인 */
 #main {
     width: 1200px;
-
     margin: 0 auto;
+    -ms-user-select: none; 
+  	-moz-user-select: -moz-none;
+  	-khtml-user-select: none;
+  	-webkit-user-select: none;
+  	user-select: none;
 }
 
 form {
@@ -36,6 +40,11 @@ form {
 	border: 2px solid #dfdfdf;
 	border-radius: 10px;
 	font-size: 30px;
+	
+}
+
+.typeWrap input:focus {
+	outline:none;
 }
 
 .plus {
