@@ -73,7 +73,7 @@ function checkPattern(form) {
 	if (form.phone.value.search(/[^0-9]/) != -1) {
 		$('.errorTxt').eq(8).text("잘못된 번호형식 입니다.");
 		pass = false;
-	} else if (form.phone.value.length < 8) {
+	} else if (form.phone.value.length < 11) {
 		$('.errorTxt').eq(8).text("11자리 입력해주세요.");
 		pass = false;
 	} else {
@@ -184,10 +184,6 @@ function emailCheck(form) {
 
 	}
 }
-
-
-
-
 
 
 // 생년월일
