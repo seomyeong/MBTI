@@ -9,6 +9,11 @@ body { min-width: 1200px; }
     width: 1200px;
     height: 900px;
     margin: 0 auto;
+    -ms-user-select: none; 
+  	-moz-user-select: -moz-none;
+  	-khtml-user-select: none;
+  	-webkit-user-select: none;
+  	user-select: none;
 }
 
 h2 {
