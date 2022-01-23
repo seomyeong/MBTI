@@ -182,6 +182,7 @@
 		var loginId;
 		loginId = ${loginId}
 		
+		console.log(loginId);
 		//등록하기 버튼 누르면 실행
 		function addComment(form) {
 			
@@ -190,7 +191,8 @@
 			if(loginId == "" || loginId == null) {
 				
 				alert("코멘트 기능은 로그인 후 이용이 가능합니다.");
-				//$('mbtiComment').val("");
+				$('.mbtiComment').val('');
+				
 				return;
 				
 			} else {
