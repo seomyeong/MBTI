@@ -206,18 +206,19 @@ CREATE TABLE CultureBoardComment(
 	CONSTRAINT CultureBoardComment_boardId_FK FOREIGN KEY(boardId) REFERENCES CultureBoard(id) ON DELETE CASCADE
 );
 
-
+SELECT * FROM LIKELOGFORCULTURE;
 CREATE TABLE LikeLogForCulture(
 	boardId			BIGINT			NOT NULL,
 	memberId		BIGINT			NOT NULL
 );
 
-
+SELECT * FROM LikeLogComment;
 CREATE TABLE LikeLogComment(
 	memberId		BIGINT			NOT NULL,
 	commentId		BIGINT			NOT NULL
 );
-
+DELETE FROM LIKELOGCOMMENT;
+INSERT INTO LikeLogComment (memberId, commentId) VALUES (1, 76);
 
 
 

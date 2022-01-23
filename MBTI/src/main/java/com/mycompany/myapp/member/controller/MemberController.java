@@ -120,7 +120,7 @@ public class MemberController {
 
 		} else {
 			mav.addObject("errorMsg", "회원정보가 일치하지 않습니다.");
-			mav.setViewName("/member/login");
+			mav.setViewName("/cultureBoard/write");
 			return mav;
 		}
 	}

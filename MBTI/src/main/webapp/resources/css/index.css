@@ -5,6 +5,9 @@
     font-weight: normal;
     font-style: normal;
 }
+.displayNone{
+	display: none;
+}
 .hidden{
     position: absolute;
     top: -9999px;

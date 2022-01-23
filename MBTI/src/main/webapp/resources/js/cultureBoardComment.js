@@ -135,7 +135,7 @@ function commentLikes(boardId, loginId, e){
 	$.ajax({
 			type: "post",
 			data: JSON.stringify(param),
-			url: "/test_project/cultureBoard/commentLikes",
+			url: "/myapp/cultureBoard/commentLikes",
 			contentType: "application/json; charset=UTF-8",
 			success: function(data) {
 				
@@ -175,7 +175,7 @@ $(document).on('click', '.delCommentBtn', function(e){
 	$.ajax({
 		type: 'post',
 		data: JSON.stringify(param),
-		url: "/test_project/cultureBoard/delComment",
+		url: "/myapp/cultureBoard/delComment",
 		contentType: "application/json; charset=UTF-8",
 		success: function(data){
 				let cultureBoardComment = data["cultureBoardComment"];

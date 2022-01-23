@@ -210,14 +210,14 @@ function writeSubmit(form){
 
 
 
-
+ 
 
 function goWriteToLogin() {
 	var loginId = $('#my-button').attr("data-loginId");
 	
 	if(loginId == null || loginId == "") {
 		alert("글쓰기는 로그인 후 이용이 가능합니다.");
-		location.href = "/cultureBoard/write";
+		location.href = "member/login";
 	}
 }
 

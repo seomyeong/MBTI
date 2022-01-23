@@ -1,3 +1,5 @@
+$('#nav li:nth-of-type(2)').addClass('clicked');
+
 /* 각 mbti 캐릭터 랜덤 등장 */
 let num = 0;
 for (let i = 1; i <= 16; i++) {

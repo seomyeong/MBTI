@@ -10,27 +10,6 @@ $('.toggle-switch .switch').on('click', function() {
 });
 
 
-/**mbti  필터 클릭시 애니메이션 처리(황수민) */
-$('.mbti-switch .toggle').on('click', function() {
-	if ($(this).parent().children('input:eq(0)').attr('checked') == false || $(this).parent().children('input:eq(0)').attr('checked') == null) {
-		$(this).parent().children('input:eq(0)').attr('checked', true);
-		$(this).animate({
-			left: 30,
-		},300,function(){
-			$(this).css("background",'#a4a0c4');
-		});
-	} else {
-		$(this).parent().children('input:eq(0)').attr('checked', false);
-		$(this).animate({			
-			left: 0,
-			
-		},300,function(){
-			$(this).css("background",'#b2d4ad');
-		});
-	}
-});
-
-
 $('.contents').on('mouseenter', function() {
 	$(this).css("background", "#f2f2f2");
 }).on('mouseleave', function() {
