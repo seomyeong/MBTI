@@ -917,9 +917,9 @@ public class CommunityDao {
 	 * 
 	 * @param boardId
 	 */
-	public void removeCommentCount(Long boardId) {
-		String sql = "UPDATE CommunityBoard SET commentsCount=commentsCount-1 WHERE id=?";
-		jdbcTemplate.update(sql, boardId);
+	public void removeCommentCount(Long boardId, int countPlusComment) {
+		String sql = "UPDATE CommunityBoard SET commentsCount=commentsCount-? WHERE id=?";
+		jdbcTemplate.update(sql, countPlusComment, boardId);
 	}
 	/**
 	 * 해당 CommentId를 가지는 CommunityComments_plus의 Count
