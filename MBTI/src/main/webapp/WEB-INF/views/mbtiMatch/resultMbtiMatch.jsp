@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>맙티</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/css/mbtiMatch/resultMbtiMatch.css">
 <script
@@ -16,7 +16,7 @@
 
 </head>
 <body>
-
+	<jsp:include page="/resources/incl/header.jsp"></jsp:include>
 	<jsp:include page="/resources/incl/nav.jsp"></jsp:include>
 
 	<div id="main">
@@ -182,6 +182,7 @@
 		var loginId;
 		loginId = ${loginId}
 		
+		console.log(loginId);
 		//등록하기 버튼 누르면 실행
 		function addComment(form) {
 			
@@ -190,7 +191,8 @@
 			if(loginId == "" || loginId == null) {
 				
 				alert("코멘트 기능은 로그인 후 이용이 가능합니다.");
-				//$('mbtiComment').val("");
+				$('.mbtiComment').val('');
+				
 				return;
 				
 			} else {
