@@ -11,7 +11,8 @@
 
 </head>
 <body>
-<jsp:include page="/resources/incl/nav.jsp"></jsp:include>
+	<jsp:include page="/resources/incl/header.jsp"></jsp:include>
+	<jsp:include page="/resources/incl/nav.jsp"></jsp:include>
 	
 	<div id="main">
 		<h2><span class="letter letter1">나</span>와 <span class="letter letter2">상대방</span>의 <span class="m">M</span><span class="b">B</span><span class="t">T</span><span class="i">I</span>로 알아보는 <span class="letter letter4">궁합</span></h2>

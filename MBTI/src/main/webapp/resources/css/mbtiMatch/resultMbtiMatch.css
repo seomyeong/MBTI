@@ -13,13 +13,13 @@ body { min-width: 1200px; /* overflow: hidden; */ }
 
 form {
     width: 1100px;
-    margin: 0 auto;
+    margin: 170px auto 75px;
 }
 
 #typeWrap {
 	width: 632px;
-	height: 116px;
-	margin: 65px auto;
+	height: 112px;
+	margin: 0 auto 65px;
 }
 
 .typeWrap {
@@ -48,7 +48,7 @@ form {
 #resultWrap {
 	width: 800px;
 	height: 800px;
-	margin: 65px auto 20px;
+	margin: 65px auto 25px;
 	text-align: center;
 }
 
@@ -79,7 +79,7 @@ h3 {
 
 #commentWrap {
 	width: 800px;
-	height: 305px;
+	height: 312px;
 	margin: 0 auto 50px;;
 }
 
