@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>맙티</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/css/mbtiMatch/resultMbtiMatch.css">
 <script

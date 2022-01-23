@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>맙티</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/mbtiMatch/mbtiMatch.css">
 <script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/mbtiMatch/mbtiMatch.js" defer></script>
