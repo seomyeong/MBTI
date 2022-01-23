@@ -12,4 +12,13 @@ public class MbtiMatch {
 	private String type01;
 	private String type02;
 	private int result;
+	
+	public MbtiMatch() {}
+
+	public MbtiMatch(int result) {
+		super();
+		this.result = result;
+	}
+	
+	
 }
