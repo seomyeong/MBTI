@@ -8,16 +8,17 @@
 <meta charset="UTF-8">
 <title>맙티</title>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/mainCommunity.css">
+	href="<%=request.getContextPath()%>/resources/css/community/mainCommunity.css">
 <script
 	src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"
 	defer></script>
 <script
-	src="<%=request.getContextPath()%>/resources/js/mainCommunity.js" defer></script>
+	src="<%=request.getContextPath()%>/resources/js/community/mainCommunity.js" defer></script>
 </head>
 
 <body>
 	<!-- // 기본양식 -->
+	<jsp:include page="/resources/incl/header.jsp"></jsp:include>
 	<jsp:include page="/resources/incl/nav.jsp"></jsp:include>
 	<div id="main">
 		<!-- 작성 구역 -->
@@ -99,7 +100,7 @@
 			<c:forEach var="communityBoard" items="${cbList_hot}">
 				<tr class="contents_hot">
 					<td class="likes">${communityBoard.likes}</td>
-					<td class="mbti">${communityBoard.member.mbti}</td>
+					<td class="mbti"><span class="mbtiImg" style="background: url(${communityBoard.member.profileImg}) 0 0 / cover"></span>${communityBoard.member.mbti}</td>
 					<td class="nickName">
 					<c:choose>
 						<c:when test="${communityBoard.member.level >= 70}">
@@ -128,7 +129,7 @@
 			<c:forEach var="communityBoard" items="${cbList}">
 				<tr class="contents">
 					<td class="likes">${communityBoard.likes}</td>
-					<td class="mbti">${communityBoard.member.mbti}</td>
+					<td class="mbti">${communityBoard.member.mbti}<span class="mbtiImg" style="background: url(${communityBoard.member.profileImg}) 0 0 / cover"></span></td>
 					<td class="nickName">
 					<c:choose>
 						<c:when test="${communityBoard.member.level >= 70}">

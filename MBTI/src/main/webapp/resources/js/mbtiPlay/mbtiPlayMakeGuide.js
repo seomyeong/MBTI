@@ -1,3 +1,5 @@
+$('#nav li:nth-of-type(5)').addClass('clicked');
+
 $('#guideTxt p').hide()
 $('#guideBtn').hide()
 

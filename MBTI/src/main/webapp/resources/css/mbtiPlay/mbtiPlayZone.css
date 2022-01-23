@@ -186,7 +186,7 @@ input[type=radio] {
   #btn{
     width: 100%;
     position: relative;
-    bottom: -80px;
+    bottom: -130px;
     left: calc(50% - 220px);
   }
 .contentsBtn{
@@ -228,11 +228,13 @@ input[type=submit]:hover{
 }
     
 #memberGuide{
+	font-size: 13px;
+    color: var(--black2);
 	position: absolute;
     bottom: 10px;
-    left: 80px;
+    left: 113px;
 }
 .notMember{
 	text-decoration: none;
-	line-height: 50px;
+	line-height: 47px;
 }

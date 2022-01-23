@@ -8,30 +8,32 @@
 <meta charset="UTF-8">
 <title>맙티</title>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/board.css">
+	href="<%=request.getContextPath()%>/resources/css/community/board.css">
 <script
 	src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
-<script src="<%=request.getContextPath()%>/resources/js/board.js" defer></script>
+<script src="<%=request.getContextPath()%>/resources/js/community/board.js" defer></script>
 </head>
 <body>
+<jsp:include page="/resources/incl/header.jsp"></jsp:include>
 	<jsp:include page="/resources/incl/nav.jsp"></jsp:include>
 	<div id="main">
 		<div id="boardInfoWrap">
 			<h2 id="board_title">${board.title}</h2>
 			<div id="board_info">
-				<span id="board_mbti">${board.member.mbti}</span> <span
+				<span id="board_mbti"><span class="mbtiImg" style="background: url(${board.member.profileImg}) 0 0 / cover"></span>${board.member.mbti}</span> <span
 					id="board_level">Lv. ${board.member.level}</span> <span
 					id="board_nickName">${board.member.nickName}</span>
 				<div id="rightInfo">
 					<span id="board_views">조회 ${board.views}</span> <span
 						id="board_reportingDate">${board.reportingDate}</span>
 					<c:if test="${board.member.id eq sessionScope.loginId}">
+						<span id="board_edit"><a href="${board.id}">수정</a></span>
 						<span id="board_delete"><a href="${board.id}">삭제</a></span>
 					</c:if>
 				</div>
 			</div>
 			<div id="contentsWrap">
-				<p id="board_contents">${board.contents}</p>
+				<pre id="board_contents">${board.contents}</pre>
 			</div>
 			<a href="javascript:likes()" id="board_likes"><span><ion-icon
 						name="thumbs-up-outline"></ion-icon></span><span id="likesCount">${board.likes}</span></a>
@@ -52,7 +54,7 @@
 				<c:forEach var="comment" items="${comments}">
 					<div class="comment">
 						<div class="commentInfo">
-							<span class="comment_mbti">${comment.member.mbti}</span> <span
+							<span class="comment_mbti"><span class="mbtiImg" style="background: url(${comment.member.profileImg}) 0 0 / cover"></span>${comment.member.mbti}</span> <span
 								class="comment_profile"><span class="comment_level">Lv.
 									${comment.member.level}</span><span class="comment_nickName">${comment.member.nickName}</span></span>
 							<span class="comment_reportingDate">${comment.reportingDate}</span>
@@ -74,7 +76,7 @@
 							<c:if test="${plus.communityComments.id eq comment.id}">
 								<div class="plusCommentView">
 									<ion-icon name="return-down-forward-outline"></ion-icon>
-									<span class="plusCommentView_mbti">${plus.member.mbti}</span> 
+									<span class="plusCommentView_mbti"><span class="mbtiImg" style="background: url(${plus.member.profileImg}) 0 0 / cover"></span>${plus.member.mbti}</span> 
 									<span class="plusCommentView_profile">
 										<span class="plusCommentView_level">Lv. ${plus.member.level}</span>
 										<span class="plusCommentView_nickName">${plus.member.nickName}</span>
@@ -89,7 +91,7 @@
 														name="close-outline"></ion-icon></a></span>
 										</c:if> <%-- <span>추천 ${comment.likes}</span> --%>
 									</span>
-									<div class="plusCommentView_comments">${plus.comments}</div>
+									<div class="plusCommentView_comments" style="white-space:pre;">${plus.comments}</div>
 								</div>						
 							</c:if>
 						</c:forEach>				
@@ -201,7 +203,7 @@
 			e.preventDefault();
 			
 			if(!($(this).parent().parent().parent().hasClass("plusCommentExtends"))) {
-				var plusCommentBox = '<div class="plusCommentBox"><ion-icon name="return-down-forward-outline"></ion-icon><span class="plusComment_mbti">' + '${loginMemberInfo.mbti}' + '</span> <span class="plusComment_profile"><span class="plusComment_level">Lv.' + '${loginMemberInfo.level}' + '</span><span class="plusComment_nickName">' + '${loginMemberInfo.nickName}' + '</span></span><form><input type="text" name="plusComment" placeholder="댓글을 입력해보세요!"/><input type="submit" onclick="return false;"/><a href="#" class="plusComment_submit">등록</a></form></div>';
+				var plusCommentBox = '<div class="plusCommentBox"><ion-icon name="return-down-forward-outline"></ion-icon><span class="plusComment_mbti">' + '${loginMemberInfo.mbti}' + '</span> <span class="plusComment_profile"><span class="plusComment_level">Lv.' + '${loginMemberInfo.level}' + '</span> <span class="plusComment_nickName">' + '${loginMemberInfo.nickName}' + '</span></span><form><input type="text" name="plusComment" placeholder="댓글을 입력해보세요!"/><input type="submit" onclick="return false;"/><a href="#" class="plusComment_submit">등록</a></form></div>';
 			
 				$(this).parent().parent().parent().append(plusCommentBox);
 				$(this).parent().parent().parent().addClass("plusCommentExtends");
@@ -343,6 +345,76 @@
 				}
 			});
 		}, 500);
+		
+		// 댓글 부분만 다시 불러오기
+		function load_comments(data) {
+			$('#commentsWrap').empty();
+			
+			var datacc = data["cc"];
+			var dataccp = data["ccp"];
+			var commentsWrap = "";
+
+			if(datacc.length != 0) {
+				for(var cc in datacc) {
+					commentsWrap += '<div class="comment"><div class="commentInfo"><span class="comment_mbti"><span class="mbtiImg" style="background: url('
+											+ datacc[cc].member.profileImg
+											+ ') 0 0 / cover"></span>'
+											+ datacc[cc].member.mbti
+											+ '</span> <span class="comment_profile"><span class="comment_level">Lv.'
+											+ datacc[cc].member.level
+											+ '</span><span class="comment_nickName">'
+											+ datacc[cc].member.nickName
+											+ '</span></span><span class="comment_reportingDate">'
+											+ datacc[cc].reportingDate
+											+ '</span>';
+					if('${board.member.id}' == datacc[cc].member.id) {
+						commentsWrap += '<span class="comment_me">작성자</span>';
+					}
+					commentsWrap += '<span class="comment_plusCommentToggle"><a href="'
+											+ datacc[cc].id
+											+ '" class="comment_plusCommentToggleA">답글 쓰기</a></span><span class="commentInfo_right"><span class="comment_delete"><a href="'
+											+ datacc[cc].id 
+											+ '"><ion-icon name="close-outline"></ion-icon></a></span></span></div><p class="comment_text">'
+											+ datacc[cc].comments
+											+ '</p>';
+					if(dataccp.length != 0) {
+						for(var ccp in dataccp) {
+							if(dataccp[ccp].communityComments.id == datacc[cc].id) {
+								commentsWrap += '<div class="plusCommentView"><ion-icon name="return-down-forward-outline"></ion-icon><span class="plusCommentView_mbti"><span class="mbtiImg" style="background: url('
+									+ dataccp[ccp].member.profileImg
+									+ ') 0 0 / cover"></span>'
+									+ dataccp[ccp].member.mbti
+									+ '</span><span class="plusCommentView_profile"><span class="plusCommentView_level">Lv. '
+									+ dataccp[ccp].member.level
+									+ '</span><span class="plusCommentView_nickName">'
+									+ dataccp[ccp].member.nickName
+									+ '</span></span><span class="plusCommentView_reportingDate">'
+									+ dataccp[ccp].reportingDate
+									+ '</span>';
+								if(dataccp[ccp].member.id == '${board.member.id}') {
+									commentsWrap += '<span class="comment_me">작성자</span>';
+								}
+								commentsWrap += '<span class="plusCommentInfo_right"> ';
+								if('${sessionScope.loginId}' == dataccp[ccp].member.id) {
+									commentsWrap += '<span class="plusComment_delete"><a href="'
+												+ dataccp[ccp].id
+												+ '"><ion-icon name="close-outline"></ion-icon></a></span>';
+												
+								}
+								commentsWrap += '</span><div class="plusCommentView_comments">'
+											+ dataccp[ccp].comments
+											+ '</div></div>';
+							}
+						}
+					}
+					commentsWrap += '</div></div>';
+				}
+			}
+			$('#commentsWrap').append(commentsWrap);
+			$('#board_commentsCount').html(data["cb"].commentsCount);
+			changeDate_comment();
+			
+		}
 		
 	</script>
 </body>

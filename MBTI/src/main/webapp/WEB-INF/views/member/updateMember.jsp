@@ -9,18 +9,18 @@
 <title>맙티</title>
 </head>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/updateMember.css">
+	href="<%=request.getContextPath()%>/resources/css/member/updateMember.css">
 <script
 	src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"
 	defer></script>
-<script src="<%=request.getContextPath()%>/resources/js/updateMember.js"
+<script src="<%=request.getContextPath()%>/resources/js/member/updateMember.js"
 	defer></script>
 <body>
 	<jsp:include page="/resources/incl/nav.jsp"></jsp:include>
 	<div id="main">
-		<main id="updateCustomer">
+		<main id="updateMember">
 			<h1>정보수정</h1>
-			<div id="updateCustomer_wrap">
+			<div id="updateMember_wrap">
 				<form:form action="successUpdateMember" method="post"
 					modelAttribute="memberCommand">
 					<table>
@@ -33,16 +33,16 @@
 						</tr>
 						<tr>
 							<th>비밀번호</th>
-							<td><form:password id="password1" placeholder="비밀번호" onpaste="return false;" oncopy="return false;"
-							value="${sessionScope.memberInfo.pw}"
-									path="pw" /></td>
+							<td><form:password id="password1" placeholder="비밀번호"
+									onpaste="return false;" oncopy="return false;"
+									value="${sessionScope.memberInfo.pw}" path="pw" /></td>
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>
-							<th>비밀번호 <br>확인
-							</th>
-							<td><input type="password" id="password2" placeholder="비밀번호 재확인" onpaste="return false;"	oncopy="return false;"					
-									/></td>
+							<th>비밀번호 확인</th>
+							<td><input type="password" id="password2"
+								placeholder="비밀번호 재확인" onpaste="return false;"
+								oncopy="return false;" /></td>
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>
@@ -68,11 +68,7 @@
 						</tr>
 						<tr>
 							<th>MBTI</th>
-							<td>
-								<%-- <form:select maxlength="4" placeholder="MBTI를 입력하세요"
-									path="mbti" required="required"
-									 /> --%> <select id="mbti" name="mbti">
-									<%-- <option><%=request.getParameter("mbti")%></option> --%>
+							<td><select id="mbti" name="mbti">
 									<option value="ENTJ">ENTJ</option>
 									<option value="ENTP">ENTP</option>
 									<option value="ENFJ">ENFJ</option>
@@ -89,10 +85,8 @@
 									<option value="ISTP">ISTP</option>
 									<option value="ISFJ">ISFJ</option>
 									<option value="ISFP">ISFP</option>
-							</select> <!-- <button
-									onclick="window.open('https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC','popup','width=1080, height=700, left=200, top=50');">검사하기</button> -->
-								<a id="mbtiBtn"
-								href="javascript:void(window.open('https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC', 'popup','width=1080, height=700, left=200, top=50'))">검사하기</a>
+							</select> <a id="mbtiBtn"
+								href="javascript:void(window.open('https://www.16personalities.com/ko/%EB%AC%B4%EB%A3%8C-%EC%84%B1%EA%B2%A9-%EC%9C%A0%ED%98%95-%EA%B2%80%EC%82%AC', 'popup','width=1080, height=1000, left=200, top=50'))">검사하기</a>
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>
@@ -113,18 +107,27 @@
 							<td><span class="errorTxt errorTxt2"></span></td>
 						</tr>
 					</table>
-					<div id="updateCustomer_btn">
-						<!-- <a onclick="javascript:history.back()">이전</a> -->
-						<a href="/myapp/index">이전</a> <input type="submit" value="정보수정"
+					<div id="updateMember_btn">
+						<a href="/myapp/index">홈으로</a> <input type="submit" value="수정완료"
 							onclick="checkPattern(this.form); return false" id="submit">
 					</div>
 				</form:form>
 			</div>
 			<div id="deco">
-            	<div id="deco1"></div>
-            	<div id="deco2"></div>
-            	<div id="deco3"></div>
-        	</div>
+				<div id="deco1">
+					<img
+						src="<%=request.getContextPath()%>/resources/img/avatar/MBTI_INFP.png"
+						alt="infp" class="avatar avatar10 infp"></img><img
+						src="<%=request.getContextPath()%>/resources/img/avatar/MBTI_ESFJ.png"
+						alt="esfj" class="avatar avatar5 esfj"></img>
+				</div>
+				<div id="deco2">
+					<img
+						src="<%=request.getContextPath()%>/resources/img/avatar/MBTI_INFJ.png"
+						alt="infj" class="avatar avatar9 infj"></img>
+				</div>
+				<div id="deco3"></div>
+			</div>
 		</main>
 
 	</div>
@@ -155,9 +158,8 @@
 			$('#day').append('<option value="' + dd + '">' + dd + '일</option>');
 		}
 
-			
 		//select, radioBtn 값 불러오기
-		
+
 		//MBTI
 		var myMbti = '${sessionScope.memberInfo.mbti}';
 		$('#mbti').val(myMbti).prop("selected", true);
@@ -177,10 +179,8 @@
 		var myDay = '${sessionScope.memberInfoBirth[2]}';
 		$('#day').val(myDay).prop("selected", true);
 
-		
 		//닉네임 중복검사
 		var loginNickName = '${sessionScope.memberInfo.nickName}';
-		
 	</script>
 </body>
 </html>

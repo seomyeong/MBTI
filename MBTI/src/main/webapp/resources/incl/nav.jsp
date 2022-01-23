@@ -55,8 +55,7 @@
 							name="heart-outline"></ion-icon>
 				</span> <span class="title">궁합도</span>
 			</a></li>
-			<li><a href="/myapp/mbtiPlay/mbtiPlayZone"> <span class="icon"> <ion-icon
-							name="ear-outline"></ion-icon>
+			<li><a href="/myapp/mbtiPlay/mbtiPlayZone"> <span class="icon"> <ion-icon name="rocket-outline"></ion-icon>
 				</span> <span class="title">맙티 플레이</span>
 			</a></li>
 			<c:choose>
@@ -82,7 +81,7 @@
 				</c:otherwise>
 			</c:choose>
 		</ul>
-		<small id="__copyright" class="hide">&copy; Copyright 2022. <br>TeamA All rights reserved.</small>
+		<small id="__copyright" class="hide">&copy; Copyright 2022. <br>WeAll-I All rights reserved.</small>
 	</nav>
 	<!-- <div id="main"></div> -->
 

@@ -12,10 +12,9 @@
 </head>
 <body>
     <header id="header">
-        <h1 class="hidden">맙티</h1>
-        <p id="logo"><span class="logoLetter">M</span>y <span class="logoLetter">B</span>est <span
+        <a id="logo" href="/myapp/"><span class="logoLetter">M</span>y <span class="logoLetter">B</span>est <span
                 class="logoLetter">T</span>eam <span class="logoLetter">I</span>s &ensp;<span
-                class="logoMbti">MBTI</span></p>
+                class="logoMbti"> MBTI</span></a>
         <div id="logoIcon"></div>
     </header>
 </body>

@@ -9,15 +9,16 @@
 <meta charset="UTF-8">
 <title>맙티</title>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/css/write.css">
+	href="<%=request.getContextPath()%>/resources/css/community/write.css">
 <script
 	src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"
 	defer></script>
-<script src="<%=request.getContextPath()%>/resources/js/write.js" defer></script>
+<script src="<%=request.getContextPath()%>/resources/js/community/write.js" defer></script>
 </head>
 
 <body>
 	<!-- // 기본양식 -->
+	<jsp:include page="/resources/incl/header.jsp"></jsp:include>
 	<jsp:include page="/resources/incl/nav.jsp"></jsp:include>
 	<div id="main">
 		<!-- 작성 구역 -->
@@ -28,7 +29,7 @@
 					name="title" placeholder="제목"/><span id="typingCount"></span><span
 					id="errorMsg2"></span>
 				<textarea id="contents" name="contents"
-					oninput="typingContents(this.form)"></textarea>
+					oninput="typingContents(this.form)" placeholder="내용"></textarea>
 				<a href="mainCommunity?type=reportingDate&q=&page=1&range=1" id="goContentsList">취소</a> <input
 					type="submit" value="작성완료"
 					onclick="writeSubmit(this.form); return false">
