@@ -1,10 +1,17 @@
+
+var list01 = document.querySelectorAll('#nav li');
+
 var list = document.querySelectorAll('#nav li');
+
 function activeLink() {
-    list.forEach((item) =>
+    list01.forEach((item) =>
         item.classList.remove('clicked'));
     this.classList.add('clicked');
 }
+list01.forEach((item) =>
+    item.addEventListener('click', activeLink));
 
-function navErrorMsg() {
-	alert("로그인이 필요한 서비스입니다.");
-}
+
+
+
+
