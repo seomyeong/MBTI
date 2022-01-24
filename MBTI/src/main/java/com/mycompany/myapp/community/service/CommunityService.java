@@ -143,16 +143,15 @@ public class CommunityService {
 	public void deleteComment(Long memberId, Long boardId, Long commentId) {
 		int countPlusComment = communityDao.countPlusComment(commentId);
 		
-		for(int i = 0; i <= countPlusComment; i++) {
-			communityDao.removeCommentCount(boardId);			
-		}
+		// 현재 삭제하는 댓글의 수를 포함시켜야 하기 때문에 countPlusComment + 1
+		communityDao.removeCommentCount(boardId, countPlusComment + 1);	
 
 		communityDao.deleteComment(commentId);
 		communityDao.deleteCommentsCount(memberId);
 	}
 	public void deletePlusComment(Long memberId, Long boardId, Long plusCommentId) {
 		communityDao.deletePlusComment(plusCommentId);
-		communityDao.removeCommentCount(boardId);
+		communityDao.removeCommentCount(boardId, 1);
 		communityDao.deleteCommentsCount(memberId);
 	}
 	
@@ -195,6 +194,9 @@ public class CommunityService {
 			
 			this.resultLevel(m);
 		}
+	}
+	public void UpdateCommunityBoard(long boardId, String title, String contents) {
+		communityDao.UpdateCommunityBoard(boardId, title, contents);
 	}
 	
 

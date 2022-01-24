@@ -917,9 +917,9 @@ public class CommunityDao {
 	 * 
 	 * @param boardId
 	 */
-	public void removeCommentCount(Long boardId) {
-		String sql = "UPDATE CommunityBoard SET commentsCount=commentsCount-1 WHERE id=?";
-		jdbcTemplate.update(sql, boardId);
+	public void removeCommentCount(Long boardId, int countPlusComment) {
+		String sql = "UPDATE CommunityBoard SET commentsCount=commentsCount-? WHERE id=?";
+		jdbcTemplate.update(sql, countPlusComment, boardId);
 	}
 	/**
 	 * 해당 CommentId를 가지는 CommunityComments_plus의 Count
@@ -972,6 +972,16 @@ public class CommunityDao {
 	public void resultLevel(Long id, int levelUp) {
 		String sql = "UPDATE Member SET level=level+? WHERE id=?";
 		jdbcTemplate.update(sql, levelUp, id);
+	}
+	/**
+	 * 해당 id를 가지는 CommunityBoard에 title과 contents를 수정한다.
+	 * @param boardId
+	 * @param title
+	 * @param contents
+	 */
+	public void UpdateCommunityBoard(long boardId, String title, String contents) {
+		String sql = "UPDATE CommunityBoard SET title=?, contents=? WHERE id=?";
+		jdbcTemplate.update(sql, title, contents, boardId);
 	}
 	
 }

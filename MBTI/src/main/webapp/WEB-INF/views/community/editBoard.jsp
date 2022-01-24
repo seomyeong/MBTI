@@ -24,15 +24,16 @@
 		<!-- 작성 구역 -->
 		<div id="writeWrap">
 			<span id="writeTitle">글쓰기</span>
-			<form action="successWrite" method="POST">
+			<form action="successEdit" method="POST">
+				<input type="text" name="boardId" value="${cb.id}" class="hidden">
 				<span id="errorMsg1"></span><input type="text" id="title"
-					name="title" placeholder="제목"/><span id="typingCount"></span><span
+					name="title" placeholder="제목" value="${cb.title}"/><span id="typingCount"></span><span
 					id="errorMsg2"></span>
 				<textarea id="contents" name="contents"
-					oninput="typingContents(this.form)" placeholder="내용"></textarea>
+					oninput="typingContents(this.form)" placeholder="내용">${cb.contents}</textarea>
 				<a href="mainCommunity?type=reportingDate&q=&page=1&range=1" id="goContentsList">취소</a> <input
 					type="submit" value="작성완료"
-					onclick="writeSubmit(this.form); return false">
+					onclick="editBoardSubmit(this.form); return false;">
 			</form>
 		</div>
 	</div>

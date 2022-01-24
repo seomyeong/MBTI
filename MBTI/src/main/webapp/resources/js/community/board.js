@@ -84,74 +84,17 @@ $('#board_delete a').on('click', function(e) {
 	}
 });
 
-// 댓글 부분만 다시 불러오기
-function load_comments(data) {
-	$('#commentsWrap').empty();
-	
-	var datacc = data["cc"];
-	var dataccp = data["ccp"];
-	var commentsWrap = "";
+// 게시글 삭제
 
-	if(datacc.length != 0) {
-		for(var cc in datacc) {
-			commentsWrap += '<div class="comment"><div class="commentInfo"><span class="comment_mbti"><span class="mbtiImg" style="background: url('
-									+ datacc[cc].member.profileImg
-									+ ') 0 0 / cover"></span>'
-									+ datacc[cc].member.mbti
-									+ '</span> <span class="comment_profile"><span class="comment_level">Lv.'
-									+ datacc[cc].member.level
-									+ '</span><span class="comment_nickName">'
-									+ datacc[cc].member.nickName
-									+ '</span></span><span class="comment_reportingDate">'
-									+ datacc[cc].reportingDate
-									+ '</span>';
-			if('${board.member.id}' == datacc[cc].member.id) {
-				commentsWrap += '<span class="comment_me">작성자</span>';
-			}
-			commentsWrap += '<span class="comment_plusCommentToggle"><a href="'
-									+ datacc[cc].id
-									+ '" class="comment_plusCommentToggleA">답글 쓰기</a></span><span class="commentInfo_right"><span class="comment_delete"><a href="'
-									+ datacc[cc].id 
-									+ '"><ion-icon name="close-outline"></ion-icon></a></span></span></div><p class="comment_text">'
-									+ datacc[cc].comments
-									+ '</p>';
-			if(dataccp.length != 0) {
-				for(var ccp in dataccp) {
-					if(dataccp[ccp].communityComments.id == datacc[cc].id) {
-						commentsWrap += '<div class="plusCommentView"><ion-icon name="return-down-forward-outline"></ion-icon><span class="plusCommentView_mbti"><span class="mbtiImg" style="background: url('
-							+ dataccp[ccp].member.profileImg
-							+ ') 0 0 / cover"></span>'
-							+ dataccp[ccp].member.mbti
-							+ '</span><span class="plusCommentView_profile"><span class="plusCommentView_level">Lv. '
-							+ dataccp[ccp].member.level
-							+ '</span><span class="plusCommentView_nickName">'
-							+ dataccp[ccp].member.nickName
-							+ '</span></span><span class="plusCommentView_reportingDate">'
-							+ dataccp[ccp].reportingDate
-							+ '</span>';
-						if(dataccp[ccp].member.id == '${board.member.id}') {
-							commentsWrap += '<span class="comment_me">작성자</span>';
-						}
-						commentsWrap += '<span class="plusCommentInfo_right"> ';
-						if('${sessionScope.loginId}' == dataccp[ccp].member.id) {
-							commentsWrap += '<span class="plusComment_delete"><a href="'
-										+ dataccp[ccp].id
-										+ '"><ion-icon name="close-outline"></ion-icon></a></span>';
-										
-						}
-						commentsWrap += '</span><div class="plusCommentView_comments">'
-									+ dataccp[ccp].comments
-									+ '</div></div>';
-					}
-				}
-			}
-			commentsWrap += '</div></div>';
-		}
+$('#board_edit a').on('click', function(e) {
+	e.preventDefault();
+	var boardId = $(this).attr("href");
+
+	var answer = confirm("해당 게시글의 수정 페이지로 이동합니다.");
+
+	if (answer == true) {
+		location.href = "editBoard?boardId=" + boardId;
 	}
-	$('#commentsWrap').append(commentsWrap);
-	$('#board_commentsCount').html(data["cb"].commentsCount);
-	changeDate_comment();
-	
-}
+});
 
 

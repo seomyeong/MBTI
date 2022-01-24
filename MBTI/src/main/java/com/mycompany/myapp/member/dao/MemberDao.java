@@ -131,7 +131,7 @@ public class MemberDao {
 	 * @return
 	 */
 	public boolean isLoginLogDate(Long loginId, String nowYear, String nowMonth, String nowDay) {
-		String sql = "SELECT YEAR(regDate),MONTH(regDate),DAY(regDate) FROM LoginLog WHERE memberId=? "
+		String sql = "SELECT YEAR(regDate), MONTH(regDate), DAY(regDate) FROM LoginLog WHERE memberId=? "
 				+ "AND YEAR(regDate)=? AND MONTH(regDate)=? AND DAY(regDate)=?";
 		List<LoginLogCommand> cLog = null;
 		cLog = jdbcTemplate.query(sql, new RowMapper<LoginLogCommand>() {
