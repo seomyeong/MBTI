@@ -60,7 +60,7 @@
 			</a></li>
 			<c:choose>
 				<c:when test="${sessionScope.loginId eq null}">
-					<li><a href="#" onclick="javascript:navErrorMsg(); return false;"> <span class="icon"> <ion-icon
+					<li><a href="#" onclick="javascript:navErrorMsg();  return false;"> <span class="icon"> <ion-icon
 									name="settings-outline"></ion-icon>
 						</span> <span class="title">개인설정</span>
 					</a></li>

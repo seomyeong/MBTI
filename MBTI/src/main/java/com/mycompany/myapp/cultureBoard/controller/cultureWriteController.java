@@ -27,16 +27,17 @@ import com.mycompany.myapp.domain.CultureBoardComment;
 public class cultureWriteController {
 	@Autowired 
 	CultureCommunityService cultureCommunityService;
-	// 
+/*
 	@GetMapping("/cultureBoard/write")
 	public ModelAndView getWrite(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
 		//세션에 로그인 되어있는지 검사 후 /member/login CONTROLLER로 이동
-		mav.setViewName("redirect:/member/login");
+		mav.setViewName("redirect:member/login");
 		return mav;
 	}
 	
+	*/
 	
 
 	@PostMapping("successWrite")
@@ -54,8 +55,8 @@ public class cultureWriteController {
 		//System.out.println(memberId + contents01 + contents02 + contentType + title + link);
 		cultureCommunityService.addWrittenContent(memberId, contents01, contents02, contentType, title, link);
 		
-		System.out.println("글쓰기 성공");
 
+		mav.setViewName("redirect:/index");
 		mav.setViewName("redirect:/");
 		return mav;
 	}

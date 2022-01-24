@@ -1,5 +1,7 @@
 package com.mycompany.myapp.cultureBoard.service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +74,19 @@ public class CultureCommunityService {
 	
 	public void addWrittenContent(long memberId,String contents01, String contents02, char contentType, String title, String link) {
 		cultureCommunityDao.addWrittenContent(memberId, contents01, contents02, contentType, title, link);
+		
+		// 해당 멤버의 총 게시글 수 카운트 올림
+		cultureCommunityDao.addCultureContentsCount(memberId);
+		
+		// 50맙 부여 
+		Member m = cultureCommunityDao.findMemberByMemberId(memberId);
+		m.calcContentsPoint();
+		
+		//맙포인트 증가
+		cultureCommunityDao.plusMab(m.getId(), m.getMabPoint());
+		//레벨 계산
+		this.resultLevel(m);
+		
 	}
 	
 	
@@ -92,6 +107,18 @@ public class CultureCommunityService {
 	public List<CultureBoardComment> Saved_findAllCultureBoardComment(Long loginId, Long boardId, String comment){
 		cultureCommunityDao.addCultureBoardComment(loginId, boardId, comment);
 		cultureCommunityDao.addCommentNum(boardId);
+		cultureCommunityDao.addCommentCount(loginId);
+		
+		Member member = cultureCommunityDao.findMemberByMemberId(loginId);
+		member.calcCommentsPoint();
+		cultureCommunityDao.plusMab(member.getId(), member.getMabPoint());
+		
+		this.resultLevel(member);
+		
+		
+		
+		
+		
 		return cultureCommunityDao.findAllCultureBoardCommentByBoardId(boardId);
 	}
 
@@ -140,6 +167,8 @@ public class CultureCommunityService {
 	public List<CultureBoardComment> deleteComment(Long loginId, Long boardId, Long commentId) {
 		cultureCommunityDao.deleteComment(commentId);
 		cultureCommunityDao.discountCommentNum(boardId);
+		cultureCommunityDao.deleteCommentsCount(loginId);
+		System.out.println("delete");
 		cultureCommunityDao.removeLikeCommentPoint(loginId, commentId);
 		return cultureCommunityDao.findAllCultureBoardCommentByBoardId(boardId);
 	}
@@ -163,13 +192,66 @@ public class CultureCommunityService {
 		return cultureCommunityDao.findCommentsOrderByTypeMbti(contentType, mbtiValue);
 	}
 
+	
+	
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param m
+	 */
+	public void resultLevel(Member m) {
+		int maxExp = 1000;
+		int mab = m.getMabPoint();
+		int levelUp = mab / maxExp;
+		
+		if(levelUp != 0) {
+			//레벨업 된 레벨 적용
+			cultureCommunityDao.resultLevel(m.getId(), levelUp);
+			//레벨업 후 맙포인트 재적용
+			cultureCommunityDao.levelUpAfterMab(m.getId(), levelUp * maxExp);			
+		}
+	}
+
+	
+	/**
+	 * 
+	 * 해당 멤버가 좋아요를 누른 게시글,댓글 아이디를 통해 컨텐츠 가져오기
+	 * (다른 아이디 로그인 시 좋아요 하트기능 초기화)
+	 * 
+	 * @param loginId
+	 * @return
+	 */
 
 
+	public List<CultureBoard> findLikesContentByMemberId(Long loginId) {
+		List<Long> likeContentsId = new ArrayList<Long>();
+		List<CultureBoard> likeContents = new ArrayList<CultureBoard>();
+		likeContentsId = cultureCommunityDao.findLikesContentIdByMemberId(loginId);
+		
+		Iterator<Long> it = likeContentsId.iterator();
+		while(it.hasNext()) {
+			Long likeConId = it.next();
+			
+			likeContents.add(cultureCommunityDao.findCultureBoardByBoardId(likeConId));
+		}
+		
+		return likeContents;
+	}
+
+
+	public List<CultureBoardComment> findLikesCommentByMemberId(Long loginId) {
+		List<Long> likeCommentsId = new ArrayList<Long>();
+		List<CultureBoardComment> likeComments = new ArrayList<CultureBoardComment>();
+		likeCommentsId = cultureCommunityDao.findLikesCommentByMemberId(loginId);
 	
-	
-	
-	
-	
-	
-	
+		
+		Iterator<Long> it = likeCommentsId.iterator();
+		while(it.hasNext()) {
+			Long likeCommentId = it.next();
+			likeComments.add(cultureCommunityDao.findCultureBoardCommentByCommentId(likeCommentId));
+		}
+		
+		return likeComments;
+	}	
 }

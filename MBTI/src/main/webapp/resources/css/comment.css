@@ -31,7 +31,7 @@
 
 
 .authorImg{
-	background-color: #000;
+	background: url(../img/nonLogin.png) no-repeat center/cover;
 	border-radius: 25px;
 	width: 50px;
 	height: 50px;	
@@ -42,7 +42,7 @@
 	width: calc(100% - 50px);
 	
 }
-.authorInfo{}
+
 .authorLv{font-family: 'gameFont';}
 .authorNickname{font-family: 'gameFont';}
 .authorMbti{font-family: 'gameFont';}
@@ -103,11 +103,9 @@ form.writeTextForm{
 	
 }
 .memberImg{
-	border: 1px solid #000;
-	background-color: #000;
-	border-radius: 15px;
+	border-radius: 13px;
 	width: 30px;
-	height: 30px;	
+	height: 42px;	
 }
 .memberWrapOfWrap{
 	width: calc(100% - 30px); height:100%;
