@@ -170,7 +170,7 @@
 							href="mainCommunity?type=${sessionScope.type}&q=${sessionScope.q}&page=${sessionScope.pagingVO.startPage-1}&range=${sessionScope.pagingVO.range - 1}">이전</a>
 					</c:when>
 					<c:otherwise>
-						<a href="#">이전</a>
+						<a href="#" onclick="alert('첫 페이지입니다.');">이전</a>
 					</c:otherwise>
 				</c:choose>
 
@@ -195,7 +195,7 @@
 							href="mainCommunity?type=${sessionScope.type}&q=${sessionScope.q}&page=${sessionScope.pagingVO.endPage+1}&range=${sessionScope.pagingVO.range + 1}">다음</a>
 					</c:when>
 					<c:otherwise>
-						<a href="#">다음</a>
+						<a href="#" onclick="alert('다음 페이지가 존재하지 않습니다.')">다음</a>
 					</c:otherwise>
 				</c:choose>
 			</div>
