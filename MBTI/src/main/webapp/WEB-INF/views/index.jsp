@@ -30,7 +30,7 @@
 		<article id="banner">
             <h2 class="hidden">배너</h2>
             <p>국내 최고<span>no.1</span> MBTI 커뮤니티 <span>맙티</span></p>
-            <p>당신을 가장 이해할 수 있는 당신만의 BEST TEAM을 찾으세요.</p>            
+            <p id="subTitle">당신을 가장 이해할 수 있는 당신만의 BEST TEAM을 찾으세요.</p>            
             <div id="bannerAvatar">
                 <img src="<%=request.getContextPath()%>/resources/img/avatar/MBTI_ENFJ.png" alt="enfj" class="avatar avatar1 enfj"></img>
                 <img src="<%=request.getContextPath()%>/resources/img/avatar/MBTI_ENFP.png" alt="enfp" class="avatar avatar2 enfp"></img>
@@ -157,7 +157,7 @@
 											<span class="dropComment">답글 ${contents.commentNum}개 보기</span>
 										</a>
 									</div>
-									<div class="linkTd"><a class="linkTag" href="${contents.link}" target="_blank">${contents.title}<span class="linkIcon"></span></a></div>
+									<div class="linkTd"><a class="linkTag" href="${contents.link}" target="_blank"><div class="contentMent">${contents.title}</div><span class="linkIcon"></span></a></div>
 									<div class="cultureBoard_reportDate">${contents.reportingDate}</div>
 								</div>
 							</div>
@@ -177,7 +177,7 @@
 											</c:otherwise>
 										</c:choose>		
 										<div class="authorWrap">
-											<div class="authorInfo">
+											<div class="authorInfo">	
 												<span class="authorLv">${memberInfo.level}</span>
 												<span class="authorNickname">${memberInfo.nickName}</span>
 												<span class="authorMbti">${memberInfo.mbti}</span>
@@ -208,7 +208,7 @@
 										<div class="memberWrapOfWrap">
 											<div class="memberWrap">
 												<div class="memberInfo">
-													<span class="eachMember memberLv">LV.${cultureBoardComment.member.level}</span>
+													<span class="eachMember memberLv">LV. ${cultureBoardComment.member.level}</span>
 													<span class="eachMember memberNickname">${cultureBoardComment.member.nickName}</span>
 													<span class="eachMember memberMbti">${cultureBoardComment.member.mbti}</span>
 													<span class="eachMember comment_reportDate">${cultureBoardComment.reportingDate}</span>

@@ -131,7 +131,7 @@ $(document).on('click', '.likeWrap a', function(){
 						
 					}else{
 						memberIsNull=
-						"<span class='authorLv'>"+ memberInfo.level + "</span>" +
+						"<span class='authorLv'>LV. "+ memberInfo.level + "</span>" +
 						"<span class='authorNickname'>" + memberInfo.nickName + "</span>" +
 						"<span class='authorMbti'>"+memberInfo.mbti+"</span>";
 						
@@ -221,7 +221,7 @@ $(document).on('click', '.likeWrap a', function(){
 							"<div class='memberWrapOfWrap'>"+
 							"<div class='memberWrap'>"+
 							"<div class='memberInfo'>"+
-							"<span class='eachMember memberLv'>"+ cultureBoardComment[com].member.level+"</span>"+
+							"<span class='eachMember memberLv'>LV. "+ cultureBoardComment[com].member.level+"</span>"+
 							"<span class='eachMember memberNickname'>"+cultureBoardComment[com].member.nickName+"</span>"+
 							"<span class='eachMember memberMbti'>"+cultureBoardComment[com].member.mbti+"</span>"+
 							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +
@@ -342,7 +342,7 @@ $(document).on('click', '.likeWrap a', function(){
 						
 					}else{
 						memberIsNull=
-						"<span class='authorLv'>"+ memberInfo.level + "</span>" +
+						"<span class='authorLv'>LV. "+ memberInfo.level + "</span>" +
 						"<span class='authorNickname'>" + memberInfo.nickName + "</span>" +
 						"<span class='authorMbti'>"+memberInfo.mbti+"</span>";
 						
@@ -432,7 +432,7 @@ $(document).on('click', '.likeWrap a', function(){
 							"<div class='memberWrapOfWrap'>"+
 							"<div class='memberWrap'>"+
 							"<div class='memberInfo'>"+
-							"<span class='eachMember memberLv'>"+ cultureBoardComment[com].member.level+"</span>"+
+							"<span class='eachMember memberLv'>LV. "+ cultureBoardComment[com].member.level+"</span>"+
 							"<span class='eachMember memberNickname'>"+cultureBoardComment[com].member.nickName+"</span>"+
 							"<span class='eachMember memberMbti'>"+cultureBoardComment[com].member.mbti+"</span>"+
 							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +
@@ -548,7 +548,7 @@ $(document).on('click', '.likeWrap a', function(){
 						
 					}else{
 						memberIsNull=
-						"<span class='authorLv'>"+ memberInfo.level + "</span>" +
+						"<span class='authorLv'>LV. "+ memberInfo.level + "</span>" +
 						"<span class='authorNickname'>" + memberInfo.nickName + "</span>" +
 						"<span class='authorMbti'>"+memberInfo.mbti+"</span>";
 						
@@ -638,7 +638,7 @@ $(document).on('click', '.likeWrap a', function(){
 							"<div class='memberWrapOfWrap'>"+
 							"<div class='memberWrap'>"+
 							"<div class='memberInfo'>"+
-							"<span class='eachMember memberLv'>"+ cultureBoardComment[com].member.level+"</span>"+
+							"<span class='eachMember memberLv'>LV. "+ cultureBoardComment[com].member.level+"</span>"+
 							"<span class='eachMember memberNickname'>"+cultureBoardComment[com].member.nickName+"</span>"+
 							"<span class='eachMember memberMbti'>"+cultureBoardComment[com].member.mbti+"</span>"+
 							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +
@@ -843,7 +843,7 @@ function selectMbti() {
 						
 					}else{
 						memberIsNull=
-						"<span class='authorLv'>"+ memberInfo.level + "</span>" +
+						"<span class='authorLv'>LV. "+ memberInfo.level + "</span>" +
 						"<span class='authorNickname'>" + memberInfo.nickName + "</span>" +
 						"<span class='authorMbti'>"+memberInfo.mbti+"</span>";
 						
@@ -933,7 +933,7 @@ function selectMbti() {
 							"<div class='memberWrapOfWrap'>"+
 							"<div class='memberWrap'>"+
 							"<div class='memberInfo'>"+
-							"<span class='eachMember memberLv'>"+ cultureBoardComment[com].member.level+"</span>"+
+							"<span class='eachMember memberLv'>LV. "+ cultureBoardComment[com].member.level+"</span>"+
 							"<span class='eachMember memberNickname'>"+cultureBoardComment[com].member.nickName+"</span>"+
 							"<span class='eachMember memberMbti'>"+cultureBoardComment[com].member.mbti+"</span>"+
 							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +
@@ -1054,7 +1054,7 @@ function selectMbti() {
 						
 					}else{
 						memberIsNull=
-						"<span class='authorLv'>"+ memberInfo.level + "</span>" +
+						"<span class='authorLv'>LV. "+ memberInfo.level + "</span>" +
 						"<span class='authorNickname'>" + memberInfo.nickName + "</span>" +
 						"<span class='authorMbti'>"+memberInfo.mbti+"</span>";
 						
@@ -1144,7 +1144,7 @@ function selectMbti() {
 							"<div class='memberWrapOfWrap'>"+
 							"<div class='memberWrap'>"+
 							"<div class='memberInfo'>"+
-							"<span class='eachMember memberLv'>"+ cultureBoardComment[com].member.level+"</span>"+
+							"<span class='eachMember memberLv'>LV. "+ cultureBoardComment[com].member.level+"</span>"+
 							"<span class='eachMember memberNickname'>"+cultureBoardComment[com].member.nickName+"</span>"+
 							"<span class='eachMember memberMbti'>"+cultureBoardComment[com].member.mbti+"</span>"+
 							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +
@@ -1260,7 +1260,7 @@ function selectMbti() {
 						
 					}else{
 						memberIsNull=
-						"<span class='authorLv'>"+ memberInfo.level + "</span>" +
+						"<span class='authorLv'>LV. "+ memberInfo.level + "</span>" +
 						"<span class='authorNickname'>" + memberInfo.nickName + "</span>" +
 						"<span class='authorMbti'>"+memberInfo.mbti+"</span>";
 						
@@ -1350,7 +1350,7 @@ function selectMbti() {
 							"<div class='memberWrapOfWrap'>"+
 							"<div class='memberWrap'>"+
 							"<div class='memberInfo'>"+
-							"<span class='eachMember memberLv'>"+ cultureBoardComment[com].member.level+"</span>"+
+							"<span class='eachMember memberLv'>LV. "+ cultureBoardComment[com].member.level+"</span>"+
 							"<span class='eachMember memberNickname'>"+cultureBoardComment[com].member.nickName+"</span>"+
 							"<span class='eachMember memberMbti'>"+cultureBoardComment[com].member.mbti+"</span>"+
 							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +
@@ -1502,7 +1502,7 @@ function orderLikes(){
 						
 					}else{
 						memberIsNull=
-						"<span class='authorLv'>"+ memberInfo.level + "</span>" +
+						"<span class='authorLv'>LV. "+ memberInfo.level + "</span>" +
 						"<span class='authorNickname'>" + memberInfo.nickName + "</span>" +
 						"<span class='authorMbti'>"+memberInfo.mbti+"</span>";
 						
@@ -1592,7 +1592,7 @@ function orderLikes(){
 							"<div class='memberWrapOfWrap'>"+
 							"<div class='memberWrap'>"+
 							"<div class='memberInfo'>"+
-							"<span class='eachMember memberLv'>"+ cultureBoardComment[com].member.level+"</span>"+
+							"<span class='eachMember memberLv'>LV. "+ cultureBoardComment[com].member.level+"</span>"+
 							"<span class='eachMember memberNickname'>"+cultureBoardComment[com].member.nickName+"</span>"+
 							"<span class='eachMember memberMbti'>"+cultureBoardComment[com].member.mbti+"</span>"+
 							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +
@@ -1713,7 +1713,7 @@ function orderLikes(){
 						
 					}else{
 						memberIsNull=
-						"<span class='authorLv'>"+ memberInfo.level + "</span>" +
+						"<span class='authorLv'>LV. "+ memberInfo.level + "</span>" +
 						"<span class='authorNickname'>" + memberInfo.nickName + "</span>" +
 						"<span class='authorMbti'>"+memberInfo.mbti+"</span>";
 						
@@ -1803,7 +1803,7 @@ function orderLikes(){
 							"<div class='memberWrapOfWrap'>"+
 							"<div class='memberWrap'>"+
 							"<div class='memberInfo'>"+
-							"<span class='eachMember memberLv'>"+ cultureBoardComment[com].member.level+"</span>"+
+							"<span class='eachMember memberLv'>LV. "+ cultureBoardComment[com].member.level+"</span>"+
 							"<span class='eachMember memberNickname'>"+cultureBoardComment[com].member.nickName+"</span>"+
 							"<span class='eachMember memberMbti'>"+cultureBoardComment[com].member.mbti+"</span>"+
 							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +
@@ -1919,7 +1919,7 @@ function orderLikes(){
 						
 					}else{
 						memberIsNull=
-						"<span class='authorLv'>"+ memberInfo.level + "</span>" +
+						"<span class='authorLv'>LV. "+ memberInfo.level + "</span>" +
 						"<span class='authorNickname'>" + memberInfo.nickName + "</span>" +
 						"<span class='authorMbti'>"+memberInfo.mbti+"</span>";
 						
@@ -2009,7 +2009,7 @@ function orderLikes(){
 							"<div class='memberWrapOfWrap'>"+
 							"<div class='memberWrap'>"+
 							"<div class='memberInfo'>"+
-							"<span class='eachMember memberLv'>"+ cultureBoardComment[com].member.level+"</span>"+
+							"<span class='eachMember memberLv'>LV. "+ cultureBoardComment[com].member.level+"</span>"+
 							"<span class='eachMember memberNickname'>"+cultureBoardComment[com].member.nickName+"</span>"+
 							"<span class='eachMember memberMbti'>"+cultureBoardComment[com].member.mbti+"</span>"+
 							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +
@@ -2161,7 +2161,7 @@ function selectBestComment(){
 						
 					}else{
 						memberIsNull=
-						"<span class='authorLv'>"+ memberInfo.level + "</span>" +
+						"<span class='authorLv'>LV. "+ memberInfo.level + "</span>" +
 						"<span class='authorNickname'>" + memberInfo.nickName + "</span>" +
 						"<span class='authorMbti'>"+memberInfo.mbti+"</span>";
 						
@@ -2251,7 +2251,7 @@ function selectBestComment(){
 							"<div class='memberWrapOfWrap'>"+
 							"<div class='memberWrap'>"+
 							"<div class='memberInfo'>"+
-							"<span class='eachMember memberLv'>"+ cultureBoardComment[com].member.level+"</span>"+
+							"<span class='eachMember memberLv'>LV. "+ cultureBoardComment[com].member.level+"</span>"+
 							"<span class='eachMember memberNickname'>"+cultureBoardComment[com].member.nickName+"</span>"+
 							"<span class='eachMember memberMbti'>"+cultureBoardComment[com].member.mbti+"</span>"+
 							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +
@@ -2372,7 +2372,7 @@ function selectBestComment(){
 						
 					}else{
 						memberIsNull=
-						"<span class='authorLv'>"+ memberInfo.level + "</span>" +
+						"<span class='authorLv'>LV. "+ memberInfo.level + "</span>" +
 						"<span class='authorNickname'>" + memberInfo.nickName + "</span>" +
 						"<span class='authorMbti'>"+memberInfo.mbti+"</span>";
 						
@@ -2462,7 +2462,7 @@ function selectBestComment(){
 							"<div class='memberWrapOfWrap'>"+
 							"<div class='memberWrap'>"+
 							"<div class='memberInfo'>"+
-							"<span class='eachMember memberLv'>"+ cultureBoardComment[com].member.level+"</span>"+
+							"<span class='eachMember memberLv'>LV. "+ cultureBoardComment[com].member.level+"</span>"+
 							"<span class='eachMember memberNickname'>"+cultureBoardComment[com].member.nickName+"</span>"+
 							"<span class='eachMember memberMbti'>"+cultureBoardComment[com].member.mbti+"</span>"+
 							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +
@@ -2578,7 +2578,7 @@ function selectBestComment(){
 						
 					}else{
 						memberIsNull=
-						"<span class='authorLv'>"+ memberInfo.level + "</span>" +
+						"<span class='authorLv'>LV. "+ memberInfo.level + "</span>" +
 						"<span class='authorNickname'>" + memberInfo.nickName + "</span>" +
 						"<span class='authorMbti'>"+memberInfo.mbti+"</span>";
 						
@@ -2668,7 +2668,7 @@ function selectBestComment(){
 							"<div class='memberWrapOfWrap'>"+
 							"<div class='memberWrap'>"+
 							"<div class='memberInfo'>"+
-							"<span class='eachMember memberLv'>"+ cultureBoardComment[com].member.level+"</span>"+
+							"<span class='eachMember memberLv'>LV. "+ cultureBoardComment[com].member.level+"</span>"+
 							"<span class='eachMember memberNickname'>"+cultureBoardComment[com].member.nickName+"</span>"+
 							"<span class='eachMember memberMbti'>"+cultureBoardComment[com].member.mbti+"</span>"+
 							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +
