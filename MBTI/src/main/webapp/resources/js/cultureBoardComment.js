@@ -31,8 +31,8 @@ function writeCommentSubmit(form, boardId, loginId, e){
 		$(e).parent().prev().children('.commentErrorMsg').prev().attr("placeholder","글자를 작성해주세요");	
 		passForComment = false;
 	}
-	else if(comment.length > 500){
-		$(e).parent().prev().children('.commentErrorMsg').text("댓글은 500자 이내로 입력하세요");
+	else if(comment.length > 20){
+		$(e).parent().prev().children('.commentErrorMsg').text("댓글은 20자 이내로 입력하세요");
 		$(e).parent().prev().children('input').css('border-bottom','3px solid red');
 		$(e).parent().prev().children('.commentErrorMsg').prev().attr("placeholder","글자를 작성해주세요");
 		passForComment = false;
@@ -62,7 +62,8 @@ function writeCommentSubmit(form, boardId, loginId, e){
 				let loginId = data["loginId"];
 				let boardId = data["boardId"];
 				let commentNum = data["commentNum"];
-			
+				let likeComments = data["likeComments"];
+
 				$('.commentReadWrap').eq(commentIndex).empty();
 				
 				$(e).parents('.commentWrap').prev().find('.dropComment').text("답글 " + commentNum + "개 보기");
@@ -70,12 +71,21 @@ function writeCommentSubmit(form, boardId, loginId, e){
 				
 				for(com in cultureBoardComment){
 					
-					if(cultureBoardComment[com].likesStatus){
-					    commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+					let state03 = 0;
+					for(lcm in likeComments){
+						if(likeComments[lcm].id == cultureBoardComment[com].id){
+									
+						   	commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+							state03 = 1;
+						}	
 					}
-					else{
-					    commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
-					}					
+					if(state03 == 0){
+		   				commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+						state03 = 0;
+					}	
+					
+					  
+									
 					
 					if(loginId == cultureBoardComment[com].member.id){
 					    commentDelOr =
@@ -85,18 +95,18 @@ function writeCommentSubmit(form, boardId, loginId, e){
 					}else{
 					    commentDelOr=
 					    "<div class='delIcon'>"+
-					    "<a href='#' class='delCommentBtn' data-boardId ="+ boardId + " data-loginId="+ loginId + " data-commentId="+ cultureBoardComment[com].id +">X</a>"+
 						"</div>";
 					}					
 					
 
 					$('.commentReadWrap').eq(commentIndex).append(
 						"<div class='commentRead'>" +
-							"<div class='memberImg'></div>" +
+							"<div class='memberImg'"+
+							"style='background: url(" + cultureBoardComment[com].member.profileImg + ")  0 0 / cover'></div>"+
 						"<div class='memberWrapOfWrap'>"+
 							"<div class='memberWrap'>" +
 							"<div class='memberInfo'>" +
-							"<span class='eachMember memberLv'>" + cultureBoardComment[com].member.level + "</span>" +
+							"<span class='eachMember memberLv'>LV. " + cultureBoardComment[com].member.level + "</span>" +
 							"<span class='eachMember memberNickname'>" + cultureBoardComment[com].member.nickName + "</span>" +
 							"<span class='eachMember memberMbti'>" + cultureBoardComment[com].member.mbti + "</span>" +
 							"</div>" +
@@ -181,17 +191,26 @@ $(document).on('click', '.delCommentBtn', function(e){
 				let cultureBoardComment = data["cultureBoardComment"];
 				let loginId = data["loginId"];
 				let boardId = data["boardId"];
+				let likeComments = data["likeComments"];
+				
 				
 				$('.commentReadWrap').eq(commentIndex).empty();
 				
 				for(com in cultureBoardComment){
 					
-					if(cultureBoardComment[com].likesStatus){
-					    commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+					let state03 = 0;
+					for(lcm in likeComments){
+						if(likeComments[lcm].id == cultureBoardComment[com].id){
+									
+						   	commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+							state03 = 1;
+						}	
 					}
-					else{
-					    commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
-					}					
+					if(state03 == 0){
+		   				commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+						state03 = 0;
+					}	
+									
 					
 					if(loginId == cultureBoardComment[com].member.id){
 					  	commentDelOr =
@@ -201,18 +220,18 @@ $(document).on('click', '.delCommentBtn', function(e){
 					}else{
 					    commentDelOr =
 					    "<div class='delIcon'>"+
-					    "<a href='#' class='delCommentBtn' data-boardId ="+ boardId + " data-loginId="+ loginId + " data-commentId="+ cultureBoardComment[com].id +">X</a>"+
 						"</div>";
 					}					
 					
 
 					$('.commentReadWrap').eq(commentIndex).append(
 						"<div class='commentRead'>" +
-							"<div class='memberImg'></div>" +
+							"<div class='memberImg'"+
+							"style='background: url(" + cultureBoardComment[com].member.profileImg + ")  0 0 / cover'></div>"+
 						"<div class='memberWrapOfWrap'>"+
 							"<div class='memberWrap'>" +
 							"<div class='memberInfo'>" +
-							"<span class='eachMember memberLv'>" + cultureBoardComment[com].member.level + "</span>" +
+							"<span class='eachMember memberLv'>LV. " + cultureBoardComment[com].member.level + "</span>" +
 							"<span class='eachMember memberNickname'>" + cultureBoardComment[com].member.nickName + "</span>" +
 							"<span class='eachMember memberMbti'>" + cultureBoardComment[com].member.mbti + "</span>" +
 							"</div>" +
