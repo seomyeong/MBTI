@@ -57,8 +57,7 @@
 						<img src="<c:url value='../resources/img/mbtiMatch/mbti5.png'/>" />
 					</c:when>
 				</c:choose>
-				<h3 id="resultType">${type02}<span>는</span>
-				</h3>
+				<h3 id="resultType">${type02}<span>는</span></h3>
 				<div id="mbtiTip">
 					<c:choose>
 						<c:when test="${type02 eq 'ISTJ'}">
