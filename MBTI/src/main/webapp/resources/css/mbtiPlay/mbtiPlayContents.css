@@ -7,7 +7,7 @@ li{list-style: none;}
 #main{text-align: center;}
 #playContents{
     position: relative;
-    margin-top: 200px;
+    margin-top: 275px;
 }
  #questionBar{
     content: "";
@@ -90,7 +90,7 @@ li{list-style: none;}
 
 /*통계 구간*/
 #statistics{
-    margin: 20px auto 0;
+    margin: 150px auto 0;
     width: 1000px;
 }
 /*내 유형 통계*/

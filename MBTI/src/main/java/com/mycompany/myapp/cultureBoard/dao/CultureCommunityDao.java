@@ -18,7 +18,6 @@ import com.mycompany.myapp.domain.LikeLogComment;
 import com.mycompany.myapp.domain.Member;
 
 
-
 @Component
 public class CultureCommunityDao {
 	@Autowired
@@ -53,7 +52,7 @@ public class CultureCommunityDao {
 			@Override
 			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Member m = new Member(rs.getLong("id"),rs.getString("email"), rs.getString("pw"), rs.getString("name"), rs.getString("nickName"), rs.getString("birth"), rs.getString("mbti"),
-						rs.getString("gender"), rs.getString("phone"), rs.getDate("regDate"));
+						rs.getString("gender"), rs.getString("phone"), rs.getDate("regDate"), rs.getString("profileImg"));
 				return m;
 			}
 		}, memberId);
@@ -375,7 +374,37 @@ public class CultureCommunityDao {
 		},commentId);
 	}
 
+	/**
+	 * 로그인한 멤버 아이디를 통해 추천누른 게시글의 id값 가져오기
+	 * @param loginId
+	 * @return
+	 */
+	
 
+	public List<Long> findLikesContentIdByMemberId(Long loginId) {
+		String sql = "SELECT boardId FROM LikeLogForCulture WHERE memberId=?";
+		
+		return jdbcTemplate.query(sql, new RowMapper<Long>() {
+
+			@Override
+			public Long mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return rs.getLong("boardId");
+			}
+			
+		},loginId);
+	}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public void addLikePointForComment(Long loginId, Long commentId) {
 		String sql = "INSERT INTO LikeLogComment(memberId, commentId) VALUES(?, ?)";
 		jdbcTemplate.update(sql, loginId, commentId);
@@ -451,6 +480,97 @@ public class CultureCommunityDao {
 		}, contentType, mbtiValue);
 	}
 
+	
+	/**
+	 * 레벨 적용에 필요한 컨텐츠추가시 함수들
+	 * 
+	 * @param loginId
+	 */
+	
+	//// 게시글 수 올리기
+	public void addCultureContentsCount(Long loginId) {
+		String sql = "UPDATE Member SET contentsCount=contentsCount+1 WHERE id=?";
+		jdbcTemplate.update(sql, loginId);
+	}
+	
+	
+	// 맙 포인트 부여
+	public void plusMab(Long memberId, int mabPoint) {
+		String sql = "UPDATE Member SET mabPoint=mabPoint+? WHERE id=?";
+		jdbcTemplate.update(sql, mabPoint, memberId);
+	}
+	
+	// 계산한 맙포인트를 이용해서 레벨 업 부여
+	public void resultLevel(Long memberId, int levelUp) {
+		String sql = "UPDATE Member SET level=level+? WHERE id=?";
+		jdbcTemplate.update(sql, levelUp, memberId);
+		
+	}
+
+	//레벨 업 후 처음부터 다시 재적용 될 맙포인트
+	public void levelUpAfterMab(long memberId, int mabPoint) {
+		String sql = "UPDATE Member SET mabPoint=mabPoint-? WHERE id=?";
+		jdbcTemplate.update(sql, mabPoint, memberId);
+		
+	}
+
+	// 해당 멤버의 댓글 갯수 증가
+	public void addCommentCount(Long loginId) {
+		String sql = "UPDATE Member SET commentsCount=commentsCount+1 WHERE id=?";
+		jdbcTemplate.update(sql, loginId);
+	}
+
+	// 해당 멤버의 댓글 갯수 감소
+	public void deleteCommentsCount(Long loginId) {
+		String sql = "UPDATE Member SET commentsCount=commentsCount-1 WHERE id=?";
+		jdbcTemplate.update(sql, loginId);
+	}
+
+
+	public List<Long> findLikesCommentByMemberId(Long loginId) {
+		String sql = "SELECT commentId FROM LikeLogComment WHERE memberId=?";
+		
+		return jdbcTemplate.query(sql, new RowMapper<Long>() {
+
+			@Override
+			public Long mapRow(ResultSet rs, int rowNum) throws SQLException {
+				return rs.getLong("commentId");
+			}
+			
+		},loginId);
+	}
+
+
+	public CultureBoardComment findCultureBoardCommentByCommentId(Long likeCommentId) {
+		String sql = "SELECT * FROM CultureBoardComment WHERE id=?";
+		return jdbcTemplate.queryForObject(sql, new RowMapper<CultureBoardComment>() {
+
+			@Override
+			public CultureBoardComment mapRow(ResultSet rs, int rowNum) throws SQLException {
+				SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Member member = null;
+				CultureBoard cultureBoard = null;
+				member = findMemberByMemberId(rs.getLong("memberId"));
+				cultureBoard = findCultureBoardByBoardId(rs.getLong("boardId"));
+				CultureBoardComment cbc = new CultureBoardComment(
+						rs.getLong("id"),
+						member, cultureBoard,
+						rs.getString("comment"),
+						rs.getInt("likes"),
+						rs.getBoolean("likesStatus"),
+						fmt.format(rs.getTimestamp("reportingDate"))
+				);
+				return cbc;
+			}
+		},likeCommentId);
+	}
+
+
+
+	
+	
+	
+	
 	
 	
 	

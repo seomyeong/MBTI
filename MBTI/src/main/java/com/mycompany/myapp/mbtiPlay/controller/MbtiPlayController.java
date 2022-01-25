@@ -62,7 +62,6 @@ public class MbtiPlayController {
 			set.add(randomNum);
 			if (!(service.isAnswersLog(loginId, randomNum))) {
 				List<MbtiPlayContents> content = service.findQuestionByRandomNum(randomNum);
-				
 				mav.setViewName("mbtiPlay/mbtiPlayContents");
 				mav.addObject("memberMbti", memberMbti.getMbti());
 				mav.addObject("content", content);
@@ -198,12 +197,12 @@ public class MbtiPlayController {
 		String nowMonth = monthDf.format(today);
 		String nowDay = dayDf.format(today);
 
+		//first insert
 		if (!(service.isContentsLogDate(loginId, nowYear, nowMonth, nowDay))) {
 			service.addContents(loginId, mbtiPlayContents);
 			service.addContentsLog(loginId);
 			service.calcQuizPoint(loginId);
 
-			System.out.println("first insert");
 			return mav;
 
 		} else if (service.isContentsLogDate(loginId, nowYear, nowMonth, nowDay)
@@ -213,15 +212,7 @@ public class MbtiPlayController {
 			service.updateContentsLog(loginId, nowYear, nowMonth, nowDay);
 			service.calcQuizPoint(loginId);
 
-			System.out.println("second insert");
-
-//			if (service.isContentsLogLimitTime(loginId, nowYear, nowMonth, nowDay)) {
-//
-//				System.out.println("3번 끝");
-//				mav.setViewName("mbtiPlay/successAddMbtiPlayMakeContents");
-//				return mav;
-//			}
-
+		//second insert
 		} else {
 			System.out.println("limitMakeContents");
 			mav.setViewName("redirect:/mbtiPlay/limitMakeContents");

@@ -19,15 +19,15 @@
 #banner p:nth-of-type(1){
 	font-family: 'Cafe24Ssurround';
 	color: var(--black3);
-	padding-top: 35px;
+	padding-top: 30px;
     font-size: 47px;
     font-weight: bold;
 }
 #banner p:nth-of-type(1) span:nth-of-type(1){
     font-size: 18px;
     position: absolute;
-    top: 30px;
-    left: calc(50% - 180px);
+    top: 24px;
+    left: calc(50% - 185px);
     color: var(--black2);
 }
 #banner p:nth-of-type(1) span:nth-of-type(2){
@@ -35,6 +35,10 @@
     color: #b2d4ad;
 }
 #banner p:nth-of-type(2){
+	margin:16px 0;
+	font-family: 'Cafe24Ssurround';
+	color: #999999;
+	
 }
 
 
@@ -44,7 +48,7 @@
     position: relative;
     margin: 0 auto;
     width: 1200px;
-    height: 210px;
+    height: 227px;
 }
 .avatar{
     /* border: 1px solid tomato; */
@@ -154,8 +158,8 @@ li{
 .cardTitle li{grid-area: main;}
 #mbtiCard{
     position: relative;
-    padding-top: 100px;
-    padding-left: 40px;
+    padding-top: 17px;
+    padding-left: 27px;
     width: 100%; height: 100%;
     min-width: 550px;
     display: grid;
@@ -182,23 +186,23 @@ li{
 }
 #mbtiImg{
     position: absolute;
-    top: 105px;
-    right: 10px;
+    top: 37px;
+    right: -3px;
     padding: 20px;
     box-sizing: border-box;
     border: 3px solid #eee;
     border-radius: 10px;
     box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
     width: 42%;
-    height: 75%;
+    height: 84%;
     background: #fff;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 #mbtiDeco{
     position: absolute;
-    top: 10%;
-    right: 33%;
+    top: -7%;
+    right: 31%;
     z-index: 3;
     width: 70px;
     height: 220px;

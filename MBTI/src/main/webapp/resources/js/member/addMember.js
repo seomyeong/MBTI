@@ -11,17 +11,14 @@ function checkPattern(form) {
 
 	// 이메일 검사 (숫자, 영어, 특수기호, 한글, 길이)
 	if (!pattern1.test(form.email1.value) || !pattern2.test(form.email1.value) || form.email1.value.length < 5) {
-		//alert("이메일은 5자리 이상 문자, 숫자로 구성하여야 합니다.");
 		$('.errorTxt').eq(0).text("5자리 이상 영문, 숫자로 구성하여야 합니다.").css("color", "red");
 		pass = false;
 	}
 	if (form.email1.value.search(/[~!@#$%^&*()_+|<>?:{}]/) != -1) {
-		//alert("이메일은 5자리 이상 문자, 숫자로 구성하여야 합니다.");
 		$('.errorTxt').eq(0).text("5자리 이상 영문, 숫자로 구성하여야 합니다.").css("color", "red");
 		pass = false;
 	}
 	if (form.email1.value.search(/[ㄱ-ㅎ]/) != -1) {
-		//alert("이메일은 5자리 이상 문자, 숫자로 구성하여야 합니다.");
 		$('.errorTxt').eq(0).text("5자리 이상 영문, 숫자로 구성하여야 합니다.").css("color", "red");
 		pass = false;
 	}
@@ -73,7 +70,7 @@ function checkPattern(form) {
 	if (form.phone.value.search(/[^0-9]/) != -1) {
 		$('.errorTxt').eq(8).text("잘못된 번호형식 입니다.");
 		pass = false;
-	} else if (form.phone.value.length < 8) {
+	} else if (form.phone.value.length < 11) {
 		$('.errorTxt').eq(8).text("11자리 입력해주세요.");
 		pass = false;
 	} else {
@@ -184,10 +181,6 @@ function emailCheck(form) {
 
 	}
 }
-
-
-
-
 
 
 // 생년월일
