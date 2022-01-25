@@ -189,6 +189,10 @@ table{
 	font-weight: 700; color: #fff;
 	height: 40px;
 	display: flex;
+	position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 2;
 }
 #contentHead p{
 	width: 100%;
@@ -196,6 +200,18 @@ table{
 	line-height: 38px;
 }
 
+#nullType{
+	height : calc(100% - 40px);
+	width : 100%;
+	display :flex;
+	justify-content : center;
+	align-items : center
+}
+
+#nullType p{
+	font-family: 'gameFont';
+	font-size : 2.5em;
+}
 
 
 .content{
@@ -212,6 +228,7 @@ table{
 .contentForm01{
 	display: flex;	
 	height: 80%;
+	font-size: 19px;
 }
 .contentForm01 div{
 	width: 100%;
@@ -225,7 +242,7 @@ table{
 	height: 20%;
 	align-items: center;
  	justify-content: space-between;
- 	padding: 0 30px 0 25px;
+ 	padding: 0 30px 4px 25px;
  	font-family: 'gameFont';
 }
 
@@ -267,21 +284,42 @@ table{
 .likesCount{
 	height: 20%;
 	line-height: 0;
+	font-family: 'gameFont';
 }
 
-.linkIcon{
+.linkIconMusic{
 	width: 25px ; height: 25px;
 	display: inline-block;
-	background: url(../img/link.png) no-repeat center/contain;
+	background: url(../img/music.png) no-repeat center/contain;
 	margin-left: 10px;
 	
 }
 
+.linkIconCinema{
+	width: 27px ; height: 27px;
+	display: inline-block;
+	background: url(../img/cinema.png) no-repeat center/contain;
+	margin-left: 10px;	
+}
+
+.linkIconTrip{
+	width: 25px ; height: 25px;
+	display: inline-block;
+	background: url(../img/trip.png) no-repeat center/contain;
+	margin-left: 10px;	
+}
+
+
 .contentMent{
 	max-width: 350px;
 	overflow: hidden;
+	font-style: italic;
 	text-overflow: ellipsis;
 	white-space : nowrap;
+	font-family: 'gameFont';
+}
+.cultureBoard_reportDate{
+	font-family: 'gameFont';
 }
 
 #bottomBtn{

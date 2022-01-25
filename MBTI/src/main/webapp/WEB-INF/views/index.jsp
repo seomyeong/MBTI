@@ -157,7 +157,12 @@
 											<span class="dropComment">답글 ${contents.commentNum}개 보기</span>
 										</a>
 									</div>
-									<div class="linkTd"><a class="linkTag" href="${contents.link}" target="_blank"><div class="contentMent">${contents.title}</div><span class="linkIcon"></span></a></div>
+									<div class="linkTd">
+										<a class="linkTag" href="${contents.link}" target="_blank">
+											<div class="contentMent">${contents.title}</div>
+											<span class="linkIconMusic"></span>	
+										</a>
+									</div>
 									<div class="cultureBoard_reportDate">${contents.reportingDate}</div>
 								</div>
 							</div>
@@ -178,13 +183,13 @@
 										</c:choose>		
 										<div class="authorWrap">
 											<div class="authorInfo">	
-												<span class="authorLv">${memberInfo.level}</span>
+												<span class="authorLv">LV.${memberInfo.level}</span>
 												<span class="authorNickname">${memberInfo.nickName}</span>
 												<span class="authorMbti">${memberInfo.mbti}</span>
 											</div>
 											<form class="writeTextForm">
 												<div class="writeText">
-													<input type="text" name="comment" placeholder="공개글 작성하기" maxlength="500" autocomplete="off"/>
+													<input type="text" name="comment" placeholder="공개글 100자 이내 작성하기" maxlength="102" autocomplete="off"/>
 													<span class="commentErrorMsg"></span>
 												</div>
 												<c:if test="${not (memberInfo eq null)}">
@@ -363,16 +368,16 @@
 				<div id="popupMain">
 					<input type="text" name="contentType" value="M" class="hidden">
 					<label for="content01"># 아티스트</label>
-					<div class="forAfter"><input type="text" name="contents01" id="content01" maxlength="10"></div>
+					<div class="forAfter"><input type="text" name="contents01" id="content01" maxlength="50"></div>
 					<span id="errorMsgArtist"></span>
 					<label for="content02"># 노래</label>
-					<div class="forAfter"><input type="text" name="contents02" id="content02" maxlength="10"></div>
+					<div class="forAfter"><input type="text" name="contents02" id="content02" maxlength="50"></div>
 					<span id="errorMsgSong"></span>
 					<label for="link"># 공유URL</label>
-					<div class="forAfter"><input type="text" name="link" class="link" maxlength="500"></div>
+					<div class="forAfter"><input type="text" name="link" class="link"></div>
 					<span class="errorMsgLink"></span>
 					<label for="title"># 추천멘트</label>
-					<textarea name="title" id="title" cols="30" rows="5" placeholder="50자 내외로 작성해주세요"></textarea>	
+					<textarea name="title" id="title" cols="30" rows="5" placeholder="100자 내외로 작성해주세요"></textarea>	
 					<span class="errorMsgMent"></span>
 				</div>
 				<div id="popupFooter">
@@ -384,13 +389,13 @@
 				<div id="popupMain">
 					<input type="text" name="contentType" value="C" class="hidden">
 					<label for="content01"># 영화</label>
-					<div class="forAfter"><input type="text" name="contents01" id="content01" maxlength="10"></div>
+					<div class="forAfter"><input type="text" name="contents01" id="content01" maxlength="50"></div>
 					<span id="errorMsgMovie"></span>
 					<label for="link"># 공유URL</label>
 					<div class="forAfter"><input type="text" name="link" class="link"></div>
 					<span class="errorMsgLink"></span>
 					<label for="title"># 추천멘트</label>
-					<textarea name="title" id="title" cols="30" rows="5" placeholder="50자 내외로 작성해주세요"></textarea>
+					<textarea name="title" id="title" cols="30" rows="5" placeholder="100자 내외로 작성해주세요"></textarea>
 					<span class="errorMsgMent"></span>
 				</div>
 				<div id="popupFooter">
@@ -402,13 +407,13 @@
 				<div id="popupMain">
 					<input type="text" name="contentType" value="T" class="hidden">
 					<label for="content01"># 여행지</label>
-					<div class="forAfter"><input type="text" name="contents01" id="content01" maxlength="10"></div>
+					<div class="forAfter"><input type="text" name="contents01" id="content01" maxlength="50"></div>
 					<span id="errorMsgTrip"></span>
 					<label for="link"># 공유URL</label>
 					<div class="forAfter"><input type="text" name="link" class="link"></div>
 					<span class="errorMsgLink"></span>
 					<label for="title"># 추천멘트</label>
-					<textarea name="title" id="title" cols="30" rows="5" placeholder="50자 내외로 작성해주세요"></textarea>
+					<textarea name="title" id="title" cols="30" rows="5" placeholder="100자 내외로 작성해주세요"></textarea>
 					<span class="errorMsgMent"></span>
 				</div>
 					<div id="popupFooter">

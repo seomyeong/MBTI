@@ -68,14 +68,7 @@ function writeSubmit(form){
 	var title = form.title.value;	
 	var pass = true;
 	
-	console.log(
-		"con1 : "+contents01 +
-		"con2 : "+contents02 + 
-		"link : "+link + 
-		"title : "+title + 
-		"contype : "+contentType
-	);
-	
+
 		
 	if(popContentType == "M"){
 		/****************************************** */
@@ -84,9 +77,9 @@ function writeSubmit(form){
 			$('#errorMsgArtist').text("아티스트명을 작성해주세요");
 			pass = false;
 		}
-		else if(contents01.length > 10){
+		else if(contents01.length > 50){
 			$('#errorMsgArtist').css('color','red');
-			$('#errorMsgArtist').text("10글자 이내로 작성해주세요");
+			$('#errorMsgArtist').text("50글자 이내로 작성해주세요");
 			pass = false;
 		}
 		else{
@@ -100,9 +93,9 @@ function writeSubmit(form){
 			$('#errorMsgSong').text("노래명을 작성해주세요");
 			pass = false;
 		}
-		else if(contents02.length > 10){
+		else if(contents02.length > 50){
 			$('#errorMsgSong').css('color','red');
-			$('#errorMsgSong').text("10글자 이내로 작성해주세요");
+			$('#errorMsgSong').text("50글자 이내로 작성해주세요");
 			pass = false;
 		}
 		else{
@@ -118,9 +111,9 @@ function writeSubmit(form){
 			$('.errorMsgLink').eq(0).text("");	
 		}
 		/****************************************** */
-		if(title.length > 50){
+		if(title.length > 100){
 			$('.errorMsgMent').eq(0).css('color','red');
-			$('.errorMsgMent').eq(0).text("50글자 이내로 작성해주세요");
+			$('.errorMsgMent').eq(0).text("100글자 이내로 작성해주세요");
 			pass = false;
 		}
 		else if(title.length == 0){
@@ -141,6 +134,11 @@ function writeSubmit(form){
 			$('#errorMsgMovie').text("영화명을 작성해주세요");
 			pass = false;
 		}
+		else if(contents01.length > 50){
+			$('#errorMsgArtist').css('color','red');
+			$('#errorMsgArtist').text("50글자 이내로 작성해주세요");
+			pass = false;
+		}
 		else{
 			$('#errorMsgMovie').text("");	
 		}
@@ -153,9 +151,9 @@ function writeSubmit(form){
 		else{
 			$('.errorMsgLink').eq(1).text("");	
 		}
-		if(title.length > 50){
+		if(title.length > 100){
 			$('.errorMsgMent').eq(0).css('color','red');
-			$('.errorMsgMent').eq(0).text("50글자 이내로 작성해주세요");
+			$('.errorMsgMent').eq(0).text("100글자 이내로 작성해주세요");
 			pass = false;
 		}
 		else if(title.length == 0){
@@ -174,6 +172,11 @@ function writeSubmit(form){
 			$('#errorMsgTrip').text("여행지를 작성해주세요");
 			pass = false;
 		}
+		else if(contents01.length > 50){
+			$('#errorMsgArtist').css('color','red');
+			$('#errorMsgArtist').text("50글자 이내로 작성해주세요");
+			pass = false;
+		}
 		else{
 			$('#errorMsgTrip').text("");	
 		}
@@ -187,9 +190,9 @@ function writeSubmit(form){
 			$('.errorMsgLink').eq(2).text("");	
 		}
 		
-		if(title.length > 50){
+		if(title.length > 100){
 			$('.errorMsgMent').eq(0).css('color','red');
-			$('.errorMsgMent').eq(0).text("50글자 이내로 작성해주세요");
+			$('.errorMsgMent').eq(0).text("100글자 이내로 작성해주세요");
 			pass = false;
 		}
 		else if(title.length == 0){

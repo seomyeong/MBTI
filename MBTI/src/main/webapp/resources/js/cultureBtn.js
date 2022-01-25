@@ -14,10 +14,12 @@ let commentAppend = new Array();
 function ifSelectBtn(){
 	console.log('들어옴');
 	if(mbtiSubmitStat){
+		$('#contentList').remove();
 		selectMbti();
 	}else{
 		mbtiValue = "none";
 		selectCulture();
+		$('#nullType').remove();
 	}		
 }
 
@@ -275,7 +277,8 @@ $(document).on('click', '.likeWrap a', function(){
 					"<span class='dropComment'>답글 "+contents[con].commentNum+"개 보기</span>" +
 					"</a>" + 
 					"</div>" +
-					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ contents[con].title+ "<span class='linkIcon'></span></a></div>" +
+					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+
+					"<div class='contentMent'>" + contents[con].title + "</div>" + "<span class='linkIconMusic'></span></a></div>" +
 					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +
 					"</div>" +
 					"</div>" +
@@ -485,7 +488,8 @@ $(document).on('click', '.likeWrap a', function(){
 					"<span class='dropComment'>답글 "+contents[con].commentNum+"개 보기</span>" +
 					"</a>" + 
 					"</div>" +
-					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ contents[con].title+ "<span class='linkIcon'></span></a></div>" +
+					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ 
+					"<div class='contentMent'>" + contents[con].title + "</div>" + "<span class='linkIconCinema'></span></a></div>" +
 					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +
 					"</div>" +
 					"</div>" +
@@ -691,7 +695,8 @@ $(document).on('click', '.likeWrap a', function(){
 					"<span class='dropComment'>답글 "+contents[con].commentNum+"개 보기</span>" +
 					"</a>" + 
 					"</div>" +
-					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ contents[con].title+ "<span class='linkIcon'></span></a></div>" +
+					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ 
+					"<div class='contentMent'>" + contents[con].title + "</div>" + "<span class='linkIconTrip'></span></a></div>" +
 					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +
 					"</div>" +
 					"</div>" +
@@ -796,6 +801,7 @@ function selectMbti() {
 		success: function(data) {
 			$('#contentWrap').css('overflow-y','scroll');
 			$('#contentList').remove();
+			$('#nullType').remove();
 			$('#noneDataWrap').remove();	
 			
 			let contents = data["contents"];
@@ -811,6 +817,9 @@ function selectMbti() {
 			let loginNull_commentSubmit;
 			let memberImg;
 
+			
+			
+			
 			
 			if(contentType == "M"){
 				$('#contentWrap').append(
@@ -987,7 +996,8 @@ function selectMbti() {
 					"<span class='dropComment'>답글 "+contents[con].commentNum+"개 보기</span>" +
 					"</a>" + 
 					"</div>" +
-					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ contents[con].title+ "<span class='linkIcon'></span></a></div>" +
+					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+
+					"<div class='contentMent'>" + contents[con].title + "</div>" + "<span class='linkIconMusic'></span></a></div>" +
 					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +
 					"</div>" +
 					"</div>" +
@@ -1197,7 +1207,8 @@ function selectMbti() {
 					"<span class='dropComment'>답글 "+contents[con].commentNum+"개 보기</span>" +
 					"</a>" + 
 					"</div>" +
-					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ contents[con].title+ "<span class='linkIcon'></span></a></div>" +
+					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ 
+					"<div class='contentMent'>" + contents[con].title + "</div>" + "<span class='linkIconCinema'></span></a></div>" +
 					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +
 					"</div>" +
 					"</div>" +
@@ -1403,7 +1414,8 @@ function selectMbti() {
 					"<span class='dropComment'>답글 "+contents[con].commentNum+"개 보기</span>" +
 					"</a>" + 
 					"</div>" +
-					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ contents[con].title+ "<span class='linkIcon'></span></a></div>" +
+					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ 
+					"<div class='contentMent'>" + contents[con].title + "</div>" + "<span class='linkIconTrip'></span></a></div>" +
 					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +
 					"</div>" +
 					"</div>" +
@@ -1433,6 +1445,16 @@ function selectMbti() {
 					commentAppend = new Array();
 					commentSum ="";
 				}
+			}
+			
+			
+			if(Array.isArray(contents) && contents.length === 0){
+				
+				$('#contentWrap').append(
+					"<div id='nullType'>" +
+						"<p>"+ mbtiValue + "에 대한 검색결과가 없습니다</p>" +
+					"</div>"		
+				);
 			}
 		}
 	});	
@@ -1646,7 +1668,8 @@ function orderLikes(){
 					"<span class='dropComment'>답글 "+contents[con].commentNum+"개 보기</span>" +
 					"</a>" + 
 					"</div>" +
-					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ contents[con].title+ "<span class='linkIcon'></span></a></div>" +
+					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+
+					"<div class='contentMent'>" + contents[con].title + "</div>" + "<span class='linkIconMusic'></span></a></div>" +
 					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +
 					"</div>" +
 					"</div>" +
@@ -1856,7 +1879,8 @@ function orderLikes(){
 					"<span class='dropComment'>답글 "+contents[con].commentNum+"개 보기</span>" +
 					"</a>" + 
 					"</div>" +
-					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ contents[con].title+ "<span class='linkIcon'></span></a></div>" +
+					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ 
+					"<div class='contentMent'>" + contents[con].title + "</div>" + "<span class='linkIconCinema'></span></a></div>" +
 					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +
 					"</div>" +
 					"</div>" +
@@ -2062,7 +2086,8 @@ function orderLikes(){
 					"<span class='dropComment'>답글 "+contents[con].commentNum+"개 보기</span>" +
 					"</a>" + 
 					"</div>" +
-					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ contents[con].title+ "<span class='linkIcon'></span></a></div>" +
+					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ 
+					"<div class='contentMent'>" + contents[con].title + "</div>" + "<span class='linkIconTrip'></span></a></div>" +
 					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +
 					"</div>" +
 					"</div>" +
@@ -2305,7 +2330,8 @@ function selectBestComment(){
 					"<span class='dropComment'>답글 "+contents[con].commentNum+"개 보기</span>" +
 					"</a>" + 
 					"</div>" +
-					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ contents[con].title+ "<span class='linkIcon'></span></a></div>" +
+					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+
+					"<div class='contentMent'>" + contents[con].title + "</div>" + "<span class='linkIconMusic'></span></a></div>" +
 					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +
 					"</div>" +
 					"</div>" +
@@ -2515,7 +2541,8 @@ function selectBestComment(){
 					"<span class='dropComment'>답글 "+contents[con].commentNum+"개 보기</span>" +
 					"</a>" + 
 					"</div>" +
-					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ contents[con].title+ "<span class='linkIcon'></span></a></div>" +
+					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ 
+					"<div class='contentMent'>" + contents[con].title + "</div>" + "<span class='linkIconCinema'></span></a></div>" +
 					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +
 					"</div>" +
 					"</div>" +
@@ -2721,7 +2748,8 @@ function selectBestComment(){
 					"<span class='dropComment'>답글 "+contents[con].commentNum+"개 보기</span>" +
 					"</a>" + 
 					"</div>" +
-					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ contents[con].title+ "<span class='linkIcon'></span></a></div>" +
+					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ 
+					"<div class='contentMent'>" + contents[con].title + "</div>" + "<span class='linkIconTrip'></span></a></div>" +
 					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +
 					"</div>" +
 					"</div>" +
