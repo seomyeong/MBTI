@@ -5,6 +5,14 @@
     font-weight: normal;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .commentWrap{width: 100%; display:none;}
 .comment{width: 100%;}
 .hidden{
@@ -44,8 +52,9 @@
 }
 .authorWrap{
 	padding-left : 20px;
-	font-family: 'gameFont';
+	font-family: 'Cafe24Ssurround';
 	width: calc(100% - 50px);
+	font-size: 13px;
 	
 }
 
@@ -53,9 +62,9 @@
 	margin-left: 9px;
 }
 
-.authorLv{font-family: 'gameFont'; color: #B0C4DE;}
-.authorNickname{font-family: 'gameFont'; color: #E996A5;}
-.authorMbti{font-family: 'gameFont'; color: #20B4BA;}
+.authorLv{font-family: 'Cafe24Ssurround'; color: #B0C4DE;}
+.authorNickname{font-family: 'Cafe24Ssurround'; color: #E996A5;}
+.authorMbti{font-family: 'Cafe24Ssurround'; color: #20B4BA;}
 
 form.writeTextForm{
 	display:flex;
@@ -73,10 +82,10 @@ form.writeTextForm{
 	border-bottom: 3px solid #b2d4ad; box-sizing: border-box;
 	display:block;
 	width:100%;
-	font-size: 18px;font-family: 'gameFont';
+	    font-size: 14px;font-family: 'Cafe24Ssurround';
 }
 .writeText input::placeholder{
-	font-family: 'gameFont';
+	font-family: 'Cafe24Ssurround';
 }
 
 .writeText input:focus{
@@ -85,7 +94,7 @@ form.writeTextForm{
 
 
 .commentErrorMsg{
-	font-family: 'gameFont';font-size: 15px;
+	font-family: 'Cafe24Ssurround';font-size: 15px;
 	font-weight: 700;
 	color: red;
 }
@@ -96,7 +105,7 @@ form.writeTextForm{
 	margin-top: 7px;
 }
 .writeSubmit input{
-	font-family: 'gameFont';font-size: 18px;
+	font-family: 'Cafe24Ssurround';font-size: 14px;
 	outline:none;
 	border:none;
 	float:right;
@@ -126,18 +135,19 @@ form.writeTextForm{
 	width: 80%; height:100%;
 	display:flex; flex-direction:column;
 	justify-content: center;
+	font-size: 13px;
 	
 }
 
 .memberInfo{font-size : 14px;}
-.eachMember{font-family: 'gameFont'; margin-left: 6px;}
+.eachMember{font-family: 'Cafe24Ssurround'; margin-left: 6px; font-size: 13px;}
 .memberLv{color: #B0C4DE;}
 .memberNickname{color: #E996A5;}
 .memberMbti{color: #20B4BA;}
 
 .memberComment{
 	padding: 10px 0;
-	font-family: 'gameFont';
+	font-family: 'Cafe24Ssurround';
 }
 
 .memberLike{
@@ -159,10 +169,10 @@ form.writeTextForm{
 .commentLikesCount{
 	height: 32%; text-align:center; line-height:11px;
 	margin-top:1px;
-	font-family: 'gameFont';
+	font-family: 'Cafe24Ssurround';
+	font-size: 12px;
 	
 }
-
 
 .memberDelete{
 	width: 7%;

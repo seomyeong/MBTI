@@ -152,8 +152,8 @@ function writeSubmit(form){
 			$('.errorMsgLink').eq(1).text("");	
 		}
 		if(title.length > 100){
-			$('.errorMsgMent').eq(0).css('color','red');
-			$('.errorMsgMent').eq(0).text("100글자 이내로 작성해주세요");
+			$('.errorMsgMent').eq(1).css('color','red');
+			$('.errorMsgMent').eq(1).text("100글자 이내로 작성해주세요");
 			pass = false;
 		}
 		else if(title.length == 0){
@@ -191,8 +191,8 @@ function writeSubmit(form){
 		}
 		
 		if(title.length > 100){
-			$('.errorMsgMent').eq(0).css('color','red');
-			$('.errorMsgMent').eq(0).text("100글자 이내로 작성해주세요");
+			$('.errorMsgMent').eq(2).css('color','red');
+			$('.errorMsgMent').eq(2).text("100글자 이내로 작성해주세요");
 			pass = false;
 		}
 		else if(title.length == 0){
