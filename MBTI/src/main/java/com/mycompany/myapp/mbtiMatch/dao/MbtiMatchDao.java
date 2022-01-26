@@ -64,7 +64,7 @@ public class MbtiMatchDao {
 	}
 
 	/***
-	 * 유저가 조합한 type01, type02 뿐만 아니라 결과가 같은 type02, type01 조합의 코멘트도 조회. 
+	 * 유저가 선택한 조합의 코멘트 조회. 
 	 * @param type01
 	 * @param type02
 	 * @return

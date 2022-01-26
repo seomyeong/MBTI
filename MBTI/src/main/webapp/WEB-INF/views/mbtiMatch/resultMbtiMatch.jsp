@@ -255,18 +255,6 @@
 			  templateId: 69529,
 		});
 		
-		Kakao.API.request({
-			  url: '/v2/api/talk/memo/scrap/send',
-			  data: {
-			    request_url: 'http://localhost:8090/myapp/mbtiMatch/resultMbtiMatch?type01=ENTP&type02=ESFP',
-			    template_id: 69529,
-			  },
-			  success: function(response) {
-			  },
-			  fail: function(error) {
-			  },
-			});
-		
 	</script>
 
 </body>
