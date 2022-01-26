@@ -131,7 +131,7 @@ public class MemberController {
 				long loginId = (long) session.getAttribute("loginId");
 				memberService.addLoginLog(loginId);
 				memberService.calcLoginPoint(loginId);
-
+				
 				mav.setViewName("redirect:/");
 				return mav;
 
