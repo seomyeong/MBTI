@@ -31,21 +31,32 @@ public class IndexController {
 	CultureCommunityService cultureCommunityService;
 	
 	//첫시작 컨텐츠 
-	@GetMapping("/index")
+	@GetMapping(value= {"/","index","main"})
 	public ModelAndView cultureConWrite(HttpSession session, @ModelAttribute CultureBoardCommand cultureBoardCommand) {
 		ModelAndView mav = new ModelAndView();
 		
 		List<CultureBoard> contents = new ArrayList<CultureBoard>();
+		List<CultureBoard> likeContents = new ArrayList<CultureBoard>();
 		List<CultureBoardComment> cultureBoardComment = new ArrayList<CultureBoardComment>(); 
+		List<CultureBoardComment> likeComments = new ArrayList<CultureBoardComment>();
+		
 		Long loginId = null;
+		
 		//첫인덱스화면 '뮤직'카테고리 게시물 전체 리스트 
 		contents = cultureCommunityService.findFirstContents();
 		cultureBoardComment = cultureCommunityService.findAllCultureBoardComment();
-	
+		
 		Member loginMemberInfo = null;
 		if (!(session == null || session.getAttribute("loginId") == null || session.getAttribute("loginId").equals(""))) {
 			loginId = Long.parseLong(String.valueOf(session.getAttribute("loginId")));
 			loginMemberInfo = cultureCommunityService.findMemberByMemberId(loginId);
+			
+			likeContents = cultureCommunityService.findLikesContentByMemberId(loginId);
+			likeComments = cultureCommunityService.findLikesCommentByMemberId(loginId);
+			
+			mav.addObject("likeContents", likeContents);
+			
+			mav.addObject("likeComments", likeComments);
 			
 			mav.addObject("loginId", loginId);
 			mav.addObject("contents", contents);
@@ -67,8 +78,9 @@ public class IndexController {
 		//mav.addObject("contents", contents);
 		//mav.addObject("cultureBoardComment", cultureBoardComment);
 		
-		//index.jsp로의 이동! 
-		mav.setViewName("../index");
+		//index.jsp로의 이동!
+		//
+		mav.setViewName("index");
 		return mav;
 	}
 	
@@ -79,11 +91,12 @@ public class IndexController {
 	@PostMapping("/cultureBoard/index")
 	public Map<String, Object> cultureBtn(HttpSession session, @RequestBody Map<String, String> param) {
 		List<CultureBoard> contents = new ArrayList<CultureBoard>();
-		List<CultureBoardComment> cultureBoardComment = new ArrayList<CultureBoardComment>();
+		List<CultureBoard> likeContents = new ArrayList<CultureBoard>();
+		List<CultureBoardComment> cultureBoardComment = new ArrayList<CultureBoardComment>(); 
+		List<CultureBoardComment> likeComments = new ArrayList<CultureBoardComment>();
 		Member member = null;
-		//member = cultureCommunityService.findMemberByMemberId(Long.parseLong("1"));
 		Long loginId = null;
-		//Long loginId = Long.parseLong("1");
+		
 		String strValue = "";
 		
 		Iterator<String> keys = param.keySet().iterator();
@@ -101,6 +114,12 @@ public class IndexController {
 		if (!(session == null || session.getAttribute("loginId") == null || session.getAttribute("loginId").equals(""))) {
 			loginId = Long.parseLong(String.valueOf(session.getAttribute("loginId")));
 			member = cultureCommunityService.findMemberByMemberId(loginId);
+			
+			likeContents = cultureCommunityService.findLikesContentByMemberId(loginId);
+			likeComments = cultureCommunityService.findLikesCommentByMemberId(loginId);
+			
+			map.put("likeContents", likeContents);
+			map.put("likeComments", likeComments);
 			
 			map.put("loginId", loginId);
 			map.put("contents", contents);
@@ -121,17 +140,19 @@ public class IndexController {
 	}	
 	
 	
+	//MBTI 별 버튼 클릭시 보여주기
 	@ResponseBody
 	@PostMapping("/cultureBoard/index02")
 	public Map<String, Object> mbtiBtn(HttpSession session, @RequestBody Map<String, String> param) {
 		List<CultureBoard> contents = new ArrayList<CultureBoard>();
-		List<CultureBoardComment> cultureBoardComment = new ArrayList<CultureBoardComment>();
+		List<CultureBoard> likeContents = new ArrayList<CultureBoard>();
+		List<CultureBoardComment> cultureBoardComment = new ArrayList<CultureBoardComment>(); 
+		List<CultureBoardComment> likeComments = new ArrayList<CultureBoardComment>();
+		
 		String mbtiValue = param.get("mbtiValue");
 		String contentType = param.get("contentType");
+		
 		Member member = null;
-		//member = cultureCommunityService.findMemberByMemberId(Long.parseLong(String.valueOf(session.getAttribute("loginId"))));
-		//member = cultureCommunityService.findMemberByMemberId(Long.parseLong("1"));
-		//Long loginId = Long.parseLong(String.valueOf(session.getAttribute("loginId")));
 		Long loginId = null;
 		
 		
@@ -144,6 +165,11 @@ public class IndexController {
 		if (!(session == null || session.getAttribute("loginId") == null || session.getAttribute("loginId").equals(""))) {
 			loginId = Long.parseLong(String.valueOf(session.getAttribute("loginId")));
 			member = cultureCommunityService.findMemberByMemberId(loginId);
+			likeContents = cultureCommunityService.findLikesContentByMemberId(loginId);
+			likeComments = cultureCommunityService.findLikesCommentByMemberId(loginId);
+			
+			map.put("likeContents", likeContents);
+			map.put("likeComments", likeComments);
 			
 			map.put("loginId", loginId);
 			map.put("contents", contents);
@@ -169,14 +195,14 @@ public class IndexController {
 	@ResponseBody
 	@PostMapping("/cultureBoard/orderLikes")
 	public Map<String, Object> orderLikesBtn(HttpSession session, @RequestBody Map<String, String> param){
+		List<CultureBoard> contents = new ArrayList<CultureBoard>();
+		List<CultureBoard> likeContents = new ArrayList<CultureBoard>();
+		List<CultureBoardComment> cultureBoardComment = new ArrayList<CultureBoardComment>(); 
+		List<CultureBoardComment> likeComments = new ArrayList<CultureBoardComment>();
+		
 		String contentType = param.get("type");
 		String mbtiValue = param.get("mbtiValue");
-		List<CultureBoardComment> cultureBoardComment = new ArrayList<CultureBoardComment>();
-		List<CultureBoard> contents = new ArrayList<CultureBoard>();
 		Member member = null;
-		//member = cultureCommunityService.findMemberByMemberId(Long.parseLong(String.valueOf(session.getAttribute("loginId"))));
-		//member = cultureCommunityService.findMemberByMemberId(Long.parseLong("1"));
-		//Long loginId = Long.parseLong(String.valueOf(session.getAttribute("loginId")));
 		Long loginId = null;
 		
 		if(mbtiValue.equals("none")) {
@@ -192,7 +218,11 @@ public class IndexController {
 		if (!(session == null || session.getAttribute("loginId") == null || session.getAttribute("loginId").equals(""))) {
 			loginId = Long.parseLong(String.valueOf(session.getAttribute("loginId")));
 			member = cultureCommunityService.findMemberByMemberId(loginId);
+			likeContents = cultureCommunityService.findLikesContentByMemberId(loginId);
+			likeComments = cultureCommunityService.findLikesCommentByMemberId(loginId);
 			
+			map.put("likeContents", likeContents);
+			map.put("likeComments", likeComments);
 			map.put("loginId", loginId);
 			map.put("contents", contents);
 			map.put("cultureBoardComment", cultureBoardComment);
@@ -219,14 +249,14 @@ public class IndexController {
 	public Map<String, Object> orderCommentBtn(HttpSession session, @RequestBody Map<String, String> param){
 		String contentType = param.get("type");
 		String mbtiValue = param.get("mbtiValue");
-		
-		List<CultureBoardComment> cultureBoardComment = new ArrayList<CultureBoardComment>();
-		List<CultureBoard> contents = new ArrayList<CultureBoard>();
 		Member member = null;
-		//member = cultureCommunityService.findMemberByMemberId(Long.parseLong(String.valueOf(session.getAttribute("loginId"))));
-		//member = cultureCommunityService.findMemberByMemberId(Long.parseLong("1"));
-		//Long loginId = Long.parseLong(String.valueOf(session.getAttribute("loginId")));
 		Long loginId = null;
+		
+		List<CultureBoard> contents = new ArrayList<CultureBoard>();
+		List<CultureBoard> likeContents = new ArrayList<CultureBoard>();
+		List<CultureBoardComment> cultureBoardComment = new ArrayList<CultureBoardComment>(); 
+		List<CultureBoardComment> likeComments = new ArrayList<CultureBoardComment>();
+		
 		
 		if(mbtiValue.equals("none")) {
 			contents = cultureCommunityService.findCommentsOrderByType(contentType);
@@ -242,6 +272,11 @@ public class IndexController {
 			loginId = Long.parseLong(String.valueOf(session.getAttribute("loginId")));
 			member = cultureCommunityService.findMemberByMemberId(loginId);
 			
+			likeContents = cultureCommunityService.findLikesContentByMemberId(loginId);
+			likeComments = cultureCommunityService.findLikesCommentByMemberId(loginId);
+			
+			map.put("likeContents", likeContents);
+			map.put("likeComments", likeComments);
 			map.put("loginId", loginId);
 			map.put("contents", contents);
 			map.put("cultureBoardComment", cultureBoardComment);
@@ -271,7 +306,7 @@ public class IndexController {
 		String loginId = param.get("loginId");
 		String boardId = param.get("boardId");
 		String appliedLikes = "";
-		 
+		List<CultureBoard> cb = null; 
 		//System.out.println(boardId);
 		// 추천이 눌려있으면 true 안눌려있으면 false
 		Boolean likeCheck = cultureCommunityService.isLike(Long.parseLong(loginId), Long.parseLong(boardId));

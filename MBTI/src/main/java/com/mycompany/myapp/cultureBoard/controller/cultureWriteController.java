@@ -27,18 +27,7 @@ import com.mycompany.myapp.domain.CultureBoardComment;
 public class cultureWriteController {
 	@Autowired 
 	CultureCommunityService cultureCommunityService;
-	// 
-	@GetMapping("/cultureBoard/write")
-	public ModelAndView getWrite(HttpSession session) {
-		ModelAndView mav = new ModelAndView();
-		
-		//세션에 로그인 되어있는지 검사 후 /member/login CONTROLLER로 이동
-		mav.setViewName("redirect:/member/login");
-		return mav;
-	}
 	
-	
-
 	@PostMapping("successWrite")
 	public ModelAndView successWrite(HttpSession session, @ModelAttribute("cultureBoardCommand") CultureBoardCommand cbc) {
 		ModelAndView mav = new ModelAndView();
@@ -54,9 +43,9 @@ public class cultureWriteController {
 		//System.out.println(memberId + contents01 + contents02 + contentType + title + link);
 		cultureCommunityService.addWrittenContent(memberId, contents01, contents02, contentType, title, link);
 		
-		System.out.println("글쓰기 성공");
 
-		mav.setViewName("redirect:/");
+		mav.setViewName("redirect:/index");
+		
 		return mav;
 	}
 	
@@ -65,7 +54,7 @@ public class cultureWriteController {
 	@ResponseBody
 	@PostMapping("/cultureBoard/successComment")
 	public Map<String, Object> cultureBtn(HttpSession session, @RequestBody Map<String, String> param) {
-		
+		List<CultureBoardComment> likeComments = new ArrayList<CultureBoardComment>();
 		String comment = param.get("comment");  //ajax를 통한 comment 
 		Long boardId = Long.parseLong(param.get("boardId"));
 		Long loginId = Long.parseLong(String.valueOf(session.getAttribute("loginId")));
@@ -75,9 +64,13 @@ public class cultureWriteController {
 		List<CultureBoardComment> cultureBoardComment = new ArrayList<CultureBoardComment>();
 		cultureBoardComment = cultureCommunityService.Saved_findAllCultureBoardComment(loginId, boardId, comment);
 		Long commentNum = cultureCommunityService.findCommentNumByBoardId(boardId);
+		
+		likeComments = cultureCommunityService.findLikesCommentByMemberId(loginId);
+
+		
 		/////////////////
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+		map.put("likeComments", likeComments);
 		map.put("commentNum", commentNum);
 		map.put("loginId", loginId);
 		map.put("boardId", boardId);
@@ -112,16 +105,19 @@ public class cultureWriteController {
 	@ResponseBody
 	@PostMapping("/cultureBoard/delComment")
 	public Map<String, Object> commentDelete(HttpSession session, @RequestBody Map<String, String> param){
+		List<CultureBoardComment> likeComments = new ArrayList<CultureBoardComment>();
 		Long commentId = Long.parseLong(param.get("commentId"));
 		Long boardId = Long.parseLong(param.get("boardId"));
 		Long loginId = Long.parseLong(String.valueOf(session.getAttribute("loginId")));
 
 		List<CultureBoardComment> cultureBoardComment = new ArrayList<CultureBoardComment>();
-		
+		likeComments = cultureCommunityService.findLikesCommentByMemberId(loginId);
+	
 		cultureBoardComment = cultureCommunityService.deleteComment(loginId, boardId, commentId);
 	
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("likeComments", likeComments);
 		map.put("cultureBoardComment", cultureBoardComment);
 		map.put("loginId", loginId);
 		map.put("boardId", boardId);

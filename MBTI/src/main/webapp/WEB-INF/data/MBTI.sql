@@ -1,13 +1,4 @@
 SELECT * FROM Member;
-SELECT * FROM LoginLog;
-
-DROP TABLE MEMBER;
-DROP TABLE LoginLog;
-
-UPDATE Member SET level=1 WHERE id=1;
-UPDATE Member SET mabPoint=990 WHERE id=1;
-
-DELETE FROM Member WHERE id=2;
 
 CREATE TABLE MEMBER(
 	id				BIGINT		PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -34,55 +25,6 @@ CREATE TABLE LoginLog(
 	CONSTRAINT LoginLog_memberId_FK FOREIGN KEY(memberId) REFERENCES Member(id)
 );
 -- Community
-
-SELECT * FROM Member WHERE mbti='ENFP' AND pw='1234' OR mbti='INFJ' AND pw='1234';
-
-SELECT * FROM Member;
-SELECT * FROM CommunityBoard;
-SELECT * FROM CommunityComments;
-SELECT * FROM CommunityComments_plus;
-
-SELECT * FROM sys.systables;
-SELECT level, mbti FROM Member;
-SELECT * FROM CommunityBoard WHERE likes>=20 ORDER BY ReportingDate DESC;
-
-UPDATE Member SET level=31 WHERE id=3;
-UPDATE Member SET level=29 WHERE id=6;
-UPDATE Member SET nickName='이즈리얼 연구원' WHERE id=1;
-UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ESFJ.png' WHERE id=4;
-UPDATE Member SET mbti='ESFJ' WHERE id=4;
-UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ISFJ.png' WHERE id=1;
-UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ENFP.png' WHERE id=1;
-
-DROP TABLE Member;
-DROP TABLE CommunityBoard;
-DROP TABLE CommunityComments;
-DROP TABLE CommunityComments_plus;
-
-INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('ydh1178@naver.com', '1234', '김종성', '성종', '961124', 'M', 'ISFJ', '010-8599-7622');
-INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('test@test.com', '1234', '테스트계정', '테스트계정', '001122', 'W', 'ENFP', '010-1111-2222');
-INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('tnals@test.com', '1234', '황수민', '민수', '967777', 'M', 'INFJ', '010-5555-6666');
-INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('tjaud@test.com', '1234', '이서명', '뜨돈', '957777', 'W', 'ESFJ', '010-0000-9999');
-INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('dnjswls@test.com', '1234', '김원진', '나이키', '997777', 'M', 'ISFP', '010-1111-0000');
-INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('wldud@test.com', '1234', '정지영', '정영지', '947777', 'W', 'INFP', '010-2222-0000');
-
-CREATE TABLE Member(
-	id				BIGINT			PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-	email			VARCHAR(50)		NOT NULL,
-	pw				VARCHAR(20)		NOT NULL,
-	name			VARCHAR(30)		NOT NULL,
-	nickName		VARCHAR(30)		NOT NULL,
-	birth			VARCHAR(20)		DEFAULT '',
-	mbti			VARCHAR(4)		NOT NULL,
-	gender			CHAR			NOT NULL,
-	phone			VARCHAR(13)		DEFAULT '',
-	regDate			TIMESTAMP		DEFAULT CURRENT_TIMESTAMP,
-	level			INT				DEFAULT 1,
-	mabPoint		INT				DEFAULT 0,
-	profileImg		VARCHAR(100)	DEFAULT '',
-	contentsCount	INT				DEFAULT 0,
-	commentsCount	INT				DEFAULT 0
-);
 
 CREATE TABLE CommunityBoard(
 	id				BIGINT			PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -119,9 +61,6 @@ CREATE TABLE CommunityComments_plus(
 
 -- 추천 로그관리
 
-SELECT * FROM LikeLog;
-DROP TABLE LikeLog;
-
 CREATE TABLE LikeLog(
 	boardId			BIGINT			NOT NULL,
 	memberId		BIGINT			NOT NULL
@@ -130,18 +69,6 @@ CREATE TABLE LikeLog(
 
 
 --MbtiPlay
-SELECT * FROM MbtiPlayContents;
-SELECT * FROM MbtiPlayContentsAnswer;
-SELECT * FROM ContentsLog;
-SELECT * FROM AnswersLog;
-
-DROP TABLE MbtiPlayContents;
-DROP TABLE MbtiPlayContentsAnswer;
-DROP TABLE ContentsLog;
-DROP TABLE AnswersLog;
-
-UPDATE Member SET mabPoint=980 WHERE id=1;
-UPDATE ContentsLog SET contentsCount=0 WHERE id=1;
 
 --문답 쿼리
 INSERT INTO MbtiPlayContents (memberId, question, answer01, answer02, answer03) VALUES (1, '친구들과 놀이동산을 간 당신, 놀이기구를 탈 때의 나는?', '오늘 이거 다섯 개는 꼭 타야 돼! 지도를 보며 계획을 세운다.', '오, 저거 재밌어 보인다! 일단 보이는 것부터 탄다.', '놀이기구는 흥미가 들지 않아 이끌려다닌다.');
@@ -188,15 +115,6 @@ CREATE TABLE AnswersLog(
 
 
 ---수민 cultureBoard 파트 테이블------
-SELECT * FROM CultureBoard;
-SELECT * FROM CultureBoardComment;
-SELECT * FROM LikeLogForCulture;
-SELECT * FROM LikeLogComment;
-
-DROP TABLE CultureBoard;
-DROP TABLE CultureBoardComment;
-DROP TABLE LikeLogForCulture;
-DROP TABLE LikeLogComment;
 
 CREATE TABLE CultureBoard(
 	id				BIGINT			PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -228,60 +146,21 @@ CREATE TABLE CultureBoardComment(
 	CONSTRAINT CultureBoardComment_boardId_FK FOREIGN KEY(boardId) REFERENCES CultureBoard(id) ON DELETE CASCADE
 );
 
-
+SELECT * FROM LIKELOGFORCULTURE;
 CREATE TABLE LikeLogForCulture(
 	boardId			BIGINT			NOT NULL,
 	memberId		BIGINT			NOT NULL
 );
 
-
+SELECT * FROM LikeLogComment;
 CREATE TABLE LikeLogComment(
 	memberId		BIGINT			NOT NULL,
 	commentId		BIGINT			NOT NULL
 );
-
+DELETE FROM LIKELOGCOMMENT;
+INSERT INTO LikeLogComment (memberId, commentId) VALUES (1, 76);
 
 ---- mbtiMatch ----
-
-SELECT * FROM MEMBER;
-SELECT * FROM MbtiMatch;
-SELECT * FROM MbtiComments;
-
-DROP TABLE MEMBER;
-DROP TABLE MbtiMatch;
-DROP TABLE MbtiComments;
-
-UPDATE MEMBER SET profileImg='/myapp/resources/img/avatar/MBTI_ENFP.png' WHERE mbti='ENFP';
-UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_INFP.png' WHERE mbti='INFP';
-UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ESFP.png' WHERE mbti='ESFP';
-UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ISFP.png' WHERE mbti='ISFP';
-UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ENTP.png' WHERE mbti='ENTP';
-UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_INTP.png' WHERE mbti='INTP';
-UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ESTP.png' WHERE mbti='ESTP';
-UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ISTP.png' WHERE mbti='ISTP';
-UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ENFJ.png' WHERE mbti='ENFJ';
-UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_INFJ.png' WHERE mbti='INFJ';
-UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ISFJ.png' WHERE mbti='ISFJ';
-UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_INTJ.png' WHERE mbti='INTJ';
-UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ESTJ.png' WHERE mbti='ESTJ';
-UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ESFJ.png' WHERE mbti='ESFJ';
-UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ISTJ.png' WHERE mbti='ISTJ';
-UPDATE Member SET profileImg='/myapp/resources/img/avatar/MBTI_ENTJ.png' WHERE mbti='ENTJ';
-
-INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('ydh1178@naver.com', '1234', '김종성', '종성', '961124', 'M', 'ISFJ', '010-8599-7622');
-INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('test@test.com', '1234', '혜윤씨', '혜윤', '001122', 'W', 'ENFP', '010-1111-2222');
-INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('tnals@test.com', '1234', '황수민', '수민', '967777', 'M', 'INFJ', '010-5555-6666');
-INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('tjaud@test.com', '1234', '이서명', '서명', '957777', 'W', 'ESFJ', '010-0000-9999');
-INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('dnjswls@test.com', '1234', '김원진', '원진', '997777', 'M', 'ISFP', '010-1111-0000');
-INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('wldud@test.com', '1234', '정지영', '지영', '947777', 'W', 'INFP', '010-2222-0000');
-INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('test1@test.com', '1234', '테스트', '테스트1', '961124', 'M', 'INTP', '010-8599-7622');
-INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('test2@test.com', '1234', '테스트', '테스트2', '001122', 'W', 'ENTP', '010-1111-2222');
-INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('test3@test.com', '1234', '테스트', '테스트3', '967777', 'M', 'ISTP', '010-5555-6666');
-INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('test4@test.com', '1234', '테스트', '테스트4', '957777', 'W', 'ENTP', '010-0000-9999');
-INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('test5@test.com', '1234', '테스트', '테스트5', '997777', 'M', 'INFP', '010-1111-0000');
-INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('test6@test.com', '1234', '테스트', '테스트6', '947777', 'W', 'INFP', '010-2222-0000');
-INSERT INTO Member(email, pw, name, nickName, birth, gender, mbti, phone) VALUES('chung12@naver.com', 'wldud12!!', '정정', '졍졍1234', '220115', 'W', 'INFP', '01011111111');
-
 
 INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTJ', 'ENTJ', 1);
 INSERT INTO MbtiMatch(type01, type02, result) VALUES('ENTJ', 'ENTP', 2);
@@ -554,39 +433,6 @@ INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFJ', 'INTP', 5);
 INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFJ', 'ESTJ', 3);
 INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFJ', 'ESFJ', 3);
 INSERT INTO MbtiMatch(type01, type02, result) VALUES('ISFJ', 'ISTJ', 2);
-
-INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(1, 'ISFJ', 'ENFP', '잘지내요0.');
-INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(2, 'ENFP', 'ISFJ', '잘지내요1.');
-INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(3, 'INFJ', 'ENFP', '잘지내요2.');
-INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(4, 'ESFJ', 'ENFP', '잘지내요3.');
-INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(5, 'ISFP', 'ISTP', '잘지내요4.');
-INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(6, 'INFP', 'INTP', '잘지내요5.');
-INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(7, 'INTP', 'INFP', '잘지내요6.');
-INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(8, 'ENTP', 'INFP', '잘지내요7.');
-INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(9, 'ISTP', 'INFP', '잘지내요8.');
-INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(10, 'ENTP', 'INFP', '잘지내요9.');
-INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(11, 'INFP', 'ISTP', '잘지내요10.');
-INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(12, 'INFP', 'ENTP', '잘지내요11.');
-INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(1, 'INFP', 'INTJ', '잘지내요11.');
-
-
-CREATE TABLE MEMBER(
-	id				BIGINT		PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-	email 			VARCHAR(40)	NOT NULL,
-	pw 				VARCHAR(20)	NOT NULL,
-	name 			VARCHAR(30)	NOT NULL,
-	nickName 		VARCHAR(10)	NOT NULL,
-	birth 			VARCHAR(20) NOT NULL,
-	mbti 			VARCHAR(4)	NOT NULL,
-	gender 			CHAR(1)		NOT NULL,
-	phone 			VARCHAR(13) NOT NULL,
-	regDate 		TIMESTAMP 	NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	level 			INT 		DEFAULT 1,
-	mabPoint 		INT 		DEFAULT 0,
-	profileImg 		VARCHAR(100) DEFAULT '',
-	contentsCount 	INT DEFAULT 0,
-	commentsCount 	INT DEFAULT 0
-);
 
 CREATE TABLE MbtiMatch(
 	id			BIGINT		PRIMARY KEY GENERATED ALWAYS AS IDENTITY,

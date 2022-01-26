@@ -6,11 +6,16 @@
             $('#element_to_pop_up').bPopup({
                
             });
-        });
-        
+        });        
      });
  })(jQuery);
 
+/**뒤로가기 시 자동팝업 구현 차단 */
+$(window).bind("pageshow", function(event){
+	if(event.originalEvent.persisted){
+		$('#element_to_pop_up').bPopup().close();
+	}
+})
 
 
 let popContentType = "M";
@@ -210,14 +215,14 @@ function writeSubmit(form){
 
 
 
-
+ 
 
 function goWriteToLogin() {
 	var loginId = $('#my-button').attr("data-loginId");
 	
 	if(loginId == null || loginId == "") {
 		alert("글쓰기는 로그인 후 이용이 가능합니다.");
-		location.href = "/cultureBoard/write";
+		location.href = "member/login";
 	}
 }
 

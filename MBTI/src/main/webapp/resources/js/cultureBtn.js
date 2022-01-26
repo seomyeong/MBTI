@@ -23,6 +23,31 @@ function ifSelectBtn(){
 
 /*********************************************************** */
 
+$(document).on('click','.mbti-switch .toggle',function(){
+	
+	if ($(this).parent().children('input:eq(0)').attr('checked') == false || $(this).parent().children('input:eq(0)').attr('checked') == null) {
+		$(this).parent().children('input:eq(0)').attr('checked', true);
+		$(this).animate({
+			left: 30,
+		},300,function(){
+			$(this).css("background",'#a4a0c4');
+		});
+	} else {
+		$(this).parent().children('input:eq(0)').attr('checked', false);
+		$(this).animate({			
+			left: 0,
+			
+		},300,function(){
+			$(this).css("background",'#b2d4ad');
+		});
+	}
+})
+
+
+
+/********************************************************************************* */
+
+
 //ajax를 통해 새로 append 된 함수에도 똑같이 적용시키고자 할때! $(document)!!
 $(document).on('click', '.likeWrap a', function(){
 	boardId = $(this).attr("data-boardId");
@@ -66,10 +91,13 @@ $(document).on('click', '.likeWrap a', function(){
 			let cultureBoardComment = data["cultureBoardComment"];
 			let loginId = data["loginId"];
 		
+			let likeContents = data["likeContents"];
+			let likeComments = data["likeComments"];
+		
+		
 			let memberIsNull;
 			let loginNull_commentSubmit;
-			
-			
+			let memberImg;
 
 			
 			if(contentType == "M"){
@@ -103,7 +131,7 @@ $(document).on('click', '.likeWrap a', function(){
 						
 					}else{
 						memberIsNull=
-						"<span class='authorLv'>"+ memberInfo.level + "</span>" +
+						"<span class='authorLv'>LV. "+ memberInfo.level + "</span>" +
 						"<span class='authorNickname'>" + memberInfo.nickName + "</span>" +
 						"<span class='authorMbti'>"+memberInfo.mbti+"</span>";
 						
@@ -111,15 +139,26 @@ $(document).on('click', '.likeWrap a', function(){
 						"<input type='button' value='댓글'" + " onclick='writeCommentSubmit(this.form,"+ contents[con].id + ","+ loginId +",this); return false'/>";
 					}
 					
+					
+					
+					let state01 = 0;
 					/** 비로그인/로그인시 메인컨텐츠별 추천*/
 					if(memberInfo != null){
-						if(contents[con].likesStatus){
-						likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId='${sessionScope.loginId}'" + " class='cultureBoard_likes'></a>";
+						
+						for(lct in likeContents){
+						
+							if(likeContents[lct].id == contents[con].id){
+								likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId=" + loginId + " class='cultureBoard_likes'></a>";
+								state01 = 1;
+							}
+						
+						}
+						
+						if(state01 == 0){
+							likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId="+ loginId + " class='cultureBoard_unlikes'></a>";
+							state01 = 0;
+						}
 					
-						}
-						else{
-						likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId='${sessionScope.loginId}'" + " class='cultureBoard_unlikes'></a>";
-						}
 					}else{
 						likesOR = "<a href='#' class='cultureBoard_unlikes'></a>";
 					}
@@ -127,15 +166,27 @@ $(document).on('click', '.likeWrap a', function(){
 					
 					
 					for(com in cultureBoardComment){
-						
+						let state02 = 0;
 						/** 비로그인/로그인시 댓글추천 */
 						if(memberInfo != null){
-							if(cultureBoardComment[com].likesStatus){
-					   			 commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+							
+							for(lcm in likeComments){
+								
+								if(likeComments[lcm].id == cultureBoardComment[com].id){
+									
+						   			 commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+									 state02 = 1;
+								}
+								
 							}
-							else{
-					    		commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+							
+							
+							if(state02 == 0){
+				   				commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+								state02 = 0;
 							}
+						
+						
 						}else{
 			    			commentLikesOr = "<a href='#' class='cultureBoardComment_unlikes'></a>";
 						}
@@ -151,7 +202,6 @@ $(document).on('click', '.likeWrap a', function(){
 							}else{
 							    commentDelOr=
 							    "<div class='delIcon'>"+
-							    "<a href='#' class='delCommentBtn' data-boardId ="+ contents[con].id + " data-loginId="+ loginId + " data-commentId="+ cultureBoardComment[com].id +">X</a>"+
 								"</div>";
 							}	
 						}else{
@@ -159,18 +209,19 @@ $(document).on('click', '.likeWrap a', function(){
 						    "<div class='delIcon'>"+
 							"</div>";
 						}
-							
+						
+						
+					
 							
 						if(contents[con].id == cultureBoardComment[com].cultureBoard.id){		
 							commentAppend[com] = 
 							"<div class='commentRead'>"+
-							"<div class='memberImg'></div>"+
-							
+							"<div class='memberImg'"+
+							"style='background: url(" + cultureBoardComment[com].member.profileImg + ")  0 0 / cover'></div>"+
 							"<div class='memberWrapOfWrap'>"+
-							
 							"<div class='memberWrap'>"+
 							"<div class='memberInfo'>"+
-							"<span class='eachMember memberLv'>"+ cultureBoardComment[com].member.level+"</span>"+
+							"<span class='eachMember memberLv'>LV. "+ cultureBoardComment[com].member.level+"</span>"+
 							"<span class='eachMember memberNickname'>"+cultureBoardComment[com].member.nickName+"</span>"+
 							"<span class='eachMember memberMbti'>"+cultureBoardComment[com].member.mbti+"</span>"+
 							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +
@@ -189,6 +240,15 @@ $(document).on('click', '.likeWrap a', function(){
 							"</div>"+
 							"</div>";
 						}
+						
+						if(memberInfo != null){
+							memberImg = "<div class='authorImg' style='background: url(" + memberInfo.profileImg + ") 0 0 / cover'></div>";
+							
+						}else{
+							memberImg = "<div class='authorImg'></div>";
+						}
+						
+	
 					}
 					
 					/**댓글 다른 보드 중복 방지 변수 */
@@ -222,7 +282,7 @@ $(document).on('click', '.likeWrap a', function(){
 					"<div class='commentWrap'>" +
 					"<div class='comment'>"	+
 						"<div class='commentWrite'>" +
-						"<div class='authorImg'></div>" +
+						memberImg +
 						"<div class='authorWrap'>" +
 						"<div class='authorInfo'>" +
 						memberIsNull +
@@ -247,6 +307,11 @@ $(document).on('click', '.likeWrap a', function(){
 				}
 			}
 			
+			
+			
+			
+			
+			
 			else if(contentType == "C"){
 				$('#contentWrap').append(
 					"<div id='contentList'>"+
@@ -260,8 +325,9 @@ $(document).on('click', '.likeWrap a', function(){
 					"<p>닉네임</p>" +
 					"</div>"
 				);
-					
+				
 				for(con in contents){
+					
 					/**댓글작성 부분 비로그인/로그인시 */
 					/**댓글 submit 버튼 비로그인/로그인시 */
 					if(memberInfo == null || memberInfo == ""){
@@ -276,7 +342,7 @@ $(document).on('click', '.likeWrap a', function(){
 						
 					}else{
 						memberIsNull=
-						"<span class='authorLv'>"+ memberInfo.level + "</span>" +
+						"<span class='authorLv'>LV. "+ memberInfo.level + "</span>" +
 						"<span class='authorNickname'>" + memberInfo.nickName + "</span>" +
 						"<span class='authorMbti'>"+memberInfo.mbti+"</span>";
 						
@@ -284,15 +350,26 @@ $(document).on('click', '.likeWrap a', function(){
 						"<input type='button' value='댓글'" + " onclick='writeCommentSubmit(this.form,"+ contents[con].id + ","+ loginId +",this); return false'/>";
 					}
 					
+					
+					
+					let state01 = 0;
 					/** 비로그인/로그인시 메인컨텐츠별 추천*/
 					if(memberInfo != null){
-						if(contents[con].likesStatus){
-						likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId='${sessionScope.loginId}'" + " class='cultureBoard_likes'></a>";
+						
+						for(lct in likeContents){
+						
+							if(likeContents[lct].id == contents[con].id){
+								likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId=" + loginId + " class='cultureBoard_likes'></a>";
+								state01 = 1;
+							}
+						
+						}
+						
+						if(state01 == 0){
+							likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId="+ loginId + " class='cultureBoard_unlikes'></a>";
+							state01 = 0;
+						}
 					
-						}
-						else{
-						likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId='${sessionScope.loginId}'" + " class='cultureBoard_unlikes'></a>";
-						}
 					}else{
 						likesOR = "<a href='#' class='cultureBoard_unlikes'></a>";
 					}
@@ -300,15 +377,27 @@ $(document).on('click', '.likeWrap a', function(){
 					
 					
 					for(com in cultureBoardComment){
-						
+						let state02 = 0;
 						/** 비로그인/로그인시 댓글추천 */
 						if(memberInfo != null){
-							if(cultureBoardComment[com].likesStatus){
-					   			 commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+							
+							for(lcm in likeComments){
+								
+								if(likeComments[lcm].id == cultureBoardComment[com].id){
+									
+						   			 commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+									 state02 = 1;
+								}
+								
 							}
-							else{
-					    		commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+							
+							
+							if(state02 == 0){
+				   				commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+								state02 = 0;
 							}
+						
+						
 						}else{
 			    			commentLikesOr = "<a href='#' class='cultureBoardComment_unlikes'></a>";
 						}
@@ -324,7 +413,6 @@ $(document).on('click', '.likeWrap a', function(){
 							}else{
 							    commentDelOr=
 							    "<div class='delIcon'>"+
-							    "<a href='#' class='delCommentBtn' data-boardId ="+ contents[con].id + " data-loginId="+ loginId + " data-commentId="+ cultureBoardComment[com].id +">X</a>"+
 								"</div>";
 							}	
 						}else{
@@ -332,18 +420,19 @@ $(document).on('click', '.likeWrap a', function(){
 						    "<div class='delIcon'>"+
 							"</div>";
 						}
-							
+						
+						
+					
 							
 						if(contents[con].id == cultureBoardComment[com].cultureBoard.id){		
 							commentAppend[com] = 
 							"<div class='commentRead'>"+
-							"<div class='memberImg'></div>"+
-							
+							"<div class='memberImg'"+
+							"style='background: url(" + cultureBoardComment[com].member.profileImg + ")  0 0 / cover'></div>"+
 							"<div class='memberWrapOfWrap'>"+
-							
 							"<div class='memberWrap'>"+
 							"<div class='memberInfo'>"+
-							"<span class='eachMember memberLv'>"+ cultureBoardComment[com].member.level+"</span>"+
+							"<span class='eachMember memberLv'>LV. "+ cultureBoardComment[com].member.level+"</span>"+
 							"<span class='eachMember memberNickname'>"+cultureBoardComment[com].member.nickName+"</span>"+
 							"<span class='eachMember memberMbti'>"+cultureBoardComment[com].member.mbti+"</span>"+
 							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +
@@ -362,6 +451,15 @@ $(document).on('click', '.likeWrap a', function(){
 							"</div>"+
 							"</div>";
 						}
+						
+						if(memberInfo != null){
+							memberImg = "<div class='authorImg' style='background: url(" + memberInfo.profileImg + ") 0 0 / cover'></div>";
+							
+						}else{
+							memberImg = "<div class='authorImg'></div>";
+						}
+						
+	
 					}
 					
 					/**댓글 다른 보드 중복 방지 변수 */
@@ -394,7 +492,7 @@ $(document).on('click', '.likeWrap a', function(){
 					"<div class='commentWrap'>" +
 					"<div class='comment'>"	+
 						"<div class='commentWrite'>" +
-						"<div class='authorImg'></div>" +
+						memberImg +
 						"<div class='authorWrap'>" +
 						"<div class='authorInfo'>" +
 						memberIsNull +
@@ -432,10 +530,10 @@ $(document).on('click', '.likeWrap a', function(){
 					"<p>여행지</p>" +
 					"<p>닉네임</p>" +
 					"</div>"
-				);  
-				
+				);
 				
 				for(con in contents){
+					
 					/**댓글작성 부분 비로그인/로그인시 */
 					/**댓글 submit 버튼 비로그인/로그인시 */
 					if(memberInfo == null || memberInfo == ""){
@@ -450,7 +548,7 @@ $(document).on('click', '.likeWrap a', function(){
 						
 					}else{
 						memberIsNull=
-						"<span class='authorLv'>"+ memberInfo.level + "</span>" +
+						"<span class='authorLv'>LV. "+ memberInfo.level + "</span>" +
 						"<span class='authorNickname'>" + memberInfo.nickName + "</span>" +
 						"<span class='authorMbti'>"+memberInfo.mbti+"</span>";
 						
@@ -458,15 +556,26 @@ $(document).on('click', '.likeWrap a', function(){
 						"<input type='button' value='댓글'" + " onclick='writeCommentSubmit(this.form,"+ contents[con].id + ","+ loginId +",this); return false'/>";
 					}
 					
+					
+					
+					let state01 = 0;
 					/** 비로그인/로그인시 메인컨텐츠별 추천*/
 					if(memberInfo != null){
-						if(contents[con].likesStatus){
-						likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId='${sessionScope.loginId}'" + " class='cultureBoard_likes'></a>";
+						
+						for(lct in likeContents){
+						
+							if(likeContents[lct].id == contents[con].id){
+								likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId=" + loginId + " class='cultureBoard_likes'></a>";
+								state01 = 1;
+							}
+						
+						}
+						
+						if(state01 == 0){
+							likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId="+ loginId + " class='cultureBoard_unlikes'></a>";
+							state01 = 0;
+						}
 					
-						}
-						else{
-						likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId='${sessionScope.loginId}'" + " class='cultureBoard_unlikes'></a>";
-						}
 					}else{
 						likesOR = "<a href='#' class='cultureBoard_unlikes'></a>";
 					}
@@ -474,15 +583,27 @@ $(document).on('click', '.likeWrap a', function(){
 					
 					
 					for(com in cultureBoardComment){
-						
+						let state02 = 0;
 						/** 비로그인/로그인시 댓글추천 */
 						if(memberInfo != null){
-							if(cultureBoardComment[com].likesStatus){
-					   			 commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+							
+							for(lcm in likeComments){
+								
+								if(likeComments[lcm].id == cultureBoardComment[com].id){
+									
+						   			 commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+									 state02 = 1;
+								}
+								
 							}
-							else{
-					    		commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+							
+							
+							if(state02 == 0){
+				   				commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+								state02 = 0;
 							}
+						
+						
 						}else{
 			    			commentLikesOr = "<a href='#' class='cultureBoardComment_unlikes'></a>";
 						}
@@ -498,7 +619,6 @@ $(document).on('click', '.likeWrap a', function(){
 							}else{
 							    commentDelOr=
 							    "<div class='delIcon'>"+
-							    "<a href='#' class='delCommentBtn' data-boardId ="+ contents[con].id + " data-loginId="+ loginId + " data-commentId="+ cultureBoardComment[com].id +">X</a>"+
 								"</div>";
 							}	
 						}else{
@@ -506,18 +626,19 @@ $(document).on('click', '.likeWrap a', function(){
 						    "<div class='delIcon'>"+
 							"</div>";
 						}
-							
+						
+						
+					
 							
 						if(contents[con].id == cultureBoardComment[com].cultureBoard.id){		
 							commentAppend[com] = 
 							"<div class='commentRead'>"+
-							"<div class='memberImg'></div>"+
-							
+							"<div class='memberImg'"+
+							"style='background: url(" + cultureBoardComment[com].member.profileImg + ")  0 0 / cover'></div>"+
 							"<div class='memberWrapOfWrap'>"+
-							
 							"<div class='memberWrap'>"+
 							"<div class='memberInfo'>"+
-							"<span class='eachMember memberLv'>"+ cultureBoardComment[com].member.level+"</span>"+
+							"<span class='eachMember memberLv'>LV. "+ cultureBoardComment[com].member.level+"</span>"+
 							"<span class='eachMember memberNickname'>"+cultureBoardComment[com].member.nickName+"</span>"+
 							"<span class='eachMember memberMbti'>"+cultureBoardComment[com].member.mbti+"</span>"+
 							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +
@@ -536,6 +657,15 @@ $(document).on('click', '.likeWrap a', function(){
 							"</div>"+
 							"</div>";
 						}
+						
+						if(memberInfo != null){
+							memberImg = "<div class='authorImg' style='background: url(" + memberInfo.profileImg + ") 0 0 / cover'></div>";
+							
+						}else{
+							memberImg = "<div class='authorImg'></div>";
+						}
+						
+	
 					}
 					
 					/**댓글 다른 보드 중복 방지 변수 */
@@ -568,7 +698,7 @@ $(document).on('click', '.likeWrap a', function(){
 					"<div class='commentWrap'>" +
 					"<div class='comment'>"	+
 						"<div class='commentWrite'>" +
-						"<div class='authorImg'></div>" +
+						memberImg +
 						"<div class='authorWrap'>" +
 						"<div class='authorInfo'>" +
 						memberIsNull +
@@ -590,7 +720,7 @@ $(document).on('click', '.likeWrap a', function(){
 					);	
 					commentAppend = new Array();
 					commentSum ="";
-				}	
+				}
 			}
 		}
     });
@@ -673,9 +803,15 @@ function selectMbti() {
 			let cultureBoardComment = data["cultureBoardComment"];
 			let loginId = data["loginId"];
 		
+			let likeContents = data["likeContents"];
+			let likeComments = data["likeComments"];
+		
+		
 			let memberIsNull;
 			let loginNull_commentSubmit;
-					
+			let memberImg;
+
+			
 			if(contentType == "M"){
 				$('#contentWrap').append(
 					"<div id='contentList'>"+
@@ -707,7 +843,7 @@ function selectMbti() {
 						
 					}else{
 						memberIsNull=
-						"<span class='authorLv'>"+ memberInfo.level + "</span>" +
+						"<span class='authorLv'>LV. "+ memberInfo.level + "</span>" +
 						"<span class='authorNickname'>" + memberInfo.nickName + "</span>" +
 						"<span class='authorMbti'>"+memberInfo.mbti+"</span>";
 						
@@ -715,15 +851,26 @@ function selectMbti() {
 						"<input type='button' value='댓글'" + " onclick='writeCommentSubmit(this.form,"+ contents[con].id + ","+ loginId +",this); return false'/>";
 					}
 					
+					
+					
+					let state01 = 0;
 					/** 비로그인/로그인시 메인컨텐츠별 추천*/
 					if(memberInfo != null){
-						if(contents[con].likesStatus){
-						likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId='${sessionScope.loginId}'" + " class='cultureBoard_likes'></a>";
+						
+						for(lct in likeContents){
+						
+							if(likeContents[lct].id == contents[con].id){
+								likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId=" + loginId + " class='cultureBoard_likes'></a>";
+								state01 = 1;
+							}
+						
+						}
+						
+						if(state01 == 0){
+							likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId="+ loginId + " class='cultureBoard_unlikes'></a>";
+							state01 = 0;
+						}
 					
-						}
-						else{
-						likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId='${sessionScope.loginId}'" + " class='cultureBoard_unlikes'></a>";
-						}
 					}else{
 						likesOR = "<a href='#' class='cultureBoard_unlikes'></a>";
 					}
@@ -731,15 +878,27 @@ function selectMbti() {
 					
 					
 					for(com in cultureBoardComment){
-						
+						let state02 = 0;
 						/** 비로그인/로그인시 댓글추천 */
 						if(memberInfo != null){
-							if(cultureBoardComment[com].likesStatus){
-					   			 commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+							
+							for(lcm in likeComments){
+								
+								if(likeComments[lcm].id == cultureBoardComment[com].id){
+									
+						   			 commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+									 state02 = 1;
+								}
+								
 							}
-							else{
-					    		commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+							
+							
+							if(state02 == 0){
+				   				commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+								state02 = 0;
 							}
+						
+						
 						}else{
 			    			commentLikesOr = "<a href='#' class='cultureBoardComment_unlikes'></a>";
 						}
@@ -755,7 +914,6 @@ function selectMbti() {
 							}else{
 							    commentDelOr=
 							    "<div class='delIcon'>"+
-							    "<a href='#' class='delCommentBtn' data-boardId ="+ contents[con].id + " data-loginId="+ loginId + " data-commentId="+ cultureBoardComment[com].id +">X</a>"+
 								"</div>";
 							}	
 						}else{
@@ -763,19 +921,21 @@ function selectMbti() {
 						    "<div class='delIcon'>"+
 							"</div>";
 						}
-							
+						
+						
+					
 							
 						if(contents[con].id == cultureBoardComment[com].cultureBoard.id){		
 							commentAppend[com] = 
 							"<div class='commentRead'>"+
-							"<div class='memberImg'></div>"+
-							
+							"<div class='memberImg'"+
+							"style='background: url(" + cultureBoardComment[com].member.profileImg + ")  0 0 / cover'></div>"+
 							"<div class='memberWrapOfWrap'>"+
-							
 							"<div class='memberWrap'>"+
 							"<div class='memberInfo'>"+
-							"<span class='eachMember memberLv'>"+ cultureBoardComment[com].member.level+"</span>"+
+							"<span class='eachMember memberLv'>LV. "+ cultureBoardComment[com].member.level+"</span>"+
 							"<span class='eachMember memberNickname'>"+cultureBoardComment[com].member.nickName+"</span>"+
+							"<span class='eachMember memberMbti'>"+cultureBoardComment[com].member.mbti+"</span>"+
 							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +
 							"</div>"+
 							"<div class='memberComment'>"+ cultureBoardComment[com].comment+"</div>"+	
@@ -792,6 +952,15 @@ function selectMbti() {
 							"</div>"+
 							"</div>";
 						}
+						
+						if(memberInfo != null){
+							memberImg = "<div class='authorImg' style='background: url(" + memberInfo.profileImg + ") 0 0 / cover'></div>";
+							
+						}else{
+							memberImg = "<div class='authorImg'></div>";
+						}
+						
+	
 					}
 					
 					/**댓글 다른 보드 중복 방지 변수 */
@@ -825,7 +994,7 @@ function selectMbti() {
 					"<div class='commentWrap'>" +
 					"<div class='comment'>"	+
 						"<div class='commentWrite'>" +
-						"<div class='authorImg'></div>" +
+						memberImg +
 						"<div class='authorWrap'>" +
 						"<div class='authorInfo'>" +
 						memberIsNull +
@@ -850,6 +1019,11 @@ function selectMbti() {
 				}
 			}
 			
+			
+			
+			
+			
+			
 			else if(contentType == "C"){
 				$('#contentWrap').append(
 					"<div id='contentList'>"+
@@ -863,8 +1037,9 @@ function selectMbti() {
 					"<p>닉네임</p>" +
 					"</div>"
 				);
-					
+				
 				for(con in contents){
+					
 					/**댓글작성 부분 비로그인/로그인시 */
 					/**댓글 submit 버튼 비로그인/로그인시 */
 					if(memberInfo == null || memberInfo == ""){
@@ -879,7 +1054,7 @@ function selectMbti() {
 						
 					}else{
 						memberIsNull=
-						"<span class='authorLv'>"+ memberInfo.level + "</span>" +
+						"<span class='authorLv'>LV. "+ memberInfo.level + "</span>" +
 						"<span class='authorNickname'>" + memberInfo.nickName + "</span>" +
 						"<span class='authorMbti'>"+memberInfo.mbti+"</span>";
 						
@@ -887,15 +1062,26 @@ function selectMbti() {
 						"<input type='button' value='댓글'" + " onclick='writeCommentSubmit(this.form,"+ contents[con].id + ","+ loginId +",this); return false'/>";
 					}
 					
+					
+					
+					let state01 = 0;
 					/** 비로그인/로그인시 메인컨텐츠별 추천*/
 					if(memberInfo != null){
-						if(contents[con].likesStatus){
-						likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId='${sessionScope.loginId}'" + " class='cultureBoard_likes'></a>";
+						
+						for(lct in likeContents){
+						
+							if(likeContents[lct].id == contents[con].id){
+								likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId=" + loginId + " class='cultureBoard_likes'></a>";
+								state01 = 1;
+							}
+						
+						}
+						
+						if(state01 == 0){
+							likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId="+ loginId + " class='cultureBoard_unlikes'></a>";
+							state01 = 0;
+						}
 					
-						}
-						else{
-						likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId='${sessionScope.loginId}'" + " class='cultureBoard_unlikes'></a>";
-						}
 					}else{
 						likesOR = "<a href='#' class='cultureBoard_unlikes'></a>";
 					}
@@ -903,15 +1089,27 @@ function selectMbti() {
 					
 					
 					for(com in cultureBoardComment){
-						
+						let state02 = 0;
 						/** 비로그인/로그인시 댓글추천 */
 						if(memberInfo != null){
-							if(cultureBoardComment[com].likesStatus){
-					   			 commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+							
+							for(lcm in likeComments){
+								
+								if(likeComments[lcm].id == cultureBoardComment[com].id){
+									
+						   			 commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+									 state02 = 1;
+								}
+								
 							}
-							else{
-					    		commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+							
+							
+							if(state02 == 0){
+				   				commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+								state02 = 0;
 							}
+						
+						
 						}else{
 			    			commentLikesOr = "<a href='#' class='cultureBoardComment_unlikes'></a>";
 						}
@@ -927,7 +1125,6 @@ function selectMbti() {
 							}else{
 							    commentDelOr=
 							    "<div class='delIcon'>"+
-							    "<a href='#' class='delCommentBtn' data-boardId ="+ contents[con].id + " data-loginId="+ loginId + " data-commentId="+ cultureBoardComment[com].id +">X</a>"+
 								"</div>";
 							}	
 						}else{
@@ -935,18 +1132,19 @@ function selectMbti() {
 						    "<div class='delIcon'>"+
 							"</div>";
 						}
-							
+						
+						
+					
 							
 						if(contents[con].id == cultureBoardComment[com].cultureBoard.id){		
 							commentAppend[com] = 
 							"<div class='commentRead'>"+
-							"<div class='memberImg'></div>"+
-							
+							"<div class='memberImg'"+
+							"style='background: url(" + cultureBoardComment[com].member.profileImg + ")  0 0 / cover'></div>"+
 							"<div class='memberWrapOfWrap'>"+
-							
 							"<div class='memberWrap'>"+
 							"<div class='memberInfo'>"+
-							"<span class='eachMember memberLv'>"+ cultureBoardComment[com].member.level+"</span>"+
+							"<span class='eachMember memberLv'>LV. "+ cultureBoardComment[com].member.level+"</span>"+
 							"<span class='eachMember memberNickname'>"+cultureBoardComment[com].member.nickName+"</span>"+
 							"<span class='eachMember memberMbti'>"+cultureBoardComment[com].member.mbti+"</span>"+
 							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +
@@ -965,6 +1163,15 @@ function selectMbti() {
 							"</div>"+
 							"</div>";
 						}
+						
+						if(memberInfo != null){
+							memberImg = "<div class='authorImg' style='background: url(" + memberInfo.profileImg + ") 0 0 / cover'></div>";
+							
+						}else{
+							memberImg = "<div class='authorImg'></div>";
+						}
+						
+	
 					}
 					
 					/**댓글 다른 보드 중복 방지 변수 */
@@ -991,13 +1198,13 @@ function selectMbti() {
 					"</a>" + 
 					"</div>" +
 					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ contents[con].title+ "<span class='linkIcon'></span></a></div>" +
-					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +					
+					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +
 					"</div>" +
 					"</div>" +
 					"<div class='commentWrap'>" +
 					"<div class='comment'>"	+
 						"<div class='commentWrite'>" +
-						"<div class='authorImg'></div>" +
+						memberImg +
 						"<div class='authorWrap'>" +
 						"<div class='authorInfo'>" +
 						memberIsNull +
@@ -1035,10 +1242,10 @@ function selectMbti() {
 					"<p>여행지</p>" +
 					"<p>닉네임</p>" +
 					"</div>"
-				);  
-				
+				);
 				
 				for(con in contents){
+					
 					/**댓글작성 부분 비로그인/로그인시 */
 					/**댓글 submit 버튼 비로그인/로그인시 */
 					if(memberInfo == null || memberInfo == ""){
@@ -1053,7 +1260,7 @@ function selectMbti() {
 						
 					}else{
 						memberIsNull=
-						"<span class='authorLv'>"+ memberInfo.level + "</span>" +
+						"<span class='authorLv'>LV. "+ memberInfo.level + "</span>" +
 						"<span class='authorNickname'>" + memberInfo.nickName + "</span>" +
 						"<span class='authorMbti'>"+memberInfo.mbti+"</span>";
 						
@@ -1061,15 +1268,26 @@ function selectMbti() {
 						"<input type='button' value='댓글'" + " onclick='writeCommentSubmit(this.form,"+ contents[con].id + ","+ loginId +",this); return false'/>";
 					}
 					
+					
+					
+					let state01 = 0;
 					/** 비로그인/로그인시 메인컨텐츠별 추천*/
 					if(memberInfo != null){
-						if(contents[con].likesStatus){
-						likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId='${sessionScope.loginId}'" + " class='cultureBoard_likes'></a>";
+						
+						for(lct in likeContents){
+						
+							if(likeContents[lct].id == contents[con].id){
+								likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId=" + loginId + " class='cultureBoard_likes'></a>";
+								state01 = 1;
+							}
+						
+						}
+						
+						if(state01 == 0){
+							likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId="+ loginId + " class='cultureBoard_unlikes'></a>";
+							state01 = 0;
+						}
 					
-						}
-						else{
-						likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId='${sessionScope.loginId}'" + " class='cultureBoard_unlikes'></a>";
-						}
 					}else{
 						likesOR = "<a href='#' class='cultureBoard_unlikes'></a>";
 					}
@@ -1077,15 +1295,27 @@ function selectMbti() {
 					
 					
 					for(com in cultureBoardComment){
-						
+						let state02 = 0;
 						/** 비로그인/로그인시 댓글추천 */
 						if(memberInfo != null){
-							if(cultureBoardComment[com].likesStatus){
-					   			 commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+							
+							for(lcm in likeComments){
+								
+								if(likeComments[lcm].id == cultureBoardComment[com].id){
+									
+						   			 commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+									 state02 = 1;
+								}
+								
 							}
-							else{
-					    		commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+							
+							
+							if(state02 == 0){
+				   				commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+								state02 = 0;
 							}
+						
+						
 						}else{
 			    			commentLikesOr = "<a href='#' class='cultureBoardComment_unlikes'></a>";
 						}
@@ -1101,7 +1331,6 @@ function selectMbti() {
 							}else{
 							    commentDelOr=
 							    "<div class='delIcon'>"+
-							    "<a href='#' class='delCommentBtn' data-boardId ="+ contents[con].id + " data-loginId="+ loginId + " data-commentId="+ cultureBoardComment[com].id +">X</a>"+
 								"</div>";
 							}	
 						}else{
@@ -1109,18 +1338,19 @@ function selectMbti() {
 						    "<div class='delIcon'>"+
 							"</div>";
 						}
-							
+						
+						
+					
 							
 						if(contents[con].id == cultureBoardComment[com].cultureBoard.id){		
 							commentAppend[com] = 
 							"<div class='commentRead'>"+
-							"<div class='memberImg'></div>"+
-							
+							"<div class='memberImg'"+
+							"style='background: url(" + cultureBoardComment[com].member.profileImg + ")  0 0 / cover'></div>"+
 							"<div class='memberWrapOfWrap'>"+
-							
 							"<div class='memberWrap'>"+
 							"<div class='memberInfo'>"+
-							"<span class='eachMember memberLv'>"+ cultureBoardComment[com].member.level+"</span>"+
+							"<span class='eachMember memberLv'>LV. "+ cultureBoardComment[com].member.level+"</span>"+
 							"<span class='eachMember memberNickname'>"+cultureBoardComment[com].member.nickName+"</span>"+
 							"<span class='eachMember memberMbti'>"+cultureBoardComment[com].member.mbti+"</span>"+
 							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +
@@ -1139,6 +1369,15 @@ function selectMbti() {
 							"</div>"+
 							"</div>";
 						}
+						
+						if(memberInfo != null){
+							memberImg = "<div class='authorImg' style='background: url(" + memberInfo.profileImg + ") 0 0 / cover'></div>";
+							
+						}else{
+							memberImg = "<div class='authorImg'></div>";
+						}
+						
+	
 					}
 					
 					/**댓글 다른 보드 중복 방지 변수 */
@@ -1171,7 +1410,7 @@ function selectMbti() {
 					"<div class='commentWrap'>" +
 					"<div class='comment'>"	+
 						"<div class='commentWrite'>" +
-						"<div class='authorImg'></div>" +
+						memberImg +
 						"<div class='authorWrap'>" +
 						"<div class='authorInfo'>" +
 						memberIsNull +
@@ -1193,8 +1432,8 @@ function selectMbti() {
 					);	
 					commentAppend = new Array();
 					commentSum ="";
-				}	
-			}	
+				}
+			}
 		}
 	});	
 }
@@ -1223,10 +1462,13 @@ function orderLikes(){
 			let cultureBoardComment = data["cultureBoardComment"];
 			let loginId = data["loginId"];
 		
+			let likeContents = data["likeContents"];
+			let likeComments = data["likeComments"];
+		
+		
 			let memberIsNull;
 			let loginNull_commentSubmit;
-			
-			
+			let memberImg;
 
 			
 			if(contentType == "M"){
@@ -1260,7 +1502,7 @@ function orderLikes(){
 						
 					}else{
 						memberIsNull=
-						"<span class='authorLv'>"+ memberInfo.level + "</span>" +
+						"<span class='authorLv'>LV. "+ memberInfo.level + "</span>" +
 						"<span class='authorNickname'>" + memberInfo.nickName + "</span>" +
 						"<span class='authorMbti'>"+memberInfo.mbti+"</span>";
 						
@@ -1268,15 +1510,26 @@ function orderLikes(){
 						"<input type='button' value='댓글'" + " onclick='writeCommentSubmit(this.form,"+ contents[con].id + ","+ loginId +",this); return false'/>";
 					}
 					
+					
+					
+					let state01 = 0;
 					/** 비로그인/로그인시 메인컨텐츠별 추천*/
 					if(memberInfo != null){
-						if(contents[con].likesStatus){
-						likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId='${sessionScope.loginId}'" + " class='cultureBoard_likes'></a>";
+						
+						for(lct in likeContents){
+						
+							if(likeContents[lct].id == contents[con].id){
+								likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId=" + loginId + " class='cultureBoard_likes'></a>";
+								state01 = 1;
+							}
+						
+						}
+						
+						if(state01 == 0){
+							likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId="+ loginId + " class='cultureBoard_unlikes'></a>";
+							state01 = 0;
+						}
 					
-						}
-						else{
-						likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId='${sessionScope.loginId}'" + " class='cultureBoard_unlikes'></a>";
-						}
 					}else{
 						likesOR = "<a href='#' class='cultureBoard_unlikes'></a>";
 					}
@@ -1284,15 +1537,27 @@ function orderLikes(){
 					
 					
 					for(com in cultureBoardComment){
-						
+						let state02 = 0;
 						/** 비로그인/로그인시 댓글추천 */
 						if(memberInfo != null){
-							if(cultureBoardComment[com].likesStatus){
-					   			 commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+							
+							for(lcm in likeComments){
+								
+								if(likeComments[lcm].id == cultureBoardComment[com].id){
+									
+						   			 commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+									 state02 = 1;
+								}
+								
 							}
-							else{
-					    		commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+							
+							
+							if(state02 == 0){
+				   				commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+								state02 = 0;
 							}
+						
+						
 						}else{
 			    			commentLikesOr = "<a href='#' class='cultureBoardComment_unlikes'></a>";
 						}
@@ -1308,7 +1573,6 @@ function orderLikes(){
 							}else{
 							    commentDelOr=
 							    "<div class='delIcon'>"+
-							    "<a href='#' class='delCommentBtn' data-boardId ="+ contents[con].id + " data-loginId="+ loginId + " data-commentId="+ cultureBoardComment[com].id +">X</a>"+
 								"</div>";
 							}	
 						}else{
@@ -1316,21 +1580,22 @@ function orderLikes(){
 						    "<div class='delIcon'>"+
 							"</div>";
 						}
-							
+						
+						
+					
 							
 						if(contents[con].id == cultureBoardComment[com].cultureBoard.id){		
 							commentAppend[com] = 
 							"<div class='commentRead'>"+
-							"<div class='memberImg'></div>"+
-							
+							"<div class='memberImg'"+
+							"style='background: url(" + cultureBoardComment[com].member.profileImg + ")  0 0 / cover'></div>"+
 							"<div class='memberWrapOfWrap'>"+
-							
 							"<div class='memberWrap'>"+
 							"<div class='memberInfo'>"+
-							"<span class='eachMember memberLv'>"+ cultureBoardComment[com].member.level+"</span>"+
+							"<span class='eachMember memberLv'>LV. "+ cultureBoardComment[com].member.level+"</span>"+
 							"<span class='eachMember memberNickname'>"+cultureBoardComment[com].member.nickName+"</span>"+
 							"<span class='eachMember memberMbti'>"+cultureBoardComment[com].member.mbti+"</span>"+
-							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +							
+							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +
 							"</div>"+
 							"<div class='memberComment'>"+ cultureBoardComment[com].comment+"</div>"+	
 							"</div>"+
@@ -1346,6 +1611,15 @@ function orderLikes(){
 							"</div>"+
 							"</div>";
 						}
+						
+						if(memberInfo != null){
+							memberImg = "<div class='authorImg' style='background: url(" + memberInfo.profileImg + ") 0 0 / cover'></div>";
+							
+						}else{
+							memberImg = "<div class='authorImg'></div>";
+						}
+						
+	
 					}
 					
 					/**댓글 다른 보드 중복 방지 변수 */
@@ -1373,13 +1647,13 @@ function orderLikes(){
 					"</a>" + 
 					"</div>" +
 					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ contents[con].title+ "<span class='linkIcon'></span></a></div>" +
-					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +					
+					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +
 					"</div>" +
 					"</div>" +
 					"<div class='commentWrap'>" +
 					"<div class='comment'>"	+
 						"<div class='commentWrite'>" +
-						"<div class='authorImg'></div>" +
+						memberImg +
 						"<div class='authorWrap'>" +
 						"<div class='authorInfo'>" +
 						memberIsNull +
@@ -1404,6 +1678,11 @@ function orderLikes(){
 				}
 			}
 			
+			
+			
+			
+			
+			
 			else if(contentType == "C"){
 				$('#contentWrap').append(
 					"<div id='contentList'>"+
@@ -1417,8 +1696,9 @@ function orderLikes(){
 					"<p>닉네임</p>" +
 					"</div>"
 				);
-					
+				
 				for(con in contents){
+					
 					/**댓글작성 부분 비로그인/로그인시 */
 					/**댓글 submit 버튼 비로그인/로그인시 */
 					if(memberInfo == null || memberInfo == ""){
@@ -1433,7 +1713,7 @@ function orderLikes(){
 						
 					}else{
 						memberIsNull=
-						"<span class='authorLv'>"+ memberInfo.level + "</span>" +
+						"<span class='authorLv'>LV. "+ memberInfo.level + "</span>" +
 						"<span class='authorNickname'>" + memberInfo.nickName + "</span>" +
 						"<span class='authorMbti'>"+memberInfo.mbti+"</span>";
 						
@@ -1441,15 +1721,26 @@ function orderLikes(){
 						"<input type='button' value='댓글'" + " onclick='writeCommentSubmit(this.form,"+ contents[con].id + ","+ loginId +",this); return false'/>";
 					}
 					
+					
+					
+					let state01 = 0;
 					/** 비로그인/로그인시 메인컨텐츠별 추천*/
 					if(memberInfo != null){
-						if(contents[con].likesStatus){
-						likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId='${sessionScope.loginId}'" + " class='cultureBoard_likes'></a>";
+						
+						for(lct in likeContents){
+						
+							if(likeContents[lct].id == contents[con].id){
+								likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId=" + loginId + " class='cultureBoard_likes'></a>";
+								state01 = 1;
+							}
+						
+						}
+						
+						if(state01 == 0){
+							likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId="+ loginId + " class='cultureBoard_unlikes'></a>";
+							state01 = 0;
+						}
 					
-						}
-						else{
-						likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId='${sessionScope.loginId}'" + " class='cultureBoard_unlikes'></a>";
-						}
 					}else{
 						likesOR = "<a href='#' class='cultureBoard_unlikes'></a>";
 					}
@@ -1457,15 +1748,27 @@ function orderLikes(){
 					
 					
 					for(com in cultureBoardComment){
-						
+						let state02 = 0;
 						/** 비로그인/로그인시 댓글추천 */
 						if(memberInfo != null){
-							if(cultureBoardComment[com].likesStatus){
-					   			 commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+							
+							for(lcm in likeComments){
+								
+								if(likeComments[lcm].id == cultureBoardComment[com].id){
+									
+						   			 commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+									 state02 = 1;
+								}
+								
 							}
-							else{
-					    		commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+							
+							
+							if(state02 == 0){
+				   				commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+								state02 = 0;
 							}
+						
+						
 						}else{
 			    			commentLikesOr = "<a href='#' class='cultureBoardComment_unlikes'></a>";
 						}
@@ -1481,7 +1784,6 @@ function orderLikes(){
 							}else{
 							    commentDelOr=
 							    "<div class='delIcon'>"+
-							    "<a href='#' class='delCommentBtn' data-boardId ="+ contents[con].id + " data-loginId="+ loginId + " data-commentId="+ cultureBoardComment[com].id +">X</a>"+
 								"</div>";
 							}	
 						}else{
@@ -1489,18 +1791,19 @@ function orderLikes(){
 						    "<div class='delIcon'>"+
 							"</div>";
 						}
-							
+						
+						
+					
 							
 						if(contents[con].id == cultureBoardComment[com].cultureBoard.id){		
 							commentAppend[com] = 
 							"<div class='commentRead'>"+
-							"<div class='memberImg'></div>"+
-							
+							"<div class='memberImg'"+
+							"style='background: url(" + cultureBoardComment[com].member.profileImg + ")  0 0 / cover'></div>"+
 							"<div class='memberWrapOfWrap'>"+
-							
 							"<div class='memberWrap'>"+
 							"<div class='memberInfo'>"+
-							"<span class='eachMember memberLv'>"+ cultureBoardComment[com].member.level+"</span>"+
+							"<span class='eachMember memberLv'>LV. "+ cultureBoardComment[com].member.level+"</span>"+
 							"<span class='eachMember memberNickname'>"+cultureBoardComment[com].member.nickName+"</span>"+
 							"<span class='eachMember memberMbti'>"+cultureBoardComment[com].member.mbti+"</span>"+
 							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +
@@ -1519,6 +1822,15 @@ function orderLikes(){
 							"</div>"+
 							"</div>";
 						}
+						
+						if(memberInfo != null){
+							memberImg = "<div class='authorImg' style='background: url(" + memberInfo.profileImg + ") 0 0 / cover'></div>";
+							
+						}else{
+							memberImg = "<div class='authorImg'></div>";
+						}
+						
+	
 					}
 					
 					/**댓글 다른 보드 중복 방지 변수 */
@@ -1545,13 +1857,13 @@ function orderLikes(){
 					"</a>" + 
 					"</div>" +
 					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ contents[con].title+ "<span class='linkIcon'></span></a></div>" +
-					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +			
+					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +
 					"</div>" +
 					"</div>" +
 					"<div class='commentWrap'>" +
 					"<div class='comment'>"	+
 						"<div class='commentWrite'>" +
-						"<div class='authorImg'></div>" +
+						memberImg +
 						"<div class='authorWrap'>" +
 						"<div class='authorInfo'>" +
 						memberIsNull +
@@ -1589,10 +1901,10 @@ function orderLikes(){
 					"<p>여행지</p>" +
 					"<p>닉네임</p>" +
 					"</div>"
-				);  
-				
+				);
 				
 				for(con in contents){
+					
 					/**댓글작성 부분 비로그인/로그인시 */
 					/**댓글 submit 버튼 비로그인/로그인시 */
 					if(memberInfo == null || memberInfo == ""){
@@ -1607,7 +1919,7 @@ function orderLikes(){
 						
 					}else{
 						memberIsNull=
-						"<span class='authorLv'>"+ memberInfo.level + "</span>" +
+						"<span class='authorLv'>LV. "+ memberInfo.level + "</span>" +
 						"<span class='authorNickname'>" + memberInfo.nickName + "</span>" +
 						"<span class='authorMbti'>"+memberInfo.mbti+"</span>";
 						
@@ -1615,15 +1927,26 @@ function orderLikes(){
 						"<input type='button' value='댓글'" + " onclick='writeCommentSubmit(this.form,"+ contents[con].id + ","+ loginId +",this); return false'/>";
 					}
 					
+					
+					
+					let state01 = 0;
 					/** 비로그인/로그인시 메인컨텐츠별 추천*/
 					if(memberInfo != null){
-						if(contents[con].likesStatus){
-						likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId='${sessionScope.loginId}'" + " class='cultureBoard_likes'></a>";
+						
+						for(lct in likeContents){
+						
+							if(likeContents[lct].id == contents[con].id){
+								likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId=" + loginId + " class='cultureBoard_likes'></a>";
+								state01 = 1;
+							}
+						
+						}
+						
+						if(state01 == 0){
+							likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId="+ loginId + " class='cultureBoard_unlikes'></a>";
+							state01 = 0;
+						}
 					
-						}
-						else{
-						likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId='${sessionScope.loginId}'" + " class='cultureBoard_unlikes'></a>";
-						}
 					}else{
 						likesOR = "<a href='#' class='cultureBoard_unlikes'></a>";
 					}
@@ -1631,15 +1954,27 @@ function orderLikes(){
 					
 					
 					for(com in cultureBoardComment){
-						
+						let state02 = 0;
 						/** 비로그인/로그인시 댓글추천 */
 						if(memberInfo != null){
-							if(cultureBoardComment[com].likesStatus){
-					   			 commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+							
+							for(lcm in likeComments){
+								
+								if(likeComments[lcm].id == cultureBoardComment[com].id){
+									
+						   			 commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+									 state02 = 1;
+								}
+								
 							}
-							else{
-					    		commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+							
+							
+							if(state02 == 0){
+				   				commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+								state02 = 0;
 							}
+						
+						
 						}else{
 			    			commentLikesOr = "<a href='#' class='cultureBoardComment_unlikes'></a>";
 						}
@@ -1655,7 +1990,6 @@ function orderLikes(){
 							}else{
 							    commentDelOr=
 							    "<div class='delIcon'>"+
-							    "<a href='#' class='delCommentBtn' data-boardId ="+ contents[con].id + " data-loginId="+ loginId + " data-commentId="+ cultureBoardComment[com].id +">X</a>"+
 								"</div>";
 							}	
 						}else{
@@ -1663,18 +1997,19 @@ function orderLikes(){
 						    "<div class='delIcon'>"+
 							"</div>";
 						}
-							
+						
+						
+					
 							
 						if(contents[con].id == cultureBoardComment[com].cultureBoard.id){		
 							commentAppend[com] = 
 							"<div class='commentRead'>"+
-							"<div class='memberImg'></div>"+
-							
+							"<div class='memberImg'"+
+							"style='background: url(" + cultureBoardComment[com].member.profileImg + ")  0 0 / cover'></div>"+
 							"<div class='memberWrapOfWrap'>"+
-							
 							"<div class='memberWrap'>"+
 							"<div class='memberInfo'>"+
-							"<span class='eachMember memberLv'>"+ cultureBoardComment[com].member.level+"</span>"+
+							"<span class='eachMember memberLv'>LV. "+ cultureBoardComment[com].member.level+"</span>"+
 							"<span class='eachMember memberNickname'>"+cultureBoardComment[com].member.nickName+"</span>"+
 							"<span class='eachMember memberMbti'>"+cultureBoardComment[com].member.mbti+"</span>"+
 							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +
@@ -1693,6 +2028,15 @@ function orderLikes(){
 							"</div>"+
 							"</div>";
 						}
+						
+						if(memberInfo != null){
+							memberImg = "<div class='authorImg' style='background: url(" + memberInfo.profileImg + ") 0 0 / cover'></div>";
+							
+						}else{
+							memberImg = "<div class='authorImg'></div>";
+						}
+						
+	
 					}
 					
 					/**댓글 다른 보드 중복 방지 변수 */
@@ -1719,13 +2063,13 @@ function orderLikes(){
 					"</a>" + 
 					"</div>" +
 					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ contents[con].title+ "<span class='linkIcon'></span></a></div>" +
-					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +					
+					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +
 					"</div>" +
 					"</div>" +
 					"<div class='commentWrap'>" +
 					"<div class='comment'>"	+
 						"<div class='commentWrite'>" +
-						"<div class='authorImg'></div>" +
+						memberImg +
 						"<div class='authorWrap'>" +
 						"<div class='authorInfo'>" +
 						memberIsNull +
@@ -1747,9 +2091,9 @@ function orderLikes(){
 					);	
 					commentAppend = new Array();
 					commentSum ="";
-				}	
+				}
 			}
-        }
+		}
 	});
 }
 
@@ -1777,10 +2121,13 @@ function selectBestComment(){
 			let cultureBoardComment = data["cultureBoardComment"];
 			let loginId = data["loginId"];
 		
+			let likeContents = data["likeContents"];
+			let likeComments = data["likeComments"];
+		
+		
 			let memberIsNull;
 			let loginNull_commentSubmit;
-			
-			
+			let memberImg;
 
 			
 			if(contentType == "M"){
@@ -1814,7 +2161,7 @@ function selectBestComment(){
 						
 					}else{
 						memberIsNull=
-						"<span class='authorLv'>"+ memberInfo.level + "</span>" +
+						"<span class='authorLv'>LV. "+ memberInfo.level + "</span>" +
 						"<span class='authorNickname'>" + memberInfo.nickName + "</span>" +
 						"<span class='authorMbti'>"+memberInfo.mbti+"</span>";
 						
@@ -1822,15 +2169,26 @@ function selectBestComment(){
 						"<input type='button' value='댓글'" + " onclick='writeCommentSubmit(this.form,"+ contents[con].id + ","+ loginId +",this); return false'/>";
 					}
 					
+					
+					
+					let state01 = 0;
 					/** 비로그인/로그인시 메인컨텐츠별 추천*/
 					if(memberInfo != null){
-						if(contents[con].likesStatus){
-						likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId='${sessionScope.loginId}'" + " class='cultureBoard_likes'></a>";
+						
+						for(lct in likeContents){
+						
+							if(likeContents[lct].id == contents[con].id){
+								likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId=" + loginId + " class='cultureBoard_likes'></a>";
+								state01 = 1;
+							}
+						
+						}
+						
+						if(state01 == 0){
+							likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId="+ loginId + " class='cultureBoard_unlikes'></a>";
+							state01 = 0;
+						}
 					
-						}
-						else{
-						likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId='${sessionScope.loginId}'" + " class='cultureBoard_unlikes'></a>";
-						}
 					}else{
 						likesOR = "<a href='#' class='cultureBoard_unlikes'></a>";
 					}
@@ -1838,15 +2196,27 @@ function selectBestComment(){
 					
 					
 					for(com in cultureBoardComment){
-						
+						let state02 = 0;
 						/** 비로그인/로그인시 댓글추천 */
 						if(memberInfo != null){
-							if(cultureBoardComment[com].likesStatus){
-					   			 commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+							
+							for(lcm in likeComments){
+								
+								if(likeComments[lcm].id == cultureBoardComment[com].id){
+									
+						   			 commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+									 state02 = 1;
+								}
+								
 							}
-							else{
-					    		commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+							
+							
+							if(state02 == 0){
+				   				commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+								state02 = 0;
 							}
+						
+						
 						}else{
 			    			commentLikesOr = "<a href='#' class='cultureBoardComment_unlikes'></a>";
 						}
@@ -1862,7 +2232,6 @@ function selectBestComment(){
 							}else{
 							    commentDelOr=
 							    "<div class='delIcon'>"+
-							    "<a href='#' class='delCommentBtn' data-boardId ="+ contents[con].id + " data-loginId="+ loginId + " data-commentId="+ cultureBoardComment[com].id +">X</a>"+
 								"</div>";
 							}	
 						}else{
@@ -1870,18 +2239,19 @@ function selectBestComment(){
 						    "<div class='delIcon'>"+
 							"</div>";
 						}
-							
+						
+						
+					
 							
 						if(contents[con].id == cultureBoardComment[com].cultureBoard.id){		
 							commentAppend[com] = 
 							"<div class='commentRead'>"+
-							"<div class='memberImg'></div>"+
-							
+							"<div class='memberImg'"+
+							"style='background: url(" + cultureBoardComment[com].member.profileImg + ")  0 0 / cover'></div>"+
 							"<div class='memberWrapOfWrap'>"+
-							
 							"<div class='memberWrap'>"+
 							"<div class='memberInfo'>"+
-							"<span class='eachMember memberLv'>"+ cultureBoardComment[com].member.level+"</span>"+
+							"<span class='eachMember memberLv'>LV. "+ cultureBoardComment[com].member.level+"</span>"+
 							"<span class='eachMember memberNickname'>"+cultureBoardComment[com].member.nickName+"</span>"+
 							"<span class='eachMember memberMbti'>"+cultureBoardComment[com].member.mbti+"</span>"+
 							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +
@@ -1900,6 +2270,15 @@ function selectBestComment(){
 							"</div>"+
 							"</div>";
 						}
+						
+						if(memberInfo != null){
+							memberImg = "<div class='authorImg' style='background: url(" + memberInfo.profileImg + ") 0 0 / cover'></div>";
+							
+						}else{
+							memberImg = "<div class='authorImg'></div>";
+						}
+						
+	
 					}
 					
 					/**댓글 다른 보드 중복 방지 변수 */
@@ -1927,13 +2306,13 @@ function selectBestComment(){
 					"</a>" + 
 					"</div>" +
 					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ contents[con].title+ "<span class='linkIcon'></span></a></div>" +
-					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +					
+					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +
 					"</div>" +
 					"</div>" +
 					"<div class='commentWrap'>" +
 					"<div class='comment'>"	+
 						"<div class='commentWrite'>" +
-						"<div class='authorImg'></div>" +
+						memberImg +
 						"<div class='authorWrap'>" +
 						"<div class='authorInfo'>" +
 						memberIsNull +
@@ -1958,6 +2337,11 @@ function selectBestComment(){
 				}
 			}
 			
+			
+			
+			
+			
+			
 			else if(contentType == "C"){
 				$('#contentWrap').append(
 					"<div id='contentList'>"+
@@ -1971,8 +2355,9 @@ function selectBestComment(){
 					"<p>닉네임</p>" +
 					"</div>"
 				);
-					
+				
 				for(con in contents){
+					
 					/**댓글작성 부분 비로그인/로그인시 */
 					/**댓글 submit 버튼 비로그인/로그인시 */
 					if(memberInfo == null || memberInfo == ""){
@@ -1987,7 +2372,7 @@ function selectBestComment(){
 						
 					}else{
 						memberIsNull=
-						"<span class='authorLv'>"+ memberInfo.level + "</span>" +
+						"<span class='authorLv'>LV. "+ memberInfo.level + "</span>" +
 						"<span class='authorNickname'>" + memberInfo.nickName + "</span>" +
 						"<span class='authorMbti'>"+memberInfo.mbti+"</span>";
 						
@@ -1995,15 +2380,26 @@ function selectBestComment(){
 						"<input type='button' value='댓글'" + " onclick='writeCommentSubmit(this.form,"+ contents[con].id + ","+ loginId +",this); return false'/>";
 					}
 					
+					
+					
+					let state01 = 0;
 					/** 비로그인/로그인시 메인컨텐츠별 추천*/
 					if(memberInfo != null){
-						if(contents[con].likesStatus){
-						likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId='${sessionScope.loginId}'" + " class='cultureBoard_likes'></a>";
+						
+						for(lct in likeContents){
+						
+							if(likeContents[lct].id == contents[con].id){
+								likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId=" + loginId + " class='cultureBoard_likes'></a>";
+								state01 = 1;
+							}
+						
+						}
+						
+						if(state01 == 0){
+							likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId="+ loginId + " class='cultureBoard_unlikes'></a>";
+							state01 = 0;
+						}
 					
-						}
-						else{
-						likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId='${sessionScope.loginId}'" + " class='cultureBoard_unlikes'></a>";
-						}
 					}else{
 						likesOR = "<a href='#' class='cultureBoard_unlikes'></a>";
 					}
@@ -2011,15 +2407,27 @@ function selectBestComment(){
 					
 					
 					for(com in cultureBoardComment){
-						
+						let state02 = 0;
 						/** 비로그인/로그인시 댓글추천 */
 						if(memberInfo != null){
-							if(cultureBoardComment[com].likesStatus){
-					   			 commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+							
+							for(lcm in likeComments){
+								
+								if(likeComments[lcm].id == cultureBoardComment[com].id){
+									
+						   			 commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+									 state02 = 1;
+								}
+								
 							}
-							else{
-					    		commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+							
+							
+							if(state02 == 0){
+				   				commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+								state02 = 0;
 							}
+						
+						
 						}else{
 			    			commentLikesOr = "<a href='#' class='cultureBoardComment_unlikes'></a>";
 						}
@@ -2035,7 +2443,6 @@ function selectBestComment(){
 							}else{
 							    commentDelOr=
 							    "<div class='delIcon'>"+
-							    "<a href='#' class='delCommentBtn' data-boardId ="+ contents[con].id + " data-loginId="+ loginId + " data-commentId="+ cultureBoardComment[com].id +">X</a>"+
 								"</div>";
 							}	
 						}else{
@@ -2043,21 +2450,22 @@ function selectBestComment(){
 						    "<div class='delIcon'>"+
 							"</div>";
 						}
-							
+						
+						
+					
 							
 						if(contents[con].id == cultureBoardComment[com].cultureBoard.id){		
 							commentAppend[com] = 
 							"<div class='commentRead'>"+
-							"<div class='memberImg'></div>"+
-							
+							"<div class='memberImg'"+
+							"style='background: url(" + cultureBoardComment[com].member.profileImg + ")  0 0 / cover'></div>"+
 							"<div class='memberWrapOfWrap'>"+
-							
 							"<div class='memberWrap'>"+
 							"<div class='memberInfo'>"+
-							"<span class='eachMember memberLv'>"+ cultureBoardComment[com].member.level+"</span>"+
+							"<span class='eachMember memberLv'>LV. "+ cultureBoardComment[com].member.level+"</span>"+
 							"<span class='eachMember memberNickname'>"+cultureBoardComment[com].member.nickName+"</span>"+
 							"<span class='eachMember memberMbti'>"+cultureBoardComment[com].member.mbti+"</span>"+
-							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +							
+							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +
 							"</div>"+
 							"<div class='memberComment'>"+ cultureBoardComment[com].comment+"</div>"+	
 							"</div>"+
@@ -2073,6 +2481,15 @@ function selectBestComment(){
 							"</div>"+
 							"</div>";
 						}
+						
+						if(memberInfo != null){
+							memberImg = "<div class='authorImg' style='background: url(" + memberInfo.profileImg + ") 0 0 / cover'></div>";
+							
+						}else{
+							memberImg = "<div class='authorImg'></div>";
+						}
+						
+	
 					}
 					
 					/**댓글 다른 보드 중복 방지 변수 */
@@ -2099,13 +2516,13 @@ function selectBestComment(){
 					"</a>" + 
 					"</div>" +
 					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ contents[con].title+ "<span class='linkIcon'></span></a></div>" +
-					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +					
+					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +
 					"</div>" +
 					"</div>" +
 					"<div class='commentWrap'>" +
 					"<div class='comment'>"	+
 						"<div class='commentWrite'>" +
-						"<div class='authorImg'></div>" +
+						memberImg +
 						"<div class='authorWrap'>" +
 						"<div class='authorInfo'>" +
 						memberIsNull +
@@ -2143,10 +2560,10 @@ function selectBestComment(){
 					"<p>여행지</p>" +
 					"<p>닉네임</p>" +
 					"</div>"
-				);  
-				
+				);
 				
 				for(con in contents){
+					
 					/**댓글작성 부분 비로그인/로그인시 */
 					/**댓글 submit 버튼 비로그인/로그인시 */
 					if(memberInfo == null || memberInfo == ""){
@@ -2161,7 +2578,7 @@ function selectBestComment(){
 						
 					}else{
 						memberIsNull=
-						"<span class='authorLv'>"+ memberInfo.level + "</span>" +
+						"<span class='authorLv'>LV. "+ memberInfo.level + "</span>" +
 						"<span class='authorNickname'>" + memberInfo.nickName + "</span>" +
 						"<span class='authorMbti'>"+memberInfo.mbti+"</span>";
 						
@@ -2169,15 +2586,26 @@ function selectBestComment(){
 						"<input type='button' value='댓글'" + " onclick='writeCommentSubmit(this.form,"+ contents[con].id + ","+ loginId +",this); return false'/>";
 					}
 					
+					
+					
+					let state01 = 0;
 					/** 비로그인/로그인시 메인컨텐츠별 추천*/
 					if(memberInfo != null){
-						if(contents[con].likesStatus){
-						likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId='${sessionScope.loginId}'" + " class='cultureBoard_likes'></a>";
+						
+						for(lct in likeContents){
+						
+							if(likeContents[lct].id == contents[con].id){
+								likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId=" + loginId + " class='cultureBoard_likes'></a>";
+								state01 = 1;
+							}
+						
+						}
+						
+						if(state01 == 0){
+							likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId="+ loginId + " class='cultureBoard_unlikes'></a>";
+							state01 = 0;
+						}
 					
-						}
-						else{
-						likesOR = "<a href='javascript:likes()' data-boardId =" + contents[con].id +" data-loginId='${sessionScope.loginId}'" + " class='cultureBoard_unlikes'></a>";
-						}
 					}else{
 						likesOR = "<a href='#' class='cultureBoard_unlikes'></a>";
 					}
@@ -2185,15 +2613,27 @@ function selectBestComment(){
 					
 					
 					for(com in cultureBoardComment){
-						
+						let state02 = 0;
 						/** 비로그인/로그인시 댓글추천 */
 						if(memberInfo != null){
-							if(cultureBoardComment[com].likesStatus){
-					   			 commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+							
+							for(lcm in likeComments){
+								
+								if(likeComments[lcm].id == cultureBoardComment[com].id){
+									
+						   			 commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_likes'></a>";
+									 state02 = 1;
+								}
+								
 							}
-							else{
-					    		commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+							
+							
+							if(state02 == 0){
+				   				commentLikesOr = "<a href='#'" + " onclick='commentLikes("+ cultureBoardComment[com].id + ","+ loginId +",this); return false' class='cultureBoardComment_unlikes'></a>";
+								state02 = 0;
 							}
+						
+						
 						}else{
 			    			commentLikesOr = "<a href='#' class='cultureBoardComment_unlikes'></a>";
 						}
@@ -2209,7 +2649,6 @@ function selectBestComment(){
 							}else{
 							    commentDelOr=
 							    "<div class='delIcon'>"+
-							    "<a href='#' class='delCommentBtn' data-boardId ="+ contents[con].id + " data-loginId="+ loginId + " data-commentId="+ cultureBoardComment[com].id +">X</a>"+
 								"</div>";
 							}	
 						}else{
@@ -2217,18 +2656,19 @@ function selectBestComment(){
 						    "<div class='delIcon'>"+
 							"</div>";
 						}
-							
+						
+						
+					
 							
 						if(contents[con].id == cultureBoardComment[com].cultureBoard.id){		
 							commentAppend[com] = 
 							"<div class='commentRead'>"+
-							"<div class='memberImg'></div>"+
-							
+							"<div class='memberImg'"+
+							"style='background: url(" + cultureBoardComment[com].member.profileImg + ")  0 0 / cover'></div>"+
 							"<div class='memberWrapOfWrap'>"+
-							
 							"<div class='memberWrap'>"+
 							"<div class='memberInfo'>"+
-							"<span class='eachMember memberLv'>"+ cultureBoardComment[com].member.level+"</span>"+
+							"<span class='eachMember memberLv'>LV. "+ cultureBoardComment[com].member.level+"</span>"+
 							"<span class='eachMember memberNickname'>"+cultureBoardComment[com].member.nickName+"</span>"+
 							"<span class='eachMember memberMbti'>"+cultureBoardComment[com].member.mbti+"</span>"+
 							"<span class='eachMember comment_reportDate'>" + timeForToday02(cultureBoardComment[com].reportingDate) + "</span>" +
@@ -2247,6 +2687,15 @@ function selectBestComment(){
 							"</div>"+
 							"</div>";
 						}
+						
+						if(memberInfo != null){
+							memberImg = "<div class='authorImg' style='background: url(" + memberInfo.profileImg + ") 0 0 / cover'></div>";
+							
+						}else{
+							memberImg = "<div class='authorImg'></div>";
+						}
+						
+	
 					}
 					
 					/**댓글 다른 보드 중복 방지 변수 */
@@ -2273,13 +2722,13 @@ function selectBestComment(){
 					"</a>" + 
 					"</div>" +
 					"<div class='linkTd'><a class='linkTag' href=" + contents[con].link + " target='_blank'>"+ contents[con].title+ "<span class='linkIcon'></span></a></div>" +
-					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +					
+					"<div class='cultureBoard_reportDate'>" + timeForToday02(contents[con].reportingDate) + "</div>" +
 					"</div>" +
 					"</div>" +
 					"<div class='commentWrap'>" +
 					"<div class='comment'>"	+
 						"<div class='commentWrite'>" +
-						"<div class='authorImg'></div>" +
+						memberImg +
 						"<div class='authorWrap'>" +
 						"<div class='authorInfo'>" +
 						memberIsNull +
@@ -2301,9 +2750,9 @@ function selectBestComment(){
 					);	
 					commentAppend = new Array();
 					commentSum ="";
-				}	
+				}
 			}
-        }
+		}
 	});	
 }
 

@@ -11,9 +11,8 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/comment.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/mbtiCard.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/indexForBanner.css">
-<script
-	src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"
-	defer></script>
+
+<script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js" defer></script>
 <script src="<%=request.getContextPath()%>/resources/js/indexForBanner.js" defer></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" defer></script>
 <script src="<%=request.getContextPath()%>/resources/js/jquery.bpopup-0.1.1.min.js" defer></script>
@@ -31,7 +30,7 @@
 		<article id="banner">
             <h2 class="hidden">배너</h2>
             <p>국내 최고<span>no.1</span> MBTI 커뮤니티 <span>맙티</span></p>
-            <p>당신을 가장 이해할 수 있는 당신만의 BEST TEAM을 찾으세요.</p>            
+            <p id="subTitle">당신을 가장 이해할 수 있는 당신만의 BEST TEAM을 찾으세요.</p>            
             <div id="bannerAvatar">
                 <img src="<%=request.getContextPath()%>/resources/img/avatar/MBTI_ENFJ.png" alt="enfj" class="avatar avatar1 enfj"></img>
                 <img src="<%=request.getContextPath()%>/resources/img/avatar/MBTI_ENFP.png" alt="enfp" class="avatar avatar2 enfp"></img>
@@ -101,28 +100,47 @@
 								<div class="contentForm01">
 									<div class="likeWrap">
 										<!-- 해당 아이디로 추천유무로 추천아이콘 변경 -->
+										<%
+											int state01 = 0;
+										%>
 										<c:choose>
-										<c:when test="${not (memberInfo eq null)}">
-											<c:choose>	
-												<c:when test="${contents.likesStatus}">
-													<a href="javascript:likes()" 
-													data-boardId ="${contents.id}" 
-													data-loginId="${loginId}"
-													class="cultureBoard_likes"></a>
-												</c:when>
-												<c:otherwise>
-													<a href="javascript:likes()" 
-													data-boardId ="${contents.id}" 
-													data-loginId="${loginId}"
-													class="cultureBoard_unlikes"></a>
-												</c:otherwise>
-											</c:choose>
-										</c:when>
-										<c:otherwise>
-											<a href="#" 
-											class="cultureBoard_unlikes"></a>
-										</c:otherwise>
+										
+											<c:when test="${not (loginId eq null)}">
+												
+												<c:forEach var="likeContent" items="${likeContents}">
+													
+													<c:if test="${(likeContent.id eq contents.id)}">
+														<a href="javascript:likes()" 
+														data-boardId ="${contents.id}" 
+														data-loginId="${loginId}"
+														class="cultureBoard_likes"></a>
+														
+														<% state01 = 1; %>
+													</c:if>
+														
+												</c:forEach>
+												
+													<%if(state01 == 0) {%>
+														<a href="javascript:likes()" 
+														data-boardId ="${contents.id}" 
+														data-loginId="${loginId}"
+														class="cultureBoard_unlikes"
+														></a>
+														<% state01 = 0; %>
+													<%}%>
+										
+											</c:when>
+											
+											
+											<c:otherwise>
+												<a href="#" 
+												class="cultureBoard_unlikes"></a>
+											</c:otherwise>
+										
+										
 										</c:choose>
+										
+										
 										<p class="likesCount">${contents.likes}</p>
 									</div>
 									
@@ -139,7 +157,7 @@
 											<span class="dropComment">답글 ${contents.commentNum}개 보기</span>
 										</a>
 									</div>
-									<div class="linkTd"><a class="linkTag" href="${contents.link}" target="_blank">${contents.title}<span class="linkIcon"></span></a></div>
+									<div class="linkTd"><a class="linkTag" href="${contents.link}" target="_blank"><div class="contentMent">${contents.title}</div><span class="linkIcon"></span></a></div>
 									<div class="cultureBoard_reportDate">${contents.reportingDate}</div>
 								</div>
 							</div>
@@ -150,9 +168,16 @@
 									
 									
 									<div class="commentWrite">
-										<div class="authorImg"></div> <!-- ${memberInfo.profileImg} -->
+										<c:choose>
+											<c:when test="${not (memberInfo eq null)}">
+												<div class="authorImg" style="background: url(${memberInfo.profileImg}) 0 0 / cover" ></div> 
+											</c:when>
+											<c:otherwise>
+												<div class="authorImg"></div>
+											</c:otherwise>
+										</c:choose>		
 										<div class="authorWrap">
-											<div class="authorInfo">
+											<div class="authorInfo">	
 												<span class="authorLv">${memberInfo.level}</span>
 												<span class="authorNickname">${memberInfo.nickName}</span>
 												<span class="authorMbti">${memberInfo.mbti}</span>
@@ -179,11 +204,11 @@
 									<c:forEach var="cultureBoardComment" items="${cultureBoardComment}">
 									<c:if test="${contents.id eq cultureBoardComment.cultureBoard.id}">
 									<div class="commentRead">
-										<div class="memberImg"></div>
+										<div class="memberImg" style="background: url(${cultureBoardComment.member.profileImg}) 0 0 / cover"></div>
 										<div class="memberWrapOfWrap">
 											<div class="memberWrap">
 												<div class="memberInfo">
-													<span class="eachMember memberLv">LV.${cultureBoardComment.member.level}</span>
+													<span class="eachMember memberLv">LV. ${cultureBoardComment.member.level}</span>
 													<span class="eachMember memberNickname">${cultureBoardComment.member.nickName}</span>
 													<span class="eachMember memberMbti">${cultureBoardComment.member.mbti}</span>
 													<span class="eachMember comment_reportDate">${cultureBoardComment.reportingDate}</span>
@@ -192,25 +217,45 @@
 											</div>
 											
 											<div class="memberLike">
+											
+											<%
+											int state02 = 0;
+											%>
+											
 											<c:choose>
+												
+												
 												<c:when test="${not (memberInfo eq null)}">
-													<c:choose>	
-														<c:when test="${cultureBoardComment.likesStatus}">
+												
+													<c:forEach var="likeComment" items="${likeComments}">
+													
+														<c:if test="${(likeComment.id eq cultureBoardComment.id)}">
 															<a href="#" 
 															onclick="commentLikes('${cultureBoardComment.id}','${loginId}',this); return false"
-															class="cultureBoardComment_likes"></a>
-														</c:when>
-														<c:otherwise>
-															<a href="#" 
-															onclick="commentLikes('${cultureBoardComment.id}','${loginId}',this); return false"
-															class="cultureBoardComment_unlikes"></a>
-														</c:otherwise>
-													</c:choose>
+															class="cultureBoardComment_likes">
+															</a>
+														
+															<% state02 = 1; %>
+														</c:if>
+													
+													</c:forEach>						
+												
+													<%if(state02 == 0) {%>
+														<a href="#" 
+														onclick="commentLikes('${cultureBoardComment.id}','${loginId}',this); return false"
+														class="cultureBoardComment_unlikes"
+														>
+														</a>
+														<% state02 = 0; %>
+													<%}%>
+																	
 												</c:when>
+												
 												<c:otherwise>
 													<a href="#"
 													class="cultureBoardComment_unlikes"></a>	
 												</c:otherwise>
+											
 											</c:choose>
 											
 											<p class="commentLikesCount">${cultureBoardComment.likes}</p>
@@ -220,9 +265,13 @@
 											<div class="memberDelete">
 												<c:choose>
 													<c:when test="${not (memberInfo eq null)}">
-														<div class="delIcon">
-															<a href="#" class="delCommentBtn" data-boardId = "${contents.id}" data-commentId ="${cultureBoardComment.id}" data-loginId="${sessionScope.loginId}">X</a>
-														</div>
+														
+														<c:if test="${loginId eq cultureBoardComment.member.id}">
+															<div class="delIcon">
+																<a href="#" class="delCommentBtn" data-boardId = "${contents.id}" data-commentId ="${cultureBoardComment.id}" data-loginId="${sessionScope.loginId}">X</a>
+															</div>
+														</c:if>
+														
 													</c:when>
 													<c:otherwise>
 														<div class="delIcon"></div>

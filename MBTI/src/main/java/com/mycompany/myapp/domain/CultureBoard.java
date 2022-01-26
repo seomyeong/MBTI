@@ -26,6 +26,8 @@ public class CultureBoard {
 	
 	
 	
+	
+	
 	//FOR Comment
 	public CultureBoard(long id, Member member, String contents01, String contents02, char contentType, String title,
 			String reportingDate, int likes, boolean likesStatus, int commentNum,String link) {
