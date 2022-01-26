@@ -11,9 +11,11 @@
 	href="<%=request.getContextPath()%>/resources/css/mbtiMatch/resultMbtiMatch.css">
 <script
 	src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
-<script
-	src="<%=request.getContextPath()%>/resources/js/mbtiMatch/resultMbtiMatch.js" defer></script>
-
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+	Kakao.init('8cc3104025014ea7f1160874240cf7ff');
+	Kakao.isInitialized();
+</script>
 </head>
 <body>
 	<jsp:include page="/resources/incl/header.jsp"></jsp:include>
@@ -57,8 +59,7 @@
 						<img src="<c:url value='../resources/img/mbtiMatch/mbti5.png'/>" />
 					</c:when>
 				</c:choose>
-				<h3 id="resultType">${type02}<span>는</span>
-				</h3>
+				<h3 id="resultType">${type02}<span>는</span></h3>
 				<div id="mbtiTip">
 					<c:choose>
 						<c:when test="${type02 eq 'ISTJ'}">
@@ -141,6 +142,10 @@
 					</c:choose>
 				</div>
 			</article>
+			<a id="create-kakao-link-btn" href="javascript:;">
+  				<img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
+    				alt="카카오링크 보내기 버튼"/>
+			</a>
 			<article id="commentWrap">
 					<input type="text" class="mbtiComment" name="mbtiComment" placeholder="코멘트는 100자 내로 입력하세요."/> 
 					<input type="submit" class="submitBtn" value="등록" onclick="addComment(this.form); return false;">
@@ -176,6 +181,8 @@
 			</article>
 		</form>
 	</div>
+
+	<script src="resource/js/mbtiMatch/share.js" charset="utf-8"></script>
 	<script>
 		$('#nav li:nth-of-type(4)').addClass('clicked');
 		
@@ -240,9 +247,15 @@
 					$('.nullComment').remove();
 				}
 			}
-		
 		}
-	
+			
+		Kakao.Link.createScrapButton({
+			  container: '#create-kakao-link-btn',
+			  requestUrl: 'http://localhost:8090/myapp/mbtiMatch/resultMbtiMatch?type01=&type02=ESFP',
+			  templateId: 69529,
+		});
+		
 	</script>
+
 </body>
 </html>

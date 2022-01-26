@@ -55,7 +55,6 @@ public class IndexController {
 			likeComments = cultureCommunityService.findLikesCommentByMemberId(loginId);
 			
 			mav.addObject("likeContents", likeContents);
-			
 			mav.addObject("likeComments", likeComments);
 			
 			mav.addObject("loginId", loginId);

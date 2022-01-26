@@ -189,6 +189,10 @@ table{
 	font-weight: 700; color: #fff;
 	height: 40px;
 	display: flex;
+	position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 2;
 }
 #contentHead p{
 	width: 100%;
@@ -196,43 +200,57 @@ table{
 	line-height: 38px;
 }
 
+#nullType{
+	height : calc(100% - 40px);
+	width : 100%;
+	display :flex;
+	justify-content : center;
+	align-items : center
+}
+
+#nullType p{
+	font-family: 'Cafe24Ssurround';
+	font-size : 2.5em;
+}
 
 
 .content{
-	height: 150px;
+	height: 135px;
 	border-bottom: 4px solid rgba(219, 196, 164, 0.863);
 }
 
 .content:hover{
-	background-color: #c4fbbd50;
-	transition: .2s;
+	background-color: rgb(230, 250, 226);
+	transition-duration: 0.5s;
 }
 
 
 .contentForm01{
 	display: flex;	
 	height: 80%;
+	font-size: 16px;
 }
 .contentForm01 div{
 	width: 100%;
 	text-align: center;
 	line-height: 118.39px;
-	font-family: 'gameFont';
+	font-family: 'Cafe24Ssurround';
 }
 
 .contentForm02{
 	display: flex;
 	height: 20%;
+	font-size: 13px;
 	align-items: center;
  	justify-content: space-between;
- 	padding: 0 30px 0 25px;
- 	font-family: 'gameFont';
+ 	padding: 0 30px 4px 25px;
+ 	font-family: 'Cafe24Ssurround';
 }
 
 .commentTd a{
 	display: block;
 	line-height:25px;
-	font-family: 'gameFont';
+	font-family: 'Cafe24Ssurround';
 }
 
 .content tr:first-child{text-align: center; height: 70%;}
@@ -242,10 +260,10 @@ table{
 	display:flex;
 	align-items: center;
 	justify-content: flex-end;
-	font-family: 'gameFont';
+	font-family: 'Cafe24Ssurround';
 }
 .dropComment{
-	font-family: 'gameFont';
+	font-family: 'Cafe24Ssurround';
 	cursor: pointer;
 	
 }
@@ -257,31 +275,52 @@ table{
 .cultureBoard_likes{
 	display: block;
 	height: 80%;
-	background: url(../img/likes.png) no-repeat center/40px 40px;
+	background: url(../img/likes.png) no-repeat center/30px 30px;
 }
 .cultureBoard_unlikes{
 	display: block;
 	height: 80%;
-	background: url(../img/unlikes.png) no-repeat center/40px 40px;
+	background: url(../img/unlikes.png) no-repeat center/30px 30px;
 }
 .likesCount{
-	height: 20%;
+	height: 25%;
 	line-height: 0;
+	font-family: 'Cafe24Ssurround';
 }
 
-.linkIcon{
+.linkIconMusic{
 	width: 25px ; height: 25px;
 	display: inline-block;
-	background: url(../img/link.png) no-repeat center/contain;
+	background: url(../img/music.png) no-repeat center/contain;
 	margin-left: 10px;
 	
 }
 
+.linkIconCinema{
+	width: 27px ; height: 27px;
+	display: inline-block;
+	background: url(../img/cinema.png) no-repeat center/contain;
+	margin-left: 10px;	
+}
+
+.linkIconTrip{
+	width: 25px ; height: 25px;
+	display: inline-block;
+	background: url(../img/trip.png) no-repeat center/contain;
+	margin-left: 10px;	
+}
+
+
 .contentMent{
 	max-width: 350px;
 	overflow: hidden;
+	font-style: italic;
 	text-overflow: ellipsis;
 	white-space : nowrap;
+	font-family: 'Cafe24Ssurround';
+}
+.cultureBoard_reportDate{
+	font-family: 'Cafe24Ssurround';
 }
 
 #bottomBtn{

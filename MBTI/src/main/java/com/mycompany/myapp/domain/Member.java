@@ -64,6 +64,26 @@ public class Member {
 		this.profileImg = profileImg;
 	}
 	
+	/***수민수민***/
+	public Member(long id, String email, String pw, String name, String nickName, String birth, String mbti,
+			String gender, String phone, Date regDate, int level, int mabPoint, String profileImg) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.pw = pw;
+		this.name = name;
+		this.nickName = nickName;
+		this.birth = birth;
+		this.mbti = mbti;
+		this.gender = gender;
+		this.phone = phone;
+		this.regDate = regDate;
+		this.level = level;
+		this.mabPoint = mabPoint;
+		this.profileImg = profileImg;
+	}
+	
+	
 	public Member(long id, String email, String pw, String name, String nickName, String birth, String mbti,
 			String gender, String phone, Date regDate, String profileImg) {
 		super();

@@ -31,8 +31,8 @@ function writeCommentSubmit(form, boardId, loginId, e){
 		$(e).parent().prev().children('.commentErrorMsg').prev().attr("placeholder","글자를 작성해주세요");	
 		passForComment = false;
 	}
-	else if(comment.length > 20){
-		$(e).parent().prev().children('.commentErrorMsg').text("댓글은 20자 이내로 입력하세요");
+	else if(comment.length > 100){
+		$(e).parent().prev().children('.commentErrorMsg').text("댓글은 100자 이내로 입력하세요");
 		$(e).parent().prev().children('input').css('border-bottom','3px solid red');
 		$(e).parent().prev().children('.commentErrorMsg').prev().attr("placeholder","글자를 작성해주세요");
 		passForComment = false;

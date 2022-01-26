@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -33,7 +32,7 @@
 				</table>
 				<div id="login_btn">
 					<a href="/myapp/index">홈으로</a> <input type="submit" value="로그인"
-						id="submit">
+						onclick="loginSubmit(this.form); return false" id="submit">
 				</div>
 			</form>
 		</div>
@@ -47,10 +46,6 @@
 		</div>
 		<div id="loginImg"></div>
 	</div>
-	<script>
-		function loginSubmit(form) {
 
-		}
-	</script>
 </body>
 </html>

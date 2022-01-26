@@ -20,8 +20,10 @@ public class MbtiMatchDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	/*
-	 * 회원의 id를 통해 member정보값을 가져오는 dao.
+	/**
+	 * 회원의 id를 통해 member정보를 조회.
+	 * @param loginId
+	 * @return
 	 */
 	public Member findMemberInfoById(Long loginId) {
 		String sql = "SELECT * FROM Member WHERE id = ?";
@@ -40,6 +42,13 @@ public class MbtiMatchDao {
 
 	}
 
+	/**
+	 * 
+	 * type01, type02와 일치하는 궁합 결과를 조회.
+	 * @param type01
+	 * @param type02
+	 * @return mbtiMatch.getResult()
+	 */
 	public int findResultByMbtiTypes(String type01, String type02) {
 		String sql = "SELECT * FROM MbtiMatch WHERE type01=? AND type02=?";
 		MbtiMatch mbtiMatch = jdbcTemplate.queryForObject(sql, new RowMapper<MbtiMatch>() {
@@ -54,6 +63,12 @@ public class MbtiMatchDao {
 		return mbtiMatch.getResult();
 	}
 
+	/***
+	 * 유저가 선택한 조합의 코멘트 조회. 
+	 * @param type01
+	 * @param type02
+	 * @return
+	 */
 	public List<MbtiComments> findMcInfoByType(String type01, String type02) { // 매개변수(type)로 mcInfo 조회.
 		String sql = "SELECT * FROM MbtiComments WHERE type01=? AND type02=? OR type01=? AND type02=? ORDER BY reportingDate DESC"; // 매개변수로 받은 값과 일치하는 행을 조회.
 		List<MbtiComments> mcInfo = jdbcTemplate.query(sql, new RowMapper<MbtiComments>() { // 조건과 일치하는 결과값을 mbtiComments리스트에 저장.
@@ -73,6 +88,13 @@ public class MbtiMatchDao {
 		return mcInfo;
 	}
 	
+	/***
+	 * 작성한 코멘트 저장.
+	 * @param loginId
+	 * @param type01
+	 * @param type02
+	 * @param comment
+	 */
 	public void addComment(long loginId, String type01, String type02, String comment) {
 		String sql = "INSERT INTO MbtiComments(memberId, type01, type02, comment) VALUES(?, ?, ?, ?)";
 		jdbcTemplate.update(sql, loginId, type01, type02, comment);
