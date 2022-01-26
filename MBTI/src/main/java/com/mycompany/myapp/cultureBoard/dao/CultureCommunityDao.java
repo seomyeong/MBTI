@@ -52,7 +52,7 @@ public class CultureCommunityDao {
 			@Override
 			public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Member m = new Member(rs.getLong("id"),rs.getString("email"), rs.getString("pw"), rs.getString("name"), rs.getString("nickName"), rs.getString("birth"), rs.getString("mbti"),
-						rs.getString("gender"), rs.getString("phone"), rs.getDate("regDate"), rs.getString("profileImg"));
+						rs.getString("gender"), rs.getString("phone"), rs.getDate("regDate"), rs.getInt("level"), rs.getInt("mabPoint"), rs.getString("profileImg"));
 				return m;
 			}
 		}, memberId);
@@ -496,7 +496,7 @@ public class CultureCommunityDao {
 	
 	// 맙 포인트 부여
 	public void plusMab(Long memberId, int mabPoint) {
-		String sql = "UPDATE Member SET mabPoint=mabPoint+? WHERE id=?";
+		String sql = "UPDATE Member SET mabPoint=? WHERE id=?";
 		jdbcTemplate.update(sql, mabPoint, memberId);
 	}
 	
@@ -510,6 +510,7 @@ public class CultureCommunityDao {
 	//레벨 업 후 처음부터 다시 재적용 될 맙포인트
 	public void levelUpAfterMab(long memberId, int mabPoint) {
 		String sql = "UPDATE Member SET mabPoint=mabPoint-? WHERE id=?";
+		
 		jdbcTemplate.update(sql, mabPoint, memberId);
 		
 	}

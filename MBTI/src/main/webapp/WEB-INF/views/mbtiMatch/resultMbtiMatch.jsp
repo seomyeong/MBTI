@@ -247,7 +247,6 @@
 					$('.nullComment').remove();
 				}
 			}
-		
 		}
 			
 		Kakao.Link.createScrapButton({
@@ -263,10 +262,8 @@
 			    template_id: 69529,
 			  },
 			  success: function(response) {
-			    console.log(response);
 			  },
 			  fail: function(error) {
-			    console.log(error);
 			  },
 			});
 		

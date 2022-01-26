@@ -12,7 +12,8 @@
 <script
 	src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"
 	defer></script>
-<script src="<%=request.getContextPath()%>/resources/js/member/addMember.js"
+<script
+	src="<%=request.getContextPath()%>/resources/js/member/addMember.js"
 	defer></script>
 </head>
 <body>
@@ -39,8 +40,9 @@
 						</tr>
 						<tr>
 							<th>비밀번호</th>
-							<td><form:password id="password1"
-									placeholder="8자리 이상 문자, 숫자, 특수문자" path="pw" /></td>
+							<td><form:password id="password1" onpaste="return false;"
+									oncopy="return false;" placeholder="8자리 이상 문자, 숫자, 특수문자"
+									path="pw" /></td>
 							<td><span class="errorTxt"></span></td>
 						</tr>
 						<tr>

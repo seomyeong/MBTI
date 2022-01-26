@@ -31,7 +31,7 @@
 .commentWrite{
 	display:flex;
 	align-items: center;
-	padding: 15px 0;
+	padding-top: 15px;
 	
 }
 
@@ -49,9 +49,13 @@
 	
 }
 
-.authorLv{font-family: 'gameFont';}
-.authorNickname{font-family: 'gameFont';}
-.authorMbti{font-family: 'gameFont';}
+.authorInfo span{
+	margin-left: 9px;
+}
+
+.authorLv{font-family: 'gameFont'; color: #B0C4DE;}
+.authorNickname{font-family: 'gameFont'; color: #E996A5;}
+.authorMbti{font-family: 'gameFont'; color: #20B4BA;}
 
 form.writeTextForm{
 	display:flex;
@@ -125,11 +129,11 @@ form.writeTextForm{
 	
 }
 
-.memberInfo{}
-.eachMember{font-family: 'gameFont';}
-.memberLv{}
-.memberNickname{}
-.memberMbti{}
+.memberInfo{font-size : 14px;}
+.eachMember{font-family: 'gameFont'; margin-left: 6px;}
+.memberLv{color: #B0C4DE;}
+.memberNickname{color: #E996A5;}
+.memberMbti{color: #20B4BA;}
 
 .memberComment{
 	padding: 10px 0;
@@ -145,12 +149,12 @@ form.writeTextForm{
 .cultureBoardComment_likes{
 	display: block;
 	height: 70%;
-	background: url(../img/likes.png) no-repeat center/30px 30px;
+	background: url(../img/likes.png) no-repeat center/25px 25px;
 }
 .cultureBoardComment_unlikes{
 	display: block;
 	height: 68%;
-	background: url(../img/unlikes.png) no-repeat center/30px 30px;
+	background: url(../img/unlikes.png) no-repeat center/25px 25px;
 }
 .commentLikesCount{
 	height: 32%; text-align:center; line-height:11px;

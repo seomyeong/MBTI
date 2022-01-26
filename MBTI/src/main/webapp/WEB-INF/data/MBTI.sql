@@ -1,5 +1,3 @@
-SELECT * FROM Member;
-
 CREATE TABLE MEMBER(
 	id				BIGINT		PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	email 			VARCHAR(40)	NOT NULL,
@@ -69,6 +67,15 @@ CREATE TABLE LikeLog(
 
 
 --MbtiPlay
+SELECT * FROM MbtiPlayContents;
+SELECT * FROM MbtiPlayContentsAnswer;
+SELECT * FROM ContentsLog;
+SELECT * FROM AnswersLog;
+
+DROP TABLE MbtiPlayContents;
+DROP TABLE MbtiPlayContentsAnswer;
+DROP TABLE ContentsLog;
+DROP TABLE AnswersLog;
 
 --문답 쿼리
 INSERT INTO MbtiPlayContents (memberId, question, answer01, answer02, answer03) VALUES (1, '친구들과 놀이동산을 간 당신, 놀이기구를 탈 때의 나는?', '오늘 이거 다섯 개는 꼭 타야 돼! 지도를 보며 계획을 세운다.', '오, 저거 재밌어 보인다! 일단 보이는 것부터 탄다.', '놀이기구는 흥미가 들지 않아 이끌려다닌다.');
@@ -109,7 +116,8 @@ CREATE TABLE AnswersLog(
 	id					BIGINT			PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	memberId			BIGINT			NOT NULL,
 	contentsNum			BIGINT			NOT NULL,
-	CONSTRAINT AnswersLog_memberId_FK FOREIGN KEY(memberId) REFERENCES Member(id)
+	CONSTRAINT AnswersLog_memberId_FK FOREIGN KEY(memberId) REFERENCES Member(id),
+	CONSTRAINT AnswersLog_contentsNum_FK FOREIGN KEY(contentsNum) REFERENCES MbtiPlayContents(id)
 );
 
 
@@ -132,7 +140,7 @@ CREATE TABLE CultureBoard(
 	CONSTRAINT CultureBoard_memberId_FK FOREIGN KEY(memberId) REFERENCES MEMBER(id)
 );
 
-
+SELECT * FROM CULTUREBOARDCOMMENT;
 
 CREATE TABLE CultureBoardComment(
 	id				BIGINT			PRIMARY KEY	GENERATED ALWAYS AS IDENTITY,

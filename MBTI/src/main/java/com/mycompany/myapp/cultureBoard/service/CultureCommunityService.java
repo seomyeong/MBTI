@@ -84,6 +84,7 @@ public class CultureCommunityService {
 		
 		//맙포인트 증가
 		cultureCommunityDao.plusMab(m.getId(), m.getMabPoint());
+		
 		//레벨 계산
 		this.resultLevel(m);
 		
@@ -113,11 +114,7 @@ public class CultureCommunityService {
 		member.calcCommentsPoint();
 		cultureCommunityDao.plusMab(member.getId(), member.getMabPoint());
 		
-		this.resultLevel(member);
-		
-		
-		
-		
+		resultLevel(member);
 		
 		return cultureCommunityDao.findAllCultureBoardCommentByBoardId(boardId);
 	}
@@ -204,8 +201,9 @@ public class CultureCommunityService {
 		int maxExp = 1000;
 		int mab = m.getMabPoint();
 		int levelUp = mab / maxExp;
-		
+	
 		if(levelUp != 0) {
+			
 			//레벨업 된 레벨 적용
 			cultureCommunityDao.resultLevel(m.getId(), levelUp);
 			//레벨업 후 맙포인트 재적용
