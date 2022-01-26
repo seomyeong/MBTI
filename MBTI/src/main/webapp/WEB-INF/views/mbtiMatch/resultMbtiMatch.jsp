@@ -186,10 +186,6 @@
 	<script>
 		$('#nav li:nth-of-type(4)').addClass('clicked');
 		
-		var type01 = "${type01}";
-		var type02 = "${type02}";
-		console.log(type01);
-		
 		var loginId;
 		loginId = ${loginId}
 		
@@ -253,9 +249,7 @@
 			}
 		
 		}
-		
-		
-		
+			
 		Kakao.Link.createScrapButton({
 			  container: '#create-kakao-link-btn',
 			  requestUrl: 'http://localhost:8090/myapp/mbtiMatch/resultMbtiMatch?type01=&type02=ESFP',
