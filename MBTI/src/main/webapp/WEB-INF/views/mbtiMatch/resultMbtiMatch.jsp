@@ -251,7 +251,7 @@
 			
 		Kakao.Link.createScrapButton({
 			  container: '#create-kakao-link-btn',
-			  requestUrl: 'http://localhost:8090/myapp/mbtiMatch/resultMbtiMatch?type01=&type02=ESFP',
+			  requestUrl: '/myapp/mbtiMatch/resultMbtiMatch?type01=' + '${type01}' + '&type02=' + '${type02}',
 			  templateId: 69529,
 		});
 		
