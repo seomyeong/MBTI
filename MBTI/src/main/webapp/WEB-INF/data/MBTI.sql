@@ -124,6 +124,11 @@ CREATE TABLE AnswersLog(
 
 ---수민 cultureBoard 파트 테이블------
 
+DROP TABLE CultureBoard;
+DROP TABLE CultureBoardComment;
+DROP TABLE LikeLogComment;
+
+
 CREATE TABLE CultureBoard(
 	id				BIGINT			PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 	memberId 		BIGINT			NOT NULL,

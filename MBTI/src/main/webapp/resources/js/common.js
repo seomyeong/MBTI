@@ -11,7 +11,6 @@ function activeLink() {
 list01.forEach((item) =>
     item.addEventListener('click', activeLink));
 
-
-
-
-
+function navErrorMsg() {
+	alert("로그인 후 이용가능한 메뉴입니다.");	
+}
