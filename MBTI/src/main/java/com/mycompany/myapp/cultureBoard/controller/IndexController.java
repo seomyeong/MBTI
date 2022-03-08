@@ -306,7 +306,6 @@ public class IndexController {
 		String boardId = param.get("boardId");
 		String appliedLikes = "";
 		List<CultureBoard> cb = null; 
-		//System.out.println(boardId);
 		// 추천이 눌려있으면 true 안눌려있으면 false
 		Boolean likeCheck = cultureCommunityService.isLike(Long.parseLong(loginId), Long.parseLong(boardId));
 		

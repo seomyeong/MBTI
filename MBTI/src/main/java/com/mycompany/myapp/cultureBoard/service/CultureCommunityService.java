@@ -73,16 +73,18 @@ public class CultureCommunityService {
 	
 	
 	public void addWrittenContent(long memberId,String contents01, String contents02, char contentType, String title, String link) {
+		// 게시글 테이블에 등록
 		cultureCommunityDao.addWrittenContent(memberId, contents01, contents02, contentType, title, link);
 		
 		// 해당 멤버의 총 게시글 수 카운트 올림
 		cultureCommunityDao.addCultureContentsCount(memberId);
 		
-		// 50맙 부여 
+		// 해당 로그인 멤버객체에 
 		Member m = cultureCommunityDao.findMemberByMemberId(memberId);
+		// 50맙 포인트 추가 시킴.
 		m.calcContentsPoint();
 		
-		//맙포인트 증가
+		// 추가된 맙 포인트가 적용된 멤버 객체를 통해 멤버 테이블의 맙포인트 적용
 		cultureCommunityDao.plusMab(m.getId(), m.getMabPoint());
 		
 		//레벨 계산
@@ -165,7 +167,6 @@ public class CultureCommunityService {
 		cultureCommunityDao.deleteComment(commentId);
 		cultureCommunityDao.discountCommentNum(boardId);
 		cultureCommunityDao.deleteCommentsCount(loginId);
-		System.out.println("delete");
 		cultureCommunityDao.removeLikeCommentPoint(loginId, commentId);
 		return cultureCommunityDao.findAllCultureBoardCommentByBoardId(boardId);
 	}
